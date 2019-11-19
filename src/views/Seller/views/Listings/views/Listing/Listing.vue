@@ -26,8 +26,8 @@ export default {
   computed: {
     navItems () {
       return [
-        { title: 'Create', path: `/sellers/listings/${this.listing._id}/create` },
-        { title: 'Performance', path: `/sellers/listings/${this.listing._id}/performance` }
+        { title: 'Create', path: `/seller/listings/${this.listing._id}/create` },
+        { title: 'Performance', path: `/seller/listings/${this.listing._id}/performance` }
       ]
     }
   }

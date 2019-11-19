@@ -5,7 +5,7 @@
     <div class="items">
       <router-link
         v-for="(listing, i) in listings"
-        :to="`/sellers/listings/${listing._id}`"
+        :to="`/seller/listings/${listing._id}`"
         :key="i">
         <BaseListingCard
           class="listing"
@@ -43,7 +43,7 @@ export default {
   methods: {
     async createListing () {
       const listing = await ListingService.create({})
-      this.$router.push(`/sellers/listings/${listing._id}`)
+      this.$router.push(`/seller/listings/${listing._id}`)
     }
   }
 }

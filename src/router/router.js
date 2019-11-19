@@ -21,43 +21,43 @@ const routes = [
     component: () => import('@/views/Login/Login')
   },
   {
-    path: '/buyers',
-    name: 'buyers',
-    component: () => import('@/views/Sellers/Sellers'),
+    path: '/buyer',
+    name: 'buyer',
+    component: () => import('@/views/Buyer/Buyer'),
     meta: { requiresAuth: true },
     children: [
       {
         path: 'search',
         name: 'search',
-        component: () => import('@/views/Sellers/Sellers')
+        component: () => import('@/views/Seller/Seller')
       },
       {
         path: 'likes',
         name: 'likes',
-        component: () => import('@/views/Sellers/Sellers')
+        component: () => import('@/views/Seller/Seller')
       },
       {
         path: 'alerts',
         name: 'alerts',
-        component: () => import('@/views/Sellers/Sellers')
+        component: () => import('@/views/Seller/Seller')
       }
     ]
   },
   {
-    path: '/sellers',
-    name: 'sellers',
-    component: () => import('@/views/Sellers/Sellers'),
+    path: '/seller',
+    name: 'seller',
+    component: () => import('@/views/Seller/Seller'),
     meta: { requiresAuth: true },
     children: [
       {
         path: 'listings',
         name: 'listings',
-        component: () => import('@/views/Sellers/views/Listings/Listings')
+        component: () => import('@/views/Seller/views/Listings/Listings')
       },
       {
         path: 'listings/:id',
         name: 'listing',
-        component: () => import('@/views/Sellers/views/Listings/views/Listing/Listing'),
+        component: () => import('@/views/Seller/views/Listings/views/Listing/Listing'),
         children: [
           {
             path: '',
@@ -67,7 +67,7 @@ const routes = [
             path: 'create',
             name: 'create',
             props: true,
-            component: () => import('@/views/Sellers/views/Listings/views/Listing/views/Create/Create')
+            component: () => import('@/views/Seller/views/Listings/views/Listing/views/Create/Create')
           }
         ]
       }
@@ -75,7 +75,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/sellers'
+    redirect: '/seller'
   }
 ]
 
