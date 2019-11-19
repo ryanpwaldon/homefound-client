@@ -128,32 +128,16 @@ export default {
   props: {
     listing: {
       type: Object,
-      default: () => ({})
+      required: false
     }
   },
+  created () {
+    this.initForm()
+    this.isEdit = !!this.listing
+  },
   data: () => ({
-    form: {
-      address: this.listing.address || '',
-      unitType: this.listing.unitType || '',
-      unitNumber: this.listing.unitNumber || '',
-      streetType: this.listing.streetType || '',
-      streetNumber: this.listing.streetNumber || '',
-      streetName: this.listing.streetName || '',
-      suburb: this.listing.suburb || '',
-      state: this.listing.state || '',
-      postcode: this.listing.postcode || '',
-      bedrooms: this.listing.bedrooms || '',
-      bathrooms: this.listing.bathrooms || '',
-      carSpaces: this.listing.carSpaces || '',
-      floorSize: this.listing.floorSize || '',
-      landSize: this.listing.landSize || '',
-      propertyType: this.listing.propertyType || '',
-      images: this.listing.images || [],
-      price: this.listing.price || '',
-      name: this.listing.name || '',
-      email: this.listing.email || '',
-      phone: this.listing.phone || ''
-    }
+    form: {},
+    isEdit: false
   }),
   computed: {
     address () {
@@ -169,10 +153,38 @@ export default {
     }
   },
   methods: {
+    initForm () {
+      this.form = {
+        address: (this.listing && this.listing.address) || '',
+        unitType: (this.listing && this.listing.unitType) || '',
+        unitNumber: (this.listing && this.listing.unitNumber) || '',
+        streetType: (this.listing && this.listing.streetType) || '',
+        streetNumber: (this.listing && this.listing.streetNumber) || '',
+        streetName: (this.listing && this.listing.streetName) || '',
+        suburb: (this.listing && this.listing.suburb) || '',
+        state: (this.listing && this.listing.state) || '',
+        postcode: (this.listing && this.listing.postcode) || '',
+        bedrooms: (this.listing && this.listing.bedrooms) || '',
+        bathrooms: (this.listing && this.listing.bathrooms) || '',
+        carSpaces: (this.listing && this.listing.carSpaces) || '',
+        floorSize: (this.listing && this.listing.floorSize) || '',
+        landSize: (this.listing && this.listing.landSize) || '',
+        propertyType: (this.listing && this.listing.propertyType) || '',
+        images: (this.listing && this.listing.images) || [],
+        price: (this.listing && this.listing.price) || '',
+        name: (this.listing && this.listing.name) || '',
+        email: (this.listing && this.listing.email) || '',
+        phone: (this.listing && this.listing.phone) || ''
+      }
+    },
     async submit () {
       if (!(await this.$refs['observer'].validate())) return
-      try { await ListingService.create(this.form) }
-      catch (err) { this.error = true; console.log(err) }
+      try {
+        if (this.isEdit) await ListingService.update(this.listing._id, this.form)
+        else await ListingService.create(this.form)
+      } catch (err) {
+        this.error = true; console.log(err)
+      }
     }
   }
 }

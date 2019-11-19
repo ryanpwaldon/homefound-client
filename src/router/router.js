@@ -55,7 +55,7 @@ const routes = [
         component: () => import('@/views/Sellers/views/Listings/Listings')
       },
       {
-        path: 'listings/listing',
+        path: 'listings/:id',
         name: 'listing',
         component: () => import('@/views/Sellers/views/Listings/views/Listing/Listing'),
         children: [
@@ -66,6 +66,7 @@ const routes = [
           {
             path: 'create',
             name: 'create',
+            props: true,
             component: () => import('@/views/Sellers/views/Listings/views/Listing/views/Create/Create')
           }
         ]

@@ -3,18 +3,20 @@
     <BaseText1 text="Listings"/>
     <BaseDivider/>
     <div class="items">
-      <BaseListingCard
-        class="listing"
+      <router-link
         v-for="(listing, i) in listings"
-        :address="listing.address"
-        :image="listing.images[0]"
-        :id="listing._id"
-        :key="i"
-      />
-      <router-link class="button" to="/sellers/listings/listing">
+        :to="`/sellers/listings/${listing._id}`"
+        :key="i">
+        <BaseListingCard
+          class="listing"
+          :address="listing.address"
+          :image="listing.images[0]"
+        />
+      </router-link>
+      <div class="button" @click="createListing">
         <img src="@/assets/img/plus.svg">
         <BaseText2 text="New listing"/>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +39,13 @@ export default {
   },
   data: () => ({
     listings: []
-  })
+  }),
+  methods: {
+    async createListing () {
+      const listing = await ListingService.create({})
+      this.$router.push(`/sellers/listings/${listing._id}`)
+    }
+  }
 }
 </script>
 
@@ -46,6 +54,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: var(--spacing-5);
+  > * { min-width: 0 }
 }
 .listing,
 .button {
@@ -60,6 +69,7 @@ export default {
   background: var(--color-white-1);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
+  cursor: pointer;
   img {
     margin-bottom: var(--spacing-2);
     width: 10px;

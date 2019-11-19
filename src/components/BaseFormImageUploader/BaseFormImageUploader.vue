@@ -4,7 +4,7 @@
       <div
         class="item"
         v-for="(url, i) in value"
-        :style="{backgroundImage: `url(${url})`}"
+        :style="{backgroundImage: `url(${url + '-/resize/400x/'})`}"
         :key="i"
       />
       <div class="item" @click="openUploader">
@@ -25,6 +25,7 @@ export default {
     }
   },
   mounted () {
+    window.UPLOADCARE_MANUAL_START = true
     uploadcare.start({ publicKey: '0d733b1aa49e3fa3156c' })
     this.files = this.value.map(cdnUrl => uploadcare.fileFrom('uploaded', cdnUrl))
   },

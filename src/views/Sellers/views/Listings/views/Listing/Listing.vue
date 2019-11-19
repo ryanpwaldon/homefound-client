@@ -1,25 +1,36 @@
 <template>
   <div class="listing">
-    <BaseText1 class="title" text="New listing"/>
-    <BaseNavHorizontal class="nav" :nav-items="navItems"/>
-    <router-view/>
+    <template v-if="listing">
+      <BaseText1 class="title" :text="listing.address || 'New listing'"/>
+      <BaseNavHorizontal class="nav" :nav-items="navItems"/>
+      <router-view :listing="listing"/>
+    </template>
   </div>
 </template>
 
 <script>
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseNavHorizontal from '@/components/BaseNavHorizontal/BaseNavHorizontal'
+import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   components: {
     BaseText1,
     BaseNavHorizontal
   },
+  async mounted () {
+    this.listing = await ListingService.findOne(this.$route.params.id)
+  },
   data: () => ({
-    navItems: [
-      { title: 'Create', path: '/sellers/listings/listing/create' },
-      { title: 'Performance', path: '/sellers/listings/listing/performance' }
-    ]
-  })
+    listing: null
+  }),
+  computed: {
+    navItems () {
+      return [
+        { title: 'Create', path: `/sellers/listings/${this.listing._id}/create` },
+        { title: 'Performance', path: `/sellers/listings/${this.listing._id}/performance` }
+      ]
+    }
+  }
 }
 </script>
 

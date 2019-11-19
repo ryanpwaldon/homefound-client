@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 .base-text-3 {
   font-size: 1rem;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }

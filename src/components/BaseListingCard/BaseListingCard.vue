@@ -1,8 +1,8 @@
 <template>
   <div class="base-listing-card">
-    <div class="image" :style="{backgroundImage: `url(${image})`}"/>
+    <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
     <div class="contents">
-      <BaseText2 :text="address"/>
+      <BaseText2 class="text" :text="address"/>
     </div>
   </div>
 </template>
@@ -14,17 +14,13 @@ export default {
     BaseText2
   },
   props: {
-    id: {
-      type: String,
-      required: true
-    },
     image: {
       type: String,
-      required: true
+      default: 'https://ucarecdn.com/48db410d-7b1f-4ec6-8e6c-e8a188c72e15/'
     },
     address: {
       type: String,
-      required: true
+      default: 'Untitled'
     }
   }
 }
@@ -49,6 +45,12 @@ export default {
   background-size: cover;
 }
 .contents {
+  flex-shrink: 0;
   padding: var(--spacing-4) var(--spacing-2);
+}
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
