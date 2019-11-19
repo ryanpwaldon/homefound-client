@@ -24,6 +24,10 @@ export default {
       required: true
     }
   },
+  mounted () {
+    uploadcare.start({ publicKey: '0d733b1aa49e3fa3156c' })
+    this.files = this.value.map(cdnUrl => uploadcare.fileFrom('uploaded', cdnUrl))
+  },
   data () {
     return {
       files: null
@@ -31,11 +35,7 @@ export default {
   },
   methods: {
     openUploader () {
-      this.dialog = uploadcare.openDialog(this.files, null, {
-        publicKey: '0d733b1aa49e3fa3156c',
-        imagesOnly: true,
-        multiple: true
-      })
+      this.dialog = uploadcare.openDialog(this.files, { imagesOnly: true, multiple: true })
       this.dialog.always(async ({ files }) => {
         this.files = files()
         this.$emit('input', (await Promise.all(this.files)).map(file => file.cdnUrl))

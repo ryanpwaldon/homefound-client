@@ -7,7 +7,15 @@ export default {
   },
 
   async findOne (id) {
-    return (await Api.get(`/listing/${id}`)).data
+    return (await Api().get(`/listing/${id}`)).data
+  },
+
+  async findCreated () {
+    return (await Api().get(`/listing/created`)).data
+  },
+
+  async findLiked () {
+    return (await Api().get(`/listing/liked`)).data
   }
 
 }

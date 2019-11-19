@@ -3,6 +3,14 @@
     <BaseText1 text="Listings"/>
     <BaseDivider/>
     <div class="items">
+      <BaseListingCard
+        class="listing"
+        v-for="(listing, i) in listings"
+        :address="listing.streetName"
+        :image="listing.images[0]"
+        :id="listing._id"
+        :key="i"
+      />
       <router-link class="button" to="/sellers/listings/listing">
         <img src="@/assets/img/plus.svg">
         <BaseText2 text="New listing"/>
@@ -15,12 +23,21 @@
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
+import BaseListingCard from '@/components/BaseListingCard/BaseListingCard'
+import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   components: {
     BaseText1,
     BaseText2,
-    BaseDivider
-  }
+    BaseDivider,
+    BaseListingCard
+  },
+  async mounted () {
+    this.listings = await ListingService.findCreated()
+  },
+  data: () => ({
+    listings: []
+  })
 }
 </script>
 

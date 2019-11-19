@@ -99,7 +99,7 @@
         </ValidationProvider>
       </div>
     </ValidationObserver>
-    <BaseFormSubmitButton text="submit" @click.native="submit"/>
+    <BaseFormSubmitButton text="Submit" @click.native="submit"/>
   </div>
 </template>
 
