@@ -12,6 +12,7 @@
 <script>
 import BaseNavVertical from '@/components/BaseNavVertical/BaseNavVertical'
 export default {
+  name: 'seller',
   components: {
     BaseNavVertical
   },

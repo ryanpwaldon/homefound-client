@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
-    <BaseText1 text="Home"/>
+  <div class="listings">
+    <BaseText1 text="Listings"/>
   </div>
 </template>
 
 <script>
 import BaseText1 from '@/components/BaseText1/BaseText1'
 export default {
-  name: 'home',
+  name: 'listings',
   components: {
     BaseText1
   }

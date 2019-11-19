@@ -28,6 +28,7 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseListingCard from '@/components/BaseListingCard/BaseListingCard'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
+  name: 'listings',
   components: {
     BaseText1,
     BaseText2,

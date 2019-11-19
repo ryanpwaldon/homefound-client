@@ -114,6 +114,7 @@ import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormIm
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 export default {
+  name: 'create',
   components: {
     BaseFormSubmitButton,
     BaseText4,

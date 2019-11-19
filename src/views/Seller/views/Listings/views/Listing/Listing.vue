@@ -13,6 +13,7 @@ import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseNavHorizontal from '@/components/BaseNavHorizontal/BaseNavHorizontal'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
+  name: 'listing',
   components: {
     BaseText1,
     BaseNavHorizontal
