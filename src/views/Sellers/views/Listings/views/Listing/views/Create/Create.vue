@@ -125,29 +125,49 @@ export default {
     ValidationProvider,
     ValidationObserver
   },
+  props: {
+    listing: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data: () => ({
     form: {
-      unitType: '',
-      unitNumber: '',
-      streetType: '',
-      streetNumber: '',
-      streetName: '',
-      suburb: '',
-      state: '',
-      postcode: '',
-      bedrooms: '',
-      bathrooms: '',
-      carSpaces: '',
-      floorSize: '',
-      landSize: '',
-      propertyType: '',
-      images: [],
-      price: '',
-      name: '',
-      email: '',
-      phone: ''
+      address: this.listing.address || '',
+      unitType: this.listing.unitType || '',
+      unitNumber: this.listing.unitNumber || '',
+      streetType: this.listing.streetType || '',
+      streetNumber: this.listing.streetNumber || '',
+      streetName: this.listing.streetName || '',
+      suburb: this.listing.suburb || '',
+      state: this.listing.state || '',
+      postcode: this.listing.postcode || '',
+      bedrooms: this.listing.bedrooms || '',
+      bathrooms: this.listing.bathrooms || '',
+      carSpaces: this.listing.carSpaces || '',
+      floorSize: this.listing.floorSize || '',
+      landSize: this.listing.landSize || '',
+      propertyType: this.listing.propertyType || '',
+      images: this.listing.images || [],
+      price: this.listing.price || '',
+      name: this.listing.name || '',
+      email: this.listing.email || '',
+      phone: this.listing.phone || ''
     }
   }),
+  computed: {
+    address () {
+      const unitSegment = this.form.unitType + ' ' + this.form.unitNumber
+      const streetSegment = this.form.streetNumber + ' ' + this.form.streetName + ' ' + this.form.streetType
+      const address = `${unitSegment} ${streetSegment}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`
+      return address.trim()
+    }
+  },
+  watch: {
+    address (val) {
+      this.form.address = val
+    }
+  },
   methods: {
     async submit () {
       if (!(await this.$refs['observer'].validate())) return

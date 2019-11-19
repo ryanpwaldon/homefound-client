@@ -2,8 +2,12 @@ import Api from '@/services/Api/Api'
 
 export default {
 
-  async create (body) {
-    return (await Api().post('/listing', body)).data
+  async create (listingData) {
+    return (await Api().post('/listing', listingData)).data
+  },
+
+  async update (id, listingData) {
+    return (await Api().put(`/listing/${id}`, listingData)).data
   },
 
   async findOne (id) {

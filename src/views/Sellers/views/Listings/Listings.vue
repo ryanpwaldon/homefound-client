@@ -6,7 +6,7 @@
       <BaseListingCard
         class="listing"
         v-for="(listing, i) in listings"
-        :address="listing.streetName"
+        :address="listing.address"
         :image="listing.images[0]"
         :id="listing._id"
         :key="i"
@@ -47,13 +47,16 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: var(--spacing-5);
 }
+.listing,
+.button {
+  height: 200px;
+}
 .button {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 200px;
   background: var(--color-white-1);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
