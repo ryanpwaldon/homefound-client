@@ -7,7 +7,7 @@
         v-for="(listing, i) in listings"
         :to="`/seller/listings/${listing._id}`"
         :key="i">
-        <BaseListingCard
+        <BaseListingCardSeller
           class="listing"
           :address="listing.address"
           :image="listing.images[0]"
@@ -25,7 +25,7 @@
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
-import BaseListingCard from '@/components/BaseListingCard/BaseListingCard'
+import BaseListingCardSeller from '@/components/BaseListingCardSeller/BaseListingCardSeller'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   name: 'listings',
@@ -33,7 +33,7 @@ export default {
     BaseText1,
     BaseText2,
     BaseDivider,
-    BaseListingCard
+    BaseListingCardSeller
   },
   async mounted () {
     this.listings = await ListingService.findCreated()

@@ -79,6 +79,12 @@ const routes = [
             name: 'performance',
             props: true,
             component: () => import('@/views/Seller/views/Listings/views/Listing/views/Performance/Performance')
+          },
+          {
+            path: 'settings',
+            name: 'settings',
+            props: true,
+            component: () => import('@/views/Seller/views/Listings/views/Listing/views/Settings/Settings')
           }
         ]
       }

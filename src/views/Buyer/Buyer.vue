@@ -1,11 +1,7 @@
 <template>
   <div class="buyer">
     <BaseNavVertical :nav-items="navItems"/>
-    <div class="content">
-      <div class="router-view-container">
-        <router-view/>
-      </div>
-    </div>
+    <router-view/>
   </div>
 </template>
 
@@ -32,19 +28,5 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-}
-.content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--color-gray-2);
-  overflow: auto;
-}
-.router-view-container {
-  width: 100%;
-  max-width: 600px;
-  margin: var(--spacing-6) 0;
 }
 </style>

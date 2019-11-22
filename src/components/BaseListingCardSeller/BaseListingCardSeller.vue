@@ -1,5 +1,5 @@
 <template>
-  <div class="base-listing-card">
+  <div class="base-listing-card-seller">
     <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
     <div class="contents">
       <BaseText2 class="text" :text="address"/>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-listing-card {
+.base-listing-card-seller {
   display: flex;
   position: relative;
   flex-direction: column;

@@ -14,12 +14,20 @@ export default {
     return (await Api().get(`/listing/${id}`)).data
   },
 
+  async findMany (params) {
+    return (await Api().get(`/listing`, { params })).data.docs
+  },
+
   async findCreated () {
     return (await Api().get(`/listing/created`)).data
   },
 
   async findLiked () {
     return (await Api().get(`/listing/liked`)).data
+  },
+
+  async delete (id) {
+    return (await Api().delete(`/listing/${id}`)).data
   }
 
 }
