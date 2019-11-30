@@ -14,8 +14,8 @@ export default {
     return (await Api().get(`/listing/${id}`)).data
   },
 
-  async findMany (params) {
-    return (await Api().get(`/listing`, { params })).data.docs
+  async findMany ({ filters, options }) {
+    return (await Api().get(`/listing`, { params: { filters, options } })).data
   },
 
   async findCreated () {

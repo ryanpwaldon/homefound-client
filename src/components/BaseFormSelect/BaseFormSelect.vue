@@ -5,7 +5,7 @@
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
     <div class="dropdown" v-if="isOpen">
-      <div class="placeholder" @click="$emit('input', '')">{{ placeholder }}</div>
+      <div class="placeholder" @click="$emit('input', undefined)">{{ placeholder }}</div>
       <div
         class="option"
         v-for="(option, i) in options"

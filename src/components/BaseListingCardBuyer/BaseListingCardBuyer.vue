@@ -3,7 +3,7 @@
     <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
     <div class="contents">
       <div class="row r-1">
-        <BaseText2 class="text" :text="price | numeral('0a')"/>
+        <BaseText2 class="text" :text="price | numeral('0.[00]a')"/>
         <BaseText2 class="text" :text="`${bedrooms} | ${bathrooms} | ${carSpaces}`"/>
       </div>
       <BaseDivider class="divider"/>

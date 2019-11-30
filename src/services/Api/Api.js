@@ -10,7 +10,6 @@ export default () => {
   client.interceptors.request.use(config => {
     config.paramsSerializer = params => {
       return qs.stringify(params, {
-        arrayFormat: 'brackets',
         encode: false
       })
     }

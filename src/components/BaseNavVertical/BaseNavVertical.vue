@@ -33,6 +33,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: var(--spacing-4) 0;
+  flex-shrink: 0;
   > *:not(:last-child) {
     margin-bottom: var(--spacing-6);
   }

@@ -1,102 +1,112 @@
 <template>
   <div class="create">
-    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <BaseText4 class="title" text="Address"/>
-      <div class="group">
-        <ValidationProvider class="provider" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
-          <BaseFormSelect placeholder="Unit type" v-model="form.unitType" :options="[ {title: 'Unit', value: 'Unit'}, {title: 'Lot', value: 'Lot'}, {title: 'Shop', value: 'Shop'} ]"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
-          <BaseFormInput placeholder="Unit number" v-model="form.unitNumber"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <div class="break"/>
-        <ValidationProvider class="provider" name="street number" rules="required" v-slot="{ errors }">
-          <BaseFormInput placeholder="Street number" v-model="form.streetNumber"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="street name" rules="required" v-slot="{ errors }">
-          <BaseFormInput placeholder="Street name" v-model="form.streetName"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="street type" rules="required" v-slot="{ errors }">
-          <BaseFormSelect placeholder="Street type" v-model="form.streetType" :options="[ {title: 'Street', value: 'Street'}, {title: 'Road', value: 'Road'}, {title: 'Avenue', value: 'Avenue'} ]"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <div class="break"/>
-        <ValidationProvider class="provider" name="suburb" rules="required" v-slot="{ errors }">
-          <BaseFormInput placeholder="Suburb" v-model="form.suburb"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="state" rules="required" v-slot="{ errors }">
-          <BaseFormSelect placeholder="State" v-model="form.state" :options="[ {title: 'NSW', value: 'NSW'}, {title: 'QLD', value: 'QLD'}, {title: 'ACT', value: 'ACT'}, {title: 'VIC', value: 'VIC'}, {title: 'SA', value: 'SA'}, {title: 'TAS', value: 'TAS'}, {title: 'WA', value: 'WA'}, {title: 'NT', value: 'NT'}, ]"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="postcode" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Postcode" v-model="form.postcode"/>
+    <ValidationObserver class="v-observer" ref="v-observer" tag="div" v-slot="{ invalid }">
+      <div class="card">
+        <BaseText4 class="title" text="Address"/>
+        <div class="group">
+          <ValidationProvider class="v-provider" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
+            <BaseFormSelect placeholder="Unit type" v-model="form.unitType" :options="[ {title: 'Unit', value: 'Unit'}, {title: 'Lot', value: 'Lot'}, {title: 'Shop', value: 'Shop'} ]"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
+            <BaseFormInput placeholder="Unit number" v-model="form.unitNumber"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <div class="break"/>
+          <ValidationProvider class="v-provider" name="street number" rules="required" v-slot="{ errors }">
+            <BaseFormInput placeholder="Street number" v-model="form.streetNumber"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="street name" rules="required" v-slot="{ errors }">
+            <BaseFormInput placeholder="Street name" v-model="form.streetName"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="street type" rules="required" v-slot="{ errors }">
+            <BaseFormSelect placeholder="Street type" v-model="form.streetType" :options="[ {title: 'Street', value: 'Street'}, {title: 'Road', value: 'Road'}, {title: 'Avenue', value: 'Avenue'} ]"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <div class="break"/>
+          <ValidationProvider class="v-provider" name="suburb" rules="required" v-slot="{ errors }">
+            <BaseFormInput placeholder="Suburb" v-model="form.suburb"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="state" rules="required" v-slot="{ errors }">
+            <BaseFormSelect placeholder="State" v-model="form.state" :options="[ {title: 'NSW', value: 'NSW'}, {title: 'QLD', value: 'QLD'}, {title: 'ACT', value: 'ACT'}, {title: 'VIC', value: 'VIC'}, {title: 'SA', value: 'SA'}, {title: 'TAS', value: 'TAS'}, {title: 'WA', value: 'WA'}, {title: 'NT', value: 'NT'}, ]"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="postcode" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Postcode" v-model="form.postcode"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+        </div>
+      </div>
+      <div class="card">
+        <BaseText4 class="title" text="Coordinates"/>
+        <ValidationProvider class="v-provider" name="coordinates" rules="required" v-slot="{ errors }" tag="div">
+          <BaseFormCoordinates class="coordinates" :address="address" v-model="form.lngLat"/>
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
       </div>
-      <BaseDivider/>
-      <BaseText4 class="title" text="Features"/>
-      <div class="group">
-        <ValidationProvider class="provider" name="bedrooms" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Bedrooms" v-model="form.bedrooms"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="bathrooms" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Bathrooms" v-model="form.bathrooms"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="car spaces" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Car spaces" v-model="form.carSpaces"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="floor size" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Floor size" v-model="form.floorSize"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="land size" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Land size" v-model="form.landSize"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="property type" rules="required" v-slot="{ errors }">
-          <BaseFormSelect placeholder="Property type" v-model="form.propertyType" :options="[ {title: 'House', value: 'house'}, {title: 'Unit', value: 'unit'} ]"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-      </div>
-      <BaseDivider/>
-      <BaseText4 class="title" text="Photos"/>
-      <div class="group">
-        <ValidationProvider class="provider" name="photos" rules="requiredArray" v-slot="{ errors }">
-          <BaseFormImageUploader v-model="form.images"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-      </div>
-      <BaseDivider/>
-      <BaseText4 class="title" text="Sale"/>
-      <div class="group">
-        <ValidationProvider class="provider" name="asking price" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Asking price" v-model="form.price"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-      </div>
-      <BaseDivider/>
-      <BaseText4 class="title" text="Contact"/>
-      <div class="group">
-        <ValidationProvider class="provider" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
-          <BaseFormInput placeholder="Name" v-model="form.name"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
-          <BaseFormInput placeholder="Email" v-model="form.email"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <ValidationProvider class="provider" name="phone" rules="required|numeric" v-slot="{ errors }">
-          <BaseFormInput placeholder="Phone" v-model="form.phone"/>
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
+      <div class="card">
+        <BaseText4 class="title" text="Features"/>
+        <div class="group">
+          <ValidationProvider class="v-provider" name="bedrooms" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Bedrooms" v-model="form.bedrooms"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="bathrooms" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Bathrooms" v-model="form.bathrooms"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="car spaces" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Car spaces" v-model="form.carSpaces"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="floor size" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Floor size" v-model="form.floorSize"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="land size" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Land size" v-model="form.landSize"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="property type" rules="required" v-slot="{ errors }">
+            <BaseFormSelect placeholder="Property type" v-model="form.propertyType" :options="[ {title: 'House', value: 'house'}, {title: 'Unit', value: 'unit'} ]"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+        </div>
+        <BaseDivider/>
+        <BaseText4 class="title" text="Photos"/>
+        <div class="group">
+          <ValidationProvider class="v-provider" name="photos" rules="requiredArray" v-slot="{ errors }">
+            <BaseFormImageUploader v-model="form.images"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+        </div>
+        <BaseDivider/>
+        <BaseText4 class="title" text="Sale"/>
+        <div class="group">
+          <ValidationProvider class="v-provider" name="asking price" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Asking price" v-model="form.price"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+        </div>
+        <BaseDivider/>
+        <BaseText4 class="title" text="Contact"/>
+        <div class="group">
+          <ValidationProvider class="v-provider" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
+            <BaseFormInput placeholder="Name" v-model="form.name"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="email" rules="required|email" v-slot="{ errors }">
+            <BaseFormInput placeholder="Email" v-model="form.email"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <ValidationProvider class="v-provider" name="phone" rules="required|numeric" v-slot="{ errors }">
+            <BaseFormInput placeholder="Phone" v-model="form.phone"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+        </div>
       </div>
     </ValidationObserver>
     <BaseFormSubmitButton text="Submit" @click.native="submit"/>
@@ -110,6 +120,7 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
+import BaseFormCoordinates from '@/components/BaseFormCoordinates/BaseFormCoordinates'
 import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormImageUploader'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
@@ -123,6 +134,7 @@ export default {
     BaseFormInput,
     BaseFormSelect,
     BaseFormImageUploader,
+    BaseFormCoordinates,
     ValidationProvider,
     ValidationObserver
   },
@@ -142,6 +154,7 @@ export default {
   }),
   computed: {
     address () {
+      if (!this.form.streetNumber || !this.form.streetName || !this.form.streetType || !this.form.suburb || !this.form.state || !this.form.postcode) return null
       const unitSegment = this.form.unitType + ' ' + this.form.unitNumber
       const streetSegment = this.form.streetNumber + ' ' + this.form.streetName + ' ' + this.form.streetType
       const address = `${unitSegment} ${streetSegment}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`
@@ -165,6 +178,7 @@ export default {
         suburb: (this.listing && this.listing.suburb) || '',
         state: (this.listing && this.listing.state) || '',
         postcode: (this.listing && this.listing.postcode) || '',
+        lngLat: (this.listing && this.listing.lngLat) || [],
         bedrooms: (this.listing && this.listing.bedrooms) || '',
         bathrooms: (this.listing && this.listing.bathrooms) || '',
         carSpaces: (this.listing && this.listing.carSpaces) || '',
@@ -179,7 +193,7 @@ export default {
       }
     },
     async submit () {
-      if (!(await this.$refs['observer'].validate())) return
+      if (!(await this.$refs['v-observer'].validate())) return
       try {
         if (this.isEdit) await ListingService.update(this.listing._id, this.form)
         else await ListingService.create(this.form)
@@ -192,29 +206,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.observer {
+.v-observer {
   width: 100%;
+}
+.card {
   background: var(--color-white-1);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
   padding: var(--spacing-5);
   margin-bottom: var(--spacing-4);
 }
-.title {
-  margin-bottom: var(--spacing-4);
+.coordinates {
+  height: 300px;
 }
 .group {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: calc(-1 * var(--spacing-2));
-  > * {
-    margin-bottom: var(--spacing-2);
-    &:not(:last-child) {
-      margin-right: var(--spacing-2);
-    }
-  }
 }
-.provider {
+.group > * {
+  margin-bottom: var(--spacing-2);
+  &:not(:last-child) { margin-right: var(--spacing-2) }
+}
+.title {
+  margin-bottom: var(--spacing-4);
+}
+.v-provider {
   position: relative;
 }
 .break {

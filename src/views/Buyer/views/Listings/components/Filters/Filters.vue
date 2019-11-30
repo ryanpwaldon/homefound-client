@@ -1,5 +1,5 @@
 <template>
-  <div class="base-filters">
+  <div class="filters">
     <BaseText4 class="title" text="Filters"/>
     <div class="items">
       <BaseFormSelect
@@ -47,30 +47,30 @@ export default {
     BaseText4,
     BaseFormSelect
   },
-  mounted () {
-    this.$emit('input', this.form)
-  },
   data: () => ({
     form: {
-      bedrooms: undefined
-      // bathrooms: null,
-      // carSpaces: null,
-      // unitType: null
+      bedrooms: undefined,
+      bathrooms: undefined,
+      carSpaces: undefined,
+      unitType: undefined
     }
   }),
   watch: {
     form: {
       deep: true,
-      handler () {
-        console.log('hello')
-      }
+      handler () { this.emit() }
+    }
+  },
+  methods: {
+    emit () {
+      this.$emit('updated', this.form)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.base-filters {
+.filters {
   width: 100%;
   padding: var(--spacing-5);
   border-radius: var(--border-radius-1);
