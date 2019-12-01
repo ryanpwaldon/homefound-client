@@ -16,9 +16,9 @@
 
 .mapboxgl-canvas-container.mapboxgl-interactive,
 .mapboxgl-ctrl-group > button.mapboxgl-ctrl-compass {
-  cursor: -webkit-pointer;
-  cursor: -moz-pointer;
-  cursor: pointer;
+  cursor: -webkit-normal;
+  cursor: -moz-normal;
+  cursor: normal;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;

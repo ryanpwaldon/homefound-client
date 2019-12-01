@@ -3,8 +3,56 @@
     <div class="content-container">
       <div class="content">
         <BaseText1 class="title" text="Search" />
-        <Filters class="filters" @updated="updateSelectionFilters" />
-        <div class="items">
+        <div class="filters-card">
+          <BaseText4 class="filters-title" text="Filters"/>
+          <div class="filters-container">
+            <BaseFormSelect
+              placeholder="Bedrooms"
+              v-model="filters.bedrooms"
+              :options="[
+                {title: '0', value: '0'},
+                {title: '1', value: '1'},
+                {title: '2', value: '2'},
+                {title: '3', value: '3'},
+                {title: '4', value: '4'},
+                {title: '5+', value: '5+'}
+              ]"
+            />
+            <BaseFormSelect
+              placeholder="Bathrooms"
+              v-model="filters.bathrooms"
+              :options="[
+                {title: '0', value: '0'},
+                {title: '1', value: '1'},
+                {title: '2', value: '2'},
+                {title: '3', value: '3'},
+                {title: '4', value: '4'},
+                {title: '5+', value: '5+'}
+              ]"
+            />
+            <BaseFormSelect
+              placeholder="Car spaces"
+              v-model="filters.carSpaces"
+              :options="[
+                {title: '0', value: '0'},
+                {title: '1', value: '1'},
+                {title: '2', value: '2'},
+                {title: '3', value: '3'},
+                {title: '4', value: '4'},
+                {title: '5+', value: '5+'}
+              ]"
+            />
+            <BaseFormSelect
+              placeholder="Property type"
+              v-model="filters.propertyType"
+              :options="[
+                {title: 'House', value: 'house'},
+                {title: 'Unit', value: 'unit'}
+              ]"
+            />
+          </div>
+        </div>
+        <div class="listings-container">
           <BaseListingCardBuyer
             class="listing"
             v-for="listing in listings"
@@ -21,53 +69,92 @@
       </div>
     </div>
     <div class="map-container">
+      <div class="map-button">
+        <transition name="fall">
+          <BaseButtonRounded
+            text="Update search area"
+            @click.native="updatePolygonFilter"
+             v-if="listings.length && polygon !== filters.lngLat.$geoWithin.$geometry.coordinates"
+          />
+        </transition>
+      </div>
       <BaseMap>
         <Pin v-for="listing of listings" :key="listing._id" :lng-lat="listing.lngLat"/>
-        <GetBounds @updated="updateGeoFilter"/>
+        <GetBounds ref="get-bounds" v-model="polygon"/>
       </BaseMap>
     </div>
   </div>
 </template>
 
 <script>
-import BaseMap from '@/components/BaseMap/BaseMap'
 import BaseText1 from '@/components/BaseText1/BaseText1'
-import Filters from './components/Filters/Filters'
+import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
+import ListingService from '@/services/Api/services/ListingService/ListingService'
 import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingCardBuyer'
 import IntersectionTrigger from './components/IntersectionTrigger/IntersectionTrigger'
-import ListingService from '@/services/Api/services/ListingService/ListingService'
-import Pin from '@/components/BaseMap/components/Pin/Pin'
+import BaseButtonRounded from '@/components/BaseButtonRounded/BaseButtonRounded'
 import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
+import Pin from '@/components/BaseMap/components/Pin/Pin'
+import BaseMap from '@/components/BaseMap/BaseMap'
 export default {
   components: {
     BaseText1,
-    Filters,
+    BaseText4,
+    BaseFormSelect,
     BaseListingCardBuyer,
     IntersectionTrigger,
-    BaseMap,
+    BaseButtonRounded,
     GetBounds,
+    BaseMap,
     Pin
   },
-  created () {
-    // this.getListings()
+  async mounted () {
+    const destroy = this.$watch('polygon', () => {
+      this.updatePolygonFilter()
+      destroy()
+    })
   },
   data: () => ({
     listings: [],
-    filters: {},
     nextPage: 1,
     limit: 9,
     lastPage: null,
-    loading: false
+    loading: false,
+    polygon: null,
+    filters: {
+      lngLat: {
+        $geoWithin: {
+          $geometry: {
+            type: 'Polygon',
+            coordinates: null
+          }
+        }
+      }
+    }
   }),
+  watch: {
+    filters: {
+      deep: true,
+      handler () {
+        this.listings = []
+        this.nextPage = 1
+        this.lastPage = null
+        this.getListings()
+      }
+    }
+  },
   methods: {
     async getListings () {
-      if (this.lastPage && this.nextPage > this.lastPage) return
+      const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
+      if (this.loading || reachedLastPage) return
       this.loading = true
       const { docs: listings, pages } = await ListingService.findMany({
         filters: this.filters,
         options: {
           page: this.nextPage,
-          limit: this.limit
+          limit: this.limit,
+          sort: { createdAt: -1 }
         }
       })
       this.listings.push(...listings)
@@ -76,26 +163,8 @@ export default {
       this.loading = false
       this.$refs['intersection-trigger'].observe()
     },
-    onFiltersUpdated () {
-      this.listings = []
-      this.nextPage = 1
-      this.lastPage = null
-      this.getListings()
-    },
-    updateSelectionFilters (filters) {
-      this.filters = filters
-      this.onFiltersUpdated()
-    },
-    updateGeoFilter (polygon) {
-      this.filters.lngLat = {
-        $geoWithin: {
-          $geometry: {
-            type: 'Polygon',
-            coordinates: [polygon]
-          }
-        }
-      }
-      this.onFiltersUpdated()
+    updatePolygonFilter () {
+      this.filters.lngLat.$geoWithin.$geometry.coordinates = this.polygon
     }
   }
 }
@@ -126,10 +195,24 @@ export default {
 .title {
   margin-bottom: var(--spacing-5);
 }
-.filters {
+.filters-card {
+  width: 100%;
+  padding: var(--spacing-5);
+  border-radius: var(--border-radius-1);
+  box-shadow: var(--box-shadow-1);
+  background: var(--color-white-1);
   margin-bottom: var(--spacing-5);
 }
-.items {
+.filters-title {
+  margin-bottom: var(--spacing-4);
+}
+.filters-container {
+  display: flex;
+  > * {
+    margin-right: var(--spacing-2);
+  }
+}
+.listings-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: var(--spacing-5);
@@ -140,6 +223,14 @@ export default {
   min-width: 0;
 }
 .map-container {
+  position: relative;
   border-left: var(--color-gray-1) solid 1px;
+}
+.map-button {
+  position: absolute;
+  transform: translateX(-50%);
+  top: var(--spacing-4);
+  left: 50%;
+  z-index: 1;
 }
 </style>

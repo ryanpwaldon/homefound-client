@@ -8,7 +8,7 @@
       </div>
       <BaseDivider class="divider"/>
       <div class="row r-2">
-        <BaseText2 class="text" :text="createdAt | moment('from', 'now')"/>
+        <BaseText2 class="text">Posted {{ createdAt | moment('from', 'now') }}</BaseText2>
       </div>
     </div>
   </div>

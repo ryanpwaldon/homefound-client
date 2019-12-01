@@ -1,5 +1,6 @@
 <template>
   <div class="base-text-2">
+    <slot/>
     {{ text }}
   </div>
 </template>
@@ -9,7 +10,7 @@ export default {
   props: {
     text: {
       type: String,
-      required: true
+      required: false
     }
   }
 }
