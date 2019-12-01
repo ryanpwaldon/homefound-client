@@ -65,7 +65,7 @@
             />
           </router-link>
         </div>
-        <IntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
+        <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
       </div>
     </div>
     <div class="map-container">
@@ -92,7 +92,7 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingCardBuyer'
-import IntersectionTrigger from './components/IntersectionTrigger/IntersectionTrigger'
+import BaseIntersectionTrigger from '@/components/BaseIntersectionTrigger/BaseIntersectionTrigger'
 import BaseButtonRounded from '@/components/BaseButtonRounded/BaseButtonRounded'
 import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
 import Pin from '@/components/BaseMap/components/Pin/Pin'
@@ -103,7 +103,7 @@ export default {
     BaseText4,
     BaseFormSelect,
     BaseListingCardBuyer,
-    IntersectionTrigger,
+    BaseIntersectionTrigger,
     BaseButtonRounded,
     GetBounds,
     BaseMap,

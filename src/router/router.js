@@ -31,13 +31,13 @@ const routes = [
       },
       {
         path: 'listings',
-        name: 'buyer-listings',
+        name: 'listings',
         component: () => import('@/views/Buyer/views/Listings/Listings')
       },
       {
         path: 'listings/:id',
-        name: 'buyer-listing',
-        component: () => import('@/views/Buyer/views/Listings/views/Listing/Listing'),
+        name: 'listing',
+        component: () => import('@/views/Buyer/views/Listing/Listing'),
         props: true
       },
       {
@@ -63,7 +63,6 @@ const routes = [
       },
       {
         path: 'listings',
-        name: 'seller-listings',
         component: () => import('@/views/Seller/views/Listings/Listings')
       },
       {

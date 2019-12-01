@@ -1,5 +1,5 @@
 <template>
-  <div class="intersection-trigger" ref="intersection-trigger"/>
+  <div class="base-intersection-trigger"/>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.intersection-trigger {
+.base-intersection-trigger {
   width: 100%;
   height: 0;
 }
