@@ -82,6 +82,8 @@ export default {
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
   z-index: 1;
+  max-height: 380px;
+  overflow: auto;
 }
 .placeholder,
 .option {

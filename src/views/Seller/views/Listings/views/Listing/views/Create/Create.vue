@@ -5,7 +5,7 @@
         <BaseText4 class="title" text="Address"/>
         <div class="group">
           <ValidationProvider class="v-provider" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Unit type" v-model="form.unitType" :options="[ {title: 'Unit', value: 'Unit'}, {title: 'Lot', value: 'Lot'}, {title: 'Shop', value: 'Shop'} ]"/>
+            <BaseFormSelect placeholder="Unit type" v-model="form.unitType" :options="options.unitTypes"/>
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <ValidationProvider class="v-provider" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
@@ -22,7 +22,7 @@
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <ValidationProvider class="v-provider" name="street type" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Street type" v-model="form.streetType" :options="[ {title: 'Street', value: 'Street'}, {title: 'Road', value: 'Road'}, {title: 'Avenue', value: 'Avenue'} ]"/>
+            <BaseFormSelect placeholder="Street type" v-model="form.streetType" :options="options.streetTypes"/>
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <div class="break"/>
@@ -31,7 +31,7 @@
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <ValidationProvider class="v-provider" name="state" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="State" v-model="form.state" :options="[ {title: 'NSW', value: 'NSW'}, {title: 'QLD', value: 'QLD'}, {title: 'ACT', value: 'ACT'}, {title: 'VIC', value: 'VIC'}, {title: 'SA', value: 'SA'}, {title: 'TAS', value: 'TAS'}, {title: 'WA', value: 'WA'}, {title: 'NT', value: 'NT'}, ]"/>
+            <BaseFormSelect placeholder="State" v-model="form.state" :options="options.states"/>
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <ValidationProvider class="v-provider" name="postcode" rules="required|numeric" v-slot="{ errors }">
@@ -71,7 +71,7 @@
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <ValidationProvider class="v-provider" name="property type" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Property type" v-model="form.propertyType" :options="[ {title: 'House', value: 'house'}, {title: 'Unit', value: 'unit'} ]"/>
+            <BaseFormSelect placeholder="Property type" v-model="form.propertyType" :options="options.propertyTypes"/>
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
         </div>
@@ -109,7 +109,7 @@
         </div>
       </div>
     </ValidationObserver>
-    <BaseFormSubmitButton text="Submit" @click.native="submit"/>
+    <BaseFormSubmitButton class="submit-button" text="Post listing" @click.native="submit"/>
   </div>
 </template>
 
@@ -124,6 +124,7 @@ import BaseFormCoordinates from '@/components/BaseFormCoordinates/BaseFormCoordi
 import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormImageUploader'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
+import * as options from './form-datatypes'
 export default {
   name: 'create',
   components: {
@@ -149,6 +150,7 @@ export default {
     this.isEdit = !!this.listing
   },
   data: () => ({
+    options,
     form: {},
     isEdit: false
   }),
@@ -206,6 +208,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .v-observer {
   width: 100%;
 }
@@ -237,5 +244,8 @@ export default {
 .break {
   flex-basis: 100%;
   margin: 0;
+}
+.submit-button {
+  max-width: 300px;
 }
 </style>

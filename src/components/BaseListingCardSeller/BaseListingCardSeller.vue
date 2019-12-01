@@ -1,6 +1,7 @@
 <template>
   <div class="base-listing-card-seller">
-    <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
+    <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}" v-if="image"/>
+    <div class="image backup" v-else/>
     <div class="contents">
       <BaseText2 class="text" :text="address"/>
     </div>
@@ -16,7 +17,7 @@ export default {
   props: {
     image: {
       type: String,
-      default: 'https://ucarecdn.com/48db410d-7b1f-4ec6-8e6c-e8a188c72e15/'
+      required: false
     },
     address: {
       type: String,
@@ -43,6 +44,11 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-bottom: 1px solid var(--color-gray-1);
+}
+.image.backup {
+  background-image: url('../../assets/img/image.svg');
+  background-size: 30% auto;
 }
 .contents {
   flex-shrink: 0;
