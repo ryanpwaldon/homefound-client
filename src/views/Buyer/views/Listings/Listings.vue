@@ -53,17 +53,17 @@
           </div>
         </div>
         <div class="listings-container">
-          <BaseListingCardBuyer
-            class="listing"
-            v-for="listing in listings"
-            :price="listing.price"
-            :bedrooms="listing.bedrooms"
-            :bathrooms="listing.bathrooms"
-            :car-spaces="listing.carSpaces"
-            :created-at="listing.createdAt"
-            :image="listing.images[0]"
-            :key="listing._id"
-          />
+          <router-link v-for="listing in listings" :key="listing._id" :to="`/buyer/listings/${listing._id}`">
+            <BaseListingCardBuyer
+              class="listing"
+              :price="listing.price"
+              :bedrooms="listing.bedrooms"
+              :bathrooms="listing.bathrooms"
+              :car-spaces="listing.carSpaces"
+              :created-at="listing.createdAt"
+              :image="listing.images[0]"
+            />
+          </router-link>
         </div>
         <IntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
       </div>

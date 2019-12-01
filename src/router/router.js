@@ -31,8 +31,14 @@ const routes = [
       },
       {
         path: 'listings',
-        name: 'listings-buyer',
+        name: 'buyer-listings',
         component: () => import('@/views/Buyer/views/Listings/Listings')
+      },
+      {
+        path: 'listings/:id',
+        name: 'buyer-listing',
+        component: () => import('@/views/Buyer/views/Listings/views/Listing/Listing'),
+        props: true
       },
       {
         path: 'likes',
@@ -57,7 +63,7 @@ const routes = [
       },
       {
         path: 'listings',
-        name: 'listings-seller',
+        name: 'seller-listings',
         component: () => import('@/views/Seller/views/Listings/Listings')
       },
       {
