@@ -65,7 +65,6 @@ export default {
 <style lang="scss" scoped>
 .base-gallery {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   &:hover .button { opacity: 1; }

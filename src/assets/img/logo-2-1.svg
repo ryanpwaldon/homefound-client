@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.23096 80.45801">
+  <line x1="1.00037" y1="79.4585" x2="9.00037" y2="71.4585" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <line x1="40.48474" y1="79.4585" x2="48.48474" y2="71.4585" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <polyline points="9 1 9 71.458 23.746 71.458" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <polyline points="23.746 51.602 40.485 51.602 40.485 79.458 55.231 79.458 63.231 71.458 63.231 1 48.485 1 40.485 9 40.485 28.856" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <polyline points="48.485 1 48.485 28.856 23.746 28.856 23.746 1 9 1 1 9 1 79.458 15.746 79.458 23.746 71.458 23.746 43.602 48.485 43.602 48.485 71.458 63.231 71.458" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+</svg>

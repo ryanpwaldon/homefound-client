@@ -15,5 +15,9 @@ export default () => {
     }
     return config
   })
+  client.interceptors.request.use(async config => {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    return config
+  })
   return client
 }

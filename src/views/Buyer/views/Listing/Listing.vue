@@ -25,7 +25,12 @@
             <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
           </div>
         </div>
-        <BaseGallery :images="listing.images"/>
+        <BaseGallery class="gallery" :images="listing.images"/>
+        <Contact
+          :name="listing.name"
+          :phone="listing.phone"
+          :email="listing.email"
+        />
       </div>
     </div>
     <div class="map-container">
@@ -43,6 +48,7 @@ import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseGallery from '@/components/BaseGallery/BaseGallery'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import Pin from '@/components/BaseMap/components/Pin/Pin'
+import Contact from './partials/Contact/Contact'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   components: {
@@ -51,7 +57,8 @@ export default {
     BaseText5,
     BaseGallery,
     BaseMap,
-    Pin
+    Pin,
+    Contact
   },
   props: {
     id: {
@@ -109,12 +116,13 @@ export default {
 }
 .title {
   margin-bottom: var(--spacing-5);
+  user-select: all;
 }
 .cards {
   display: grid;
   grid-gap: var(--spacing-4);
   grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-5);
 }
 .card {
   width: 100%;
@@ -137,6 +145,9 @@ export default {
 .features img {
   height: 0.9em;
   margin-right: var(--spacing-2);
+}
+.gallery {
+  margin-bottom: var(--spacing-5);
 }
 .map-container {
   position: relative;
