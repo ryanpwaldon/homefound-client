@@ -7,7 +7,7 @@
           <BaseText4 text="BACK TO SEARCH"/>
         </router-link>
         <BaseText1 class="title" :text="listing.address" />
-        <div class="details">
+        <div class="cards">
           <div class="card">
             <BaseText4 class="label" text="Features"/>
             <BaseText5 class="features">
@@ -25,6 +25,7 @@
             <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
           </div>
         </div>
+        <BaseGallery :images="listing.images"/>
       </div>
     </div>
     <div class="map-container">
@@ -39,6 +40,7 @@
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
+import BaseGallery from '@/components/BaseGallery/BaseGallery'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import Pin from '@/components/BaseMap/components/Pin/Pin'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
@@ -47,6 +49,7 @@ export default {
     BaseText1,
     BaseText4,
     BaseText5,
+    BaseGallery,
     BaseMap,
     Pin
   },
@@ -107,10 +110,11 @@ export default {
 .title {
   margin-bottom: var(--spacing-5);
 }
-.details {
+.cards {
   display: grid;
   grid-gap: var(--spacing-4);
   grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: var(--spacing-4);
 }
 .card {
   width: 100%;
