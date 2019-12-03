@@ -14,10 +14,16 @@ export default {
   },
   data: () => ({
     navItems: [
-      { title: 'Search', path: '/buyer/listings', icon: require('@/assets/img/search.svg') },
-      { title: 'Likes', path: '/buyer/likes', icon: require('@/assets/img/likes.svg') },
-      { title: 'Alerts', path: '/buyer/alerts', icon: require('@/assets/img/alerts.svg') },
-      { title: 'Seller', path: '/seller', icon: require('@/assets/img/switch.svg') }
+      [
+        { title: 'Search', path: '/buyer/listings', icon: require('@/assets/img/search.svg') },
+        { title: 'Likes', path: '/buyer/likes', icon: require('@/assets/img/likes.svg') },
+        { title: 'Alerts', path: '/buyer/alerts', icon: require('@/assets/img/alerts.svg') },
+        { title: 'Seller', path: '/seller', icon: require('@/assets/img/switch.svg') }
+      ],
+      [
+        { title: 'Account', path: '/seller/account', icon: require('@/assets/img/gear.svg') },
+        { title: 'Help', path: '/help', icon: require('@/assets/img/question-mark.svg') }
+      ]
     ]
   })
 }

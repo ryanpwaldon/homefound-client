@@ -18,8 +18,14 @@ export default {
   },
   data: () => ({
     navItems: [
-      { title: 'Listings', path: '/seller/listings', icon: require('@/assets/img/listings.svg') },
-      { title: 'Buyer', path: '/buyer', icon: require('@/assets/img/switch.svg') }
+      [
+        { title: 'Listings', path: '/seller/listings', icon: require('@/assets/img/listings.svg') },
+        { title: 'Buyer', path: '/buyer', icon: require('@/assets/img/switch.svg') }
+      ],
+      [
+        { title: 'Account', path: '/seller/account', icon: require('@/assets/img/gear.svg') },
+        { title: 'Help', path: '/help', icon: require('@/assets/img/question-mark.svg') }
+      ]
     ]
   })
 }

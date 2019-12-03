@@ -1,6 +1,6 @@
 <template>
   <div class="listings">
-    <BaseText1 text="Listings"/>
+    <BaseText1 text="Your listings"/>
     <BaseDivider/>
     <div class="items">
       <router-link

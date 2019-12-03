@@ -49,6 +49,10 @@ const routes = [
         path: 'alerts',
         name: 'alerts',
         component: () => import('@/views/Buyer/views/Alerts/Alerts')
+      },
+      {
+        path: 'account',
+        component: () => import('@/views/Account/Account')
       }
     ]
   },
@@ -92,6 +96,10 @@ const routes = [
             component: () => import('@/views/Seller/views/Listings/views/Listing/views/Settings/Settings')
           }
         ]
+      },
+      {
+        path: 'account',
+        component: () => import('@/views/Account/Account')
       }
     ]
   },

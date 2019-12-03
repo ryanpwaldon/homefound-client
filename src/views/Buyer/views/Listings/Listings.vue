@@ -64,6 +64,7 @@
               :image="listing.images[0]"
             />
           </router-link>
+          <BaseLoader class="loader" v-if="loading"/>
         </div>
         <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
       </div>
@@ -95,6 +96,7 @@ import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingC
 import BaseIntersectionTrigger from '@/components/BaseIntersectionTrigger/BaseIntersectionTrigger'
 import BaseButtonRounded from '@/components/BaseButtonRounded/BaseButtonRounded'
 import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
+import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import Pin from '@/components/BaseMap/components/Pin/Pin'
 import BaseMap from '@/components/BaseMap/BaseMap'
 export default {
@@ -105,6 +107,7 @@ export default {
     BaseListingCardBuyer,
     BaseIntersectionTrigger,
     BaseButtonRounded,
+    BaseLoader,
     GetBounds,
     BaseMap,
     Pin
@@ -218,7 +221,8 @@ export default {
   grid-gap: var(--spacing-5);
   margin-bottom: var(--spacing-5);
 }
-.listing {
+.listing,
+.loader {
   height: 200px;
   min-width: 0;
 }
