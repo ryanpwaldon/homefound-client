@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="listings-container">
-          <router-link v-for="listing in listings" :key="listing._id" :to="`/buyer/listings/${listing._id}`">
+          <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
             <BaseListingCardBuyer
               class="listing"
               :price="listing.price"
@@ -164,7 +164,7 @@ export default {
       this.lastPage = pages
       this.nextPage++
       this.loading = false
-      this.$refs['intersection-trigger'].observe()
+      this.$refs['intersection-trigger'] && this.$refs['intersection-trigger'].observe()
     },
     updatePolygonFilter () {
       this.filters.lngLat.$geoWithin.$geometry.coordinates = this.polygon

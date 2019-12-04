@@ -21,57 +21,40 @@ const routes = [
     component: () => import('@/views/Login/Login')
   },
   {
-    path: '/buyer',
-    component: () => import('@/views/Buyer/Buyer'),
-    meta: { requiresAuth: true },
+    path: '/app',
+    name: 'app',
+    component: () => import('@/views/App/App'),
     children: [
-      {
-        path: '',
-        redirect: 'listings'
-      },
       {
         path: 'listings',
         name: 'listings',
-        component: () => import('@/views/Buyer/views/Listings/Listings')
+        component: () => import('@/views/App/views/Listings/Listings')
       },
       {
         path: 'listings/:id',
         name: 'listing',
-        component: () => import('@/views/Buyer/views/Listing/Listing'),
+        component: () => import('@/views/App/views/Listing/Listing'),
         props: true
       },
       {
         path: 'likes',
         name: 'likes',
-        component: () => import('@/views/Buyer/views/Likes/Likes')
+        component: () => import('@/views/App/views/Likes/Likes')
       },
       {
         path: 'alerts',
         name: 'alerts',
-        component: () => import('@/views/Buyer/views/Alerts/Alerts')
+        component: () => import('@/views/App/views/Alerts/Alerts')
       },
       {
-        path: 'account',
-        component: () => import('@/views/Account/Account')
-      }
-    ]
-  },
-  {
-    path: '/seller',
-    component: () => import('@/views/Seller/Seller'),
-    meta: { requiresAuth: true },
-    children: [
-      {
-        path: '',
-        redirect: 'listings'
+        path: 'my-listings',
+        name: 'my-listings',
+        component: () => import('@/views/App/views/MyListings/MyListings')
       },
       {
-        path: 'listings',
-        component: () => import('@/views/Seller/views/Listings/Listings')
-      },
-      {
-        path: 'listings/:id',
-        component: () => import('@/views/Seller/views/Listings/views/Listing/Listing'),
+        path: 'my-listings/:id',
+        name: 'my-listing',
+        component: () => import('@/views/App/views/MyListing/MyListing'),
         children: [
           {
             path: '',
@@ -81,31 +64,32 @@ const routes = [
             path: 'create',
             name: 'create',
             props: true,
-            component: () => import('@/views/Seller/views/Listings/views/Listing/views/Create/Create')
+            component: () => import('@/views/App/views/MyListing/views/Create/Create')
           },
           {
             path: 'performance',
             name: 'performance',
             props: true,
-            component: () => import('@/views/Seller/views/Listings/views/Listing/views/Performance/Performance')
+            component: () => import('@/views/App/views/MyListing/views/Performance/Performance')
           },
           {
             path: 'settings',
             name: 'settings',
             props: true,
-            component: () => import('@/views/Seller/views/Listings/views/Listing/views/Settings/Settings')
+            component: () => import('@/views/App/views/MyListing/views/Settings/Settings')
           }
         ]
       },
       {
         path: 'account',
-        component: () => import('@/views/Account/Account')
+        name: 'account',
+        component: () => import('@/views/App/views/Account/Account')
       }
     ]
   },
   {
     path: '*',
-    redirect: '/seller'
+    redirect: '/app/listings'
   }
 ]
 

@@ -2,7 +2,7 @@
   <div class="listing" v-if="listing">
     <div class="content-container">
       <div class="content">
-        <router-link class="back" to="/buyer/listings">
+        <router-link class="back" to="/app/listings">
           <img src="@/assets/img/arrow.svg">
           <BaseText4 text="BACK TO SEARCH"/>
         </router-link>

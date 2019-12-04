@@ -1,50 +1,60 @@
 <template>
-  <div class="listings">
-    <BaseText1 text="Your listings"/>
-    <BaseDivider/>
-    <div class="items">
-      <router-link
-        v-for="(listing, i) in listings"
-        :to="`/seller/listings/${listing._id}`"
-        :key="i">
-        <BaseListingCardSeller
-          class="listing"
-          :address="listing.address"
-          :image="listing.images[0]"
-        />
-      </router-link>
-      <div class="button" @click="createListing">
-        <img src="@/assets/img/plus.svg">
-        <BaseText2 text="New listing"/>
+  <LayoutCenter>
+    <div class="my-listings">
+      <BaseText1 text="My listings"/>
+      <BaseDivider/>
+      <div class="items">
+        <div class="button" @click="createListing">
+          <img src="@/assets/img/plus.svg">
+          <BaseText2 text="New listing"/>
+        </div>
+        <BaseLoader class="loader" v-if="loading"/>
+        <router-link
+          v-for="(listing, i) in listings"
+          :to="`/app/my-listings/${listing._id}`"
+          :key="i">
+          <BaseListingCardSeller
+            class="listing"
+            :address="listing.address"
+            :image="listing.images[0]"
+          />
+        </router-link>
       </div>
     </div>
-  </div>
+  </LayoutCenter>
 </template>
 
 <script>
+import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseListingCardSeller from '@/components/BaseListingCardSeller/BaseListingCardSeller'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
+import BaseLoader from '@/components/BaseLoader/BaseLoader'
 export default {
-  name: 'listings',
+  name: 'my-listings',
   components: {
+    LayoutCenter,
     BaseText1,
     BaseText2,
     BaseDivider,
-    BaseListingCardSeller
+    BaseListingCardSeller,
+    BaseLoader
   },
   async mounted () {
+    this.loading = true
     this.listings = await ListingService.findCreated()
+    this.loading = false
   },
   data: () => ({
-    listings: []
+    listings: [],
+    loading: false
   }),
   methods: {
     async createListing () {
       const listing = await ListingService.create({})
-      this.$router.push(`/seller/listings/${listing._id}`)
+      this.$router.push(`/app/my-listing/${listing._id}`)
     }
   }
 }
@@ -58,7 +68,8 @@ export default {
   > * { min-width: 0 }
 }
 .listing,
-.button {
+.button,
+.loader {
   height: 200px;
 }
 .button {
