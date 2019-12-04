@@ -2,7 +2,7 @@
   <LayoutCenter>
     <div class="account">
       <BaseText1 class="title" text="Account"/>
-      <BaseNavHorizontal class="nav" :nav-items="navItems"/>
+      <BaseNavHorizontalSecondary class="nav" :nav-items="navItems"/>
       <router-view/>
     </div>
   </LayoutCenter>
@@ -10,19 +10,19 @@
 
 <script>
 import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
-import BaseNavHorizontal from '@/components/BaseNavHorizontal/BaseNavHorizontal'
+import BaseNavHorizontalSecondary from '@/components/BaseNavHorizontalSecondary/BaseNavHorizontalSecondary'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 export default {
   name: 'account',
   components: {
     LayoutCenter,
-    BaseNavHorizontal,
+    BaseNavHorizontalSecondary,
     BaseText1
   },
   data: () => ({
     navItems: [
-      { title: 'Overview', path: `/app/account/overview` },
-      { title: 'Billing', path: `/app/account/billing` }
+      { text: 'Overview', path: `/app/account/overview` },
+      { text: 'Billing', path: `/app/account/billing` }
     ]
   })
 }

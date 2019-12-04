@@ -15,14 +15,14 @@ export default {
   data: () => ({
     navItems: [
       [
-        { title: 'Home', path: '/', icon: require('@/assets/img/logo-2-2.svg') },
-        { title: 'Search', path: '/app/listings', icon: require('@/assets/img/search.svg') },
-        { title: 'Likes', path: '/app/likes', icon: require('@/assets/img/likes.svg') },
-        { title: 'Alerts', path: '/app/alerts', icon: require('@/assets/img/alerts.svg') },
-        { title: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg') }
+        { text: 'Home', path: '/', icon: require('@/assets/img/logo-2-2.svg') },
+        { text: 'Search', path: '/app/listings', icon: require('@/assets/img/search.svg') },
+        { text: 'Likes', path: '/app/likes', icon: require('@/assets/img/likes.svg') },
+        { text: 'Alerts', path: '/app/alerts', icon: require('@/assets/img/alerts.svg') },
+        { text: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg') }
       ],
       [
-        { title: 'Account', path: '/app/account', icon: require('@/assets/img/gear.svg') }
+        { text: 'Account', path: '/app/account', icon: require('@/assets/img/gear.svg') }
       ]
     ]
   })

@@ -1,11 +1,11 @@
 <template>
-  <div class="base-nav-horizontal">
+  <div class="base-nav-horizontal-secondary">
     <router-link
       class="nav-item"
       v-for="(navItem, i) in navItems"
       :to="navItem.path"
       :key="i">
-      <BaseText3 class="text" :text="navItem.title"/>
+      <BaseText3 class="text" :text="navItem.text"/>
     </router-link>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-nav-horizontal {
+.base-nav-horizontal-secondary {
   width: 100%;
   border-bottom: 1px solid var(--color-gray-1);
   padding-bottom: var(--spacing-2);

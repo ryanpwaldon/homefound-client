@@ -106,7 +106,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/app/listings'
+    redirect: '/'
   }
 ]
 
