@@ -1,5 +1,5 @@
 <template>
-  <div class="base-button">
+  <div class="base-button" :class=[design]>
     <BaseText2 :text="text"/>
   </div>
 </template>
@@ -14,6 +14,10 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    design: {
+      type: String,
+      default: 'gray'
     }
   }
 }
@@ -23,10 +27,20 @@ export default {
 .base-button {
   text-align: center;
   padding: var(--spacing-1) var(--spacing-2);
-  color: var(--color-black-2);
-  background: var(--color-gray-1);
   border-radius: var(--border-radius-1);
   display: inline-block;
   cursor: pointer;
+}
+.gray {
+  color: var(--color-black-2);
+  background: var(--color-gray-1);
+}
+.black {
+  color: var(--color-white-1);
+  background: var(--color-black-2);
+}
+.red {
+  color: var(--color-white-1);
+  background: var(--color-red-1);
 }
 </style>

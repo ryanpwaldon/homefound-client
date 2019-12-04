@@ -1,31 +1,30 @@
 <template>
   <div class="base-nav-vertical">
     <div class="section">
-      <img class="logo" src="@/assets/img/logo.svg">
-      <router-link
-        class="nav-item"
+      <NavItem
         v-for="(navItem, i) in navItems[0]"
         :to="navItem.path"
+        :icon="navItem.icon"
         :key="i"
-      >
-        <img class="icon" :src="navItem.icon">
-      </router-link>
+      />
     </div>
     <div class="section">
-      <router-link
-        class="nav-item"
+      <NavItem
         v-for="(navItem, i) in navItems[1]"
         :to="navItem.path"
+        :icon="navItem.icon"
         :key="i"
-      >
-        <img class="icon" :src="navItem.icon">
-      </router-link>
+      />
     </div>
   </div>
 </template>
 
 <script>
+import NavItem from './partials/NavItem/NavItem'
 export default {
+  components: {
+    NavItem
+  },
   props: {
     navItems: {
       type: Array,
@@ -56,21 +55,7 @@ export default {
     margin-bottom: var(--spacing-6);
   }
 }
-.nav-item {
-  display: flex;
-  width: 20px;
-  height: 20px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  display: block;
-}
 .logo {
-  width: 30px;
-}
-.icon {
-  width: 20px;
-  max-width: 100%;
-  max-height: 100%;
+  width: 25px;
 }
 </style>

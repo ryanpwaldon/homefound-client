@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   background: var(--color-gray-2);
+  padding: 0 var(--spacing-5);
   overflow: auto;
 }
 .content {

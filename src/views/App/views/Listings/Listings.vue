@@ -1,74 +1,72 @@
 <template>
   <div class="listings">
-    <div class="content-container">
-      <div class="content">
-        <BaseText1 class="title" text="Search" />
-        <div class="filters-card">
-          <BaseText4 class="filters-title" text="Filters"/>
-          <div class="filters-container">
-            <BaseFormSelect
-              placeholder="Bedrooms"
-              v-model="filters.bedrooms"
-              :options="[
-                {title: '0', value: '0'},
-                {title: '1', value: '1'},
-                {title: '2', value: '2'},
-                {title: '3', value: '3'},
-                {title: '4', value: '4'},
-                {title: '5+', value: '5+'}
-              ]"
-            />
-            <BaseFormSelect
-              placeholder="Bathrooms"
-              v-model="filters.bathrooms"
-              :options="[
-                {title: '0', value: '0'},
-                {title: '1', value: '1'},
-                {title: '2', value: '2'},
-                {title: '3', value: '3'},
-                {title: '4', value: '4'},
-                {title: '5+', value: '5+'}
-              ]"
-            />
-            <BaseFormSelect
-              placeholder="Car spaces"
-              v-model="filters.carSpaces"
-              :options="[
-                {title: '0', value: '0'},
-                {title: '1', value: '1'},
-                {title: '2', value: '2'},
-                {title: '3', value: '3'},
-                {title: '4', value: '4'},
-                {title: '5+', value: '5+'}
-              ]"
-            />
-            <BaseFormSelect
-              placeholder="Property type"
-              v-model="filters.propertyType"
-              :options="[
-                {title: 'House', value: 'house'},
-                {title: 'Unit', value: 'unit'}
-              ]"
-            />
-          </div>
+    <LayoutCenter>
+      <BaseText1 class="title" text="Search" />
+      <div class="filters-card">
+        <BaseText4 class="filters-title" text="Filters"/>
+        <div class="filters-container">
+          <BaseFormSelect
+            placeholder="Bedrooms"
+            v-model="filters.bedrooms"
+            :options="[
+              {title: '0', value: '0'},
+              {title: '1', value: '1'},
+              {title: '2', value: '2'},
+              {title: '3', value: '3'},
+              {title: '4', value: '4'},
+              {title: '5+', value: '5+'}
+            ]"
+          />
+          <BaseFormSelect
+            placeholder="Bathrooms"
+            v-model="filters.bathrooms"
+            :options="[
+              {title: '0', value: '0'},
+              {title: '1', value: '1'},
+              {title: '2', value: '2'},
+              {title: '3', value: '3'},
+              {title: '4', value: '4'},
+              {title: '5+', value: '5+'}
+            ]"
+          />
+          <BaseFormSelect
+            placeholder="Car spaces"
+            v-model="filters.carSpaces"
+            :options="[
+              {title: '0', value: '0'},
+              {title: '1', value: '1'},
+              {title: '2', value: '2'},
+              {title: '3', value: '3'},
+              {title: '4', value: '4'},
+              {title: '5+', value: '5+'}
+            ]"
+          />
+          <BaseFormSelect
+            placeholder="Property type"
+            v-model="filters.propertyType"
+            :options="[
+              {title: 'House', value: 'house'},
+              {title: 'Unit', value: 'unit'}
+            ]"
+          />
         </div>
-        <div class="listings-container">
-          <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
-            <BaseListingCardBuyer
-              class="listing"
-              :price="listing.price"
-              :bedrooms="listing.bedrooms"
-              :bathrooms="listing.bathrooms"
-              :car-spaces="listing.carSpaces"
-              :created-at="listing.createdAt"
-              :image="listing.images[0]"
-            />
-          </router-link>
-          <BaseLoader class="loader" v-if="loading"/>
-        </div>
-        <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
       </div>
-    </div>
+      <div class="listings-container">
+        <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
+          <BaseListingCardBuyer
+            class="listing"
+            :price="listing.price"
+            :bedrooms="listing.bedrooms"
+            :bathrooms="listing.bathrooms"
+            :car-spaces="listing.carSpaces"
+            :created-at="listing.createdAt"
+            :image="listing.images[0]"
+          />
+        </router-link>
+        <BaseLoader class="loader" v-if="loading"/>
+      </div>
+      <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
+    </LayoutCenter>
     <div class="map-container">
       <div class="map-button">
         <transition name="fall">
@@ -88,6 +86,7 @@
 </template>
 
 <script>
+import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
@@ -101,6 +100,7 @@ import Pin from '@/components/BaseMap/components/Pin/Pin'
 import BaseMap from '@/components/BaseMap/BaseMap'
 export default {
   components: {
+    LayoutCenter,
     BaseText1,
     BaseText4,
     BaseFormSelect,
@@ -183,18 +183,6 @@ export default {
     flex-shrink: 0;
   }
 }
-.content-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: var(--color-gray-2);
-  overflow: auto;
-}
-.content {
-  width: 100%;
-  max-width: 600px;
-  margin: var(--spacing-5);
-}
 .title {
   margin-bottom: var(--spacing-5);
 }
@@ -211,13 +199,16 @@ export default {
 }
 .filters-container {
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: calc(-1 * var(--spacing-2));
   > * {
     margin-right: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
   }
 }
 .listings-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-gap: var(--spacing-5);
   margin-bottom: var(--spacing-5);
 }

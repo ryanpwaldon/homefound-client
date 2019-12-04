@@ -54,7 +54,7 @@ export default {
   methods: {
     async createListing () {
       const listing = await ListingService.create({})
-      this.$router.push(`/app/my-listing/${listing._id}`)
+      this.$router.push(`/app/my-listings/${listing._id}`)
     }
   }
 }
@@ -63,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .items {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-gap: var(--spacing-5);
   > * { min-width: 0 }
 }

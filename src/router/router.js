@@ -24,6 +24,7 @@ const routes = [
     path: '/app',
     name: 'app',
     component: () => import('@/views/App/App'),
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'listings',
@@ -83,7 +84,23 @@ const routes = [
       {
         path: 'account',
         name: 'account',
-        component: () => import('@/views/App/views/Account/Account')
+        component: () => import('@/views/App/views/Account/Account'),
+        children: [
+          {
+            path: '',
+            redirect: 'overview'
+          },
+          {
+            path: 'overview',
+            name: 'overview',
+            component: () => import('@/views/App/views/Account/views/Overview/Overview')
+          },
+          {
+            path: 'billing',
+            name: 'billing',
+            component: () => import('@/views/App/views/Account/views/Billing/Billing')
+          }
+        ]
       }
     ]
   },
