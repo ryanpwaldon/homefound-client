@@ -1,10 +1,10 @@
 <template>
   <div class="base-nav-horizontal-primary">
     <div class="section">
-      <div class="logo-container">
+      <router-link class="logo-container" to="/">
         <img class="logo" src="@/assets/img/logo-2-2.svg">
         <BaseText2 text="Homeshade"/>
-      </div>
+      </router-link>
     </div>
     <div class="section">
       <NavItemText
@@ -29,7 +29,12 @@ export default {
   props: {
     navItems: {
       type: Array,
-      required: true
+      default: () => [
+        { text: 'How it works?', path: '/how-it-works' },
+        { text: 'Pricing', path: '/pricing' },
+        { text: 'Login', path: '/login' },
+        { text: 'Sign up', path: '/register', design: 'blue' }
+      ]
     }
   }
 }

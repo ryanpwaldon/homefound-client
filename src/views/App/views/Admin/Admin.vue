@@ -1,7 +1,7 @@
 <template>
   <LayoutCenter>
-    <div class="likes">
-      <BaseText1 text="Liked properties"/>
+    <div class="admin">
+      <BaseText1 text="Admin"/>
     </div>
   </LayoutCenter>
 </template>
@@ -10,7 +10,7 @@
 import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 export default {
-  name: 'likes',
+  name: 'admin',
   components: {
     LayoutCenter,
     BaseText1

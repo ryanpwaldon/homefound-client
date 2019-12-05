@@ -2,7 +2,7 @@
   <div class="base-nav-vertical">
     <div class="section">
       <NavItem
-        v-for="(navItem, i) in navItems[0]"
+        v-for="(navItem, i) in navItems.filter(item => item.position === 1)"
         :to="navItem.path"
         :icon="navItem.icon"
         :key="i"
@@ -10,7 +10,7 @@
     </div>
     <div class="section">
       <NavItem
-        v-for="(navItem, i) in navItems[1]"
+        v-for="(navItem, i) in navItems.filter(item => item.position === 2)"
         :to="navItem.path"
         :icon="navItem.icon"
         :key="i"

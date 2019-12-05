@@ -11,6 +11,11 @@ const routes = [
     component: () => import('@/views/Home/Home')
   },
   {
+    path: '/how-it-works',
+    name: 'how-it-works',
+    component: () => import('@/views/HowItWorks/HowItWorks')
+  },
+  {
     path: '/register',
     name: 'register',
     component: () => import('@/views/Register/Register')
@@ -24,7 +29,7 @@ const routes = [
     path: '/app',
     name: 'app',
     component: () => import('@/views/App/App'),
-    meta: { requiresAuth: true },
+    meta: { requiredRole: [ 'buyer', 'seller', 'admin' ] },
     children: [
       {
         path: 'listings',
@@ -50,12 +55,14 @@ const routes = [
       {
         path: 'my-listings',
         name: 'my-listings',
-        component: () => import('@/views/App/views/MyListings/MyListings')
+        component: () => import('@/views/App/views/MyListings/MyListings'),
+        meta: { requiredRole: [ 'seller', 'admin' ] }
       },
       {
         path: 'my-listings/:id',
         name: 'my-listing',
         component: () => import('@/views/App/views/MyListing/MyListing'),
+        meta: { requiredRole: [ 'seller', 'admin' ] },
         children: [
           {
             path: '',
@@ -101,8 +108,19 @@ const routes = [
             component: () => import('@/views/App/views/Account/views/Billing/Billing')
           }
         ]
+      },
+      {
+        path: 'admin',
+        name: 'admin',
+        component: () => import('@/views/App/views/Admin/Admin'),
+        meta: { requiredRole: [ 'admin' ] }
       }
     ]
+  },
+  {
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: () => import('@/views/Unauthorized/Unauthorized')
   },
   {
     path: '*',
@@ -122,8 +140,8 @@ router.beforeEach(async (to, _, next) => {
     await store.dispatch('checkAuthStatus')
     router.options.firstLoad = false
   }
-  const requiresAuth = !!to.matched.find(item => item.meta.requiresAuth)
-  if (requiresAuth) return store.state.accessToken ? next() : next('/')
+  const authedRoute = to.matched.slice().reverse().find(item => item.meta.requiredRole)
+  if (authedRoute) return authedRoute.meta.requiredRole.includes(store.state.user.role) ? next() : next('/unauthorized')
   else return next()
 })
 

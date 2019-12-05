@@ -1,6 +1,8 @@
 <template>
-  <div class="login">
-    <img class="logo" src="@/assets/img/logo.svg">
+  <div class="login" @keypress.enter="submit">
+    <router-link to="/">
+      <img class="logo" src="@/assets/img/logo-2-2.svg">
+    </router-link>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
         <BaseFormInput
@@ -21,14 +23,10 @@
       </ValidationProvider>
       <div class="forgot-password">I forgot my password</div>
       <BaseFormSubmitButton
-        text="Login to Homesight"
+        text="Login to Homeshade"
+        :loading="loading"
         @click.native="submit"
       />
-      <transition name="fade">
-        <!-- <div class="auth-error" v-if="loginFailed">
-          Your login info isn't right. Try again, or reset your password if it slipped your mind.
-        </div> -->
-      </transition>
     </ValidationObserver>
   </div>
 </template>
@@ -54,21 +52,24 @@ export default {
         email: '',
         password: ''
       },
-      loading: false,
-      error: false
+      loading: false
     }
   },
   methods: {
     async submit () {
-      if (!(await this.$refs['observer'].validate())) return
+      if (this.loading || !(await this.$refs['observer'].validate())) return
+      this.loading = true
       try {
         const { user, accessToken } = await AuthService.login(this.form)
         this.$store.dispatch('loginSuccess', { user, accessToken })
+        this.$router.push('/app/listings')
       }
       catch (error) {
+        this.$notify({ text: 'Your login info isn\'t right. Try again, or reset your password if it slipped your mind.', type: 'error' })
         this.$store.dispatch('logout')
         console.log(error)
       }
+      this.loading = false
     }
   }
 }
@@ -85,8 +86,8 @@ export default {
 }
 .logo {
   position: absolute;
-  margin: var(--spacing-4);
-  width: 3rem;
+  margin: var(--spacing-5);
+  height: 2.5rem;
   left: 0;
   top: 0;
 }

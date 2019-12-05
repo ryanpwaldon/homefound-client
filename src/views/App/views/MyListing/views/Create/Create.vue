@@ -1,5 +1,5 @@
 <template>
-  <div class="create">
+  <div class="create" @keypress.enter="submit">
     <ValidationObserver class="v-observer" ref="v-observer" tag="div" v-slot="{ invalid }">
       <div class="card">
         <BaseText4 class="title" text="Address"/>
@@ -109,7 +109,7 @@
         </div>
       </div>
     </ValidationObserver>
-    <BaseFormSubmitButton class="submit-button" text="Post listing" @click.native="submit"/>
+    <BaseFormSubmitButton class="submit-button" text="Post listing" @click.native="submit" :loading="loading"/>
   </div>
 </template>
 
@@ -152,7 +152,8 @@ export default {
   data: () => ({
     options,
     form: {},
-    isEdit: false
+    isEdit: false,
+    loading: false
   }),
   computed: {
     address () {
@@ -195,13 +196,17 @@ export default {
       }
     },
     async submit () {
-      if (!(await this.$refs['v-observer'].validate())) return
+      if (this.loading || !(await this.$refs['v-observer'].validate())) return
+      this.loading = true
       try {
         if (this.isEdit) await ListingService.update(this.listing._id, this.form)
         else await ListingService.create(this.form)
+        this.$notify({ text: 'Listing successfully updated.', type: 'success' })
       } catch (err) {
         this.error = true; console.log(err)
+        this.$notify({ text: 'Could not save data.', type: 'error' })
       }
+      this.loading = false
     }
   }
 }

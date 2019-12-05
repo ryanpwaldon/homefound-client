@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="content">
-      <BaseNavHorizontalPrimary :nav-items="navItems"/>
+      <BaseNavHorizontalPrimary/>
       <div class="main">
         <div class="title">Discover properties for sale <span class="bold">before</span> they hit the open market</div>
-        <div class="subtitle">Get early access to <span class="bold">783</span> properties – and counting – before they list on Domain or REA</div>
+        <div class="subtitle">Get early access to <span class="bold">783</span> properties before they list on Domain or REA</div>
       </div>
     </div>
     <BaseMap class="map"/>
@@ -19,15 +19,7 @@ export default {
   components: {
     BaseNavHorizontalPrimary,
     BaseMap
-  },
-  data: () => ({
-    navItems: [
-      { text: 'How it works?', path: '/how-it-works' },
-      { text: 'Pricing', path: '/pricing' },
-      { text: 'Login', path: '/login' },
-      { text: 'Sign up', path: '/register', design: 'blue' }
-    ]
-  })
+  }
 }
 </script>
 
