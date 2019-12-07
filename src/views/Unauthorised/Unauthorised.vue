@@ -1,8 +1,8 @@
 <template>
-  <div class="unauthorized">
+  <div class="unauthorised">
     <LayoutCenter>
       <BaseCard>
-        <BaseText5 text="Unauthorized"/>
+        <BaseText5 text="Unauthorised"/>
       </BaseCard>
     </LayoutCenter>
   </div>
@@ -13,7 +13,7 @@ import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 export default {
-  name: 'unauthorized',
+  name: 'unauthorised',
   components: {
     LayoutCenter,
     BaseCard,
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.unauthorized {
+.unauthorised {
   position: relative;
   width: 100%;
   height: 100%;

@@ -32,6 +32,10 @@ const routes = [
     meta: { requiredRole: [ 'buyer', 'seller', 'admin' ] },
     children: [
       {
+        path: '',
+        redirect: 'listings'
+      },
+      {
         path: 'listings',
         name: 'listings',
         component: () => import('@/views/App/views/Listings/Listings')
@@ -118,9 +122,9 @@ const routes = [
     ]
   },
   {
-    path: '/unauthorized',
-    name: 'unauthorized',
-    component: () => import('@/views/Unauthorized/Unauthorized')
+    path: '/unauthorised',
+    name: 'unauthorised',
+    component: () => import('@/views/Unauthorised/Unauthorised')
   },
   {
     path: '*',
@@ -141,7 +145,7 @@ router.beforeEach(async (to, _, next) => {
     router.options.firstLoad = false
   }
   const authedRoute = to.matched.slice().reverse().find(item => item.meta.requiredRole)
-  if (authedRoute) return authedRoute.meta.requiredRole.includes(store.state.user.role) ? next() : next('/unauthorized')
+  if (authedRoute) return store.state.accessToken && authedRoute.meta.requiredRole.includes(store.state.user.role) ? next() : next('/unauthorised')
   else return next()
 })
 

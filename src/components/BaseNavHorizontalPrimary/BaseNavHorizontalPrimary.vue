@@ -30,8 +30,6 @@ export default {
     navItems: {
       type: Array,
       default: () => [
-        { text: 'How it works?', path: '/how-it-works' },
-        { text: 'Pricing', path: '/pricing' },
         { text: 'Login', path: '/login' },
         { text: 'Sign up', path: '/register', design: 'blue' }
       ]

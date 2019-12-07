@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import store from '@/store/store'
 import axios from 'axios'
 import qs from 'qs'
@@ -15,9 +16,14 @@ export default () => {
     }
     return config
   })
-  client.interceptors.request.use(async config => {
-    await new Promise(resolve => setTimeout(resolve, 500))
-    return config
-  })
+  client.interceptors.request.use(config => config.url.includes('auth') ? config : new Promise(resolve => setTimeout(() => resolve(config), 1000)))
+  client.interceptors.response.use(
+    response => response,
+    error => {
+      const { statusCode: code, error: message } = error.response.data
+      Vue.notify({ text: `${code} ${message}`, type: 'error' })
+      return Promise.reject(error)
+    }
+  )
   return client
 }

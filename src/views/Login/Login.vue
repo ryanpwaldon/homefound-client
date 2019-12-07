@@ -46,6 +46,9 @@ export default {
     ValidationObserver,
     ValidationProvider
   },
+  mounted () {
+    if (this.$store.state.accessToken) this.$router.push('/app')
+  },
   data () {
     return {
       form: {

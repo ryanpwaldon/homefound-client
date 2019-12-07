@@ -9,7 +9,7 @@
             <BaseText6 class="joined">Joined Homeshade {{ joined | moment('from', 'now') }}</BaseText6>
           </div>
         </div>
-        <BaseButton text="Logout" design="black"/>
+        <BaseButton text="Logout" design="black" @click.native="logout"/>
       </div>
       <BaseDivider/>
       <div class="row">
@@ -56,7 +56,13 @@ export default {
     email: state => state.user.email,
     joined: state => state.user.createdAt,
     initials: state => state.user.name.slice(0, 2)
-  })
+  }),
+  methods: {
+    logout () {
+      this.$router.push('/')
+      this.$store.dispatch('logout')
+    }
+  }
 }
 </script>
 
