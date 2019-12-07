@@ -27,9 +27,8 @@ const routes = [
   },
   {
     path: '/app',
-    name: 'app',
     component: () => import('@/views/App/App'),
-    meta: { requiredRole: [ 'buyer', 'seller', 'admin' ] },
+    meta: { auth: true },
     children: [
       {
         path: '',
@@ -60,13 +59,12 @@ const routes = [
         path: 'my-listings',
         name: 'my-listings',
         component: () => import('@/views/App/views/MyListings/MyListings'),
-        meta: { requiredRole: [ 'seller', 'admin' ] }
+        meta: { roles: [ 'seller', 'admin' ] }
       },
       {
         path: 'my-listings/:id',
-        name: 'my-listing',
         component: () => import('@/views/App/views/MyListing/MyListing'),
-        meta: { requiredRole: [ 'seller', 'admin' ] },
+        meta: { roles: [ 'seller', 'admin' ] },
         children: [
           {
             path: '',
@@ -94,7 +92,6 @@ const routes = [
       },
       {
         path: 'account',
-        name: 'account',
         component: () => import('@/views/App/views/Account/Account'),
         children: [
           {
@@ -117,7 +114,7 @@ const routes = [
         path: 'admin',
         name: 'admin',
         component: () => import('@/views/App/views/Admin/Admin'),
-        meta: { requiredRole: [ 'admin' ] }
+        meta: { roles: [ 'admin' ] }
       }
     ]
   },
@@ -139,13 +136,18 @@ const router = new VueRouter({
   routes
 })
 
+const hasAuth = () => store.state.accessToken
+const hasRole = roles => !roles.length || store.state.user.roles.some(role => roles.includes(role))
+
 router.beforeEach(async (to, _, next) => {
   if (router.options.firstLoad && store.state.accessToken) {
     await store.dispatch('checkAuthStatus')
     router.options.firstLoad = false
   }
-  const authedRoute = to.matched.slice().reverse().find(item => item.meta.requiredRole)
-  if (authedRoute) return store.state.accessToken && authedRoute.meta.requiredRole.includes(store.state.user.role) ? next() : next('/unauthorised')
+  const rolesRoute = to.matched.slice().reverse().find(item => item.meta.roles)
+  const roles = (rolesRoute && rolesRoute.meta.roles) || []
+  const auth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!roles.length
+  if (auth) hasAuth() && hasRole(roles) ? next() : next('/unauthorised')
   else return next()
 })
 

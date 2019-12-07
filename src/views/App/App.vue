@@ -18,14 +18,14 @@ export default {
       { text: 'Search', path: '/app/listings', icon: require('@/assets/img/search.svg'), position: 1 },
       { text: 'Likes', path: '/app/likes', icon: require('@/assets/img/likes.svg'), position: 1 },
       { text: 'Alerts', path: '/app/alerts', icon: require('@/assets/img/alerts.svg'), position: 1 },
-      { text: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg'), position: 1, requiredRole: ['seller', 'admin'] },
-      { text: 'Admin', path: '/app/admin', icon: require('@/assets/img/wand.svg'), position: 1, requiredRole: ['admin'] },
+      { text: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg'), position: 1, roles: ['seller', 'admin'] },
+      { text: 'Admin', path: '/app/admin', icon: require('@/assets/img/wand.svg'), position: 1, roles: ['admin'] },
       { text: 'Account', path: '/app/account', icon: require('@/assets/img/gear.svg'), position: 2 }
     ]
   }),
   computed: {
     filteredNavItems () {
-      return this.navItems.filter(item => !item.requiredRole || item.requiredRole.includes(this.$store.state.user.role))
+      return this.navItems.filter(item => !item.roles || this.$store.state.user.roles.some(role => item.roles.includes(role)))
     }
   }
 }
