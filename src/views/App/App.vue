@@ -19,7 +19,7 @@ export default {
       { text: 'Likes', path: '/app/likes', icon: require('@/assets/img/likes.svg'), position: 1 },
       { text: 'Alerts', path: '/app/alerts', icon: require('@/assets/img/alerts.svg'), position: 1 },
       { text: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg'), position: 1, roles: ['seller', 'admin'] },
-      { text: 'Admin', path: '/app/admin', icon: require('@/assets/img/wand.svg'), position: 1, roles: ['admin'] },
+      { text: 'Admin', path: '/app/admin', icon: require('@/assets/img/controls.svg'), position: 1, roles: ['admin'] },
       { text: 'Account', path: '/app/account', icon: require('@/assets/img/gear.svg'), position: 2 }
     ]
   }),
