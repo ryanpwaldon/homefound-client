@@ -1,5 +1,5 @@
 <template>
-  <div class="login" @keypress.enter="submit">
+  <div class="login" @keypress.enter="submit" v-if="authCheckIsComplete">
     <router-link to="/">
       <img class="logo" src="@/assets/img/logo-2-2.svg">
     </router-link>
@@ -8,7 +8,7 @@
         <BaseFormInput
           v-model="form.email"
           placeholder="tom@hanks.com"
-          autocomplete="username"
+          autocomplete="username email"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
@@ -48,6 +48,7 @@ export default {
   },
   mounted () {
     if (this.$store.state.accessToken) this.$router.push('/app')
+    this.authCheckIsComplete = true
   },
   data () {
     return {
@@ -55,7 +56,8 @@ export default {
         email: '',
         password: ''
       },
-      loading: false
+      loading: false,
+      authCheckIsComplete: false
     }
   },
   methods: {
