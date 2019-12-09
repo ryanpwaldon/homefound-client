@@ -11,9 +11,9 @@ const routes = [
     component: () => import('@/views/Home/Home')
   },
   {
-    path: '/how-it-works',
-    name: 'how-it-works',
-    component: () => import('@/views/HowItWorks/HowItWorks')
+    path: '/about',
+    name: 'about',
+    component: () => import('@/views/About/About')
   },
   {
     path: '/register',
@@ -24,6 +24,21 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login/Login')
+  },
+  {
+    path: '/verify',
+    name: 'verify',
+    component: () => import('@/views/Verify/Verify')
+  },
+  {
+    path: '/password/instructions',
+    name: 'password-instructions',
+    component: () => import('@/views/Password/views/Instructions/Instructions')
+  },
+  {
+    path: '/password/reset',
+    name: 'password-reset',
+    component: () => import('@/views/Password/views/Reset/Reset')
   },
   {
     path: '/app',
@@ -136,19 +151,23 @@ const router = new VueRouter({
   routes
 })
 
-const hasAuth = () => store.state.accessToken
-const hasRole = roles => !roles.length || store.state.user.roles.some(role => roles.includes(role))
+const userHasToken = () => store.state.accessToken
+const userIsActive = () => store.state.user && store.state.user.active
+const userHasRole = roles => !roles.length || store.state.user.roles.some(role => roles.includes(role))
 
 router.beforeEach(async (to, _, next) => {
-  if (router.options.firstLoad && store.state.accessToken) {
+  if (router.options.firstLoad && userHasToken()) {
     await store.dispatch('checkAuthStatus')
     router.options.firstLoad = false
   }
-  const rolesRoute = to.matched.slice().reverse().find(item => item.meta.roles)
-  const roles = (rolesRoute && rolesRoute.meta.roles) || []
-  const auth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!roles.length
-  if (auth) hasAuth() && hasRole(roles) ? next() : next('/unauthorised')
-  else return next()
+  const routeThatRequiresRoles = to.matched.slice().reverse().find(item => item.meta.roles)
+  const requiredRoles = (routeThatRequiresRoles && routeThatRequiresRoles.meta.roles) || []
+  const requiresAuth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!requiredRoles.length
+  if (requiresAuth) {
+    if (!userHasToken()) return next('/unauthorised')
+    if (userHasToken() && !userIsActive()) return next('/verify')
+    if (userHasToken() && userIsActive() && userHasRole(requiredRoles)) return next()
+  } else return next()
 })
 
 export default router

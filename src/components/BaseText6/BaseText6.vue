@@ -1,6 +1,6 @@
 <template>
   <div class="base-text-6">
-    {{ text }}
+    <span v-if="text" v-html="text"/>
     <slot/>
   </div>
 </template>

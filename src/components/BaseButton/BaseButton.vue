@@ -43,4 +43,8 @@ export default {
   color: var(--color-white-1);
   background: var(--color-red-1);
 }
+.blue {
+  color: var(--color-white-1);
+  background: var(--color-blue-3);
+}
 </style>

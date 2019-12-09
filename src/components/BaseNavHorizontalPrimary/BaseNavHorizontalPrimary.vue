@@ -2,7 +2,7 @@
   <div class="base-nav-horizontal-primary">
     <div class="section">
       <router-link class="logo-container" to="/">
-        <img class="logo" src="@/assets/img/logo-2-2.svg">
+        <img class="logo" src="@/assets/img/logo-4.svg">
         <BaseText2 text="Homeshade"/>
       </router-link>
     </div>
@@ -30,8 +30,7 @@ export default {
     navItems: {
       type: Array,
       default: () => [
-        { text: 'Login', path: '/login' },
-        { text: 'Sign up', path: '/register', design: 'blue' }
+        { text: 'Login', path: '/login' }
       ]
     }
   }

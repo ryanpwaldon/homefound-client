@@ -1,0 +1,13 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.462 160.916">
+  <title>logo-2-22</title>
+  <line x1="2.00074" y1="158.91701" x2="18.00074" y2="142.91701" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <line x1="80.96948" y1="158.91701" x2="96.96948" y2="142.91701" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <polyline points="18 2 18 142.916 47.492 142.916" fill="none" stroke="#323639" stroke-miterlimit="10" stroke-width="2"/>
+  <polyline points="47.492 103.204 80.97 103.204 80.97 158.916 110.462 158.916 126.462 142.916 126.462 2 96.97 2 80.97 18 80.97 57.712" fill="#fff" stroke="#323639" stroke-miterlimit="10" stroke-width="4"/>
+  <polyline points="96.97 2 96.97 57.712 47.492 57.712 47.492 2 18 2 2 18 2 158.916 31.492 158.916 47.492 142.916 47.492 87.204 96.97 87.204 96.97 142.916 126.462 142.916 96.97 142.916" fill="#fff" stroke="#323639" stroke-miterlimit="10" stroke-width="4"/>
+  <polygon points="2 18 18 2 18 142.916 2 158.916 2 18" fill="#323639"/>
+  <polygon points="2 158.916 18 142.916 47.492 142.916 31.492 158.916 2 158.916" fill="#323639"/>
+  <polygon points="47.492 87.204 96.97 87.204 96.97 142.916 80.97 158.916 80.97 103.204 47.492 103.204 47.492 87.204" fill="#323639"/>
+  <polygon points="110.462 158.916 80.97 158.916 96.97 142.916 126.462 142.916 110.462 158.916" fill="#323639"/>
+  <polyline points="80.97 57.712 80.97 18 96.014 4.736 96.014 56.34" fill="#323639"/>
+</svg>

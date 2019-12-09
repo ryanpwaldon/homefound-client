@@ -1,10 +1,10 @@
 <template>
-  <div class="how-it-works">
+  <div class="about">
     <div class="container">
       <BaseNavHorizontalPrimary/>
       <BaseDivider/>
       <div class="content">
-        <BaseText1 text="How it works"/>
+        <BaseText1 text="About"/>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@ import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseNavHorizontalPrimary from '@/components/BaseNavHorizontalPrimary/BaseNavHorizontalPrimary'
 export default {
-  name: 'how-it-works',
+  name: 'about',
   components: {
     BaseNavHorizontalPrimary,
     BaseDivider,
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.how-it-works {
+.about {
   width: 100%;
   height: 100%;
   display: flex;

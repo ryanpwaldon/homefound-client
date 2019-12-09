@@ -4,7 +4,10 @@
       <BaseNavHorizontalPrimary/>
       <div class="main">
         <div class="title">Discover properties for sale <span class="bold">before</span> they hit the open market</div>
-        <div class="subtitle">Get early access to <span class="bold">783</span> properties before they list on Domain or REA</div>
+        <div class="subtitle">Access 1,829 properties before they’re publicly advertised on REA or Domain</div>
+        <router-link to="/register">
+          <BaseButton class="button" text="Get started" design="blue"/>
+        </router-link>
       </div>
     </div>
     <BaseMap class="map"/>
@@ -13,11 +16,13 @@
 
 <script>
 import BaseNavHorizontalPrimary from '@/components/BaseNavHorizontalPrimary/BaseNavHorizontalPrimary'
+import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseMap from '@/components/BaseMap/BaseMap'
 export default {
   name: 'home',
   components: {
     BaseNavHorizontalPrimary,
+    BaseButton,
     BaseMap
   }
 }
@@ -38,6 +43,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--color-gray-2);
 }
 .main {
   flex: 1;
@@ -50,16 +56,17 @@ export default {
 .title {
   font-size: 4rem;
   line-height: 1.2;
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-5);
-  color: var(--color-gray-4);
+  margin-bottom: var(--spacing-2);
   .bold {
     font-weight: var(--font-weight-bold);
-    color: var(--color-black-2);
   }
 }
-.subtitle .bold {
-  font-weight: var(--font-weight-bold);
+.subtitle {
+  color: var(--color-gray-4);
+  margin-bottom: var(--spacing-5);
+}
+.button {
+  padding: var(--spacing-2);
 }
 .map {
   border-left: var(--color-gray-1) solid 1px;

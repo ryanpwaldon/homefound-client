@@ -1,32 +1,25 @@
 <template>
-  <div class="login" @keypress.enter="submit" v-if="authCheckIsComplete">
+  <div class="verify" @keypress.enter="submit" v-if="authCheckIsComplete">
     <router-link to="/">
       <img class="logo" src="@/assets/img/logo-4.svg">
     </router-link>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <BaseText1 class="title" text="Login"/>
-      <BaseText4 class="label" text="Email"/>
-      <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
+      <BaseText1 class="title" text="Verify your account"/>
+      <BaseText2 class="description">
+        We sent a code to <span style="color: var(--color-black-2)">{{ $store.state.user.email }}</span>. Please verify your account by entering the code below. Be sure to check your junk folder.
+      </BaseText2>
+      <BaseText4 class="label" text="Verification code"/>
+      <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
         <BaseFormInput
-          v-model="form.email"
-          placeholder="tom@hanks.com"
-          autocomplete="username email"
+          v-model="form.code"
+          placeholder="Enter the code sent to your email"
+          type="text"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
-      <BaseText4 class="label" text="Password"/>
-      <ValidationProvider class="provider password" name="password" rules="required" v-slot="{ errors }">
-        <BaseFormInput
-          v-model="form.password"
-          placeholder="At least 8 characters"
-          autocomplete="current-password"
-          type="password"
-        />
-        <BaseFormError :message="errors[0]"/>
-      </ValidationProvider>
-      <div class="forgot-password">I forgot my password</div>
+      <BaseText6 class="resend" text="Resend email" @click.native="resend"/>
       <BaseFormSubmitButton
-        text="Login to Homeshade"
+        text="Submit"
         :loading="loading"
         @click.native="submit"
       />
@@ -35,53 +28,62 @@
 </template>
 
 <script>
-import AuthService from '@/services/Api/services/AuthService/AuthService'
+import UserService from '@/services/Api/services/UserService/UserService'
 import BaseText1 from '@/components/BaseText1/BaseText1'
+import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
-  name: 'login',
+  name: 'verify',
   components: {
     BaseFormInput,
     BaseText1,
+    BaseText2,
     BaseText4,
+    BaseText6,
     BaseFormSubmitButton,
     BaseFormError,
     ValidationObserver,
     ValidationProvider
   },
   mounted () {
-    if (this.$store.state.accessToken) {
-      if (this.$store.state.user && this.$store.state.user.active) this.$router.push('/app')
-      else this.$router.push('/verify')
-    }
+    if (!this.$store.state.user) this.$router.push('/unauthorised')
+    if (this.$store.getters.authenticated) this.$router.push('/app')
     this.authCheckIsComplete = true
   },
   data () {
     return {
       form: {
-        email: '',
-        password: ''
+        code: ''
       },
       loading: false,
       authCheckIsComplete: false
     }
   },
   methods: {
+    async resend () {
+      try {
+        await UserService.sendVerificationEmail()
+        this.$notify({ text: 'A new verification email has been sent', type: 'success' })
+      } catch (error) {
+        console.log(error)
+        this.$notify({ text: 'Error sending email', type: 'error' })
+      }
+    },
     async submit () {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const { user, accessToken } = await AuthService.login(this.form)
-        this.$store.dispatch('loginSuccess', { user, accessToken })
+        const user = await UserService.verify(this.form.code)
+        this.$store.commit('setUser', user)
         this.$router.push('/app/listings')
       } catch (error) {
-        this.$notify({ text: 'Your login info isn\'t right. Try again, or reset your password if it slipped your mind', type: 'error' })
-        this.$store.dispatch('logout')
         console.log(error)
+        this.$notify({ text: 'Error verifying email', type: 'error' })
       }
       this.loading = false
     }
@@ -90,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
+.verify {
   width: 100%;
   height: 100%;
   display: flex;
@@ -110,25 +112,24 @@ export default {
   position: relative;
 }
 .title {
-  margin-bottom: var(--spacing-6);
-  text-align: center;
+  margin-bottom: var(--spacing-5);
+  text-align: left;
+}
+.description {
+  margin-bottom: var(--spacing-5);
+  color: var(--color-gray-4);
+  line-height: 1.5;
 }
 .label {
   margin-bottom: var(--spacing-2);
 }
 .provider {
-  position: relative;
   display: block;
-}
-.provider.email {
-  margin-bottom: var(--spacing-4);
-}
-.provider.password {
+  position: relative;
   margin-bottom: var(--spacing-1);
 }
-.forgot-password {
-  font-size: 12px;
-  color: var(--color-medium-gray);
+.resend {
+  color: var(--color-gray-4);
   text-decoration: underline;
   margin-bottom: calc(var(--spacing-4) + 5px);
   display: inline-block;

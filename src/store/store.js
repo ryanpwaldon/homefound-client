@@ -9,6 +9,9 @@ export default new Vuex.Store({
     user: null,
     accessToken: localStorage.getItem('accessToken') || null
   },
+  authenticated: state => {
+    return state.user && state.user.active
+  },
   mutations: {
     setUser (state, value) {
       state.user = value

@@ -8,10 +8,6 @@ export default {
 
   async login (body) {
     return (await Api().post('/auth/login', body)).data
-  },
-
-  async register (body) {
-    return (await Api().post('/user', body)).data
   }
 
 }

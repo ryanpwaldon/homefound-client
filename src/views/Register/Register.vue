@@ -1,7 +1,7 @@
 <template>
   <div class="register" @keypress.enter="submit" v-if="authCheckIsComplete">
     <router-link to="/">
-      <img class="logo" src="@/assets/img/logo-2-2.svg">
+      <img class="logo" src="@/assets/img/logo-4.svg">
     </router-link>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Create your account"/>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import AuthService from '@/services/Api/services/AuthService/AuthService'
+import UserService from '@/services/Api/services/UserService/UserService'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -63,7 +63,10 @@ export default {
     ValidationProvider
   },
   mounted () {
-    if (this.$store.state.accessToken) this.$router.push('/app')
+    if (this.$store.state.accessToken) {
+      if (this.$store.state.user && this.$store.state.user.active) this.$router.push('/app')
+      else this.$router.push('/verify')
+    }
     this.authCheckIsComplete = true
   },
   data () {
@@ -82,9 +85,13 @@ export default {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const { user, accessToken } = await AuthService.register(this.form)
-      }
-      catch (error) {
+        const { user, accessToken } = await UserService.register(this.form)
+        this.$notify({ text: 'Account successfully created', type: 'success' })
+        this.$store.dispatch('loginSuccess', { user, accessToken })
+        this.$router.push('/verify')
+      } catch (error) {
+        console.log(error)
+        this.$notify({ text: 'Error creating your account', type: 'error' })
       }
       this.loading = false
     }
