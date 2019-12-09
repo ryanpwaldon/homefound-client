@@ -5,6 +5,7 @@
     </router-link>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Verify your account"/>
+      <BaseDivider/>
       <BaseText2 class="description">
         We sent a code to <span style="color: var(--color-black-2)">{{ $store.state.user.email }}</span>. Please verify your account by entering the code below. Be sure to check your junk folder.
       </BaseText2>
@@ -19,7 +20,7 @@
       </ValidationProvider>
       <BaseText6 class="resend" text="Resend email" @click.native="resend"/>
       <BaseFormSubmitButton
-        text="Submit"
+        text="Next"
         :loading="loading"
         @click.native="submit"
       />
@@ -29,6 +30,7 @@
 
 <script>
 import UserService from '@/services/Api/services/UserService/UserService'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -41,6 +43,7 @@ export default {
   name: 'verify',
   components: {
     BaseFormInput,
+    BaseDivider,
     BaseText1,
     BaseText2,
     BaseText4,
@@ -67,7 +70,7 @@ export default {
   methods: {
     async resend () {
       try {
-        await UserService.sendVerificationEmail()
+        await UserService.sendVerificationInstructions()
         this.$notify({ text: 'A new verification email has been sent', type: 'success' })
       } catch (error) {
         console.log(error)
@@ -83,7 +86,6 @@ export default {
         this.$router.push('/app/listings')
       } catch (error) {
         console.log(error)
-        this.$notify({ text: 'Error verifying email', type: 'error' })
       }
       this.loading = false
     }

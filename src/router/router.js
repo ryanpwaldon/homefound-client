@@ -38,7 +38,8 @@ const routes = [
   {
     path: '/password/reset',
     name: 'password-reset',
-    component: () => import('@/views/Password/views/Reset/Reset')
+    component: () => import('@/views/Password/views/Reset/Reset'),
+    props: route => ({ token: route.query.token })
   },
   {
     path: '/app',

@@ -11,11 +11,19 @@ export default {
   },
 
   async verify (code) {
-    return (await Api().get(`/user/verification`, { params: { code } })).data
+    return (await Api().get(`/user/verification/verify`, { params: { code } })).data
   },
 
-  async sendVerificationEmail () {
-    return (await Api().get(`/user/verification/send`)).data
+  async sendVerificationInstructions () {
+    return (await Api().get(`/user/verification/instructions`)).data
+  },
+
+  async sendPasswordResetInstructions (email) {
+    return (await Api().get(`/user/password/instructions`, { params: { email } })).data
+  },
+
+  async passwordReset (token, password) {
+    return (await Api().post(`/user/password/reset`, { token, password })).data
   }
 
 }

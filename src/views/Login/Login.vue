@@ -4,7 +4,8 @@
       <img class="logo" src="@/assets/img/logo-4.svg">
     </router-link>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <BaseText1 class="title" text="Login"/>
+      <BaseText1 class="title" text="Login to Homeshade"/>
+      <BaseDivider/>
       <BaseText4 class="label" text="Email"/>
       <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
         <BaseFormInput
@@ -24,9 +25,11 @@
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
-      <div class="forgot-password">I forgot my password</div>
+      <router-link to="/password/instructions">
+        <div class="forgot-password">I forgot my password</div>
+      </router-link>
       <BaseFormSubmitButton
-        text="Login to Homeshade"
+        text="Login"
         :loading="loading"
         @click.native="submit"
       />
@@ -38,6 +41,7 @@
 import AuthService from '@/services/Api/services/AuthService/AuthService'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
@@ -46,6 +50,7 @@ export default {
   name: 'login',
   components: {
     BaseFormInput,
+    BaseDivider,
     BaseText1,
     BaseText4,
     BaseFormSubmitButton,
@@ -79,9 +84,8 @@ export default {
         this.$store.dispatch('loginSuccess', { user, accessToken })
         this.$router.push('/app/listings')
       } catch (error) {
-        this.$notify({ text: 'Your login info isn\'t right. Try again, or reset your password if it slipped your mind', type: 'error' })
-        this.$store.dispatch('logout')
         console.log(error)
+        this.$store.dispatch('logout')
       }
       this.loading = false
     }
@@ -111,7 +115,7 @@ export default {
 }
 .title {
   margin-bottom: var(--spacing-6);
-  text-align: center;
+  text-align: left;
 }
 .label {
   margin-bottom: var(--spacing-2);
