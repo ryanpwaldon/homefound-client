@@ -1,7 +1,7 @@
 <template>
-  <router-link class="nav-item-text" :class="design" :to="path">
+  <component class="base-nav-item-text" :class="design" :is="path ? 'router-link' : 'div'" :to="path">
     <BaseText2 class="text" :text="text"/>
-  </router-link>
+  </component>
 </template>
 
 <script>
@@ -28,9 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-item-text {
+.base-nav-item-text {
   display: block;
   position: relative;
+  cursor: pointer;
   &::before {
     content: '';
     position: absolute;
@@ -45,10 +46,10 @@ export default {
     opacity: 0;
   }
 }
-.nav-item-text.transparent:hover::before {
+.base-nav-item-text.transparent:hover::before {
   opacity: 0.2;
 }
-.nav-item-text:not(.transparent) {
+.base-nav-item-text:not(.transparent) {
   margin-right: var(--spacing-2);
 }
 .blue {

@@ -3,6 +3,7 @@
     <router-link to="/">
       <img class="logo" src="@/assets/img/logo-4.svg">
     </router-link>
+    <BaseNavItemText class="logout" text="Logout" @click.native="logout"/>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Verify your account"/>
       <BaseDivider/>
@@ -38,6 +39,7 @@ import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
+import BaseNavItemText from '@/components/BaseNavItemText/BaseNavItemText'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
   name: 'verify',
@@ -49,6 +51,7 @@ export default {
     BaseText4,
     BaseText6,
     BaseFormSubmitButton,
+    BaseNavItemText,
     BaseFormError,
     ValidationObserver,
     ValidationProvider
@@ -88,6 +91,10 @@ export default {
         console.log(error)
       }
       this.loading = false
+    },
+    logout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
 }
@@ -107,6 +114,12 @@ export default {
   margin: var(--spacing-5);
   height: 2.5rem;
   left: 0;
+  top: 0;
+}
+.logout {
+  position: absolute;
+  margin: var(--spacing-5);
+  right: 0;
   top: 0;
 }
 .observer {

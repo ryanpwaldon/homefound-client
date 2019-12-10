@@ -7,7 +7,7 @@
       </router-link>
     </div>
     <div class="section">
-      <NavItemText
+      <BaseNavItemText
         v-for="(navItem, i) in navItems"
         :path="navItem.path"
         :text="navItem.text"
@@ -20,11 +20,11 @@
 
 <script>
 import BaseText2 from '@/components/BaseText2/BaseText2'
-import NavItemText from './partials/NavItemText/NavItemText'
+import BaseNavItemText from '@/components/BaseNavItemText/BaseNavItemText'
 export default {
   components: {
     BaseText2,
-    NavItemText
+    BaseNavItemText
   },
   props: {
     navItems: {
