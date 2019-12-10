@@ -9,12 +9,23 @@
       <BaseText2 class="description">
         Please enter your new password.
       </BaseText2>
-      <BaseText4 class="label" text="Password"/>
+      <BaseText4 class="label" text="New password"/>
       <ValidationProvider class="provider" name="password" rules="required" v-slot="{ errors }">
         <BaseFormInput
           v-model="form.password"
           placeholder="At least 8 characters"
           autocomplete="new-password"
+          type="password"
+        />
+        <BaseFormError :message="errors[0]"/>
+      </ValidationProvider>
+      <BaseText4 class="label" text="Re-enter password"/>
+      <ValidationProvider class="provider" name="re-enter password" rules="required|match:password" v-slot="{ errors }">
+        <BaseFormInput
+          v-model="form.reEnterPassword"
+          placeholder="Just one more time"
+          autocomplete="new-password"
+          type="password"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
@@ -63,7 +74,8 @@ export default {
   data () {
     return {
       form: {
-        password: ''
+        password: '',
+        reEnterPassword: ''
       },
       loading: false,
       authCheckIsComplete: false
@@ -76,6 +88,7 @@ export default {
       try {
         await UserService.passwordReset(this.token, this.form.password)
         this.$notify({ text: 'Successfully reset password', type: 'success' })
+        this.$router.push('/login')
       } catch (error) {
         console.log(error)
       }

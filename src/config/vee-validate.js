@@ -12,3 +12,9 @@ extend('requiredIf', {
   validate: (value, { other }) => !other || (!!other && !!value),
   message: 'The {_field_} field is required if the {_target_} field is filled'
 })
+
+extend('match', {
+  params: [{ name: 'other', isTarget: true }],
+  validate: (value, { other }) => other === value,
+  message: 'This field does not match the {_target_} field'
+})
