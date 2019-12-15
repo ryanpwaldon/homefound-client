@@ -13,7 +13,7 @@ export default {
   props: {
     path: {
       type: String,
-      required: true
+      required: false
     },
     text: {
       type: String,

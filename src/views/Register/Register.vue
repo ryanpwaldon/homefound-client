@@ -66,8 +66,8 @@ export default {
     ValidationProvider
   },
   mounted () {
-    if (this.$store.state.accessToken) {
-      if (this.$store.state.user && this.$store.state.user.active) this.$router.push('/app')
+    if (this.$store.state.user.accessToken) {
+      if (this.$store.state.user.user && this.$store.state.user.user.active) this.$router.push('/app')
       else this.$router.push('/verify')
     }
     this.authCheckIsComplete = true
@@ -90,7 +90,7 @@ export default {
       try {
         const { user, accessToken } = await UserService.register(this.form)
         this.$notify({ text: 'Account successfully created', type: 'success' })
-        this.$store.dispatch('loginSuccess', { user, accessToken })
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$router.push('/verify')
       } catch (error) {
         console.log(error)

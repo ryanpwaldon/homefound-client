@@ -152,13 +152,13 @@ const router = new VueRouter({
   routes
 })
 
-const userHasToken = () => store.state.accessToken
-const userIsActive = () => store.state.user && store.state.user.active
-const userHasRole = roles => !roles.length || store.state.user.roles.some(role => roles.includes(role))
+const userHasToken = () => store.state.user.accessToken
+const userIsActive = () => store.state.user.user && store.state.user.user.active
+const userHasRole = roles => !roles.length || store.state.user.user.roles.some(role => roles.includes(role))
 
 router.beforeEach(async (to, _, next) => {
   if (router.options.firstLoad && userHasToken()) {
-    await store.dispatch('checkAuthStatus')
+    await store.dispatch('user/checkAuthStatus')
     router.options.firstLoad = false
   }
   const routeThatRequiresRoles = to.matched.slice().reverse().find(item => item.meta.roles)

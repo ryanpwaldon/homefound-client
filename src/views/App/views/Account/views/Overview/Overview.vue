@@ -17,7 +17,7 @@
           <BaseText4 class="label" text="Email address"/>
           <BaseText5 class="value" :text="email"/>
         </div>
-        <BaseButton text="Update"/>
+        <BaseButton text="Update" @click.native="$store.commit('ui/setActiveModalType', 'UpdateEmail')"/>
       </div>
       <BaseDivider/>
       <div class="row">
@@ -25,7 +25,7 @@
           <BaseText4 class="label" text="Password"/>
           <BaseText5 class="value" text="•••••••••••••••••••••••"/>
         </div>
-        <BaseButton text="Update"/>
+        <BaseButton text="Update" @click.native="$store.commit('ui/setActiveModalType', 'UpdatePassword')"/>
       </div>
     </BaseCard>
   </div>
@@ -51,7 +51,7 @@ export default {
     BaseText6,
     BaseButton
   },
-  computed: mapState({
+  computed: mapState('user', {
     name: state => state.user.name,
     email: state => state.user.email,
     joined: state => state.user.createdAt,
@@ -60,7 +60,7 @@ export default {
   methods: {
     logout () {
       this.$router.push('/')
-      this.$store.dispatch('logout')
+      this.$store.dispatch('user/logout')
     }
   }
 }

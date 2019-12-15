@@ -25,7 +25,7 @@ export default {
   }),
   computed: {
     filteredNavItems () {
-      return this.navItems.filter(item => !item.roles || this.$store.state.user.roles.some(role => item.roles.includes(role)))
+      return this.navItems.filter(item => !item.roles || this.$store.state.user.user.roles.some(role => item.roles.includes(role)))
     }
   }
 }

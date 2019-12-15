@@ -6,7 +6,7 @@ import qs from 'qs'
 export default () => {
   const client = axios.create({
     baseURL: process.env.VUE_APP_API_BASE_URL,
-    headers: { Authorization: `Bearer ${store.state.accessToken}` }
+    headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
   })
   client.interceptors.request.use(config => {
     config.paramsSerializer = params => {

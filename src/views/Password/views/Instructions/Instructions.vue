@@ -50,7 +50,7 @@ export default {
     ValidationProvider
   },
   mounted () {
-    if (this.$store.getters.authenticated) this.$router.push('/app')
+    if (this.$store.getters['user/authenticated']) this.$router.push('/app')
     this.authCheckIsComplete = true
   },
   data () {

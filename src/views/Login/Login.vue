@@ -59,8 +59,8 @@ export default {
     ValidationProvider
   },
   mounted () {
-    if (this.$store.state.accessToken) {
-      if (this.$store.state.user && this.$store.state.user.active) this.$router.push('/app')
+    if (this.$store.state.user.accessToken) {
+      if (this.$store.state.user.user && this.$store.state.user.user.active) this.$router.push('/app')
       else this.$router.push('/verify')
     }
     this.authCheckIsComplete = true
@@ -81,11 +81,11 @@ export default {
       this.loading = true
       try {
         const { user, accessToken } = await AuthService.login(this.form)
-        this.$store.dispatch('loginSuccess', { user, accessToken })
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$router.push('/app/listings')
       } catch (error) {
         console.log(error)
-        this.$store.dispatch('logout')
+        this.$store.dispatch('user/logout')
       }
       this.loading = false
     }

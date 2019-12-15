@@ -8,7 +8,7 @@
       <BaseText1 class="title" text="Verify your account"/>
       <BaseDivider/>
       <BaseText2 class="description">
-        We sent a code to <span style="color: var(--color-black-2)">{{ $store.state.user.email }}</span>. Please verify your account by entering the code below. Be sure to check your junk folder.
+        We sent a code to <span style="color: var(--color-black-2)">{{ $store.state.user.user.email }}</span>. Please verify your account by entering the code below. Be sure to check your junk folder.
       </BaseText2>
       <BaseText4 class="label" text="Verification code"/>
       <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
@@ -57,8 +57,8 @@ export default {
     ValidationProvider
   },
   mounted () {
-    if (!this.$store.state.user) this.$router.push('/unauthorised')
-    if (this.$store.getters.authenticated) this.$router.push('/app')
+    if (!this.$store.state.user.user) this.$router.push('/unauthorised')
+    if (this.$store.getters['user/authenticated']) this.$router.push('/app')
     this.authCheckIsComplete = true
   },
   data () {
@@ -85,7 +85,7 @@ export default {
       this.loading = true
       try {
         const user = await UserService.verify(this.form.code)
-        this.$store.commit('setUser', user)
+        this.$store.commit('user/setUser', user)
         this.$router.push('/app/listings')
       } catch (error) {
         console.log(error)
@@ -93,7 +93,7 @@ export default {
       this.loading = false
     },
     logout () {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('user/logout')
       this.$router.push('/login')
     }
   }
