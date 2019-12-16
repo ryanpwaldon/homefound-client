@@ -7,13 +7,14 @@
           <BaseText5 class="value" :text="subscribed ? 'Subscribed' : 'Not subscribed'"/>
         </div>
         <BaseButton text="Unsubscribe" v-if="subscribed"/>
-        <BaseButton text="Subscribe for $74 per month" design="blue" v-else/>
+        <BaseButton text="Subscribe" design="blue" @click.native="redirectToCheckout" v-else/>
       </div>
     </BaseCard>
   </div>
 </template>
 
 <script>
+import BillingService from '@/services/Api/services/BillingService/BillingService'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -29,7 +30,10 @@ export default {
   },
   computed: mapState('user', {
     subscribed: state => state.user.roles.includes('buyer')
-  })
+  }),
+  methods: {
+    redirectToCheckout: () => BillingService.redirectToCheckout()
+  }
 }
 </script>
 
