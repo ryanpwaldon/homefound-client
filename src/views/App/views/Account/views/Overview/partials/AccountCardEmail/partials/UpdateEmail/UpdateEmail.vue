@@ -42,10 +42,10 @@ export default {
   }),
   methods: {
     async submit () {
-      if (this.loading || !(await this.$refs['v-observer'].validate())) return
+      if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        await new Promise(resolve => () => setTimeout(resolve, 2000))
+        await new Promise(resolve => setTimeout(resolve, 2000))
         this.$notify({ text: 'Successfully updated email', type: 'success' })
       } catch (err) {
         console.log(err)
@@ -62,6 +62,10 @@ export default {
 }
 .observer {
   margin-bottom: var(--spacing-5);
+}
+.provider {
+  position: relative;
+  display: block;
 }
 .buttons {
   display: flex;

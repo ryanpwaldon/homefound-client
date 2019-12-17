@@ -3,7 +3,7 @@
     <BaseText1 class="title" text="Update your password"/>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText4 class="label" text="New password"/>
-      <ValidationProvider class="provider" name="password" rules="required" v-slot="{ errors }">
+      <ValidationProvider class="provider" name="new password" rules="required" v-slot="{ errors }">
         <BaseFormInput
           v-model="form.password"
           placeholder="At least 8 characters"
@@ -13,7 +13,7 @@
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
       <BaseText4 class="label" text="Re-enter password"/>
-      <ValidationProvider class="provider" name="re-enter password" rules="required|match:password" v-slot="{ errors }">
+      <ValidationProvider class="provider" name="re-enter password" rules="required|match:new password" v-slot="{ errors }">
         <BaseFormInput
           v-model="form.reEnterPassword"
           placeholder="Just one more time"
@@ -58,10 +58,10 @@ export default {
   }),
   methods: {
     async submit () {
-      if (this.loading || !(await this.$refs['v-observer'].validate())) return
+      if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        await new Promise(resolve => () => setTimeout(resolve, 2000))
+        await new Promise(resolve => setTimeout(resolve, 2000))
         this.$notify({ text: 'Successfully updated password', type: 'success' })
       } catch (err) {
         console.log(err)
@@ -82,8 +82,11 @@ export default {
 .observer {
   margin-bottom: var(--spacing-5);
 }
-.provider:not(:last-child) {
+.provider {
+  position: relative;
   display: block;
+}
+.provider:not(:last-child) {
   margin-bottom: var(--spacing-5);
 }
 .buttons {
