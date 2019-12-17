@@ -1,20 +1,33 @@
 <template>
-  <div class="update-email">
-    <BaseText1 class="title" text="Update your email"/>
+  <BaseModal @close="$emit('close')">
+    <BaseText1 class="title" text="Update your password"/>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
+      <BaseText4 class="label" text="New password"/>
+      <ValidationProvider class="provider" name="password" rules="required" v-slot="{ errors }">
         <BaseFormInput
-          placeholder="New email"
-          v-model="form.email"
+          v-model="form.password"
+          placeholder="At least 8 characters"
+          autocomplete="new-password"
+          type="password"
+        />
+        <BaseFormError :message="errors[0]"/>
+      </ValidationProvider>
+      <BaseText4 class="label" text="Re-enter password"/>
+      <ValidationProvider class="provider" name="re-enter password" rules="required|match:password" v-slot="{ errors }">
+        <BaseFormInput
+          v-model="form.reEnterPassword"
+          placeholder="Just one more time"
+          autocomplete="new-password"
+          type="password"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
     </ValidationObserver>
-    <div class="footer">
-      <BaseButton text="Cancel" @click.native="$store.commit('ui/setActiveModalType', null)"/>
+    <div class="buttons">
+      <BaseButton text="Cancel" @click.native="$emit('close')"/>
       <BaseButton text="Save" design="black" @click.native="submit"/>
     </div>
-  </div>
+  </BaseModal>
 </template>
 
 <script>
@@ -23,6 +36,8 @@ import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseText1 from '@/components/BaseText1/BaseText1'
+import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseModal from '@/components/BaseModal/BaseModal'
 export default {
   components: {
     ValidationObserver,
@@ -30,12 +45,15 @@ export default {
     BaseFormInput,
     BaseFormError,
     BaseButton,
-    BaseText1
+    BaseText1,
+    BaseText4,
+    BaseModal
   },
   data: () => ({
     loading: false,
     form: {
-      email: ''
+      password: '',
+      reEnterPassword: ''
     }
   }),
   methods: {
@@ -44,7 +62,7 @@ export default {
       this.loading = true
       try {
         await new Promise(resolve => () => setTimeout(resolve, 2000))
-        this.$notify({ text: 'Successfully updated email', type: 'success' })
+        this.$notify({ text: 'Successfully updated password', type: 'success' })
       } catch (err) {
         console.log(err)
       }
@@ -58,10 +76,17 @@ export default {
 .title {
   margin-bottom: var(--spacing-5);
 }
+.label {
+  margin-bottom: var(--spacing-2);
+}
 .observer {
   margin-bottom: var(--spacing-5);
 }
-.footer {
+.provider:not(:last-child) {
+  display: block;
+  margin-bottom: var(--spacing-5);
+}
+.buttons {
   display: flex;
   justify-content: flex-end;
   > *:not(:last-child) {
