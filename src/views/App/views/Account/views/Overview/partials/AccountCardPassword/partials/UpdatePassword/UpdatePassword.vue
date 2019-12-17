@@ -1,6 +1,7 @@
 <template>
   <BaseModal @close="$emit('close')">
     <BaseText1 class="title" text="Update your password"/>
+    <BaseDivider/>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText4 class="label" text="New password"/>
       <ValidationProvider class="provider" name="new password" rules="required" v-slot="{ errors }">
@@ -23,6 +24,7 @@
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
     </ValidationObserver>
+    <BaseDivider/>
     <div class="buttons">
       <BaseButton text="Cancel" @click.native="$emit('close')"/>
       <BaseButton text="Save" design="black" @click.native="submit"/>
@@ -35,6 +37,7 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-va
 import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseModal from '@/components/BaseModal/BaseModal'
@@ -44,6 +47,7 @@ export default {
     ValidationProvider,
     BaseFormInput,
     BaseFormError,
+    BaseDivider,
     BaseButton,
     BaseText1,
     BaseText4,
@@ -73,9 +77,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-bottom: var(--spacing-5);
-}
 .label {
   margin-bottom: var(--spacing-2);
 }

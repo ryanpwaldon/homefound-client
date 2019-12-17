@@ -1,8 +1,8 @@
 <template>
   <transition @enter="animateEnter" @leave="animateLeave" :css="false">
-    <div class="base-modal" @click="$emit('close')">
+    <div class="base-modal">
       <div class="backdrop"/>
-      <BaseCard class="card" ref="card" @click.native.stop>
+      <BaseCard class="card" ref="card">
         <slot/>
       </BaseCard>
     </div>
@@ -26,10 +26,12 @@ export default {
     animateEnter (el, done) {
       const tl = anime.timeline({ easing: 'easeInOutQuad', duration: 200, complete: done })
       tl.add({ targets: el, opacity: [0, 1] }, 0)
-      tl.add({ targets: this.$refs['card'].$el, opacity: [0, 1], translateY: [20, 0] }, 150)
+      tl.add({ targets: this.$refs['card'].$el, opacity: [0, 1], translateY: [20, 0], easing: 'easeOutBack' }, 200)
     },
     animateLeave (el, done) {
-      anime({ targets: el, opacity: [1, 0], easing: 'easeInOutQuad', duration: 200, complete: done })
+      const tl = anime.timeline({ easing: 'easeInOutQuad', duration: 200, complete: done })
+      tl.add({ targets: this.$refs['card'].$el, opacity: [1, 0], translateY: [0, -20] }, 0)
+      tl.add({ targets: el, opacity: [1, 0] }, 200)
     }
   }
 }
