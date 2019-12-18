@@ -18,6 +18,6 @@ export default {
 <style lang="scss" scoped>
 .base-text-1 {
   font-size: 2rem;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
 }
 </style>

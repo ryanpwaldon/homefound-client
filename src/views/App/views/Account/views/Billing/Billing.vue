@@ -1,56 +1,29 @@
 <template>
   <div class="billing">
-    <BaseCard class="card">
-      <div class="row">
-        <div class="info">
-          <BaseText4 class="label" text="Status"/>
-          <BaseText5 class="value" :text="subscribed ? 'Subscribed' : 'Not subscribed'"/>
-        </div>
-        <BaseButton text="Unsubscribe" v-if="subscribed"/>
-        <BaseButton text="Subscribe" design="blue" @click.native="redirectToCheckout" v-else/>
-      </div>
-    </BaseCard>
+    <AccountCardSubscription/>
+    <AccountCardNextInvoice/>
+    <AccountCardPaymentMethod/>
   </div>
 </template>
 
 <script>
-import BillingService from '@/services/Api/services/BillingService/BillingService'
-import BaseCard from '@/components/BaseCard/BaseCard'
-import BaseText5 from '@/components/BaseText5/BaseText5'
-import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseButton from '@/components/BaseButton/BaseButton'
-import { mapState } from 'vuex'
+import AccountCardSubscription from './partials/AccountCardSubscription/AccountCardSubscription'
+import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
+import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
 export default {
   name: 'billing',
   components: {
-    BaseCard,
-    BaseText5,
-    BaseText4,
-    BaseButton
-  },
-  computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer')
-  }),
-  methods: {
-    redirectToCheckout: () => BillingService.redirectToCheckout()
+    AccountCardSubscription,
+    AccountCardNextInvoice,
+    AccountCardPaymentMethod
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-.label {
-  margin-bottom: var(--spacing-2);
-  color: var(--color-gray-4);
+.billing {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--spacing-5);
 }
 </style>
