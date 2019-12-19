@@ -53,7 +53,6 @@ export default {
   left: calc(100% + var(--spacing-2));
   position: absolute;
   pointer-events: none;
-  border: solid 1px var(--color-red-1);
   border-radius: var(--border-radius-1);
   background: var(--color-white-1);
   opacity: 0;

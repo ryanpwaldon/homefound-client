@@ -36,14 +36,13 @@ export default {
 
 <style lang="scss" scoped>
 .base-nav-vertical {
-  width: 65px;
   height: 100%;
   border-right: 1px solid var(--color-gray-1);
   background: var(--color-white-1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--spacing-4) 0;
+  padding: var(--spacing-4);
   flex-shrink: 0;
 }
 .section {

@@ -2,7 +2,9 @@
   <transition @enter="animateEnter" @leave="animateLeave" :css="false">
     <div class="base-modal">
       <div class="backdrop"/>
-      <BaseCard class="card" ref="card">
+      <img class="logo" src="@/assets/img/logo-4.svg">
+      <BaseCard class="card" ref="card" @click.native.stop>
+        <ButtonIcon class="close" :icon="require('@/assets/img/close.svg')" @click.native="$emit('close')"/>
         <slot/>
       </BaseCard>
     </div>
@@ -12,9 +14,11 @@
 <script>
 import anime from 'animejs'
 import BaseCard from '@/components/BaseCard/BaseCard'
+import ButtonIcon from '@/components/ButtonIcon/ButtonIcon'
 export default {
   components: {
-    BaseCard
+    BaseCard,
+    ButtonIcon
   },
   created () {
     document.querySelector('body').style.overflow = 'hidden'
@@ -61,6 +65,22 @@ export default {
   background-color: var(--color-gray-2);
   opacity: 1;
   z-index: -1;
+}
+.logo {
+  position: absolute;
+  margin: var(--spacing-4);
+  height: 2.5rem;
+  left: 0;
+  top: 0;
+}
+.close {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  margin: var(--spacing-4) var(--spacing-2);
+  cursor: pointer;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 .card {
   width: 400px;
