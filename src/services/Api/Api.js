@@ -20,7 +20,7 @@ export default () => {
   client.interceptors.response.use(
     response => response,
     error => {
-      const { statusCode: code, error: message } = error.response.data
+      const { statusCode: code, message } = error.response.data
       Vue.notify({ text: `${code} ${message}`, type: 'error' })
       return Promise.reject(error)
     }

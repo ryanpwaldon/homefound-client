@@ -2,34 +2,22 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText4 class="label" text="Status"/>
-        <BaseText5 class="value" :text="subscribed ? 'Subscribed' : 'Not subscribed'"/>
+        <BaseText4 class="label" text="Next invoice"/>
+        <BaseText5 class="value" text="You will be charged $74 on the 18th of January 2020"/>
       </div>
-      <BaseButton text="Unsubscribe" v-if="subscribed"/>
-      <BaseButton text="Subscribe" design="blue" @click.native="redirectToCheckout" v-else/>
     </div>
   </BaseCard>
 </template>
 
 <script>
-import BillingService from '@/services/Api/services/BillingService/BillingService'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseButton from '@/components/BaseButton/BaseButton'
-import { mapState } from 'vuex'
 export default {
   components: {
     BaseCard,
     BaseText5,
-    BaseText4,
-    BaseButton
-  },
-  computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer')
-  }),
-  methods: {
-    redirectToCheckout: () => BillingService.redirectToCheckout()
+    BaseText4
   }
 }
 </script>

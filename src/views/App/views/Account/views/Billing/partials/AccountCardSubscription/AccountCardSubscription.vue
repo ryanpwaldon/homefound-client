@@ -2,12 +2,12 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText4 class="label" text="Status"/>
-        <BaseText5 class="value" :text="subscribed ? 'Subscribed' : 'Not subscribed'"/>
+        <BaseText4 class="label" text="Subscription"/>
+        <BaseText5 class="value" text="Inactive"/>
       </div>
-      <BaseButton text="Unsubscribe" v-if="subscribed"/>
-      <BaseButton text="Subscribe" design="blue" @click.native="redirectToCheckout" v-else/>
+      <BaseButton text="Subscribe" @click.native="showModal = true"/>
     </div>
+    <UpdateSubscription v-show="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 
@@ -17,14 +17,19 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseButton from '@/components/BaseButton/BaseButton'
+import UpdateSubscription from './partials/UpdateSubscription/UpdateSubscription'
 import { mapState } from 'vuex'
 export default {
   components: {
     BaseCard,
     BaseText5,
     BaseText4,
-    BaseButton
+    BaseButton,
+    UpdateSubscription
   },
+  data: () => ({
+    showModal: false
+  }),
   computed: mapState('user', {
     subscribed: state => state.user.roles.includes('buyer')
   }),

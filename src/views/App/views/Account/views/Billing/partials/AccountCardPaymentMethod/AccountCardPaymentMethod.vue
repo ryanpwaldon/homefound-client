@@ -2,35 +2,32 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText4 class="label" text="Status"/>
-        <BaseText5 class="value" :text="subscribed ? 'Subscribed' : 'Not subscribed'"/>
+        <BaseText4 class="label" text="Payment method"/>
+        <BaseText5 class="value" text="Mastercard"/>
       </div>
-      <BaseButton text="Unsubscribe" v-if="subscribed"/>
-      <BaseButton text="Subscribe" design="blue" @click.native="redirectToCheckout" v-else/>
+      <BaseButton text="Update" @click.native="showModal = true"/>
     </div>
+    <UpdatePaymentMethod v-show="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 
 <script>
-import BillingService from '@/services/Api/services/BillingService/BillingService'
 import BaseCard from '@/components/BaseCard/BaseCard'
-import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseButton from '@/components/BaseButton/BaseButton'
-import { mapState } from 'vuex'
+import UpdatePaymentMethod from './partials/UpdatePaymentMethod/UpdatePaymentMethod'
 export default {
   components: {
     BaseCard,
-    BaseText5,
     BaseText4,
-    BaseButton
+    BaseText5,
+    BaseButton,
+    UpdatePaymentMethod
   },
-  computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer')
-  }),
-  methods: {
-    redirectToCheckout: () => BillingService.redirectToCheckout()
-  }
+  data: () => ({
+    showModal: false
+  })
 }
 </script>
 
