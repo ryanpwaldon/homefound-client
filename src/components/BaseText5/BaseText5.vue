@@ -20,5 +20,6 @@ export default {
 .base-text-5 {
   font-size: 1.6rem;
   font-weight: var(--font-weight-regular);
+  line-height: 1.5;
 }
 </style>

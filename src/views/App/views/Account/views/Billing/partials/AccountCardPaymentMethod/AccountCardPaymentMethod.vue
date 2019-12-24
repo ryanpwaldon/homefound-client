@@ -3,7 +3,9 @@
     <div class="container">
       <div class="content">
         <BaseText4 class="label" text="Payment method"/>
-        <BaseText5 class="value" text="Mastercard"/>
+        <BaseText5 class="value">
+          <span class="card-brand">{{ cardBrand }}</span> ending in {{ cardLast4 }}.
+        </BaseText5>
       </div>
       <BaseButton text="Update" @click.native="showModal = true"/>
     </div>
@@ -17,6 +19,7 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseButton from '@/components/BaseButton/BaseButton'
 import UpdatePaymentMethod from './partials/UpdatePaymentMethod/UpdatePaymentMethod'
+import { mapState } from 'vuex'
 export default {
   components: {
     BaseCard,
@@ -27,6 +30,10 @@ export default {
   },
   data: () => ({
     showModal: false
+  }),
+  computed: mapState('user', {
+    cardBrand: state => state.user.cardBrand,
+    cardLast4: state => state.user.cardLast4
   })
 }
 </script>
@@ -46,5 +53,8 @@ export default {
 .label {
   margin-bottom: var(--spacing-2);
   color: var(--color-gray-4);
+}
+.card-brand {
+  text-transform: capitalize;
 }
 </style>

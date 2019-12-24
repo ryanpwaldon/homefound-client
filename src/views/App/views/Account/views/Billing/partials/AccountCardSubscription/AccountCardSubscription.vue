@@ -3,41 +3,62 @@
     <div class="container">
       <div class="content">
         <BaseText4 class="label" text="Subscription"/>
-        <BaseText5 class="value" :text="subscribed ? 'Active' : 'Inactive'"/>
+        <BaseBadge :text="config.badgeText" :design="config.badgeDesign"/>
       </div>
-      <BaseButton text="Subscribe" @click.native="showActivationModal = true" v-if="!subscribed"/>
-      <BaseButton text="Cancel subscription" @click.native="showCancelationModal = true" v-else/>
+      <BaseButton
+        :text="config.buttonText"
+        @click.native="showModal = true"
+      />
     </div>
-    <ActivateSubscription v-show="showActivationModal" @close="showActivationModal = false"/>
-    <CancelSubscription v-show="showCancelationModal" @close="showCancelationModal = false"/>
+    <ActivateSubscription v-show="config.modal === 'activate' && showModal" @close="showModal = false"/>
+    <ReactivateSubscription v-show="config.modal === 'reactivate' && showModal" @close="showModal = false"/>
+    <CancelSubscription v-show="config.modal === 'cancel' && showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 
 <script>
 import BillingService from '@/services/Api/services/BillingService/BillingService'
 import BaseCard from '@/components/BaseCard/BaseCard'
-import BaseText5 from '@/components/BaseText5/BaseText5'
+import BaseBadge from '@/components/BaseBadge/BaseBadge'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseButton from '@/components/BaseButton/BaseButton'
 import ActivateSubscription from './partials/ActivateSubscription/ActivateSubscription'
+import ReactivateSubscription from './partials/ReactivateSubscription/ReactivateSubscription'
 import CancelSubscription from './partials/CancelSubscription/CancelSubscription'
 import { mapState } from 'vuex'
 export default {
   components: {
     BaseCard,
-    BaseText5,
+    BaseBadge,
     BaseText4,
     BaseButton,
     ActivateSubscription,
+    ReactivateSubscription,
     CancelSubscription
   },
   data: () => ({
-    showActivationModal: false,
-    showCancelationModal: false
+    showModal: false
   }),
-  computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer')
-  }),
+  computed: {
+    ...mapState('user', {
+      subscribed: state => state.user.roles.includes('buyer'),
+      subscriptionCancelled: state => state.user.subscriptionCancelled
+    }),
+    subscriptionStatus () {
+      let subscriptionStatus
+      if (!this.subscribed) subscriptionStatus = 'inactive'
+      if (this.subscribed && !this.subscriptionCancelled) subscriptionStatus = 'active'
+      if (this.subscribed && this.subscriptionCancelled) subscriptionStatus = 'cancelled'
+      return subscriptionStatus
+    },
+    config () {
+      let config
+      if (this.subscriptionStatus === 'active') config = { badgeText: 'Active', badgeDesign: 'green', buttonText: 'Cancel subscription', modal: 'cancel' }
+      if (this.subscriptionStatus === 'inactive') config = { badgeText: 'Inactive', badgeDesign: 'red', buttonText: 'Activate subscription', modal: 'activate' }
+      if (this.subscriptionStatus === 'cancelled') config = { badgeText: 'Cancelled', badgeDesign: 'yellow', buttonText: 'Reactivate subscription', modal: 'reactivate' }
+      return config
+    }
+  },
   methods: {
     redirectToCheckout: () => BillingService.redirectToCheckout()
   }

@@ -1,10 +1,8 @@
 <template>
   <div class="billing">
     <AccountCardSubscription/>
-    <template v-if="subscribed">
-      <AccountCardNextInvoice/>
-      <AccountCardPaymentMethod/>
-    </template>
+    <AccountCardNextInvoice v-if="nextInvoiceAt"/>
+    <AccountCardPaymentMethod v-if="hasCardDetails"/>
   </div>
 </template>
 
@@ -21,7 +19,9 @@ export default {
     AccountCardPaymentMethod
   },
   computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer')
+    subscribed: state => state.user.roles.includes('buyer'),
+    hasCardDetails: state => state.user.cardBrand && state.user.cardLast4,
+    nextInvoiceAt: state => state.user.nextInvoiceAt
   })
 }
 </script>

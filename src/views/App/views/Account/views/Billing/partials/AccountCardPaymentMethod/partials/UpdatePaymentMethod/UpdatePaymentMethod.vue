@@ -19,6 +19,7 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseModal from '@/components/BaseModal/BaseModal'
+import { mapState } from 'vuex'
 export default {
   components: {
     BaseDivider,
@@ -33,6 +34,9 @@ export default {
   data: () => ({
     loading: false,
     valid: false
+  }),
+  computed: mapState('user', {
+    customerId: state => state.user.customerId
   }),
   methods: {
     initCard () {
@@ -62,7 +66,7 @@ export default {
       this.loading = true
       try {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
-        const user = await BillingService.updateCustomerPaymentMethod(paymentMethod.id)
+        const user = await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
         this.$store.commit('user/setUser', user)
         this.$notify({ text: 'Successfully updated payment method', type: 'success' })
       } catch (err) { console.log(err) }

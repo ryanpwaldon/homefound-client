@@ -29,6 +29,7 @@ import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseModal from '@/components/BaseModal/BaseModal'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
+import { mapState } from 'vuex'
 export default {
   components: {
     BaseText1,
@@ -49,6 +50,9 @@ export default {
     valid: false,
     error: '',
     loading: false
+  }),
+  computed: mapState('user', {
+    customerId: state => state.user.customerId
   }),
   methods: {
     initCard () {
@@ -78,8 +82,8 @@ export default {
       this.loading = true
       try {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
-        await BillingService.updateCustomerPaymentMethod(paymentMethod.id)
-        const { user, accessToken } = await BillingService.createSubscription()
+        await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
+        const { user, accessToken } = await BillingService.createSubscription(this.customerId)
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$notify({ text: 'Successfully subscribed.', type: 'success' })
       } catch (err) { console.log(err) }
