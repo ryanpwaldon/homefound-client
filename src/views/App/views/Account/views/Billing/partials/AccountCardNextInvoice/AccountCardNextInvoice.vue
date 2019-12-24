@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <BaseText4 class="label" text="Next invoice"/>
-        <BaseText5 class="value" text="You will be charged $74 on the 18th of January 2020"/>
+        <BaseText5 class="value" text="Your card will be billed $74 on the 18th of January 2020"/>
       </div>
     </div>
   </BaseCard>

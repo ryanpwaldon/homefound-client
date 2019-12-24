@@ -1,8 +1,10 @@
 <template>
   <div class="billing">
     <AccountCardSubscription/>
-    <AccountCardNextInvoice/>
-    <AccountCardPaymentMethod/>
+    <template v-if="subscribed">
+      <AccountCardNextInvoice/>
+      <AccountCardPaymentMethod/>
+    </template>
   </div>
 </template>
 
@@ -10,13 +12,17 @@
 import AccountCardSubscription from './partials/AccountCardSubscription/AccountCardSubscription'
 import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
 import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
+import { mapState } from 'vuex'
 export default {
   name: 'billing',
   components: {
     AccountCardSubscription,
     AccountCardNextInvoice,
     AccountCardPaymentMethod
-  }
+  },
+  computed: mapState('user', {
+    subscribed: state => state.user.roles.includes('buyer')
+  })
 }
 </script>
 

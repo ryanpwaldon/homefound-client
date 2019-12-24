@@ -3,11 +3,13 @@
     <div class="container">
       <div class="content">
         <BaseText4 class="label" text="Subscription"/>
-        <BaseText5 class="value" text="Inactive"/>
+        <BaseText5 class="value" :text="subscribed ? 'Active' : 'Inactive'"/>
       </div>
-      <BaseButton text="Subscribe" @click.native="showModal = true"/>
+      <BaseButton text="Subscribe" @click.native="showActivationModal = true" v-if="!subscribed"/>
+      <BaseButton text="Cancel subscription" @click.native="showCancelationModal = true" v-else/>
     </div>
-    <UpdateSubscription v-show="showModal" @close="showModal = false"/>
+    <ActivateSubscription v-show="showActivationModal" @close="showActivationModal = false"/>
+    <CancelSubscription v-show="showCancelationModal" @close="showCancelationModal = false"/>
   </BaseCard>
 </template>
 
@@ -17,7 +19,8 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseButton from '@/components/BaseButton/BaseButton'
-import UpdateSubscription from './partials/UpdateSubscription/UpdateSubscription'
+import ActivateSubscription from './partials/ActivateSubscription/ActivateSubscription'
+import CancelSubscription from './partials/CancelSubscription/CancelSubscription'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -25,10 +28,12 @@ export default {
     BaseText5,
     BaseText4,
     BaseButton,
-    UpdateSubscription
+    ActivateSubscription,
+    CancelSubscription
   },
   data: () => ({
-    showModal: false
+    showActivationModal: false,
+    showCancelationModal: false
   }),
   computed: mapState('user', {
     subscribed: state => state.user.roles.includes('buyer')

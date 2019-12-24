@@ -79,13 +79,10 @@ export default {
       try {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
         await BillingService.updateCustomerPaymentMethod(paymentMethod.id)
-        const subscription = await BillingService.createSubscription()
-        console.log(subscription)
-        this.$notify({ text: 'Successfully updated payment method', type: 'success' })
-      } catch (err) {
-        console.log(err)
-        this.$notify({ text: 'An error occurred', type: 'error' })
-      }
+        const { user, accessToken } = await BillingService.createSubscription()
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
+        this.$notify({ text: 'Successfully subscribed.', type: 'success' })
+      } catch (err) { console.log(err) }
       this.loading = false
     }
   }

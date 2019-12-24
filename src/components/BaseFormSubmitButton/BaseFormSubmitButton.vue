@@ -1,5 +1,5 @@
 <template>
-  <div class="base-form-submit-button">
+  <div class="base-form-submit-button" :class="[design]">
     <BaseText2 :text="text" :style="{visibility: loading ? 'hidden' : 'visible'}"/>
     <div class="spinner" v-if="loading"><BaseSpinner/></div>
   </div>
@@ -21,6 +21,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    design: {
+      type: String,
+      default: 'black'
     }
   }
 }
@@ -31,12 +35,18 @@ export default {
   width: 100%;
   text-align: center;
   padding: var(--spacing-2);
-  color: var(--color-white-1);
-  background: var(--color-black-2);
   border-radius: var(--border-radius-1);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   position: relative;
+}
+.black {
+  color: var(--color-white-1);
+  background: var(--color-black-2);
+}
+.gray {
+  color: var(--color-black-2);
+  background: var(--color-gray-1);
 }
 .spinner {
   position: absolute;
