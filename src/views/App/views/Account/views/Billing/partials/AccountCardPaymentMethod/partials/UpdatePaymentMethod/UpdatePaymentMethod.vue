@@ -28,7 +28,8 @@ export default {
     BaseText4,
     BaseModal
   },
-  mounted () {
+  async mounted () {
+    await this.$refs['card']
     this.initCard()
   },
   data: () => ({
@@ -67,6 +68,7 @@ export default {
       try {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
         const user = await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
+        this.$emit('close')
         this.$store.commit('user/setUser', user)
         this.$notify({ text: 'Successfully updated payment method', type: 'success' })
       } catch (err) { console.log(err) }

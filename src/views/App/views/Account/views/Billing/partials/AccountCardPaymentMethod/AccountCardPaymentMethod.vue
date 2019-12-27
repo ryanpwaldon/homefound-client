@@ -9,7 +9,7 @@
       </div>
       <BaseButton text="Update" @click.native="showModal = true"/>
     </div>
-    <UpdatePaymentMethod v-show="showModal" @close="showModal = false"/>
+    <UpdatePaymentMethod v-if="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 

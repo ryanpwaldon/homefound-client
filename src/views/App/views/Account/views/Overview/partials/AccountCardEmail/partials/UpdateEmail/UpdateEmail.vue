@@ -15,7 +15,7 @@
     <BaseDivider/>
     <div class="buttons">
       <BaseButton text="Cancel" @click.native="$emit('close')"/>
-      <BaseButton text="Save" design="black" @click.native="submit"/>
+      <BaseButton text="Save" design="black" @click.native="submit" :loading="loading"/>
     </div>
   </BaseModal>
 </template>
@@ -53,6 +53,7 @@ export default {
       this.loading = true
       try {
         await new Promise(resolve => setTimeout(resolve, 2000))
+        this.$emit('close')
         this.$notify({ text: 'Successfully updated email', type: 'success' })
       } catch (err) {
         console.log(err)

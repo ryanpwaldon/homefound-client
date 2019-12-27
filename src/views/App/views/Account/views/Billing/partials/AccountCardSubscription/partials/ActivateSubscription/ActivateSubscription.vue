@@ -40,7 +40,8 @@ export default {
     BaseDivider,
     BaseFormSubmitButton
   },
-  mounted () {
+  async mounted () {
+    await this.$refs['card']
     this.initCard()
   },
   data: () => ({
@@ -84,6 +85,7 @@ export default {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
         await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
         const { user, accessToken } = await BillingService.createSubscription(this.customerId)
+        this.$emit('close')
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$notify({ text: 'Successfully subscribed.', type: 'success' })
       } catch (err) { console.log(err) }

@@ -44,6 +44,7 @@ export default {
       this.loading = true
       try {
         const user = await BillingService.reactivateSubscription(this.subscriptionId)
+        this.$emit('close')
         this.$store.commit('user/setUser', user)
         this.$notify({ text: 'Successfully reactivated subscription.', type: 'success' })
       } catch (err) { console.log(err) }

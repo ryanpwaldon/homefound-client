@@ -36,7 +36,6 @@ export default {
   text-align: center;
   padding: var(--spacing-2);
   border-radius: var(--border-radius-1);
-  font-weight: var(--font-weight-medium);
   cursor: pointer;
   position: relative;
 }

@@ -10,9 +10,9 @@
         @click.native="showModal = true"
       />
     </div>
-    <ActivateSubscription v-show="config.modal === 'activate' && showModal" @close="showModal = false"/>
-    <ReactivateSubscription v-show="config.modal === 'reactivate' && showModal" @close="showModal = false"/>
-    <CancelSubscription v-show="config.modal === 'cancel' && showModal" @close="showModal = false"/>
+    <ActivateSubscription v-if="config.modal === 'activate' && showModal" @close="showModal = false"/>
+    <ReactivateSubscription v-if="config.modal === 'reactivate' && showModal" @close="showModal = false"/>
+    <CancelSubscription v-if="config.modal === 'cancel' && showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 
@@ -53,9 +53,9 @@ export default {
     },
     config () {
       let config
-      if (this.subscriptionStatus === 'active') config = { badgeText: 'Active', badgeDesign: 'green', buttonText: 'Cancel subscription', modal: 'cancel' }
-      if (this.subscriptionStatus === 'inactive') config = { badgeText: 'Inactive', badgeDesign: 'red', buttonText: 'Activate subscription', modal: 'activate' }
-      if (this.subscriptionStatus === 'cancelled') config = { badgeText: 'Cancelled', badgeDesign: 'yellow', buttonText: 'Reactivate subscription', modal: 'reactivate' }
+      if (this.subscriptionStatus === 'active') config = { badgeText: 'Active', badgeDesign: 'black', buttonText: 'Cancel subscription', modal: 'cancel' }
+      if (this.subscriptionStatus === 'inactive') config = { badgeText: 'Inactive', badgeDesign: 'black', buttonText: 'Activate subscription', modal: 'activate' }
+      if (this.subscriptionStatus === 'cancelled') config = { badgeText: 'Cancelled', badgeDesign: 'black', buttonText: 'Reactivate subscription', modal: 'reactivate' }
       return config
     }
   },

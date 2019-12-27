@@ -7,7 +7,7 @@
       </div>
       <BaseButton text="Update" @click.native="showModal = true"/>
     </div>
-    <UpdateEmail v-show="showModal" @close="showModal = false"/>
+    <UpdateEmail v-if="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 

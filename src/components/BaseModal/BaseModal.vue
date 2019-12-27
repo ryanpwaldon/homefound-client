@@ -1,5 +1,5 @@
 <template>
-  <transition @enter="animateEnter" @leave="animateLeave" :css="false">
+  <transition @enter="animateEnter" @leave="animateLeave" :css="false" v-if="mounted">
     <div class="base-modal">
       <div class="backdrop"/>
       <img class="logo" src="@/assets/img/logo-4.svg">
@@ -20,12 +20,18 @@ export default {
     BaseCard,
     ButtonIcon
   },
+  mounted () {
+    this.mounted = true
+  },
   created () {
     document.querySelector('body').style.overflow = 'hidden'
   },
   beforeDestroy () {
     document.querySelector('body').style.overflow = 'auto'
   },
+  data: () => ({
+    mounted: false
+  }),
   methods: {
     animateEnter (el, done) {
       const tl = anime.timeline({ easing: 'easeInOutQuad', duration: 200, complete: done })
