@@ -28,6 +28,11 @@ export default {
   border-radius: 100px;
   display: inline-block;
   padding: var(--spacing-1) var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+}
+.black {
+  color: var(--color-white-1);
+  background: var(--color-black-2);
 }
 .green {
   color: var(--color-white-1);
