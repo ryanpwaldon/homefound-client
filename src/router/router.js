@@ -16,19 +16,24 @@ const routes = [
     component: () => import('@/views/About/About')
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/Register/Register')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login/Login')
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/Register/Register')
+  },
+  {
     path: '/verify',
     name: 'verify',
     component: () => import('@/views/Verify/Verify')
+  },
+  {
+    path: '/activate',
+    name: 'activate',
+    component: () => import('@/views/Activate/Activate')
   },
   {
     path: '/password/instructions',
@@ -153,7 +158,7 @@ const router = new VueRouter({
 })
 
 const userHasToken = () => store.state.user.accessToken
-const userIsActive = () => store.state.user.user && store.state.user.user.active
+const userIsVerified = () => store.state.user.user && store.state.user.user.verified
 const userHasRole = roles => !roles.length || store.state.user.user.roles.some(role => roles.includes(role))
 
 router.beforeEach(async (to, _, next) => {
@@ -166,8 +171,8 @@ router.beforeEach(async (to, _, next) => {
   const requiresAuth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!requiredRoles.length
   if (requiresAuth) {
     if (!userHasToken()) return next('/unauthorised')
-    if (userHasToken() && !userIsActive()) return next('/verify')
-    if (userHasToken() && userIsActive() && userHasRole(requiredRoles)) return next()
+    if (userHasToken() && !userIsVerified()) return next('/verify')
+    if (userHasToken() && userIsVerified() && userHasRole(requiredRoles)) return next()
   } else return next()
 })
 

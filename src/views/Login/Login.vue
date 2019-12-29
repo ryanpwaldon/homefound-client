@@ -60,7 +60,7 @@ export default {
   },
   mounted () {
     if (this.$store.state.user.accessToken) {
-      if (this.$store.state.user.user && this.$store.state.user.user.active) this.$router.push('/app')
+      if (this.$store.state.user.user && this.$store.state.user.user.verified) this.$router.push('/app')
       else this.$router.push('/verify')
     }
     this.authCheckIsComplete = true

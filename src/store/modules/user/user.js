@@ -8,7 +8,7 @@ export default {
   },
   getters: {
     authenticated: state => {
-      return state.user && state.user.active
+      return state.user && state.user.verified
     }
   },
   mutations: {
