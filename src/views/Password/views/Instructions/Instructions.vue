@@ -4,7 +4,7 @@
       <BaseText1 class="title" text="Reset password"/>
       <BaseDivider/>
       <BaseText2 class="description">
-        Type the email address linked to your account and we’ll send you password reset instructions. This may end up in your spam folder, so be sure to check there as well.
+        Type the email address linked to your account and we’ll send you password reset instructions. Be sure to check your spam folder.
       </BaseText2>
       <BaseText4 class="label" text="Email"/>
       <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
