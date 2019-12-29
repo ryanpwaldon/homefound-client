@@ -1,19 +1,20 @@
 <template>
-  <BaseModal @close="$emit('close')">
+  <LayoutFocus>
     <BaseActivateSubscription
       :customer-id="customerId"
       @payment-success="onPaymentSuccess"
     />
-  </BaseModal>
+  </LayoutFocus>
 </template>
 
 <script>
+import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
 import BaseActivateSubscription from '@/components/BaseActivateSubscription/BaseActivateSubscription'
-import BaseModal from '@/components/BaseModal/BaseModal'
 import { mapState } from 'vuex'
 export default {
+  name: 'activate',
   components: {
-    BaseModal,
+    LayoutFocus,
     BaseActivateSubscription
   },
   computed: mapState('user', {
@@ -21,7 +22,6 @@ export default {
   }),
   methods: {
     onPaymentSuccess ({ user, accessToken }) {
-      this.$emit('close')
       this.$store.dispatch('user/loginSuccess', { user, accessToken })
     }
   }
