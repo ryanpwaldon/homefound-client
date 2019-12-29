@@ -2,20 +2,17 @@
   <div class="overview">
     <AccountCardUser/>
     <AccountCardEmail/>
-    <AccountCardPassword/>
   </div>
 </template>
 
 <script>
 import AccountCardUser from './partials/AccountCardUser/AccountCardUser'
 import AccountCardEmail from './partials/AccountCardEmail/AccountCardEmail'
-import AccountCardPassword from './partials/AccountCardPassword/AccountCardPassword'
 export default {
   name: 'overview',
   components: {
     AccountCardUser,
-    AccountCardEmail,
-    AccountCardPassword
+    AccountCardEmail
   }
 }
 </script>

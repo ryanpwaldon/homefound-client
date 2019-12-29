@@ -5,9 +5,7 @@
         <BaseText4 class="label" text="Email"/>
         <BaseText5 :text="email"/>
       </div>
-      <BaseButton text="Update" @click.native="showModal = true"/>
     </div>
-    <UpdateEmail v-if="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 
@@ -15,20 +13,13 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
-import BaseButton from '@/components/BaseButton/BaseButton'
-import UpdateEmail from './partials/UpdateEmail/UpdateEmail'
 import { mapState } from 'vuex'
 export default {
   components: {
     BaseCard,
     BaseText4,
-    BaseText5,
-    BaseButton,
-    UpdateEmail
+    BaseText5
   },
-  data: () => ({
-    showModal: false
-  }),
   computed: mapState('user', {
     email: state => state.user.email
   })
