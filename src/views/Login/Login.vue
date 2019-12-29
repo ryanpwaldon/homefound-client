@@ -1,8 +1,5 @@
 <template>
-  <div class="login" @keypress.enter="submit" v-if="authCheckIsComplete">
-    <router-link to="/">
-      <img class="logo" src="@/assets/img/logo-4.svg">
-    </router-link>
+  <LayoutFocus @keypress.native.enter="submit" v-if="authCheckIsComplete">
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Login to Homeshade"/>
       <BaseDivider/>
@@ -28,16 +25,18 @@
       <router-link to="/password/instructions">
         <div class="forgot-password">I forgot my password</div>
       </router-link>
+      <BaseDivider/>
       <BaseFormSubmitButton
         text="Login"
         :loading="loading"
         @click.native="submit"
       />
     </ValidationObserver>
-  </div>
+  </LayoutFocus>
 </template>
 
 <script>
+import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
 import AuthService from '@/services/Api/services/AuthService/AuthService'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -49,6 +48,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'login',
   components: {
+    LayoutFocus,
     BaseFormInput,
     BaseDivider,
     BaseText1,
@@ -94,47 +94,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-gray-2);
-}
-.logo {
-  position: absolute;
-  margin: var(--spacing-5);
-  height: 2.5rem;
-  left: 0;
-  top: 0;
-}
 .observer {
-  width: 256px;
+  width: 100%;
   position: relative;
-}
-.title {
-  margin-bottom: var(--spacing-6);
-  text-align: left;
 }
 .label {
   margin-bottom: var(--spacing-2);
 }
 .provider {
   position: relative;
+  margin-bottom: var(--spacing-5);
   display: block;
-}
-.provider.email {
-  margin-bottom: var(--spacing-4);
 }
 .provider.password {
   margin-bottom: var(--spacing-1);
 }
 .forgot-password {
   font-size: 12px;
-  color: var(--color-medium-gray);
+  color: var(--color-gray-4);
   text-decoration: underline;
-  margin-bottom: calc(var(--spacing-4) + 5px);
   display: inline-block;
   cursor: pointer;
 }
