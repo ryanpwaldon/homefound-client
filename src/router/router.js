@@ -157,12 +157,12 @@ const router = new VueRouter({
   routes
 })
 
-const userHasToken = () => store.state.user.accessToken
-const userIsVerified = () => store.state.user.user && store.state.user.user.verified
-const userHasRole = roles => !roles.length || store.state.user.user.roles.some(role => roles.includes(role))
+const checkUserHasToken = () => store.state.user.accessToken
+const checkUserIsVerified = () => store.state.user.user && store.state.user.user.verified
+const checkUserHasRole = roles => !roles.length || store.state.user.user.roles.some(role => roles.includes(role))
 
 router.beforeEach(async (to, _, next) => {
-  if (router.options.firstLoad && userHasToken()) {
+  if (router.options.firstLoad && checkUserHasToken()) {
     await store.dispatch('user/checkAuthStatus')
     router.options.firstLoad = false
   }
@@ -170,9 +170,9 @@ router.beforeEach(async (to, _, next) => {
   const requiredRoles = (routeThatRequiresRoles && routeThatRequiresRoles.meta.roles) || []
   const requiresAuth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!requiredRoles.length
   if (requiresAuth) {
-    if (!userHasToken()) return next('/unauthorised')
-    if (userHasToken() && !userIsVerified()) return next('/verify')
-    if (userHasToken() && userIsVerified() && userHasRole(requiredRoles)) return next()
+    if (!checkUserHasToken()) return next('/unauthorised')
+    if (checkUserHasToken() && !checkUserIsVerified()) return next('/verify')
+    if (checkUserHasToken() && checkUserIsVerified() && checkUserHasRole(requiredRoles)) return next()
   } else return next()
 })
 
