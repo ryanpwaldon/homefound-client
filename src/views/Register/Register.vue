@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit" v-if="authCheckIsComplete">
+  <LayoutFocus @keypress.native.enter="submit">
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Create your account"/>
       <BaseDivider/>
@@ -65,22 +65,15 @@ export default {
     ValidationObserver,
     ValidationProvider
   },
-  mounted () {
-    if (this.$store.state.user.accessToken) {
-      if (this.$store.state.user.user && this.$store.state.user.user.verified) this.$router.push('/app')
-      else this.$router.push('/verify')
-    }
-    this.authCheckIsComplete = true
-  },
   data () {
     return {
       form: {
         name: '',
         email: '',
-        password: ''
+        password: '',
+        userType: 'buyer'
       },
-      loading: false,
-      authCheckIsComplete: false
+      loading: false
     }
   },
   methods: {

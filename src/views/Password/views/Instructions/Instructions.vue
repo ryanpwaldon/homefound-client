@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit" v-if="authCheckIsComplete">
+  <LayoutFocus @keypress.native.enter="submit">
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Reset password"/>
       <BaseDivider/>
@@ -49,17 +49,12 @@ export default {
     ValidationObserver,
     ValidationProvider
   },
-  mounted () {
-    if (this.$store.getters['user/authenticated']) this.$router.push('/app')
-    this.authCheckIsComplete = true
-  },
   data () {
     return {
       form: {
         email: ''
       },
-      loading: false,
-      authCheckIsComplete: false
+      loading: false
     }
   },
   methods: {

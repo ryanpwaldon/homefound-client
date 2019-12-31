@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit" v-if="authCheckIsComplete">
+  <LayoutFocus @keypress.native.enter="submit">
     <BaseNavItemText class="logout" text="Logout" @click.native="logout"/>
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Verify your account"/>
@@ -56,18 +56,12 @@ export default {
     ValidationObserver,
     ValidationProvider
   },
-  mounted () {
-    if (!this.$store.state.user.user) this.$router.push('/unauthorised')
-    if (this.$store.getters['user/authenticated']) this.$router.push('/app')
-    this.authCheckIsComplete = true
-  },
   data () {
     return {
       form: {
         code: ''
       },
-      loading: false,
-      authCheckIsComplete: false
+      loading: false
     }
   },
   methods: {
@@ -84,9 +78,9 @@ export default {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const user = await UserService.verify(this.form.code)
-        this.$store.commit('user/setUser', user)
-        this.$router.push('/app/listings')
+        const { user, accessToken } = await UserService.verify(this.form.code)
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
+        this.$router.push('/app')
       } catch (error) {
         console.log(error)
       }

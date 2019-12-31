@@ -7,8 +7,8 @@ export default {
     accessToken: localStorage.getItem('accessToken') || null
   },
   getters: {
-    authenticated: state => {
-      return state.user && state.user.verified
+    roles: state => {
+      return (state.user && state.user.roles) || ['guest']
     }
   },
   mutations: {

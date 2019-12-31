@@ -18,22 +18,46 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login/Login')
+    component: () => import('@/views/Login/Login'),
+    meta: {
+      permissions: [
+        { roles: ['guest'], access: true },
+        { roles: ['*'], redirect: '/app' }
+      ]
+    }
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/views/Register/Register')
+    component: () => import('@/views/Register/Register'),
+    meta: {
+      permissions: [
+        { roles: ['guest'], access: true },
+        { roles: ['*'], redirect: '/app' }
+      ]
+    }
   },
   {
     path: '/verify',
     name: 'verify',
-    component: () => import('@/views/Verify/Verify')
+    component: () => import('@/views/Verify/Verify'),
+    meta: {
+      permissions: [
+        { roles: ['unverified'], access: true },
+        { roles: ['*'], redirect: '/app' }
+      ]
+    }
   },
   {
     path: '/activate',
     name: 'activate',
-    component: () => import('@/views/Activate/Activate')
+    component: () => import('@/views/Activate/Activate'),
+    meta: {
+      permissions: [
+        { roles: ['buyer-inactive'], access: true },
+        { roles: ['*'], redirect: '/app' }
+      ]
+    }
   },
   {
     path: '/password/instructions',
@@ -49,7 +73,14 @@ const routes = [
   {
     path: '/app',
     component: () => import('@/views/App/App'),
-    meta: { auth: true },
+    meta: {
+      permissions: [
+        { roles: ['buyer', 'seller', 'admin'], access: true },
+        { roles: ['unverified'], redirect: '/verify' },
+        { roles: ['buyer-inactive'], redirect: '/activate' },
+        { roles: ['*'], redirect: '/login' }
+      ]
+    },
     children: [
       {
         path: '',
@@ -80,12 +111,20 @@ const routes = [
         path: 'my-listings',
         name: 'my-listings',
         component: () => import('@/views/App/views/MyListings/MyListings'),
-        meta: { roles: [ 'seller', 'admin' ] }
+        permissions: [
+          { roles: ['seller'], access: true },
+          { roles: ['*'], redirect: '/app' }
+        ]
       },
       {
         path: 'my-listings/:id',
         component: () => import('@/views/App/views/MyListing/MyListing'),
-        meta: { roles: [ 'seller', 'admin' ] },
+        meta: {
+          permissions: [
+            { roles: ['seller'], access: true },
+            { roles: ['*'], redirect: '/app' }
+          ]
+        },
         children: [
           {
             path: '',
@@ -135,7 +174,12 @@ const routes = [
         path: 'admin',
         name: 'admin',
         component: () => import('@/views/App/views/Admin/Admin'),
-        meta: { roles: [ 'admin' ] }
+        meta: {
+          permissions: [
+            { roles: ['admin'], access: true },
+            { roles: ['*'], redirect: '/app' }
+          ]
+        }
       }
     ]
   },
@@ -153,27 +197,18 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  firstLoad: true,
   routes
 })
 
-const checkUserHasToken = () => store.state.user.accessToken
-const checkUserIsVerified = () => store.state.user.user && store.state.user.user.verified
-const checkUserHasRole = roles => !roles.length || store.state.user.user.roles.some(role => roles.includes(role))
-
 router.beforeEach(async (to, _, next) => {
-  if (router.options.firstLoad && checkUserHasToken()) {
-    await store.dispatch('user/checkAuthStatus')
-    router.options.firstLoad = false
+  const routePermissions = (to.matched.slice().reverse().find(item => item.meta.permissions) || { meta: { permissions: [] } }).meta.permissions
+  if (!routePermissions.length) return next()
+  const userRoles = store.getters['user/roles']
+  for (const permission of routePermissions) {
+    const match = permission.roles.includes('*') || userRoles.some(role => permission.roles.includes(role))
+    console.log(to.path)
+    if (match) return permission.access ? next() : next(permission.redirect)
   }
-  const routeThatRequiresRoles = to.matched.slice().reverse().find(item => item.meta.roles)
-  const requiredRoles = (routeThatRequiresRoles && routeThatRequiresRoles.meta.roles) || []
-  const requiresAuth = !!to.matched.slice().reverse().find(item => item.meta.auth) || !!requiredRoles.length
-  if (requiresAuth) {
-    if (!checkUserHasToken()) return next('/unauthorised')
-    if (checkUserHasToken() && !checkUserIsVerified()) return next('/verify')
-    if (checkUserHasToken() && checkUserIsVerified() && checkUserHasRole(requiredRoles)) return next()
-  } else return next()
 })
 
 export default router

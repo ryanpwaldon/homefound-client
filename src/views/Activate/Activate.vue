@@ -23,6 +23,7 @@ export default {
   methods: {
     onPaymentSuccess ({ user, accessToken }) {
       this.$store.dispatch('user/loginSuccess', { user, accessToken })
+      this.$router.push('/app')
     }
   }
 }
