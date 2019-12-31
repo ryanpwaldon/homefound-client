@@ -111,10 +111,12 @@ const routes = [
         path: 'my-listings',
         name: 'my-listings',
         component: () => import('@/views/App/views/MyListings/MyListings'),
-        permissions: [
-          { roles: ['seller'], access: true },
-          { roles: ['*'], redirect: '/app' }
-        ]
+        meta: {
+          permissions: [
+            { roles: ['seller'], access: true },
+            { roles: ['*'], redirect: '/app' }
+          ]
+        }
       },
       {
         path: 'my-listings/:id',
@@ -206,7 +208,6 @@ router.beforeEach(async (to, _, next) => {
   const userRoles = store.getters['user/roles']
   for (const permission of routePermissions) {
     const match = permission.roles.includes('*') || userRoles.some(role => permission.roles.includes(role))
-    console.log(to.path)
     if (match) return permission.access ? next() : next(permission.redirect)
   }
 })
