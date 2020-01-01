@@ -22,8 +22,13 @@ export default {
   },
   actions: {
     async checkAuthStatus ({ dispatch }) {
-      try { const { user, accessToken } = await AuthService.checkAuthStatus(); dispatch('loginSuccess', { user, accessToken }) }
-      catch (error) { dispatch('logout'); console.log(error) }
+      try {
+        const { user, accessToken } = await AuthService.checkAuthStatus()
+        dispatch('loginSuccess', { user, accessToken })
+      } catch (error) {
+        dispatch('logout')
+        console.log(error)
+      }
     },
     loginSuccess ({ commit }, { user, accessToken }) {
       commit('setUser', user)
