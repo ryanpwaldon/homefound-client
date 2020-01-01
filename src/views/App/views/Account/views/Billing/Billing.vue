@@ -1,8 +1,8 @@
 <template>
   <div class="billing">
-    <AccountCardCancelSubscription v-if="subscribed"/>
-    <AccountCardActivateSubscription v-if="!subscribed"/>
-    <AccountCardReactivateSubscription v-if="pendingCancellation && subscribed"/>
+    <AccountCardReactivateSubscription v-if="subscriptionStatus === 'cancelled'"/>
+    <AccountCardActivateSubscription v-if="subscriptionStatus === 'inactive'"/>
+    <AccountCardCancelSubscription v-if="subscriptionStatus === 'active'"/>
     <AccountCardNextInvoice v-if="nextInvoiceAt"/>
     <AccountCardPaymentMethod v-if="hasCardDetails"/>
   </div>
@@ -14,7 +14,7 @@ import AccountCardReactivateSubscription from './partials/AccountCardReactivateS
 import AccountCardCancelSubscription from './partials/AccountCardCancelSubscription/AccountCardCancelSubscription'
 import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
 import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
-import { BUYER, BUYER_PENDING_CANCELLATION } from '@/roles/roles'
+import { BUYER, BUYER_CANCELLED, BUYER_INACTIVE } from '@/roles/roles'
 import { mapState } from 'vuex'
 export default {
   name: 'billing',
@@ -25,12 +25,19 @@ export default {
     AccountCardNextInvoice,
     AccountCardPaymentMethod
   },
-  computed: mapState('user', {
-    subscribed: state => state.user.roles.includes(BUYER),
-    pendingCancellation: state => state.user.roles.includes(BUYER_PENDING_CANCELLATION),
-    hasCardDetails: state => state.user.cardBrand && state.user.cardLast4,
-    nextInvoiceAt: state => state.user.nextInvoiceAt
-  })
+  computed: {
+    ...mapState('user', {
+      roles: state => state.user.roles,
+      hasCardDetails: state => state.user.cardBrand && state.user.cardLast4,
+      nextInvoiceAt: state => state.user.nextInvoiceAt
+    }),
+    subscriptionStatus () {
+      if (this.roles.includes(BUYER_CANCELLED)) return 'cancelled'
+      if (this.roles.includes(BUYER_INACTIVE)) return 'inactive'
+      if (this.roles.includes(BUYER)) return 'active'
+      return null
+    }
+  }
 }
 </script>
 

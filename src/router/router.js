@@ -7,9 +7,8 @@ import {
   ADMIN,
   SELLER,
   BUYER,
+  BUYER_INACTIVE,
   BUYER_PENDING_ACTIVATION,
-  // BUYER_PENDING_CANCELLATION,
-  // BUYER_CANCELLED,
   VERIFICATION_PENDING
 } from '@/roles/roles'
 
@@ -86,7 +85,7 @@ const routes = [
     component: () => import('@/views/App/App'),
     meta: {
       permissions: [
-        { roles: [BUYER, SELLER, ADMIN], access: true },
+        { roles: [BUYER, BUYER_INACTIVE, SELLER, ADMIN], access: true },
         { roles: [VERIFICATION_PENDING], redirect: '/verify' },
         { roles: [BUYER_PENDING_ACTIVATION], redirect: '/activate' },
         { roles: [ALL], redirect: '/login' }
