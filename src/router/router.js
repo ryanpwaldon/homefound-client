@@ -1,6 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store/store'
+import {
+  ALL,
+  GUEST,
+  ADMIN,
+  SELLER,
+  BUYER,
+  BUYER_PENDING_ACTIVATION,
+  // BUYER_PENDING_CANCELLATION,
+  // BUYER_CANCELLED,
+  VERIFICATION_PENDING
+} from '@/roles/roles'
 
 Vue.use(VueRouter)
 
@@ -21,8 +32,8 @@ const routes = [
     component: () => import('@/views/Login/Login'),
     meta: {
       permissions: [
-        { roles: ['guest'], access: true },
-        { roles: ['*'], redirect: '/app' }
+        { roles: [GUEST], access: true },
+        { roles: [ALL], redirect: '/app' }
       ]
     }
   },
@@ -32,8 +43,8 @@ const routes = [
     component: () => import('@/views/Register/Register'),
     meta: {
       permissions: [
-        { roles: ['guest'], access: true },
-        { roles: ['*'], redirect: '/app' }
+        { roles: [GUEST], access: true },
+        { roles: [ALL], redirect: '/app' }
       ]
     }
   },
@@ -43,8 +54,8 @@ const routes = [
     component: () => import('@/views/Verify/Verify'),
     meta: {
       permissions: [
-        { roles: ['unverified'], access: true },
-        { roles: ['*'], redirect: '/app' }
+        { roles: [VERIFICATION_PENDING], access: true },
+        { roles: [ALL], redirect: '/app' }
       ]
     }
   },
@@ -54,8 +65,8 @@ const routes = [
     component: () => import('@/views/Activate/Activate'),
     meta: {
       permissions: [
-        { roles: ['buyer-inactive'], access: true },
-        { roles: ['*'], redirect: '/app' }
+        { roles: [BUYER_PENDING_ACTIVATION], access: true },
+        { roles: [ALL], redirect: '/app' }
       ]
     }
   },
@@ -75,10 +86,10 @@ const routes = [
     component: () => import('@/views/App/App'),
     meta: {
       permissions: [
-        { roles: ['buyer', 'seller', 'admin'], access: true },
-        { roles: ['unverified'], redirect: '/verify' },
-        { roles: ['buyer-inactive'], redirect: '/activate' },
-        { roles: ['*'], redirect: '/login' }
+        { roles: [BUYER, SELLER, ADMIN], access: true },
+        { roles: [VERIFICATION_PENDING], redirect: '/verify' },
+        { roles: [BUYER_PENDING_ACTIVATION], redirect: '/activate' },
+        { roles: [ALL], redirect: '/login' }
       ]
     },
     children: [
@@ -113,8 +124,8 @@ const routes = [
         component: () => import('@/views/App/views/MyListings/MyListings'),
         meta: {
           permissions: [
-            { roles: ['seller'], access: true },
-            { roles: ['*'], redirect: '/app' }
+            { roles: [SELLER], access: true },
+            { roles: [ALL], redirect: '/app' }
           ]
         }
       },
@@ -123,8 +134,8 @@ const routes = [
         component: () => import('@/views/App/views/MyListing/MyListing'),
         meta: {
           permissions: [
-            { roles: ['seller'], access: true },
-            { roles: ['*'], redirect: '/app' }
+            { roles: [SELLER], access: true },
+            { roles: [ALL], redirect: '/app' }
           ]
         },
         children: [
@@ -178,8 +189,8 @@ const routes = [
         component: () => import('@/views/App/views/Admin/Admin'),
         meta: {
           permissions: [
-            { roles: ['admin'], access: true },
-            { roles: ['*'], redirect: '/app' }
+            { roles: [ADMIN], access: true },
+            { roles: [ALL], redirect: '/app' }
           ]
         }
       }
@@ -207,7 +218,7 @@ router.beforeEach(async (to, _, next) => {
   if (!routePermissions.length) return next()
   const userRoles = store.getters['user/roles']
   for (const permission of routePermissions) {
-    const match = permission.roles.includes('*') || userRoles.some(role => permission.roles.includes(role))
+    const match = permission.roles.includes(ALL) || userRoles.some(role => permission.roles.includes(role))
     if (match) return permission.access ? next() : next(permission.redirect)
   }
 })

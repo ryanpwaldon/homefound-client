@@ -17,7 +17,7 @@
         <BaseFormInput
           v-model="form.email"
           placeholder="tom@hanks.com"
-          autocomplete="username email"
+          autocomplete="email"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
