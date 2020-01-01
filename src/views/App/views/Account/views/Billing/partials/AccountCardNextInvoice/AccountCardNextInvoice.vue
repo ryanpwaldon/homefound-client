@@ -4,8 +4,8 @@
       <div class="content">
         <BaseText4 class="label" text="Next invoice"/>
         <BaseText5 class="value">
-          <template v-if="!subscriptionCancelled">Your card will be billed $74 on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
-          <template v-else>Your subscription has been cancelled. You will still have access until {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
+          <template v-if="!subscriptionCancelled">Your card will be billed $74 on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}</template>
+          <template v-else>Your subscription has been cancelled. You will still have access until {{ nextInvoiceAt | moment('DD MMMM YYYY') }}</template>
         </BaseText5>
       </div>
     </div>
