@@ -17,7 +17,7 @@ export default {
     },
     design: {
       type: String,
-      default: 'green'
+      default: 'black'
     }
   }
 }

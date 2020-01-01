@@ -1,4 +1,5 @@
 import AuthService from '@/services/Api/services/AuthService/AuthService'
+import { GUEST } from '@/roles/roles'
 
 export default {
   namespaced: true,
@@ -8,7 +9,7 @@ export default {
   },
   getters: {
     roles: state => {
-      return (state.user && state.user.roles) || ['guest']
+      return (state.user && state.user.roles) || [GUEST]
     }
   },
   mutations: {

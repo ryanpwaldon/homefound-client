@@ -1,25 +1,33 @@
 <template>
   <div class="billing">
-    <AccountCardSubscription/>
+    <AccountCardCancelSubscription v-if="subscribed"/>
+    <AccountCardActivateSubscription v-if="!subscribed"/>
+    <AccountCardReactivateSubscription v-if="pendingCancellation && subscribed"/>
     <AccountCardNextInvoice v-if="nextInvoiceAt"/>
     <AccountCardPaymentMethod v-if="hasCardDetails"/>
   </div>
 </template>
 
 <script>
-import AccountCardSubscription from './partials/AccountCardSubscription/AccountCardSubscription'
+import AccountCardActivateSubscription from './partials/AccountCardActivateSubscription/AccountCardActivateSubscription'
+import AccountCardReactivateSubscription from './partials/AccountCardReactivateSubscription/AccountCardReactivateSubscription'
+import AccountCardCancelSubscription from './partials/AccountCardCancelSubscription/AccountCardCancelSubscription'
 import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
 import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
+import { BUYER, BUYER_PENDING_CANCELLATION } from '@/roles/roles'
 import { mapState } from 'vuex'
 export default {
   name: 'billing',
   components: {
-    AccountCardSubscription,
+    AccountCardActivateSubscription,
+    AccountCardReactivateSubscription,
+    AccountCardCancelSubscription,
     AccountCardNextInvoice,
     AccountCardPaymentMethod
   },
   computed: mapState('user', {
-    subscribed: state => state.user.roles.includes('buyer'),
+    subscribed: state => state.user.roles.includes(BUYER),
+    pendingCancellation: state => state.user.roles.includes(BUYER_PENDING_CANCELLATION),
     hasCardDetails: state => state.user.cardBrand && state.user.cardLast4,
     nextInvoiceAt: state => state.user.nextInvoiceAt
   })
