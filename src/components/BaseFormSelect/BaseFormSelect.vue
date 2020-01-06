@@ -1,19 +1,22 @@
 <template>
-  <div class="base-form-select" :class="{focus: isOpen}" v-on="isOpen ? {} : { click: open }">
+  <div class="base-form-select" :class="{focused}" @click="focused = !focused">
     <div class="selected" :style="{color: value ? 'var(--color-black-1)' : 'var(--color-gray-4)'}">
       {{ selected && selected.title || placeholder }}
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
-    <div class="dropdown" v-if="isOpen">
-      <div class="placeholder" @click="$emit('input', undefined)">{{ placeholder }}</div>
-      <div
-        class="option"
-        v-for="(option, i) in options"
-        @click="$emit('input', option.value)"
-        :key="i">
-        {{ option.title }}
+    <template v-if="focused">
+      <div class="dropdown">
+        <div class="placeholder" @click="$emit('input', undefined)">{{ placeholder }}</div>
+        <div
+          class="option"
+          v-for="(option, i) in options"
+          @click="$emit('input', option.value)"
+          :key="i">
+          {{ option.title }}
+        </div>
       </div>
-    </div>
+      <div class="backdrop"/>
+    </template>
   </div>
 </template>
 
@@ -34,22 +37,11 @@ export default {
     }
   },
   data: () => ({
-    isOpen: false
+    focused: false
   }),
   computed: {
     selected () {
       return this.options.find(option => option.value === this.value)
-    }
-  },
-  methods: {
-    open (e) {
-      this.isOpen = true
-      e.stopImmediatePropagation()
-      document.addEventListener('click', this.close)
-    },
-    close () {
-      this.isOpen = false
-      document.removeEventListener('click', this.close)
     }
   }
 }
@@ -67,7 +59,7 @@ export default {
   white-space: nowrap;
   font-size: 1.4rem;
   cursor: pointer;
-  &.focus { border-color: var(--color-black) }
+  &.focused { border-color: var(--color-black) }
 }
 .selected { margin-right: var(--spacing-2) }
 .icon { height: 5px }
@@ -81,7 +73,7 @@ export default {
   border: solid 1px var(--color-gray-3);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
-  z-index: 1;
+  z-index: 2;
   max-height: 380px;
   overflow: auto;
 }
@@ -92,5 +84,14 @@ export default {
 }
 .placeholder {
   color: var(--color-gray-4);
+}
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  cursor: auto;
 }
 </style>
