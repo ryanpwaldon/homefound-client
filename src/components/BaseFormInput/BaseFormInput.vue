@@ -26,7 +26,7 @@ export default {
     },
     autocomplete: {
       type: String,
-      required: false
+      default: 'disabled'
     }
   }
 }

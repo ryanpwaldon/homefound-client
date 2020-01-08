@@ -1,126 +1,193 @@
 <template>
   <div class="create" @keypress.enter="submit">
-    <ValidationObserver class="v-observer" ref="v-observer" tag="div" v-slot="{ invalid }">
-      <div class="card">
+    <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
+      <BaseCard class="card">
         <BaseText4 class="title" text="Address"/>
-        <div class="group">
-          <ValidationProvider class="v-provider" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Unit type" v-model="form.unitType" :options="options.unitTypes"/>
-            <BaseFormError :message="errors[0]"/>
+        <BaseDivider/>
+        <div class="grid">
+          <ValidationProvider class="field md" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Unit type"/>
+            <div class="field-content">
+              <BaseFormSelect placeholder="Select" v-model="form.unitType" :options="options.unitTypes"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
-            <BaseFormInput placeholder="Unit number" v-model="form.unitNumber"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="break"/>
-          <ValidationProvider class="v-provider" name="street number" rules="required" v-slot="{ errors }">
-            <BaseFormInput placeholder="Street number" v-model="form.streetNumber"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <ValidationProvider class="v-provider" name="street name" rules="required" v-slot="{ errors }">
-            <BaseFormInput placeholder="Street name" v-model="form.streetName"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <ValidationProvider class="v-provider" name="street type" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Street type" v-model="form.streetType" :options="options.streetTypes"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field sm" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Unit number"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.unitNumber"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
           <div class="break"/>
-          <ValidationProvider class="v-provider" name="suburb" rules="required" v-slot="{ errors }">
-            <BaseFormInput placeholder="Suburb" v-model="form.suburb"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field sm" name="street number" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Street number"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.streetNumber"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="state" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="State" v-model="form.state" :options="options.states"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field lg" name="street name" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Street name"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.streetName"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="postcode" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Postcode" v-model="form.postcode"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field md" name="street type" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Street type"/>
+            <div class="field-content">
+              <BaseFormSelect placeholder="Select" v-model="form.streetType" :options="options.streetTypes"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+          <div class="break"/>
+          <ValidationProvider class="field lg" name="suburb" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Suburb"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.suburb"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+          <ValidationProvider class="field md" name="state" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="State"/>
+            <div class="field-content">
+              <BaseFormSelect placeholder="Select" v-model="form.state" :options="options.states"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+          <ValidationProvider class="field sm" name="postcode" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Postcode"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.postcode"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
         </div>
-      </div>
-      <div class="card">
+      </BaseCard>
+      <BaseCard class="card">
         <BaseText4 class="title" text="Coordinates"/>
-        <ValidationProvider class="v-provider" name="coordinates" rules="required" v-slot="{ errors }" tag="div">
-          <BaseFormCoordinates class="coordinates" :address="address" v-model="form.lngLat"/>
+        <BaseDivider/>
+        <ValidationProvider class="field map" name="coordinates" rules="required" v-slot="{ errors }">
+          <BaseFormCoordinates :address="address" v-model="form.lngLat"/>
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
-      </div>
-      <div class="card">
+      </BaseCard>
+      <BaseCard class="card">
         <BaseText4 class="title" text="Features"/>
-        <div class="group">
-          <ValidationProvider class="v-provider" name="bedrooms" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Bedrooms" v-model="form.bedrooms"/>
-            <BaseFormError :message="errors[0]"/>
+        <BaseDivider/>
+        <div class="grid">
+          <ValidationProvider class="field md" name="property type" rules="required" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Property type"/>
+            <div class="field-content">
+              <BaseFormSelect placeholder="Select" v-model="form.propertyType" :options="options.propertyTypes"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="bathrooms" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Bathrooms" v-model="form.bathrooms"/>
-            <BaseFormError :message="errors[0]"/>
+          <div class="break"/>
+          <ValidationProvider class="field md" name="bedrooms" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Bedrooms"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.bedrooms"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="car spaces" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Car spaces" v-model="form.carSpaces"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field md" name="bathrooms" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Bathrooms"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.bathrooms"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="floor size" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Floor size" v-model="form.floorSize"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field md" name="car spaces" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Car spaces"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.carSpaces"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="land size" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Land size" v-model="form.landSize"/>
-            <BaseFormError :message="errors[0]"/>
+          <div class="break"/>
+          <ValidationProvider class="field md" name="land size" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Land size"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.landSize"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
-          <ValidationProvider class="v-provider" name="property type" rules="required" v-slot="{ errors }">
-            <BaseFormSelect placeholder="Property type" v-model="form.propertyType" :options="options.propertyTypes"/>
-            <BaseFormError :message="errors[0]"/>
+          <ValidationProvider class="field md" name="floor size" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Floor size"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.floorSize"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
         </div>
-        <BaseDivider/>
+      </BaseCard>
+      <BaseCard class="card">
         <BaseText4 class="title" text="Photos"/>
-        <div class="group">
-          <ValidationProvider class="v-provider" name="photos" rules="requiredArray" v-slot="{ errors }">
-            <BaseFormImageUploader v-model="form.images"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-        </div>
         <BaseDivider/>
+        <ValidationProvider class="field image-uploader" name="photos" rules="requiredArray" v-slot="{ errors }">
+          <BaseFormImageUploader v-model="form.images"/>
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+      </BaseCard>
+      <BaseCard class="card">
         <BaseText4 class="title" text="Sale"/>
-        <div class="group">
-          <ValidationProvider class="v-provider" name="asking price" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Asking price" v-model="form.price"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-        </div>
         <BaseDivider/>
-        <BaseText4 class="title" text="Contact"/>
-        <div class="group">
-          <ValidationProvider class="v-provider" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
-            <BaseFormInput placeholder="Name" v-model="form.name"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <ValidationProvider class="v-provider" name="email" rules="required|email" v-slot="{ errors }">
-            <BaseFormInput placeholder="Email" v-model="form.email"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <ValidationProvider class="v-provider" name="phone" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput placeholder="Phone" v-model="form.phone"/>
-            <BaseFormError :message="errors[0]"/>
+        <div class="grid">
+          <ValidationProvider class="field lg" name="asking price" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Asking price"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.price"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
           </ValidationProvider>
         </div>
-      </div>
+      </BaseCard>
+      <BaseCard class="card">
+        <BaseText4 class="title" text="Contact"/>
+        <BaseDivider/>
+        <div class="grid">
+          <ValidationProvider class="field lg" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Name"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.name" autocomplete="name"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+          <div class="break"/>
+          <ValidationProvider class="field lg" name="email" rules="required|email" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Email"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.email" autocomplete="email"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+          <div class="break"/>
+          <ValidationProvider class="field lg" name="phone" rules="required|numeric" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Phone"/>
+            <div class="field-content">
+              <BaseFormInput v-model="form.phone" autocomplete="phone"/>
+              <BaseFormError :message="errors[0]"/>
+            </div>
+          </ValidationProvider>
+        </div>
+      </BaseCard>
     </ValidationObserver>
     <BaseFormSubmitButton class="submit-button" text="Post listing" @click.native="submit" :loading="loading"/>
   </div>
 </template>
 
 <script>
+import BaseCard from '@/components/BaseCard/BaseCard'
+import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
 import BaseFormCoordinates from '@/components/BaseFormCoordinates/BaseFormCoordinates'
+import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormImageUploader'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
@@ -128,12 +195,14 @@ import * as options from './form-datatypes'
 export default {
   name: 'create',
   components: {
-    BaseFormSubmitButton,
+    BaseCard,
+    BaseText2,
     BaseText4,
     BaseDivider,
     BaseFormError,
     BaseFormInput,
     BaseFormSelect,
+    BaseFormSubmitButton,
     BaseFormImageUploader,
     BaseFormCoordinates,
     ValidationProvider,
@@ -196,7 +265,7 @@ export default {
       }
     },
     async submit () {
-      if (this.loading || !(await this.$refs['v-observer'].validate())) return
+      if (this.loading || !(await this.$refs['form'].validate())) return
       this.loading = true
       try {
         if (this.isEdit) await ListingService.update(this.listing._id, this.form)
@@ -217,38 +286,42 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.v-observer {
-  width: 100%;
+  min-width: 600px;
 }
 .card {
-  background: var(--color-white-1);
-  border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
-  padding: var(--spacing-5);
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-5);
 }
-.coordinates {
-  height: 300px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: var(--spacing-4);
 }
-.group {
+.field {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: calc(-1 * var(--spacing-2));
+  flex-direction: column;
+  white-space: nowrap;
+  &.sm { grid-column: span 1 }
+  &.md { grid-column: span 2 }
+  &.lg { grid-column: span 3 }
 }
-.group > * {
-  margin-bottom: var(--spacing-2);
-  &:not(:last-child) { margin-right: var(--spacing-2) }
-}
-.title {
-  margin-bottom: var(--spacing-4);
-}
-.v-provider {
+.field-content {
   position: relative;
 }
+.field-label {
+  margin-bottom: var(--spacing-2);
+  color: var(--color-gray-4);
+}
 .break {
-  flex-basis: 100%;
-  margin: 0;
+  grid-column: span 6;
+  height: var(--spacing-4);
+}
+.map {
+  height: 300px;
+  width: 100%;
+}
+.image-uploader {
+  display: inline-flex;
 }
 .submit-button {
   max-width: 300px;
