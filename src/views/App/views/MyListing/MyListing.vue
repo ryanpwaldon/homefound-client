@@ -4,7 +4,7 @@
       <template v-if="listing">
         <BaseText1 class="title" :text="listing.address || 'New listing'"/>
         <BaseNavHorizontalSecondary class="nav" :nav-items="navItems"/>
-        <router-view :listing="listing"/>
+        <router-view :listing="listing" @listing-updated="listing = $event"/>
       </template>
     </div>
   </LayoutCenter>
