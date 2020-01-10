@@ -35,8 +35,8 @@ export default {
   background: var(--color-black-2);
 }
 .green {
-  color: var(--color-white-1);
-  background: var(--color-green-2);
+  color: var(--color-green-3);
+  background: var(--color-green-4);
 }
 .yellow {
   color: var(--color-black-2);
