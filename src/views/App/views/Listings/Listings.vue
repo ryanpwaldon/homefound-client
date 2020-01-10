@@ -157,7 +157,7 @@ export default {
         options: {
           page: this.nextPage,
           limit: this.limit,
-          sort: { createdAt: -1 }
+          sort: { postedAt: -1 }
         }
       })
       this.listings.push(...listings)
