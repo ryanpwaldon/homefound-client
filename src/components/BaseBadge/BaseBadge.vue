@@ -1,6 +1,9 @@
 <template>
   <div class="base-badge" :class=[design]>
-    <BaseText6 :text="text"/>
+    <BaseText6>
+      <span>{{ text }}</span>
+      <img v-if="icon" :src="icon">
+    </BaseText6>
   </div>
 </template>
 
@@ -18,6 +21,10 @@ export default {
     design: {
       type: String,
       default: 'black'
+    },
+    icon: {
+      type: String,
+      required: false
     }
   }
 }
@@ -26,13 +33,23 @@ export default {
 <style lang="scss" scoped>
 .base-badge {
   border-radius: 100px;
-  display: inline-block;
+  display: inline-flex;
   padding: var(--spacing-1) var(--spacing-2);
   font-weight: var(--font-weight-medium);
+  justify-content: center;
+  align-items: center;
+}
+img {
+  height: 0.7em;
+  margin-left: var(--spacing-1);
 }
 .black {
   color: var(--color-white-1);
   background: var(--color-black-2);
+}
+.gray {
+  color: var(--color-black-2);
+  background: var(--color-gray-1);
 }
 .green {
   color: var(--color-green-3);

@@ -73,7 +73,7 @@
           <BaseButtonRounded
             text="Update search area"
             @click.native="updatePolygonFilter"
-             v-if="listings.length && polygon !== filters.lngLat.$geoWithin.$geometry.coordinates"
+             v-if="!loading && polygon !== filters.lngLat.$geoWithin.$geometry.coordinates"
           />
         </transition>
       </div>
@@ -112,7 +112,7 @@ export default {
     BaseMap,
     Pin
   },
-  async mounted () {
+  async created () {
     const destroy = this.$watch('polygon', () => {
       this.updatePolygonFilter()
       destroy()
