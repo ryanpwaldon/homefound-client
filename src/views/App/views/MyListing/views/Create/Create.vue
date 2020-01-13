@@ -1,5 +1,5 @@
 <template>
-  <div class="create" @keypress.enter="submit">
+  <div class="create">
     <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
       <BaseCard class="card">
         <BaseText4 class="title" text="Address"/>
@@ -174,7 +174,17 @@
         </div>
       </BaseCard>
     </ValidationObserver>
-    <BaseFormSubmitButton class="submit-button" text="Post listing" @click.native="submit" :loading="loading"/>
+    <BaseCard class="card">
+      <div class="button-container">
+        <BaseFormSubmitButton class="button" text="Save as unpublished" design="gray" @click.native="submit(false)" :loading="loading"/>
+        <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">hidden</span> from property seekers in search results</BaseText6>
+      </div>
+      <BaseDivider/>
+      <div class="button-container">
+        <BaseFormSubmitButton class="button" text="Save and publish" @click.native="submit(true)" :loading="loading"/>
+        <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">visible</span> to to property seekers in search results</BaseText6>
+      </div>
+    </BaseCard>
   </div>
 </template>
 
@@ -182,6 +192,7 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
@@ -198,6 +209,7 @@ export default {
     BaseCard,
     BaseText2,
     BaseText4,
+    BaseText6,
     BaseDivider,
     BaseFormError,
     BaseFormInput,
@@ -260,22 +272,20 @@ export default {
         name: this.listing.name || '',
         email: this.listing.email || '',
         phone: this.listing.phone || '',
-        postedAt: this.listing.postedAt || null,
-        modifiedAt: this.listing.modifiedAt || null
+        published: this.listing.published || false
       }
     },
-    async submit () {
-      if (this.loading || !(await this.$refs['form'].validate())) return
+    async submit (shouldPublish) {
+      if (this.loading || (shouldPublish && !(await this.$refs['form'].validate()))) return
       this.loading = true
       try {
-        const now = new Date()
-        this.form.modifiedAt = now
-        this.form.postedAt = this.form.postedAt || now
-        await ListingService.update(this.listing._id, this.form)
-        this.$notify({ text: 'Listing successfully updated.', type: 'success' })
+        this.form.published = shouldPublish
+        const listing = await ListingService.update(this.listing._id, this.form)
+        this.$emit('listing-updated', listing)
+        this.$notify({ text: 'Success', type: 'success' })
       } catch (err) {
-        this.error = true; console.log(err)
-        this.$notify({ text: 'Could not save data.', type: 'error' })
+        console.log(err)
+        this.$notify({ text: 'Error', type: 'error' })
       }
       this.loading = false
     }
@@ -291,6 +301,7 @@ export default {
   min-width: 600px;
 }
 .card {
+  width: 100%;
   margin-bottom: var(--spacing-5);
 }
 .grid {
@@ -325,7 +336,16 @@ export default {
 .image-uploader {
   display: inline-flex;
 }
-.submit-button {
-  max-width: 300px;
+.button-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .button {
+    width: auto;
+    margin-right: var(--spacing-4);
+  }
+}
+.subcopy {
+  color: var(--color-gray-4);
 }
 </style>

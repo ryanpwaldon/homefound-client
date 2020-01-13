@@ -1,15 +1,15 @@
 <template>
   <div class="settings">
-    <CardHideListing
+    <CardTogglePublished
       :listing-id="listing._id"
       @listing-updated="$emit('listing-updated', $event)"
-      :hidden="listing.hidden"
+      :published="listing.published"
     />
   </div>
 </template>
 
 <script>
-import CardHideListing from './partials/CardHideListing/CardHideListing'
+import CardTogglePublished from './partials/CardTogglePublished/CardTogglePublished'
 export default {
   name: 'settings',
   props: {
@@ -19,7 +19,7 @@ export default {
     }
   },
   components: {
-    CardHideListing
+    CardTogglePublished
   }
 }
 </script>

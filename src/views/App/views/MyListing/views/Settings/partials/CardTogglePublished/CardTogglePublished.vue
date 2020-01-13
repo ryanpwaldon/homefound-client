@@ -2,18 +2,18 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText4 class="label" text="Hide listing"/>
-        <BaseText5 class="value" text="This listing will be hidden from search results"/>
+        <BaseText2 class="label" text="Published"/>
+        <BaseText2 class="value">Published listings will be visible in search results. If disabled, this listing will only visible to yourself.</BaseText2>
       </div>
-      <BaseFormToggle :value="hidden" :async-func="updateListingHiddenState"/>
+      <div class="spacer"/>
+      <BaseFormToggle class="toggle" :value="published" :async-func="updateListingPublishedState"/>
     </div>
   </BaseCard>
 </template>
 
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
-import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseText5 from '@/components/BaseText5/BaseText5'
+import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseFormToggle from '@/components/BaseFormToggle/BaseFormToggle'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
@@ -22,21 +22,20 @@ export default {
       type: String,
       required: true
     },
-    hidden: {
+    published: {
       type: Boolean,
       required: true
     }
   },
   components: {
     BaseCard,
-    BaseText4,
-    BaseText5,
+    BaseText2,
     BaseFormToggle
   },
   methods: {
-    async updateListingHiddenState (state) {
+    async updateListingPublishedState (state) {
       try {
-        const listing = await ListingService.update(this.listingId, { hidden: state })
+        const listing = await ListingService.update(this.listingId, { published: state })
         this.$emit('listing-updated', listing)
       } catch (err) { console.log(err) }
     }
@@ -57,7 +56,19 @@ export default {
   align-items: flex-start;
 }
 .label {
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-1);
+  color: var(--color-black-2);
+}
+.value {
   color: var(--color-gray-4);
+  line-height: 1.5;
+}
+.spacer {
+  width: calc(2 * var(--spacing-5));
+  height: 100%;
+  flex-shrink: 0;
+}
+.toggle {
+  flex-shrink: 0;
 }
 </style>
