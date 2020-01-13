@@ -237,21 +237,14 @@ export default {
   computed: {
     address () {
       if (!this.form.streetNumber || !this.form.streetName || !this.form.streetType || !this.form.suburb || !this.form.state || !this.form.postcode) return null
-      const unitSegment = this.form.unitType + ' ' + this.form.unitNumber
-      const streetSegment = this.form.streetNumber + ' ' + this.form.streetName + ' ' + this.form.streetType
-      const address = `${unitSegment} ${streetSegment}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`
+      const unitSegment = this.form.unitType && this.form.unitNumber ? `${this.form.unitType} ${this.form.unitNumber}` : ''
+      const address = `${unitSegment} ${unitSegment ? '/' : ''} ${this.form.streetNumber} ${this.form.streetName} ${this.form.streetType}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`
       return address.trim()
-    }
-  },
-  watch: {
-    address (val) {
-      this.form.address = val
     }
   },
   methods: {
     initForm () {
       this.form = {
-        address: this.listing.address || '',
         unitType: this.listing.unitType || '',
         unitNumber: this.listing.unitNumber || '',
         streetType: this.listing.streetType || '',

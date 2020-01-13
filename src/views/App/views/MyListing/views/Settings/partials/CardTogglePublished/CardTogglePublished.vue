@@ -34,10 +34,8 @@ export default {
   },
   methods: {
     async updateListingPublishedState (state) {
-      try {
-        const listing = await ListingService.update(this.listingId, { published: state })
-        this.$emit('listing-updated', listing)
-      } catch (err) { console.log(err) }
+      const listing = await ListingService.update(this.listingId, { published: state })
+      this.$emit('listing-updated', listing)
     }
   }
 }

@@ -42,7 +42,7 @@ export default {
     },
     animate (state) {
       const documentStyle = getComputedStyle(document.documentElement)
-      const color1 = documentStyle.getPropertyValue('--color-green-5').trim()
+      const color1 = documentStyle.getPropertyValue('--color-green-7').trim()
       const color2 = documentStyle.getPropertyValue('--color-gray-4').trim()
       const tl = anime.timeline({ easing: 'easeInOutQuad', duration: 200 })
       tl.add({ targets: this.$refs['knob'], translateX: state ? this.$refs['knob'].parentElement.offsetWidth - this.$refs['knob'].offsetWidth : 0 }, 0)
