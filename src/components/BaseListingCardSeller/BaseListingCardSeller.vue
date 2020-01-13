@@ -3,7 +3,7 @@
     <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}" v-if="image"/>
     <div class="image backup" v-else/>
     <div class="contents">
-      <BaseText2 class="text" :text="address"/>
+      <BaseText2 class="text" :text="address || 'Untitled'"/>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     address: {
       type: String,
-      default: 'Untitled'
+      required: false
     }
   }
 }

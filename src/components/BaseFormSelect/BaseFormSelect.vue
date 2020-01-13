@@ -6,7 +6,7 @@
     <img class="icon" src="@/assets/img/arrow-down.svg">
     <template v-if="focused">
       <div class="dropdown">
-        <div class="placeholder" @click="$emit('input', undefined)">{{ placeholder }}</div>
+        <div class="placeholder" @click="$emit('input', null)">{{ placeholder }}</div>
         <div
           class="option"
           v-for="(option, i) in options"

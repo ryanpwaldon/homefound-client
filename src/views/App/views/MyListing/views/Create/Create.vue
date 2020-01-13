@@ -269,7 +269,7 @@ export default {
       }
     },
     async submit (shouldPublish) {
-      if (this.loading || (shouldPublish && !(await this.$refs['form'].validate()))) return
+      if (this.loading || !(await this.$refs['form'].validate())) return
       this.loading = true
       try {
         this.form.published = shouldPublish
