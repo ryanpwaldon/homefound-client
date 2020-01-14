@@ -11,11 +11,11 @@ export default {
   props: {
     center: {
       type: Array,
-      default: () => [151.209900, -33.865143]
+      default: () => [133.7751, -25.2744]
     },
     zoom: {
       type: Number,
-      default: 10
+      default: 3.5
     }
   },
   mounted () {

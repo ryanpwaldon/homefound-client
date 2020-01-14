@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <BaseText4 class="label" text="Published"/>
-        <BaseText2 class="value">Published listings will be visible to property seekers in search results.<br>If disabled, this listing will only visible to yourself.</BaseText2>
+        <BaseText2 class="value">Make this listing visible in search results</BaseText2>
       </div>
       <div class="spacer"/>
       <BaseFormToggle class="toggle" :value="published" :async-func="updateListingPublishedState"/>
