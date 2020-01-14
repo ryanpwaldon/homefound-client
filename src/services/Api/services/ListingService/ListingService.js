@@ -18,8 +18,8 @@ export default {
     return (await Api().get(`/listing`, { params: { filters, options } })).data
   },
 
-  async findCreated () {
-    return (await Api().get(`/listing/created`)).data
+  async findCreated ({ filters, options }) {
+    return (await Api().get(`/listing/created`, { params: { filters, options } })).data
   },
 
   async findLiked () {

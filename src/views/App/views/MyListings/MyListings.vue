@@ -39,7 +39,7 @@ export default {
   },
   async mounted () {
     this.loading = true
-    this.listings = await ListingService.findCreated()
+    this.listings = (await ListingService.findCreated({ options: { limit: 1000, sort: { published: -1, createdAt: -1 } } })).docs
     this.loading = false
   },
   data: () => ({
