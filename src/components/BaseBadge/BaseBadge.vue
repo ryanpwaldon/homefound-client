@@ -51,12 +51,8 @@ img {
   color: var(--color-white-1);
   background: var(--color-black-2);
 }
-.gray-dark {
-  color: var(--color-black-2);
-  background: var(--color-gray-1);
-}
 .gray {
-  color: var(--color-gray-4);
+  color: var(--color-black-2);
   background: var(--color-gray-1);
 }
 .green {
@@ -64,7 +60,7 @@ img {
   background: var(--color-green-4);
 }
 .yellow {
-  color: var(--color-black-2);
+  color: var(--color-yellow-3);
   background: var(--color-yellow-1);
 }
 .red {

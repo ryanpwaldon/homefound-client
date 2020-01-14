@@ -12,7 +12,7 @@
       </BaseText6>
       <BaseDivider class="divider"/>
       <div class="badges">
-        <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'gray'"/>
+        <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'yellow'"/>
         <router-link :to="`/app/listings/${listing._id}`" target="_blank" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }" @click.native.stop>
           <BaseBadge :icon="require('@/assets/img/clickout.svg')" design="gray"/>
         </router-link>

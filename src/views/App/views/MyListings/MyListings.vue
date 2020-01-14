@@ -3,7 +3,7 @@
     <div class="my-listings">
       <div class="header">
         <BaseText1 text="My listings"/>
-        <BaseButton text="Create listing" design="black" @click.native="createListing"/>
+        <BaseButton text="Create listing" design="gray" @click.native="createListing"/>
       </div>
       <BaseDivider/>
       <div class="items">
