@@ -1,23 +1,18 @@
 <template>
   <LayoutCenter>
     <div class="my-listings">
-      <BaseText1 text="My listings"/>
+      <div class="header">
+        <BaseText1 text="My listings"/>
+        <BaseButton text="Create listing" design="black" @click.native="createListing"/>
+      </div>
       <BaseDivider/>
       <div class="items">
-        <div class="button" @click="createListing">
-          <img src="@/assets/img/plus.svg">
-          <BaseText2 text="New listing"/>
-        </div>
         <BaseLoader class="loader" v-if="loading"/>
         <router-link
           v-for="(listing, i) in listings"
           :to="`/app/my-listings/${listing._id}`"
           :key="i">
-          <BaseListingCardSeller
-            class="listing"
-            :address="listing.address"
-            :image="listing.images[0]"
-          />
+          <BaseListingCardSeller class="listing" :listing="listing" />
         </router-link>
       </div>
     </div>
@@ -27,8 +22,8 @@
 <script>
 import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
+import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseListingCardSeller from '@/components/BaseListingCardSeller/BaseListingCardSeller'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
@@ -37,8 +32,8 @@ export default {
   components: {
     LayoutCenter,
     BaseText1,
-    BaseText2,
     BaseDivider,
+    BaseButton,
     BaseListingCardSeller,
     BaseLoader
   },
@@ -67,24 +62,9 @@ export default {
   grid-gap: var(--spacing-5);
   > * { min-width: 0 }
 }
-.listing,
-.button,
-.loader {
-  height: 200px;
-}
-.button {
+.header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  background: var(--color-white-1);
-  border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
-  cursor: pointer;
-  img {
-    margin-bottom: var(--spacing-2);
-    width: 10px;
-  }
 }
 </style>

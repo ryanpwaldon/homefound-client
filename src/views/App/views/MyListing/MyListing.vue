@@ -5,7 +5,7 @@
         <div class="badges">
           <BaseBadge :text="listingState.text" :design="listingState.design"/>
           <router-link :to="`/app/listings/${listing._id}`" target="_blank" v-if="listing.publishable">
-            <BaseBadge design="gray" text="Preview" :icon="require('@/assets/img/clickout.svg')"/>
+            <BaseBadge design="gray-dark" text="Preview" :icon="require('@/assets/img/clickout.svg')"/>
           </router-link>
         </div>
         <BaseText1 class="title" :text="listing.address || 'New listing'"/>

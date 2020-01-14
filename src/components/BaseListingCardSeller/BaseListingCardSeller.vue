@@ -1,27 +1,40 @@
 <template>
   <div class="base-listing-card-seller">
-    <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}" v-if="image"/>
-    <div class="image backup" v-else/>
+    <div class="image-container">
+      <div class="image" :style="{backgroundImage: `url(${listing.images[0] + '-/resize/400x/'})`}" v-if="listing.images[0]"/>
+      <div class="image backup" v-else/>
+    </div>
     <div class="contents">
-      <BaseText2 class="text" :text="address || 'Untitled'"/>
+      <BaseText6 class="text address" :text="listing.address || 'Untitled'"/>
+      <BaseDivider class="divider"/>
+      <BaseText6 class="text created">
+      Created {{ listing.createdAt | moment('from', 'now') }}
+      </BaseText6>
+      <BaseDivider class="divider"/>
+      <div class="badges">
+        <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'gray'"/>
+        <router-link :to="`/app/listings/${listing._id}`" target="_blank" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }" @click.native.stop>
+          <BaseBadge :icon="require('@/assets/img/clickout.svg')" design="gray"/>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import BaseText2 from '@/components/BaseText2/BaseText2'
+import BaseText6 from '@/components/BaseText6/BaseText6'
+import BaseBadge from '@/components/BaseBadge/BaseBadge'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 export default {
   components: {
-    BaseText2
+    BaseText6,
+    BaseBadge,
+    BaseDivider
   },
   props: {
-    image: {
-      type: String,
-      required: false
-    },
-    address: {
-      type: String,
-      required: false
+    listing: {
+      type: Object,
+      required: true
     }
   }
 }
@@ -37,8 +50,16 @@ export default {
   box-shadow: var(--box-shadow-1);
   overflow: hidden;
 }
-.image {
+.image-container {
   position: relative;
+  padding-top: calc(100% / 1.2);
+  width: 100%;
+  height: 0;
+}
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-position: center center;
@@ -52,11 +73,22 @@ export default {
 }
 .contents {
   flex-shrink: 0;
-  padding: var(--spacing-4) var(--spacing-2);
+  padding: var(--spacing-2);
+}
+.divider {
+  margin: var(--spacing-2) 0;
 }
 .text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.created {
+  color: var(--color-gray-4);
+}
+.badges {
+  display: flex;
+  justify-content: space-between;
+  > *:not(:last-child) { margin-right: var(--spacing-3) }
 }
 </style>

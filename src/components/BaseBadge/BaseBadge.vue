@@ -2,6 +2,7 @@
   <div class="base-badge" :class=[design]>
     <BaseText6>
       <span>{{ text }}</span>
+      <span class="spacer" v-if="text && icon"/>
       <img v-if="icon" :src="icon">
     </BaseText6>
   </div>
@@ -16,7 +17,7 @@ export default {
   props: {
     text: {
       type: String,
-      required: true
+      required: false
     },
     design: {
       type: String,
@@ -39,16 +40,23 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.spacer {
+  display: inline-block;
+  width: var(--spacing-1);
+}
 img {
   height: 0.7em;
-  margin-left: var(--spacing-1);
 }
 .black {
   color: var(--color-white-1);
   background: var(--color-black-2);
 }
-.gray {
+.gray-dark {
   color: var(--color-black-2);
+  background: var(--color-gray-1);
+}
+.gray {
+  color: var(--color-gray-4);
   background: var(--color-gray-1);
 }
 .green {

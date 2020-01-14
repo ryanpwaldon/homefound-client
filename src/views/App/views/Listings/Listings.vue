@@ -214,7 +214,6 @@ export default {
 }
 .listing,
 .loader {
-  height: 200px;
   min-width: 0;
 }
 .map-container {

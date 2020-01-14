@@ -1,6 +1,8 @@
 <template>
   <div class="base-listing-card-buyer">
-    <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
+    <div class="image-container">
+      <div class="image" :style="{backgroundImage: `url(${image + '-/resize/400x/'})`}"/>
+    </div>
     <div class="contents">
       <div class="row r-1">
         <BaseText2 class="text" :text="price | numeral('0.[00]a')"/>
@@ -61,13 +63,21 @@ export default {
   box-shadow: var(--box-shadow-1);
   overflow: hidden;
 }
-.image {
+.image-container {
   position: relative;
+  padding-top: calc(100% / 1.2);
+  width: 100%;
+  height: 0;
+}
+.image {
+  position: absolute;
   width: 100%;
   height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  top: 0;
+  left: 0;
 }
 .contents {
   flex-shrink: 0;

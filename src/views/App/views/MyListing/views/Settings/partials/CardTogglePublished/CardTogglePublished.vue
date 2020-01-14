@@ -2,8 +2,8 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText2 class="label" text="Published"/>
-        <BaseText2 class="value">Published listings will be visible in search results. If disabled, this listing will only visible to yourself.</BaseText2>
+        <BaseText4 class="label" text="Published"/>
+        <BaseText2 class="value">Published listings will be visible to property seekers in search results.<br>If disabled, this listing will only visible to yourself.</BaseText2>
       </div>
       <div class="spacer"/>
       <BaseFormToggle class="toggle" :value="published" :async-func="updateListingPublishedState"/>
@@ -13,6 +13,7 @@
 
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
+import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseFormToggle from '@/components/BaseFormToggle/BaseFormToggle'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
@@ -29,6 +30,7 @@ export default {
   },
   components: {
     BaseCard,
+    BaseText4,
     BaseText2,
     BaseFormToggle
   },
@@ -54,11 +56,11 @@ export default {
   align-items: flex-start;
 }
 .label {
-  margin-bottom: var(--spacing-1);
-  color: var(--color-black-2);
+  margin-bottom: var(--spacing-2);
+  color: var(--color-gray-4);
 }
 .value {
-  color: var(--color-gray-4);
+  color: var(--color-black-2);
   line-height: 1.5;
 }
 .spacer {
