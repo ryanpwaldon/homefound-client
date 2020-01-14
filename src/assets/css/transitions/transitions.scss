@@ -10,7 +10,10 @@
     opacity 0.2s ease-in-out,
     transform 0.2s ease-in-out;
 }
+.fall-leave-to,
 .fall-enter {
   opacity: 0;
+}
+.fall-enter {
   transform: translateY(-100%);
 }

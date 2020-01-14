@@ -25,7 +25,7 @@ export default {
   padding: var(--spacing-2) var(--spacing-6);
   color: var(--color-black-2);
   background: var(--color-white-1);
-  border: 1px var(--color-black-1) solid;
+  box-shadow: var(--box-shadow-1);
   border-radius: 100px;
   display: inline-block;
   cursor: pointer;
