@@ -269,7 +269,7 @@ export default {
       }
     },
     async submit (shouldPublish) {
-      if (this.loading || !(await this.$refs['form'].validate())) return
+      if (this.loading || !(await this.$refs['form'].validate())) return this.$notify({ text: 'Form is incomplete', type: 'error' })
       this.loading = true
       try {
         this.form.published = shouldPublish

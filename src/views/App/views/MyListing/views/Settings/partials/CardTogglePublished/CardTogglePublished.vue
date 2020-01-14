@@ -2,8 +2,8 @@
   <BaseCard>
     <div class="container">
       <div class="content">
-        <BaseText4 class="label" text="Published"/>
-        <BaseText2 class="value">Make this listing visible in search results</BaseText2>
+        <BaseText4 class="label" text="Publish"/>
+        <BaseText2 class="value">Make this listing visible to property seekers in search results</BaseText2>
       </div>
       <div class="spacer"/>
       <BaseFormToggle class="toggle" :value="published" :async-func="updateListingPublishedState"/>

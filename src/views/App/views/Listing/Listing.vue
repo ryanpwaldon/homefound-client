@@ -1,38 +1,36 @@
 <template>
   <div class="listing" v-if="listing">
-    <div class="content-container">
-      <div class="content">
-        <router-link class="back" to="/app/listings">
-          <img src="@/assets/img/arrow.svg">
-          <BaseText4 text="BACK TO SEARCH"/>
-        </router-link>
-        <BaseText1 class="title" :text="listing.address" />
-        <div class="cards">
-          <div class="card">
-            <BaseText4 class="label" text="Features"/>
-            <BaseText5 class="features">
-              <span>{{ listing.bedrooms }}</span> <img src="@/assets/img/bed.svg">
-              <span>{{ listing.bathrooms }}</span> <img src="@/assets/img/bath.svg">
-              <span>{{ listing.carSpaces }}</span> <img src="@/assets/img/car.svg">
-            </BaseText5>
-          </div>
-          <div class="card">
-            <BaseText4 class="label" text="Price"/>
-            <BaseText5>$ {{ listing.price | numeral('0,0') }}</BaseText5>
-          </div>
-          <div class="card">
-            <BaseText4 class="label" text="Posted"/>
-            <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
-          </div>
+    <LayoutCenter>
+      <router-link class="back" to="/app/listings">
+        <img src="@/assets/img/arrow.svg">
+        <BaseText4 text="BACK TO SEARCH"/>
+      </router-link>
+      <BaseText1 class="title" :text="listing.address" />
+      <div class="cards">
+        <div class="card">
+          <BaseText4 class="label" text="Features"/>
+          <BaseText5 class="features">
+            <span>{{ listing.bedrooms }}</span> <img src="@/assets/img/bed.svg">
+            <span>{{ listing.bathrooms }}</span> <img src="@/assets/img/bath.svg">
+            <span>{{ listing.carSpaces }}</span> <img src="@/assets/img/car.svg">
+          </BaseText5>
         </div>
-        <BaseGallery class="gallery" :images="listing.images"/>
-        <Contact
-          :name="listing.name"
-          :phone="listing.phone"
-          :email="listing.email"
-        />
+        <div class="card">
+          <BaseText4 class="label" text="Price"/>
+          <BaseText5>$ {{ listing.price | numeral('0,0') }}</BaseText5>
+        </div>
+        <div class="card">
+          <BaseText4 class="label" text="Posted"/>
+          <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
+        </div>
       </div>
-    </div>
+      <BaseGallery class="gallery" :images="listing.images"/>
+      <Contact
+        :name="listing.name"
+        :phone="listing.phone"
+        :email="listing.email"
+      />
+    </LayoutCenter>
     <div class="map-container">
       <BaseMap :center="listing.lngLat" :zoom="16">
         <Pin :lng-lat="listing.lngLat"/>
@@ -42,6 +40,7 @@
 </template>
 
 <script>
+import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
@@ -52,6 +51,7 @@ import Contact from './partials/Contact/Contact'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   components: {
+    LayoutCenter,
     BaseText1,
     BaseText4,
     BaseText5,
@@ -91,18 +91,6 @@ export default {
     width: 50%;
     flex-shrink: 0;
   }
-}
-.content-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: var(--color-gray-2);
-  overflow: auto;
-}
-.content {
-  width: 100%;
-  max-width: 600px;
-  margin: var(--spacing-5);
 }
 .back {
   color: var(--color-gray-4);

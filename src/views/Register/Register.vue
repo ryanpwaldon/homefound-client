@@ -71,7 +71,7 @@ export default {
         name: '',
         email: '',
         password: '',
-        userType: 'buyer'
+        userType: 'seller'
       },
       loading: false
     }
