@@ -5,7 +5,7 @@
         <div class="icon"><BaseText1 :text="initials"/></div>
         <div class="details">
           <BaseText5 class="name" :text="name"/>
-          <BaseText6 class="joined">Joined Homeshade {{ joined | moment('from', 'now') }}</BaseText6>
+          <BaseText6 class="joined">Joined Homefound {{ joined | moment('from', 'now') }}</BaseText6>
         </div>
       </div>
       <BaseButton text="Logout" design="black" @click.native="logout"/>

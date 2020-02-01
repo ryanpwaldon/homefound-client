@@ -1,19 +1,21 @@
 <template>
   <div class="base-nav-horizontal-primary">
-    <div class="section">
-      <router-link class="logo-container" to="/">
-        <img class="logo" src="@/assets/img/logo-4.svg">
-        <BaseText2 text="Homeshade"/>
-      </router-link>
-    </div>
-    <div class="section">
-      <BaseNavItemText
-        v-for="(navItem, i) in navItems"
-        :path="navItem.path"
-        :text="navItem.text"
-        :design="navItem.design"
-        :key="i"
-      />
+    <div class="content">
+      <div class="section">
+        <router-link class="logo-container" to="/">
+          <img class="logo" src="@/assets/img/logo-5.svg">
+          <BaseText2 text="Homefound"/>
+        </router-link>
+      </div>
+      <div class="section">
+        <BaseNavItemText
+          v-for="(navItem, i) in navItems"
+          :path="navItem.path"
+          :text="navItem.text"
+          :design="navItem.design"
+          :key="i"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +32,12 @@ export default {
     navItems: {
       type: Array,
       default: () => [
-        { text: 'Login', path: '/login' }
+        { text: 'Buyers', path: '/' },
+        { text: 'Agents', path: '/agents' },
+        { text: 'Pricing', path: '/pricing' },
+        { text: 'FAQs', path: '/faqs' },
+        { text: 'Login', path: '/login' },
+        { text: 'Sign up', path: '/register' }
       ]
     }
   }
@@ -41,7 +48,17 @@ export default {
 .base-nav-horizontal-primary {
   width: 100%;
   display: flex;
+  justify-content: center;
+  background: var(--color-white-1);
+  border-bottom: var(--color-gray-1) solid 1px;
+  padding: var(--spacing-4) var(--spacing-5);
+  font-weight: var(--font-weight-medium);
+}
+.content {
+  display: flex;
   justify-content: space-between;
+  max-width: 90rem;
+  width: 100%;
 }
 .section {
   display: flex;

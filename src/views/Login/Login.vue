@@ -1,7 +1,7 @@
 <template>
   <LayoutFocus @keypress.native.enter="submit">
-    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <BaseText1 class="title" text="Login to Homeshade"/>
+    <ValidationObserver class="observer" ref="observer" tag="div">
+      <BaseText1 class="title" text="Login to Homefound"/>
       <BaseDivider/>
       <BaseText4 class="label" text="Email"/>
       <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">

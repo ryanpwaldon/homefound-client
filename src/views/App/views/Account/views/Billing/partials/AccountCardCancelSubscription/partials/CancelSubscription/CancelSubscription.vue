@@ -2,7 +2,7 @@
   <BaseModal @close="$emit('close')">
     <BaseText1 class="title" text="Cancel your subscription"/>
     <BaseDivider/>
-    <BaseText2 class="subcopy" text="You will no longer be charged for this subscription. You may continue using Homeshade until the end of your billing period."/>
+    <BaseText2 class="subcopy" text="You will no longer be charged for this subscription. You may continue using Homefound until the end of your billing period."/>
     <BaseDivider/>
     <div class="buttons">
       <BaseFormSubmitButton class="button" text="Back" design="gray" @click.native="$emit('close')"/>
