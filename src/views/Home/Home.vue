@@ -24,8 +24,6 @@
         </div>
       </div>
       <div class="divider"/>
-      <div class="section section-2">
-      </div>
     </div>
   </div>
 </template>
