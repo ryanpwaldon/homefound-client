@@ -26,8 +26,8 @@ export default {
     return (await Api().get(`/listing/liked`)).data
   },
 
-  async findTimeseries (id, range, eventName) {
-    return (await Api().get(`/listing/${id}/timeseries`, { params: { eventName, range } })).data
+  async findTimeseries (id, eventName, range, period) {
+    return (await Api().get(`/listing/${id}/timeseries`, { params: { eventName, range, period } })).data
   },
 
   async delete (id) {
