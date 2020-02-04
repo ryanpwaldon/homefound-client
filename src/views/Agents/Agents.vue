@@ -1,26 +1,25 @@
 <template>
-  <div class="home">
+  <div class="agents">
     <BaseNavHorizontalPrimary/>
     <div class="container">
       <div class="section section-1">
         <div class="content">
-          <div class="copy-1">Discover properties before the crowd</div>
-          <div class="copy-2">Access off-market and pre-market properties before they’re listed on Realestate.com.au or Domain</div>
+          <div class="copy-1">List for free and<br>gain quality insights</div>
+          <div class="copy-2">Advertise your pre-market and off-market listings to our private audience of motivated buyers and gain quality market insights</div>
           <div class="buttons">
             <BaseButtonLarge text="Get started" design="red"/>
-            <BaseButtonLarge text="View our properties" design="white"/>
           </div>
-          <div class="copy-3">Agents list free. Find out more <img src="@/assets/img/arrow-right.svg"></div>
         </div>
-        <div class="illustration" ref="illustration">
-          <BaseMockListing :image="require('./assets/1.jpg')"/>
-          <BaseMockListing :image="require('./assets/2.jpg')"/>
-          <BaseMockListing :image="require('./assets/3.jpg')"/>
-          <BaseMockListing :image="require('./assets/4.jpg')"/>
-        </div>
-        <div class="background">
-          <div class="image" :style="{backgroundImage: `url(${require('./assets/map.png')})`}"/>
-          <div class="gradient"/>
+        <div class="illustration">
+          <div class="listings" ref="listings">
+            <BaseMockListing listing-width="auto" spacing="0.8rem" placeholder-height="1rem"/>
+            <BaseMockListing listing-width="auto" spacing="0.8rem" placeholder-height="1rem" :image="require('./assets/1.jpg')"/>
+            <BaseMockListing listing-width="auto" spacing="0.8rem" placeholder-height="1rem"/>
+          </div>
+          <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 51">
+            <path ref="line-path" d="M2.5,2.5v46" fill="none" stroke="#00a672" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" stroke-dasharray="0.1 10"/>
+          </svg>
+          <img class="chart" src="./assets/chart.png">
         </div>
       </div>
     </div>
@@ -35,7 +34,7 @@ import BaseMockListing from '@/components/BaseMockListing/BaseMockListing'
 import BaseFooter from '@/components/BaseFooter/BaseFooter'
 import anime from 'animejs'
 export default {
-  name: 'home',
+  name: 'agents',
   components: {
     BaseNavHorizontalPrimary,
     BaseButtonLarge,
@@ -44,10 +43,17 @@ export default {
   },
   mounted () {
     anime({
-      targets: this.$refs['illustration'].children,
+      targets: this.$refs['listings'].children,
       direction: 'alternate',
       rotateY: [-10, 10],
       easing: 'easeInOutSine',
+      duration: 2000,
+      loop: true
+    })
+    anime({
+      targets: this.$refs['line-path'],
+      strokeDashoffset: -20,
+      easing: 'linear',
       duration: 2000,
       loop: true
     })
@@ -56,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.agents {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -108,57 +114,36 @@ export default {
       margin-right: var(--spacing-5);
     }
   }
-  .copy-3 {
-    font-size: 1.5rem;
-    color: var(--color-gray-6);
-    display: flex;
-    align-items: baseline;
-    align-self: flex-start;
-    cursor: pointer;
-    img {
-      height: 1ex;
-      margin-left: 0.75ex;
-    }
-  }
   .illustration {
-    display: grid;
-    grid-gap: var(--spacing-5);
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    position: relative;
+    width: 40%;
+    display: flex;
     align-self: center;
-    z-index: 1;
-    perspective: 1000px;
-    > * {
-      transform: rotateY(-30deg);
-      &:nth-child(2n + 1) {
-        position: relative;
-        top: 10rem;
+    flex-direction: column;
+    align-items: center;
+    .listings {
+      width: 100%;
+      display: grid;
+      grid-gap: var(--spacing-4);
+      grid-template-columns: 1fr 1fr 1fr;
+      align-self: center;
+      z-index: 1;
+      perspective: 1000px;
+      > * {
+        &:nth-child(2n + 1) {
+          position: relative;
+          top: -3rem;
+        }
       }
     }
-  }
-  .background {
-    position: absolute;
-    width: 100vw;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 0;
-  }
-  .image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right center;
-  }
-  .gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(250, 250, 250, 1) 60%, rgba(250, 250, 250, 0))
+    .line {
+      height: 6rem;
+      margin: -0.5rem 0;
+    }
+    .chart {
+      width: 100%;
+      box-shadow: var(--box-shadow-1);
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="content">
       <div class="section">
         <router-link class="logo-container" to="/">
-          <img class="logo" src="@/assets/img/logo-5.svg">
+          <img class="logo" src="@/assets/img/logo-1.svg">
           <BaseText2 text="Homefound"/>
         </router-link>
       </div>

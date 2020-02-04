@@ -1,7 +1,7 @@
 <template>
   <div class="layout-focus">
     <router-link to="/">
-      <img class="logo" src="@/assets/img/logo-4.svg">
+      <img class="logo" src="@/assets/img/logo-1.svg">
     </router-link>
     <BaseCard class="content">
       <slot/>

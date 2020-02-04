@@ -1,5 +1,5 @@
 <template>
-  <div class="mock-listing">
+  <div class="base-mock-listing" :style="cssVars">
     <div class="image-container">
       <div class="image" :style="{backgroundImage: `url(${image})`}"/>
     </div>
@@ -19,23 +19,44 @@ export default {
     image: {
       type: String,
       required: true
+    },
+    listingWidth: {
+      type: String,
+      default: '18rem'
+    },
+    placeholderHeight: {
+      type: String,
+      default: '1.5rem'
+    },
+    spacing: {
+      type: String,
+      default: '1rem'
+    }
+  },
+  computed: {
+    cssVars () {
+      return {
+        '--listing-width': this.listingWidth,
+        '--placeholder-height': this.placeholderHeight,
+        '--spacing': this.spacing
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.mock-listing {
+.base-mock-listing {
   display: flex;
+  width: var(--listing-width);
   flex-direction: column;
-  width: 18rem;
-  padding: var(--spacing-2);
   position: relative;
+  padding: var(--spacing);
   box-shadow: var(--box-shadow-1);
   border-radius: var(--border-radius-1);
   background: var(--color-white-1);
   > *:not(:last-child) {
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing);
   }
 }
 .image-container {
@@ -50,6 +71,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
+  background-color: var(--color-gray-5);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -58,7 +80,7 @@ export default {
 .row {
   display: flex;
   justify-content: space-between;
-  height: var(--spacing-3);
+  height: var(--placeholder-height);
   width: 100%;
 }
 .placeholder {
@@ -68,12 +90,12 @@ export default {
   & :first-child { margin-right: auto }
 }
 .placeholder-1 {
-  width: 6rem;
+  width: 40%;
 }
 .placeholder-2 {
-  width: 4rem;
+  width: 25%;
 }
 .placeholder-3 {
-  width: 10rem;
+  width: 65%;
 }
 </style>

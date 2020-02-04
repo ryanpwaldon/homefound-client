@@ -54,7 +54,4 @@ export default {
     margin-bottom: var(--spacing-6);
   }
 }
-.logo {
-  width: 25px;
-}
 </style>

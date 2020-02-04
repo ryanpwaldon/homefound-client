@@ -28,7 +28,6 @@ export default {
   display: block;
   position: relative;
   &.home {
-    height: 25px;
     .icon {
       opacity: 1;
     }

@@ -15,7 +15,7 @@ export default {
   },
   data: () => ({
     navItems: [
-      { text: 'Home', path: '/', icon: require('@/assets/img/logo-4.svg'), position: 1 },
+      { text: 'Home', path: '/', icon: require('@/assets/img/logo-1.svg'), position: 1 },
       { text: 'Search', path: '/app/listings', icon: require('@/assets/img/search.svg'), position: 1 },
       { text: 'Likes', path: '/app/likes', icon: require('@/assets/img/likes.svg'), position: 1 },
       { text: 'MyListings', path: '/app/my-listings', icon: require('@/assets/img/listings.svg'), position: 1, roles: [SELLER, ADMIN] },
