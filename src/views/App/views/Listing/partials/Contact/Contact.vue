@@ -23,7 +23,7 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
-import EventService from '@/services/Api/services/EventService/EventService'
+import ListingPerformanceService from '@/services/Api/services/ListingPerformanceService/ListingPerformanceService'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -64,7 +64,7 @@ export default {
     onClick () {
       this.show = true
       if (this.userId !== this.createdBy) {
-        EventService.create({ type: 'LISTING_CONTACT_DETAILS_VIEWED', properties: { listingId: this.listingId } })
+        ListingPerformanceService.trackContactDetailView(this.listingId)
       }
     }
   }

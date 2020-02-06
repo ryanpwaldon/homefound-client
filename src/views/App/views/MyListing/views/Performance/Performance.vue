@@ -1,29 +1,50 @@
 <template>
-  <div class="performance" v-if="data">
+  <div class="performance" v-if="impressions && views">
     <BaseCard>
-      <BaseText4 class="title" text="Impressions Vs Clicks"/>
+      <BaseText4 class="title" text="Engagement"/>
+      <BaseDivider/>
+      <div class="totals">
+        <div class="metric">
+          <BaseText6 class="label" text="Impressions"/>
+          <div class="value">{{ sum(impressions) }}</div>
+        </div>
+        <div class="metric">
+          <BaseText6 class="label" text="Clicks"/>
+          <div class="value">{{ sum(views) }}</div>
+        </div>
+        <div class="metric">
+          <BaseText6 class="label" text="CTR"/>
+          <div class="value">{{ ctr }}</div>
+        </div>
+        <div class="metric">
+          <BaseText6 class="label" text="Contact Detail Clicks"/>
+          <div class="value">{{ sum(contactDetailViews) }}</div>
+        </div>
+      </div>
+      <BaseDivider/>
       <BaseChart
-        :data="{
-          labels: Object.keys(data.impressions).map(label => moment(label).format('MMM DD')),
-          datasets: [
-            {
-              label: 'Impressions',
-              data: Object.values(data.impressions),
-              backgroundColor: Chart.helpers.color('#35a2eb').alpha(0.5).rgbString(),
-              borderColor: '#35a2eb',
-              borderWidth: 1,
-              lineTension: 0
-            },
-            {
-              label: 'Clicks',
-              data: Object.values(data.views),
-              backgroundColor: Chart.helpers.color('#ff6383').alpha(0.5).rgbString(),
-              borderColor: '#ff6383',
-              borderWidth: 1,
-              lineTension: 0
-            }
-          ]
-        }"
+        :datasets="[
+          {
+            label: 'Impressions',
+            data: Object.entries(impressions).map(([date, count]) => ({ x: date, y: count })),
+            backgroundColor: Chart.helpers.color('#d7d7d7').alpha(0.5).rgbString(),
+            borderColor: '#d7d7d7',
+            pointBackgroundColor: '#d7d7d7',
+            pointBorderColor: '#ffffff',
+            borderWidth: 1,
+            lineTension: 0.2
+          },
+          {
+            label: 'Clicks',
+            data: Object.entries(views).map(([date, count]) => ({ x: date, y: count })),
+            backgroundColor: Chart.helpers.color('#777777').alpha(0.5).rgbString(),
+            borderColor: '#777777',
+            pointBackgroundColor: '#777777',
+            pointBorderColor: '#ffffff',
+            borderWidth: 1,
+            lineTension: 0.2
+          }
+        ]"
       />
     </BaseCard>
   </div>
@@ -33,7 +54,9 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseChart from '@/components/BaseChart/BaseChart'
 import BaseText4 from '@/components/BaseText4/BaseText4'
-import ListingService from '@/services/Api/services/ListingService/ListingService'
+import BaseText6 from '@/components/BaseText6/BaseText6'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
+import ListingPerformanceService from '@/services/Api/services/ListingPerformanceService/ListingPerformanceService'
 import Chart from 'chart.js'
 import moment from 'moment'
 export default {
@@ -41,7 +64,9 @@ export default {
   components: {
     BaseCard,
     BaseChart,
-    BaseText4
+    BaseText4,
+    BaseText6,
+    BaseDivider
   },
   props: {
     listing: {
@@ -50,22 +75,58 @@ export default {
     }
   },
   async mounted () {
-    const [ impressions, views ] = await Promise.all([
-      ListingService.findTimeseries(this.listing._id, 'Listing Impression', 'week', 'day'),
-      ListingService.findTimeseries(this.listing._id, 'Listing Viewed', 'week', 'day')
+    const [ impressions, views, contactDetailViews ] = await Promise.all([
+      this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
+      this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
+      this.fetchTimeseries({ property: 'contactDetailViews', range: 7, period: 'day' })
     ])
-    this.data = { impressions, views }
+    this.impressions = impressions
+    this.views = views
+    this.contactDetailViews = contactDetailViews
   },
   data: () => ({
     data: null,
+    impressions: null,
+    views: null,
+    contactDetailViews: null,
     moment,
     Chart
-  })
+  }),
+  computed: {
+    ctr () {
+      return (this.sum(this.views) / this.sum(this.impressions) * 100).toFixed(1) + '%'
+    }
+  },
+  methods: {
+    fetchTimeseries ({ property, range, period }) {
+      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing._id, property, range, period })
+    },
+    sum (timeseries) {
+      return Object.values(timeseries).reduce((sum, value) => sum + value, 0)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-bottom: var(--spacing-5);
+.totals {
+  display: flex;
+  > *:not(:last-child) {
+    padding-right: var(--spacing-5);
+    margin-right: var(--spacing-5);
+    border-right: 1px solid var(--color-gray-1);
+  }
+}
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.label {
+  color: var(--color-gray-4);
+  margin-bottom: var(--spacing-2);
+}
+.value {
+  font-size: 3.6rem;
 }
 </style>
