@@ -1,15 +1,11 @@
 <template>
-  <div class="base-form-coordinates" :class="[mode]">
+  <div class="base-form-coordinates" :class="[mode.toLowerCase()]">
     <div class="map-container">
       <BaseMap class="map" ref="map">
-        <GeocodeForward :query="query" @updated="onGeocodeForward" v-if="mode === 'automatic'"/>
+        <GeocodeForward :query="query" @updated="onGeocodeForward" v-if="mode === 'AUTOMATIC'"/>
         <GetCenter @updated="onGetCenter" v-else/>
       </BaseMap>
       <img class="pin" src="@/assets/img/pin.svg" v-if="value.length">
-    </div>
-    <div class="helper" v-if="address">
-      <div v-if="mode === 'automatic'">Not the correct location? <span @click="updateMode('manual')">Set pin manually</span></div>
-      <div v-else><span @click="updateMode('automatic')">Geolocate from address</span></div>
     </div>
   </div>
 </template>
@@ -33,10 +29,16 @@ export default {
     address: {
       type: String,
       required: false
+    },
+    mode: {
+      type: String,
+      require: false
     }
   },
+  mounted () {
+    this.value.length && this.$refs['map'].updateView(this.value)
+  },
   data: () => ({
-    mode: 'automatic',
     query: null
   }),
   watch: {
@@ -55,10 +57,6 @@ export default {
     onGeocodeForward (lngLat) {
       this.$refs['map'].updateView(lngLat)
       this.$emit('input', lngLat)
-    },
-    updateMode (mode) {
-      this.query = mode === 'automatic' ? this.address : null
-      this.mode = mode
     }
   }
 }

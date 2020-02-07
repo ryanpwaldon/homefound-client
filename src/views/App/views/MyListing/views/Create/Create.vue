@@ -62,9 +62,10 @@
         <BaseText4 class="title" text="Coordinates"/>
         <BaseDivider/>
         <ValidationProvider class="field map" name="coordinates" rules="required" v-slot="{ errors }">
-          <BaseFormCoordinates :address="buildingAddress" v-model="form.lngLat"/>
+          <BaseFormCoordinates :address="buildingAddress" :mode="form.lngLatMode" v-model="form.lngLat"/>
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
+        <BaseFormTextSwitch class="field map-mode" v-model="form.lngLatMode" :options="{ AUTOMATIC: 'Not the correct address? Set pin manually.', MANUAL: 'Geolocate from address.' }" v-if="buildingAddress"/>
       </BaseCard>
       <BaseCard class="card">
         <BaseText4 class="title" text="Features"/>
@@ -193,6 +194,7 @@ import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
 import BaseFormCoordinates from '@/components/BaseFormCoordinates/BaseFormCoordinates'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormImageUploader'
+import BaseFormTextSwitch from '@/components/BaseFormTextSwitch/BaseFormTextSwitch'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 import * as options from './form-datatypes'
@@ -207,6 +209,7 @@ export default {
     BaseFormError,
     BaseFormInput,
     BaseFormSelect,
+    BaseFormTextSwitch,
     BaseFormSubmitButton,
     BaseFormImageUploader,
     BaseFormCoordinates,
@@ -243,6 +246,7 @@ export default {
         suburb: this.listing.suburb || '',
         state: this.listing.state || '',
         postcode: this.listing.postcode || '',
+        lngLatMode: this.listing.lngLatMode,
         lngLat: this.listing.lngLat || [],
         bedrooms: this.listing.bedrooms || '',
         bathrooms: this.listing.bathrooms || '',
@@ -315,6 +319,11 @@ export default {
 .map {
   height: 300px;
   width: 100%;
+  margin-bottom: var(--spacing-1);
+}
+.map-mode {
+  align-self: flex-start;
+  display: inline;
 }
 .image-uploader {
   display: inline-flex;
