@@ -5,8 +5,8 @@
         <BaseText4 class="title" text="Address"/>
         <BaseDivider/>
         <div class="grid">
-          <ValidationProvider class="field sm" name="unit number" v-slot="{ errors }">
-            <BaseText2 class="field-label" text="Unit number" rules="addressNumber"/>
+          <ValidationProvider class="field sm" name="unit number" rules="addressNumber" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Unit number"/>
             <div class="field-content">
               <BaseFormInput v-model="form.unitNumber" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
@@ -222,14 +222,19 @@ export default {
       required: true
     }
   },
-  created () {
-    this.initForm()
-  },
   data: () => ({
     options,
     form: {},
     loading: false
   }),
+  watch: {
+    listing: {
+      immediate: true,
+      handler (val) {
+        this.initForm()
+      }
+    }
+  },
   computed: {
     buildingAddress () {
       if (!this.form.streetNumber || !this.form.streetName || !this.form.streetType || !this.form.suburb || !this.form.state || !this.form.postcode) return null

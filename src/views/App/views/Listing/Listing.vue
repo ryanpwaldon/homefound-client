@@ -1,48 +1,52 @@
 <template>
-  <div class="listing" v-if="listing">
-    <LayoutCenter>
-      <router-link class="back" to="/app/listings">
-        <img src="@/assets/img/arrow.svg">
-        <BaseText4 text="BACK TO SEARCH"/>
-      </router-link>
-      <BaseText1 class="title" :text="listing.fullAddress" />
-      <div class="cards">
-        <div class="card">
-          <BaseText4 class="label" text="Features"/>
-          <BaseText5 class="features">
-            <span>{{ listing.bedrooms }}</span> <img src="@/assets/img/bed.svg">
-            <span>{{ listing.bathrooms }}</span> <img src="@/assets/img/bath.svg">
-            <span>{{ listing.carSpaces }}</span> <img src="@/assets/img/car.svg">
-          </BaseText5>
+  <div class="listing">
+    <BaseLoader class="loader" text="Loading content" v-if="loading"/>
+    <div class="container" v-else>
+      <LayoutCenter>
+        <router-link class="back" to="/app/listings">
+          <img src="@/assets/img/arrow.svg">
+          <BaseText4 text="BACK TO SEARCH"/>
+        </router-link>
+        <BaseText1 class="title" :text="listing.fullAddress" />
+        <div class="cards">
+          <div class="card">
+            <BaseText4 class="label" text="Features"/>
+            <BaseText5 class="features">
+              <span>{{ listing.bedrooms }}</span> <img src="@/assets/img/bed.svg">
+              <span>{{ listing.bathrooms }}</span> <img src="@/assets/img/bath.svg">
+              <span>{{ listing.carSpaces }}</span> <img src="@/assets/img/car.svg">
+            </BaseText5>
+          </div>
+          <div class="card">
+            <BaseText4 class="label" text="Price"/>
+            <BaseText5>$ {{ listing.price | numeral('0,0') }}</BaseText5>
+          </div>
+          <div class="card">
+            <BaseText4 class="label" text="Posted"/>
+            <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
+          </div>
         </div>
-        <div class="card">
-          <BaseText4 class="label" text="Price"/>
-          <BaseText5>$ {{ listing.price | numeral('0,0') }}</BaseText5>
-        </div>
-        <div class="card">
-          <BaseText4 class="label" text="Posted"/>
-          <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
-        </div>
+        <BaseGallery class="gallery" :images="listing.images"/>
+        <Contact
+          :listing-id="listing._id"
+          :created-by="listing.createdBy"
+          :name="listing.name"
+          :phone="listing.phone"
+          :email="listing.email"
+        />
+      </LayoutCenter>
+      <div class="map-container">
+        <BaseMap :center="listing.lngLat" :zoom="16">
+          <Pin :lng-lat="listing.lngLat"/>
+        </BaseMap>
       </div>
-      <BaseGallery class="gallery" :images="listing.images"/>
-      <Contact
-        :listing-id="listing._id"
-        :created-by="listing.createdBy"
-        :name="listing.name"
-        :phone="listing.phone"
-        :email="listing.email"
-      />
-    </LayoutCenter>
-    <div class="map-container">
-      <BaseMap :center="listing.lngLat" :zoom="16">
-        <Pin :lng-lat="listing.lngLat"/>
-      </BaseMap>
     </div>
   </div>
 </template>
 
 <script>
 import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
@@ -54,6 +58,7 @@ import ListingService from '@/services/Api/services/ListingService/ListingServic
 export default {
   components: {
     LayoutCenter,
+    BaseLoader,
     BaseText1,
     BaseText4,
     BaseText5,
@@ -72,11 +77,11 @@ export default {
     this.getListing()
   },
   data: () => ({
-    listing: null
+    listing: null,
+    loading: true
   }),
   methods: {
     async getListing () {
-      this.loading = true
       this.listing = await ListingService.findOne(this.id)
       this.loading = false
     }
@@ -86,6 +91,14 @@ export default {
 
 <style lang="scss" scoped>
 .listing {
+  width: 100%;
+  height: 100%;
+}
+.loader {
+  width: 100%;
+  height: 100%;
+}
+.container {
   width: 100%;
   height: 100%;
   display: flex;

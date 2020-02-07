@@ -10,7 +10,7 @@
       </div>
       <BaseDivider class="divider"/>
       <div class="row r-2">
-        <BaseText2 class="text">Posted {{ createdAt | moment('from', 'now') }}</BaseText2>
+        <BaseText2 class="text">Posted {{ firstPublishedAt | moment('from', 'now') }}</BaseText2>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@ export default {
       type: String,
       required: true
     },
-    createdAt: {
+    firstPublishedAt: {
       type: String,
       required: true
     }

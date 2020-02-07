@@ -59,7 +59,7 @@
             :bedrooms="listing.bedrooms"
             :bathrooms="listing.bathrooms"
             :car-spaces="listing.carSpaces"
-            :created-at="listing.createdAt"
+            :first-published-at="listing.firstPublishedAt"
             :image="listing.images[0]"
           />
         </router-link>
