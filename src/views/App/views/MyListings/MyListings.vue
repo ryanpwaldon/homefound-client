@@ -1,6 +1,7 @@
 <template>
   <LayoutCenter>
-    <div class="my-listings">
+    <BaseLoader class="loader" v-if="loading" text="Loading content"/>
+    <div class="my-listings" v-else>
       <div class="header">
         <BaseText1 text="My listings"/>
         <BaseButton text="Create listing" design="gray" @click.native="createListing"/>
@@ -38,13 +39,12 @@ export default {
     BaseLoader
   },
   async mounted () {
-    this.loading = true
     this.listings = (await ListingService.findCreated({ options: { limit: 1000, sort: { published: -1, createdAt: -1 } } })).docs
     this.loading = false
   },
   data: () => ({
     listings: [],
-    loading: false
+    loading: true
   }),
   methods: {
     async createListing () {
@@ -66,5 +66,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.loader {
+  width: 100%;
+  height: 100%;
 }
 </style>

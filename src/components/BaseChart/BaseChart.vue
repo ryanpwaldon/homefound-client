@@ -39,7 +39,7 @@ export default {
         options: {
           animation: { duration: 0 },
           scales: {
-            yAxes: [{ ticks: { display: true, padding: 20, maxTicksLimit: 10 }, gridLines: { drawTicks: false, display: true, drawBorder: false, zeroLineColor: 'rgba(0, 0, 0, 0.1)' } }],
+            yAxes: [{ ticks: { display: true, padding: 20, maxTicksLimit: 10, min: 0, beginAtZero: true, precision: 0, suggestedMax: 10 }, gridLines: { drawTicks: false, display: true, drawBorder: false, zeroLineColor: 'rgba(0, 0, 0, 0.1)' } }],
             xAxes: [{ ticks: { display: true, padding: 20 }, gridLines: { drawTicks: false, display: false, drawBorder: false, zeroLineColor: 'rgba(0, 0, 0, 0.1)' }, type: 'time', time: { unit: 'day', displayFormats: this.displayFormats, tooltipFormat: 'MMM D' } }]
           },
           layout: { padding: { top: 0, right: 0, bottom: 0, left: 0 } },

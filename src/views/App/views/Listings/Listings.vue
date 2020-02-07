@@ -63,8 +63,8 @@
             :image="listing.images[0]"
           />
         </router-link>
-        <BaseLoader class="loader" v-if="loading"/>
       </div>
+      <BaseLoader class="loader" v-if="loading"/>
       <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
     </LayoutCenter>
     <div class="map-container">
@@ -157,7 +157,7 @@ export default {
         options: {
           page: this.nextPage,
           limit: this.limit,
-          sort: { postedAt: -1 }
+          sort: { firstPublishedAt: -1 }
         }
       })
       this.listings.push(...listings)
@@ -212,8 +212,7 @@ export default {
   grid-gap: var(--spacing-5);
   margin-bottom: var(--spacing-5);
 }
-.listing,
-.loader {
+.listing {
   min-width: 0;
 }
 .map-container {
@@ -226,5 +225,9 @@ export default {
   top: var(--spacing-4);
   left: 50%;
   z-index: 1;
+}
+.loader {
+  width: 100%;
+  height: 100%;
 }
 </style>

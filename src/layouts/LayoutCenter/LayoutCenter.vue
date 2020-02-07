@@ -25,8 +25,11 @@
   overflow: auto;
 }
 .content {
+  flex: 1;
   width: 100%;
   max-width: 600px;
-  margin: var(--spacing-6) 0;
+  padding: var(--spacing-6) 0;
+  display: flex;
+  flex-direction: column;
 }
 </style>

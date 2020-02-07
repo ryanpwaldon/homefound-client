@@ -1,11 +1,9 @@
 <template>
   <div class="performance">
-    <BaseCard v-if="loading">
-      <BaseLoader/>
-    </BaseCard>
+    <BaseLoader class="loader" text="Loading content" v-if="loading"/>
     <template v-else>
       <BaseCard v-if="!success">
-        <BaseText4 text="No performance data available"/>
+        <BaseText5 text="No data available"/>
       </BaseCard>
       <BaseCard v-else>
         <BaseText4 class="title" text="Engagement"/>
@@ -21,7 +19,7 @@
           </div>
           <div class="metric">
             <BaseText6 class="label" text="CTR"/>
-            <div class="value">{{ ctr }}</div>
+            <div class="value">{{ ctr | numeral('0.[0]%') }}</div>
           </div>
           <div class="metric">
             <BaseText6 class="label" text="Contact Detail Clicks"/>
@@ -63,6 +61,7 @@ import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseChart from '@/components/BaseChart/BaseChart'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import ListingPerformanceService from '@/services/Api/services/ListingPerformanceService/ListingPerformanceService'
@@ -75,6 +74,7 @@ export default {
     BaseCard,
     BaseChart,
     BaseText4,
+    BaseText5,
     BaseText6,
     BaseDivider
   },
@@ -99,7 +99,7 @@ export default {
   }),
   computed: {
     ctr () {
-      return (this.sum(this.views) / this.sum(this.impressions) * 100).toFixed(1) + '%'
+      return (this.sum(this.views) / this.sum(this.impressions)) || 0
     }
   },
   methods: {
@@ -130,6 +130,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.performance {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 .totals {
   display: flex;
   > *:not(:last-child) {
@@ -149,5 +154,9 @@ export default {
 }
 .value {
   font-size: 3.6rem;
+}
+.loader {
+  width: 100%;
+  height: 100%;
 }
 </style>
