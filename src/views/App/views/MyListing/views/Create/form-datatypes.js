@@ -47,39 +47,6 @@ export const streetTypes = [
   { title: 'Way', value: 'Way' }
 ]
 
-export const unitTypes = [
-  { title: 'Apartment', value: 'Apartment' },
-  { title: 'Block', value: 'Block' },
-  { title: 'Building', value: 'Building' },
-  { title: 'Bungalow', value: 'Bungalow' },
-  { title: 'Cottage', value: 'Cottage' },
-  { title: 'Duplex', value: 'Duplex' },
-  { title: 'Factory', value: 'Factory' },
-  { title: 'Flat', value: 'Flat' },
-  { title: 'House', value: 'House' },
-  { title: 'Lot', value: 'Lot' },
-  { title: 'Office', value: 'Office' },
-  { title: 'Penthouse', value: 'Penthouse' },
-  { title: 'Rear', value: 'Rear' },
-  { title: 'Reserve', value: 'Reserve' },
-  { title: 'Room', value: 'Room' },
-  { title: 'Suite', value: 'Suite' },
-  { title: 'Shed', value: 'Shed' },
-  { title: 'Shop', value: 'Shop' },
-  { title: 'Showroom', value: 'Showroom' },
-  { title: 'Site', value: 'Site' },
-  { title: 'Store', value: 'Store' },
-  { title: 'Strata unit', value: 'Strata unit' },
-  { title: 'Studio', value: 'Studio' },
-  { title: 'Tenancy', value: 'Tenancy' },
-  { title: 'Townhouse', value: 'Townhouse' },
-  { title: 'Tower', value: 'Tower' },
-  { title: 'Unit', value: 'Unit' },
-  { title: 'Villa', value: 'Villa' },
-  { title: 'Warehouse', value: 'Warehouse' },
-  { title: 'Workshop', value: 'Workshop' }
-]
-
 export const states = [
   { title: 'NSW', value: 'NSW' },
   { title: 'QLD', value: 'QLD' },

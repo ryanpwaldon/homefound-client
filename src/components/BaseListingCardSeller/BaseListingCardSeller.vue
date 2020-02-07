@@ -5,7 +5,7 @@
       <div class="image backup" v-else/>
     </div>
     <div class="contents">
-      <BaseText6 class="text address" :text="listing.address || 'Untitled'"/>
+      <BaseText6 class="text address" :text="listing.fullAddress || 'Untitled'"/>
       <BaseDivider class="divider"/>
       <BaseText6 class="text created">
       Created {{ listing.createdAt | moment('from', 'now') }}

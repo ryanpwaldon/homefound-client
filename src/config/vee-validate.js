@@ -18,3 +18,13 @@ extend('match', {
   validate: (value, { other }) => other === value,
   message: 'This field does not match the {_target_} field'
 })
+
+extend('name', {
+  validate: value => /^[a-zA-Z\- ']*$/.test(value),
+  message: 'The {_field_} field may only contain letters, spaces, apostrophies, and hyphens'
+})
+
+extend('addressNumber', {
+  validate: value => /^[a-zA-Z0-9\- ]*$/.test(value),
+  message: 'The {_field_} field may only contain letters, numbers, spaces, and hyphens'
+})

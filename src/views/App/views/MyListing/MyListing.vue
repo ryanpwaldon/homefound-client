@@ -8,7 +8,7 @@
             <BaseBadge design="gray" text="Preview" :icon="require('@/assets/img/clickout.svg')"/>
           </router-link>
         </div>
-        <BaseText1 class="title" :text="listing.address || 'New listing'"/>
+        <BaseText1 class="title" :text="listing.fullAddress || 'New listing'"/>
         <BaseNavHorizontalSecondary class="nav" :nav-items="navItems"/>
         <router-view :listing="listing" @listing-updated="listing = $event"/>
       </template>

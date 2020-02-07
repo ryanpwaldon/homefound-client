@@ -1,33 +1,26 @@
 <template>
   <div class="create">
-    <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
+    <ValidationObserver class="form" ref="form" tag="div">
       <BaseCard class="card">
         <BaseText4 class="title" text="Address"/>
         <BaseDivider/>
         <div class="grid">
-          <ValidationProvider class="field md" name="unit type" rules="requiredIf:unit number" v-slot="{ errors }">
-            <BaseText2 class="field-label" text="Unit type"/>
-            <div class="field-content">
-              <BaseFormSelect placeholder="Select" v-model="form.unitType" :options="options.unitTypes"/>
-              <BaseFormError :message="errors[0]"/>
-            </div>
-          </ValidationProvider>
-          <ValidationProvider class="field sm" name="unit number" rules="requiredIf:unit type" v-slot="{ errors }">
-            <BaseText2 class="field-label" text="Unit number"/>
+          <ValidationProvider class="field sm" name="unit number" v-slot="{ errors }">
+            <BaseText2 class="field-label" text="Unit number" rules="addressNumber"/>
             <div class="field-content">
               <BaseFormInput v-model="form.unitNumber"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
-          <div class="break"/>
-          <ValidationProvider class="field sm" name="street number" rules="required" v-slot="{ errors }">
+          <ValidationProvider class="field sm" name="street number" rules="required|addressNumber" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Street number"/>
             <div class="field-content">
               <BaseFormInput v-model="form.streetNumber"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
-          <ValidationProvider class="field lg" name="street name" rules="required" v-slot="{ errors }">
+          <div class="break"/>
+          <ValidationProvider class="field lg" name="street name" rules="required|name" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Street name"/>
             <div class="field-content">
               <BaseFormInput v-model="form.streetName"/>
@@ -42,7 +35,7 @@
             </div>
           </ValidationProvider>
           <div class="break"/>
-          <ValidationProvider class="field lg" name="suburb" rules="required" v-slot="{ errors }">
+          <ValidationProvider class="field lg" name="suburb" rules="required|name" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Suburb"/>
             <div class="field-content">
               <BaseFormInput v-model="form.suburb"/>
@@ -69,7 +62,7 @@
         <BaseText4 class="title" text="Coordinates"/>
         <BaseDivider/>
         <ValidationProvider class="field map" name="coordinates" rules="required" v-slot="{ errors }">
-          <BaseFormCoordinates :address="address" v-model="form.lngLat"/>
+          <BaseFormCoordinates :address="buildingAddress" v-model="form.lngLat"/>
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
       </BaseCard>
@@ -148,7 +141,7 @@
         <BaseText4 class="title" text="Contact"/>
         <BaseDivider/>
         <div class="grid">
-          <ValidationProvider class="field lg" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
+          <ValidationProvider class="field lg" name="name" rules="required|name" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Name"/>
             <div class="field-content">
               <BaseFormInput v-model="form.name" autocomplete="name"/>
@@ -235,17 +228,14 @@ export default {
     loading: false
   }),
   computed: {
-    address () {
+    buildingAddress () {
       if (!this.form.streetNumber || !this.form.streetName || !this.form.streetType || !this.form.suburb || !this.form.state || !this.form.postcode) return null
-      const unitSegment = this.form.unitType && this.form.unitNumber ? `${this.form.unitType} ${this.form.unitNumber}` : ''
-      const address = `${unitSegment} ${unitSegment ? '/' : ''} ${this.form.streetNumber} ${this.form.streetName} ${this.form.streetType}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`
-      return address.trim()
+      return (`${this.form.streetNumber} ${this.form.streetName} ${this.form.streetType}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`).trim()
     }
   },
   methods: {
     initForm () {
       this.form = {
-        unitType: this.listing.unitType || '',
         unitNumber: this.listing.unitNumber || '',
         streetType: this.listing.streetType || '',
         streetNumber: this.listing.streetNumber || '',

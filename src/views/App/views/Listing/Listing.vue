@@ -5,7 +5,7 @@
         <img src="@/assets/img/arrow.svg">
         <BaseText4 text="BACK TO SEARCH"/>
       </router-link>
-      <BaseText1 class="title" :text="listing.address" />
+      <BaseText1 class="title" :text="listing.fullAddress" />
       <div class="cards">
         <div class="card">
           <BaseText4 class="label" text="Features"/>
