@@ -5,6 +5,8 @@
         v-for="(navItem, i) in navItems.filter(item => item.position === 1)"
         :to="navItem.path"
         :icon="navItem.icon"
+        :size="navItem.size"
+        :spacing="navItem.spacing"
         :key="i"
       />
     </div>
@@ -13,6 +15,8 @@
         v-for="(navItem, i) in navItems.filter(item => item.position === 2)"
         :to="navItem.path"
         :icon="navItem.icon"
+        :size="navItem.size"
+        :spacing="navItem.spacing"
         :key="i"
       />
     </div>

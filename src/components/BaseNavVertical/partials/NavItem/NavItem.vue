@@ -1,5 +1,5 @@
 <template>
-  <router-link class="nav-item" :class="{ home: to === '/' }" :to="to">
+  <router-link class="nav-item" :class="{ home: to === '/' }" :to="to" :style="{ '--spacing': spacing, '--size': size }">
     <div class="wrapper">
       <img class="icon" :src="icon">
     </div>
@@ -16,6 +16,14 @@ export default {
     icon: {
       type: String,
       required: true
+    },
+    size: {
+      type: String,
+      default: '2rem'
+    },
+    spacing: {
+      type: String,
+      default: 'var(--spacing-4)'
     }
   }
 }
@@ -23,15 +31,10 @@ export default {
 
 <style lang="scss" scoped>
 .nav-item {
-  width: 20px;
-  height: 20px;
+  width: var(--size);
+  height: var(--size);
   display: block;
   position: relative;
-  &.home {
-    .icon {
-      opacity: 1;
-    }
-  }
 }
 .nav-item:hover,
 .router-link-active:not(.home) {
@@ -51,8 +54,8 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% + var(--spacing-4));
-    height: calc(100% + var(--spacing-4));
+    width: calc(100% + var(--spacing));
+    height: calc(100% + var(--spacing));
     border-radius: var(--border-radius-1);
     background: var(--color-gray-4);
     opacity: 0;
