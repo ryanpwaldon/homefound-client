@@ -1,5 +1,5 @@
 <template>
-  <div class="base-form-select" :class="{focused}" @click="focused = !focused">
+  <div class="base-form-select" :class="{ focused, disabled }" @click="focused = !focused">
     <div class="selected" :style="{color: value ? 'var(--color-black-1)' : 'var(--color-gray-4)'}">
       {{ selected && selected.title || placeholder }}
     </div>
@@ -34,6 +34,10 @@ export default {
     options: {
       type: Array,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -93,5 +97,9 @@ export default {
   left: 0;
   z-index: 1;
   cursor: auto;
+}
+.disabled {
+  pointer-events: none;
+  background: var(--color-gray-1);
 }
 </style>

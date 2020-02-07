@@ -8,14 +8,14 @@
           <ValidationProvider class="field sm" name="unit number" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Unit number" rules="addressNumber"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.unitNumber"/>
+              <BaseFormInput v-model="form.unitNumber" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
           <ValidationProvider class="field sm" name="street number" rules="required|addressNumber" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Street number"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.streetNumber"/>
+              <BaseFormInput v-model="form.streetNumber" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
@@ -23,14 +23,14 @@
           <ValidationProvider class="field lg" name="street name" rules="required|name" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Street name"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.streetName"/>
+              <BaseFormInput v-model="form.streetName" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
           <ValidationProvider class="field md" name="street type" rules="required" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Street type"/>
             <div class="field-content">
-              <BaseFormSelect placeholder="Select" v-model="form.streetType" :options="options.streetTypes"/>
+              <BaseFormSelect placeholder="Select" v-model="form.streetType" :options="options.streetTypes" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
@@ -38,21 +38,21 @@
           <ValidationProvider class="field lg" name="suburb" rules="required|name" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Suburb"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.suburb"/>
+              <BaseFormInput v-model="form.suburb" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
           <ValidationProvider class="field md" name="state" rules="required" v-slot="{ errors }">
             <BaseText2 class="field-label" text="State"/>
             <div class="field-content">
-              <BaseFormSelect placeholder="Select" v-model="form.state" :options="options.states"/>
+              <BaseFormSelect placeholder="Select" v-model="form.state" :options="options.states" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
           <ValidationProvider class="field sm" name="postcode" rules="required|numeric" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Postcode"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.postcode"/>
+              <BaseFormInput v-model="form.postcode" :disabled="!!listing.firstPublishedAt"/>
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>

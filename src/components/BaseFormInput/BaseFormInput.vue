@@ -1,11 +1,13 @@
 <template>
   <input
     class="base-form-input"
+    :class="{ disabled }"
     :placeholder="placeholder"
     :autocomplete="autocomplete"
     @input="$emit('input', $event.target.value)"
     :value="value"
     :type="type"
+    :disabled="disabled"
   >
 </template>
 
@@ -27,6 +29,10 @@ export default {
     autocomplete: {
       type: String,
       default: 'disabled'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -43,6 +49,10 @@ export default {
   width: 100%;
   &:focus {
     border-color: var(--color-black-2);
+  }
+  &.disabled {
+    pointer-events: none;
+    background: var(--color-gray-1);
   }
 }
 </style>
