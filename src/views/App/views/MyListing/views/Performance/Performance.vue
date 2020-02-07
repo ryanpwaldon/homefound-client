@@ -1,56 +1,65 @@
 <template>
-  <div class="performance" v-if="impressions && views">
-    <BaseCard>
-      <BaseText4 class="title" text="Engagement"/>
-      <BaseDivider/>
-      <div class="totals">
-        <div class="metric">
-          <BaseText6 class="label" text="Impressions"/>
-          <div class="value">{{ sum(impressions) }}</div>
-        </div>
-        <div class="metric">
-          <BaseText6 class="label" text="Clicks"/>
-          <div class="value">{{ sum(views) }}</div>
-        </div>
-        <div class="metric">
-          <BaseText6 class="label" text="CTR"/>
-          <div class="value">{{ ctr }}</div>
-        </div>
-        <div class="metric">
-          <BaseText6 class="label" text="Contact Detail Clicks"/>
-          <div class="value">{{ sum(contactDetailViews) }}</div>
-        </div>
-      </div>
-      <BaseDivider/>
-      <BaseChart
-        :datasets="[
-          {
-            label: 'Impressions',
-            data: Object.entries(impressions).map(([date, count]) => ({ x: date, y: count })),
-            backgroundColor: Chart.helpers.color('#d7d7d7').alpha(0.5).rgbString(),
-            borderColor: '#d7d7d7',
-            pointBackgroundColor: '#d7d7d7',
-            pointBorderColor: '#ffffff',
-            borderWidth: 1,
-            lineTension: 0.2
-          },
-          {
-            label: 'Clicks',
-            data: Object.entries(views).map(([date, count]) => ({ x: date, y: count })),
-            backgroundColor: Chart.helpers.color('#777777').alpha(0.5).rgbString(),
-            borderColor: '#777777',
-            pointBackgroundColor: '#777777',
-            pointBorderColor: '#ffffff',
-            borderWidth: 1,
-            lineTension: 0.2
-          }
-        ]"
-      />
+  <div class="performance">
+    <BaseCard v-if="loading">
+      <BaseLoader/>
     </BaseCard>
+    <template v-else>
+      <BaseCard v-if="!success">
+        <BaseText4 text="No performance data available"/>
+      </BaseCard>
+      <BaseCard v-else>
+        <BaseText4 class="title" text="Engagement"/>
+        <BaseDivider/>
+        <div class="totals">
+          <div class="metric">
+            <BaseText6 class="label" text="Impressions"/>
+            <div class="value">{{ sum(impressions) }}</div>
+          </div>
+          <div class="metric">
+            <BaseText6 class="label" text="Clicks"/>
+            <div class="value">{{ sum(views) }}</div>
+          </div>
+          <div class="metric">
+            <BaseText6 class="label" text="CTR"/>
+            <div class="value">{{ ctr }}</div>
+          </div>
+          <div class="metric">
+            <BaseText6 class="label" text="Contact Detail Clicks"/>
+            <div class="value">{{ sum(contactDetailViews) }}</div>
+          </div>
+        </div>
+        <BaseDivider/>
+        <BaseChart
+          :datasets="[
+            {
+              label: 'Impressions',
+              data: Object.entries(impressions).map(([date, count]) => ({ x: date, y: count })),
+              backgroundColor: Chart.helpers.color('#d7d7d7').alpha(0.5).rgbString(),
+              borderColor: '#d7d7d7',
+              pointBackgroundColor: '#d7d7d7',
+              pointBorderColor: '#ffffff',
+              borderWidth: 1,
+              lineTension: 0.2
+            },
+            {
+              label: 'Clicks',
+              data: Object.entries(views).map(([date, count]) => ({ x: date, y: count })),
+              backgroundColor: Chart.helpers.color('#777777').alpha(0.5).rgbString(),
+              borderColor: '#777777',
+              pointBackgroundColor: '#777777',
+              pointBorderColor: '#ffffff',
+              borderWidth: 1,
+              lineTension: 0.2
+            }
+          ]"
+        />
+      </BaseCard>
+    </template>
   </div>
 </template>
 
 <script>
+import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseChart from '@/components/BaseChart/BaseChart'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -62,6 +71,7 @@ import moment from 'moment'
 export default {
   name: 'performance',
   components: {
+    BaseLoader,
     BaseCard,
     BaseChart,
     BaseText4,
@@ -74,21 +84,16 @@ export default {
       required: true
     }
   },
-  async mounted () {
-    const [ impressions, views, contactDetailViews ] = await Promise.all([
-      this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
-      this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
-      this.fetchTimeseries({ property: 'contactDetailViews', range: 7, period: 'day' })
-    ])
-    this.impressions = impressions
-    this.views = views
-    this.contactDetailViews = contactDetailViews
+  mounted () {
+    this.fetchData()
   },
   data: () => ({
     data: null,
     impressions: null,
     views: null,
     contactDetailViews: null,
+    success: false,
+    loading: true,
     moment,
     Chart
   }),
@@ -98,6 +103,22 @@ export default {
     }
   },
   methods: {
+    async fetchData () {
+      try {
+        const [ impressions, views, contactDetailViews ] = await Promise.all([
+          this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
+          this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
+          this.fetchTimeseries({ property: 'contactDetailViews', range: 7, period: 'day' })
+        ])
+        this.impressions = impressions
+        this.views = views
+        this.contactDetailViews = contactDetailViews
+        this.success = true
+      } catch (err) {
+        this.success = false
+      }
+      this.loading = false
+    },
     fetchTimeseries ({ property, range, period }) {
       return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing._id, property, range, period })
     },
