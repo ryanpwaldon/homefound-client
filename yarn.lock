@@ -8541,6 +8541,11 @@ vue-numeral-filter@^1.1.1:
   dependencies:
     numeral "^2.0.6"
 
+vue-prevent-parent-scroll@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vue-prevent-parent-scroll/-/vue-prevent-parent-scroll-1.0.5.tgz#1ba769b8770f303601c3988853e5871fd2fcf122"
+  integrity sha1-G6dpuHcPMDYBw5iIU+WHH9L88SI=
+
 vue-router@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.3.tgz#e6b14fabc0c0ee9fda0e2cbbda74b350e28e412b"

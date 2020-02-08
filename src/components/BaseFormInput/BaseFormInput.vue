@@ -47,7 +47,9 @@ export default {
   border-radius: var(--border-radius-1);
   font-size: 1.4rem;
   width: 100%;
-  &:focus {
+  transition: var(--transition-settings-1) border-color;
+  &:focus,
+  &:hover {
     border-color: var(--color-black-2);
   }
   &.disabled {

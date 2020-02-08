@@ -4,8 +4,8 @@
       {{ selected && selected.title || placeholder }}
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
-    <template v-if="focused">
-      <div class="dropdown">
+    <TransitionContextMenu transform-origin="center top">
+      <div class="dropdown" ref="dropdown" v-if="focused" v-prevent-parent-scroll>
         <div class="placeholder" @click="$emit('input', null)">{{ placeholder }}</div>
         <div
           class="option"
@@ -15,13 +15,17 @@
           {{ option.title }}
         </div>
       </div>
-      <div class="backdrop"/>
-    </template>
+    </TransitionContextMenu>
+    <div class="backdrop" v-if="focused" @mousewheel.prevent/>
   </div>
 </template>
 
 <script>
+import TransitionContextMenu from '@/transitions/TransitionContextMenu/TransitionContextMenu'
 export default {
+  components: {
+    TransitionContextMenu
+  },
   props: {
     value: {
       type: String,
@@ -63,7 +67,9 @@ export default {
   white-space: nowrap;
   font-size: 1.4rem;
   cursor: pointer;
-  &.focused { border-color: var(--color-black) }
+  transition: var(--transition-settings-1) border-color;
+  &.focused,
+  &:hover { border-color: var(--color-black) }
 }
 .selected { margin-right: var(--spacing-2) }
 .icon { height: 5px }
@@ -77,14 +83,15 @@ export default {
   border: solid 1px var(--color-gray-3);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
-  z-index: 2;
+  z-index: 1001;
   max-height: 380px;
   overflow: auto;
 }
 .placeholder,
 .option {
   padding: var(--spacing-2);
-  &:hover { background: var(--color-gray-1) }
+  transition: var(--transition-settings-1) background-color;
+  &:hover { background-color: var(--color-gray-1) }
 }
 .placeholder {
   color: var(--color-gray-4);
@@ -95,7 +102,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 1000;
   cursor: auto;
 }
 .disabled {

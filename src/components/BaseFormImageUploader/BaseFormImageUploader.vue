@@ -67,6 +67,10 @@ export default {
   align-items: center;
   font-size: 1.4rem;
   margin-bottom: var(--spacing-2);
+  transition: var(--transition-settings-1) border-color;
+  &:hover {
+    border-color: var(--color-black-2);
+  }
   &:not(:last-child) {
     margin-right: var(--spacing-2);
   }
