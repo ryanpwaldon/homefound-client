@@ -113,9 +113,9 @@ const routes = [
         props: true
       },
       {
-        path: 'likes',
-        name: 'likes',
-        component: () => import('@/views/App/views/Likes/Likes')
+        path: 'saved',
+        name: 'saved',
+        component: () => import('@/views/App/views/Saved/Saved')
       },
       {
         path: 'alerts',

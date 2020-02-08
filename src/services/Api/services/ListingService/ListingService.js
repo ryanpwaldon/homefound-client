@@ -22,8 +22,8 @@ export default {
     return (await Api().get(`/listing/created`, { params: { filters, options } })).data
   },
 
-  async findLiked () {
-    return (await Api().get(`/listing/liked`)).data
+  async findSaved () {
+    return (await Api().get(`/listing/saved`)).data
   },
 
   async findTimeseries (id, eventName, range, period) {

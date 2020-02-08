@@ -1,6 +1,6 @@
 <template>
   <div class="base-form-select" :class="{ focused, disabled }" @click="focused = !focused">
-    <div class="selected" :style="{color: value ? 'var(--color-black-1)' : 'var(--color-gray-4)'}">
+    <div class="selected" :style="{color: value ? 'var(--color-black-2)' : 'var(--color-gray-4)'}">
       {{ selected && selected.title || placeholder }}
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
@@ -69,7 +69,7 @@ export default {
   cursor: pointer;
   transition: var(--transition-settings-1) border-color;
   &.focused,
-  &:hover { border-color: var(--color-black) }
+  &:hover { border-color: var(--color-black-2) }
 }
 .selected { margin-right: var(--spacing-2) }
 .icon { height: 5px }

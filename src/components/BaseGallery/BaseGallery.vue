@@ -158,6 +158,6 @@ export default {
   transition: border-color .2s;
 }
 .swiper-thumbs .swiper-slide-thumb-active .thumbnail-image::after {
-  border-color: var(--color-black-1);
+  border-color: var(--color-black-2);
 }
 </style>

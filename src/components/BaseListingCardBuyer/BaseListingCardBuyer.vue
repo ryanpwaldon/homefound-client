@@ -60,8 +60,8 @@ export default {
   flex-direction: column;
   background: var(--color-white-1);
   border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
   overflow: hidden;
+  box-shadow: var(--box-shadow-1);
 }
 .image-container {
   position: relative;
