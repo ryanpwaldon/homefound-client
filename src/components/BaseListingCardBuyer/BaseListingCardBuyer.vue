@@ -10,7 +10,10 @@
       </div>
       <BaseDivider class="divider"/>
       <div class="row r-2">
-        <BaseText2 class="text">Posted {{ firstPublishedAt | moment('from', 'now') }}</BaseText2>
+        <BaseText2 class="text">{{ firstPublishedAt | moment('from', 'now') }}</BaseText2>
+        <BaseContextMenu>
+          <BaseButtonFlex class="options-button" :icon="require('@/assets/img/dots.svg')"/>
+        </BaseContextMenu>
       </div>
     </div>
   </div>
@@ -19,10 +22,14 @@
 <script>
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
+import BaseButtonFlex from '@/components/BaseButtonFlex/BaseButtonFlex'
+import BaseContextMenu from '@/components/BaseContextMenu/BaseContextMenu'
 export default {
   components: {
     BaseText2,
-    BaseDivider
+    BaseDivider,
+    BaseButtonFlex,
+    BaseContextMenu
   },
   props: {
     image: {
@@ -60,8 +67,8 @@ export default {
   flex-direction: column;
   background: var(--color-white-1);
   border-radius: var(--border-radius-1);
-  overflow: hidden;
   box-shadow: var(--box-shadow-1);
+  overflow: hidden;
 }
 .image-container {
   position: relative;
@@ -94,5 +101,9 @@ export default {
 }
 .divider {
   margin: var(--spacing-2) 0;
+}
+.options-button {
+  height: 2rem;
+  width: 2em;
 }
 </style>

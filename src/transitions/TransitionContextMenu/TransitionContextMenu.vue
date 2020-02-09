@@ -1,5 +1,5 @@
 <template>
-  <transition @enter="enter" @leave="leave" :css="false">
+  <transition @enter="enter" @leave="leave" @after-leave="$emit('after-leave')" :css="false">
     <slot/>
   </transition>
 </template>
@@ -10,7 +10,7 @@ export default {
   props: {
     transformOrigin: {
       type: String,
-      required: true
+      default: 'center center'
     }
   },
   methods: {

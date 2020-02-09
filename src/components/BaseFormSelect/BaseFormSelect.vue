@@ -5,7 +5,7 @@
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
     <TransitionContextMenu transform-origin="center top">
-      <div class="dropdown" ref="dropdown" v-if="focused" v-prevent-parent-scroll>
+      <div class="dropdown" v-if="focused" v-contain-scroll>
         <div class="placeholder" @click="$emit('input', null)">{{ placeholder }}</div>
         <div
           class="option"
@@ -16,7 +16,7 @@
         </div>
       </div>
     </TransitionContextMenu>
-    <div class="backdrop" v-if="focused" @mousewheel.prevent/>
+    <div class="backdrop" v-if="focused"/>
   </div>
 </template>
 
@@ -77,14 +77,14 @@ export default {
   position: absolute;
   top: 100%;
   left: -1px;
-  width: 200px;
+  width: 20rem;
   margin: var(--spacing-1) 0;
   background: var(--color-white-1);
   border: solid 1px var(--color-gray-3);
   border-radius: var(--border-radius-1);
   box-shadow: var(--box-shadow-1);
   z-index: 1001;
-  max-height: 380px;
+  max-height: 38rem;
   overflow: auto;
 }
 .placeholder,
