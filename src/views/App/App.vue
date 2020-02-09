@@ -36,10 +36,10 @@ export default {
   },
   methods: {
     addAppStyles () {
-      document.documentElement.classList.add('homefound-app')
+      document.documentElement.classList.add('app-mode')
     },
     removeAppStyles () {
-      document.documentElement.classList.add('homefound-app')
+      document.documentElement.classList.add('app-mode')
     }
   }
 }
@@ -54,7 +54,7 @@ export default {
 </style>
 
 <style lang="scss">
-.homefound-app {
+.app-mode {
   &html,
   body,
   #app {
