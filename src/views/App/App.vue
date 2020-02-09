@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <BaseNavVertical :nav-items="filteredNavItems"/>
-    <router-view/>
+    <keep-alive include="listings">
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 

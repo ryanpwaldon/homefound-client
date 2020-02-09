@@ -73,7 +73,7 @@
           <BaseButtonRounded
             text="Update search area"
             @click.native="updatePolygonFilter"
-             v-if="!loading && polygon !== filters.lngLat.$geoWithin.$geometry.coordinates"
+             v-if="!loading && !isEqual(polygon, filters.lngLat.$geoWithin.$geometry.coordinates)"
           />
         </transition>
       </div>
@@ -98,7 +98,9 @@ import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import Pin from '@/components/BaseMap/components/Pin/Pin'
 import BaseMap from '@/components/BaseMap/BaseMap'
+import isEqual from 'lodash/isEqual'
 export default {
+  name: 'listings',
   components: {
     LayoutCenter,
     BaseText1,
@@ -148,6 +150,7 @@ export default {
     }
   },
   methods: {
+    isEqual,
     async getListings () {
       const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
       if (this.loading || reachedLastPage) return
