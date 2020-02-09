@@ -1,11 +1,11 @@
 <template>
-  <div class="button" @click.prevent="open">
-    <slot/>
+  <div class="trigger-container" @click.prevent="open">
+    <slot name="trigger"/>
     <Portal v-if="portalState">
-      <div class="container" :style="style" @click="close">
+      <div class="context-menu-container" :style="style" @click="close">
         <TransitionContextMenu @after-leave="portalState = false">
           <div class="context-menu" ref="context-menu" v-if="contextMenuState" @click.stop v-contain-scroll>
-            <div class="action">Add to saved</div>
+            <slot name="content"/>
           </div>
         </TransitionContextMenu>
       </div>
@@ -49,10 +49,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.button {
+.trigger-container {
   position: relative;
 }
-.container {
+.context-menu-container {
   position: fixed;
   display: grid;
   width: 100%;
@@ -76,10 +76,5 @@ export default {
   max-height: 38rem;
   overflow: auto;
   cursor: pointer;
-}
-.action {
-  padding: var(--spacing-2);
-  transition: var(--transition-settings-1) background-color;
-  &:hover { background-color: var(--color-gray-1) }
 }
 </style>

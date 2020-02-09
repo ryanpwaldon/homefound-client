@@ -12,7 +12,12 @@
       <div class="row r-2">
         <BaseText2 class="text">{{ firstPublishedAt | moment('from', 'now') }}</BaseText2>
         <BaseContextMenu>
-          <BaseButtonFlex class="options-button" :icon="require('@/assets/img/dots.svg')"/>
+          <template v-slot:trigger>
+            <BaseButtonFlex class="options-button" :icon="require('@/assets/img/dots.svg')"/>
+          </template>
+          <template v-slot:content>
+            <div class="action">Add to saved</div>
+          </template>
         </BaseContextMenu>
       </div>
     </div>
@@ -105,5 +110,10 @@ export default {
 .options-button {
   height: 2rem;
   width: 2em;
+}
+.action {
+  padding: var(--spacing-2);
+  transition: var(--transition-settings-1) background-color;
+  &:hover { background-color: var(--color-gray-1) }
 }
 </style>
