@@ -11,7 +11,8 @@ export default () => {
   client.interceptors.request.use(config => {
     config.paramsSerializer = params => {
       return qs.stringify(params, {
-        encode: false
+        encode: false,
+        skipNulls: true
       })
     }
     return config
