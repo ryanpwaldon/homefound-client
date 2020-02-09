@@ -39,7 +39,7 @@ export default {
       document.documentElement.classList.add('app-mode')
     },
     removeAppStyles () {
-      document.documentElement.classList.add('app-mode')
+      document.documentElement.classList.remove('app-mode')
     }
   }
 }
