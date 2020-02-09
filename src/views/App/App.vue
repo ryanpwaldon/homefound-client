@@ -13,6 +13,12 @@ export default {
   components: {
     BaseNavVertical
   },
+  mounted () {
+    this.addAppStyles()
+  },
+  beforeDestroy () {
+    this.removeAppStyles()
+  },
   data: () => ({
     navItems: [
       { text: 'Home', path: '/', icon: require('@/assets/img/logo-1.svg'), position: 1, size: '2.5rem', spacing: 'var(--spacing-3)' },
@@ -27,6 +33,14 @@ export default {
     filteredNavItems () {
       return this.navItems.filter(item => !item.roles || this.$store.state.user.user.roles.some(role => item.roles.includes(role)))
     }
+  },
+  methods: {
+    addAppStyles () {
+      document.documentElement.classList.add('homefound-app')
+    },
+    removeAppStyles () {
+      document.documentElement.classList.add('homefound-app')
+    }
   }
 }
 </script>
@@ -36,5 +50,15 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
+}
+</style>
+
+<style lang="scss">
+.homefound-app {
+  &html,
+  body,
+  #app {
+    overflow: hidden;
+  }
 }
 </style>
