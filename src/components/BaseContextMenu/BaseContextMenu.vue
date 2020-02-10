@@ -5,7 +5,7 @@
       <div class="context-menu-container" :style="style" @click="close">
         <TransitionContextMenu @after-leave="portalState = false">
           <div class="context-menu" ref="context-menu" v-if="contextMenuState" @click.stop v-contain-scroll>
-            <slot name="content"/>
+            <slot name="content" :close="close"/>
           </div>
         </TransitionContextMenu>
       </div>
@@ -66,15 +66,12 @@ export default {
   align-self: flex-start;
   grid-column: 2;
   grid-row: 2;
-  width: 20rem;
+  width: 21rem;
   background: var(--color-white-1);
-  border: solid 1px var(--color-gray-3);
   border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
-  white-space: nowrap;
+  box-shadow: var(--box-shadow-3);
   font-size: 1.4rem;
   max-height: 38rem;
   overflow: auto;
-  cursor: pointer;
 }
 </style>

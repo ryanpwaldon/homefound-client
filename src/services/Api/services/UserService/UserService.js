@@ -10,6 +10,18 @@ export default {
     return (await Api().get(`/user/me`)).data
   },
 
+  async findSavedListings () {
+    return (await Api().get(`/user/saved-listings`)).data
+  },
+
+  async addToSavedListings (listingId) {
+    return (await Api().post(`/user/saved-listings`, { listingId })).data
+  },
+
+  async removeFromSavedListings (listingId) {
+    return (await Api().delete(`/user/saved-listings`, { listingId })).data
+  },
+
   async verify (code) {
     return (await Api().get(`/user/verification/verify`, { params: { code } })).data
   },

@@ -3,10 +3,10 @@
     <BaseLoader class="loader" text="Loading content" v-if="loading"/>
     <div class="container" v-else>
       <LayoutCenter>
-        <router-link class="back" to="/app/listings">
+        <div class="back" @click="$router.go(-1)">
           <img src="@/assets/img/arrow.svg">
-          <BaseText4 text="BACK TO SEARCH"/>
-        </router-link>
+          <BaseText4 text="BACK"/>
+        </div>
         <BaseText1 class="title" :text="listing.fullAddress" />
         <div class="cards">
           <div class="card">
@@ -112,6 +112,8 @@ export default {
   margin-bottom: var(--spacing-5);
   display: flex;
   align-items: center;
+  align-self: flex-start;
+  cursor: pointer;
   img {
     margin-right: var(--spacing-2);
     height: 0.6em;

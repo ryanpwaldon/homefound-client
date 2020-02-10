@@ -55,6 +55,8 @@
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
             class="listing"
+            :listing-id="listing._id"
+            :address="listing.fullAddress"
             :price="listing.price"
             :bedrooms="listing.bedrooms"
             :bathrooms="listing.bathrooms"

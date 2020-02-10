@@ -15,8 +15,13 @@
           <template v-slot:trigger>
             <BaseButtonFlex class="options-button" :icon="require('@/assets/img/dots.svg')"/>
           </template>
-          <template v-slot:content>
-            <div class="action">Add to saved</div>
+          <template v-slot:content="{ close }">
+            <div class="info">{{ address }}</div>
+            <BaseDivider class="context-menu-divider"/>
+            <div class="action" @click="addToSavedListings(close)">
+              <img src="@/assets/img/bookmark-sm.svg">
+              Add to saved
+            </div>
           </template>
         </BaseContextMenu>
       </div>
@@ -29,6 +34,7 @@ import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseButtonFlex from '@/components/BaseButtonFlex/BaseButtonFlex'
 import BaseContextMenu from '@/components/BaseContextMenu/BaseContextMenu'
+import UserService from '@/services/Api/services/UserService/UserService'
 export default {
   components: {
     BaseText2,
@@ -37,6 +43,14 @@ export default {
     BaseContextMenu
   },
   props: {
+    listingId: {
+      type: String,
+      required: true
+    },
+    address: {
+      type: String,
+      required: true
+    },
     image: {
       type: String,
       default: 'https://ucarecdn.com/48db410d-7b1f-4ec6-8e6c-e8a188c72e15/'
@@ -60,6 +74,19 @@ export default {
     firstPublishedAt: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    async addToSavedListings (close) {
+      close()
+      try {
+        const user = await UserService.addToSavedListings(this.listingId)
+        this.$store.commit('user/setUser', user)
+        this.$notify({ text: 'Added to your saved listings', type: 'success' })
+      } catch (error) {
+        console.log(error)
+        this.$notify({ text: 'Error', type: 'error' })
+      }
     }
   }
 }
@@ -111,9 +138,28 @@ export default {
   height: 2rem;
   width: 2em;
 }
+.context-menu-divider {
+  margin: 0;
+}
+.info {
+  padding: var(--spacing-3);
+  color: var(--color-gray-4);
+  line-height: 1.5;
+}
 .action {
-  padding: var(--spacing-2);
+  margin: var(--spacing-1) 0;
+  padding: var(--spacing-2) var(--spacing-3);
   transition: var(--transition-settings-1) background-color;
-  &:hover { background-color: var(--color-gray-1) }
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  img {
+    height: 1em;
+    width: 11px;
+    margin-right: var(--spacing-2);
+  }
+  &:hover {
+    background-color: var(--color-gray-1);
+  }
 }
 </style>
