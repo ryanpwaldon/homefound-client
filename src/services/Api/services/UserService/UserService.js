@@ -15,11 +15,11 @@ export default {
   },
 
   async addToSavedListings (listingId) {
-    return (await Api().post(`/user/saved-listings`, { listingId })).data
+    return (await Api().put(`/user/saved-listings/add`, { listingId })).data
   },
 
   async removeFromSavedListings (listingId) {
-    return (await Api().delete(`/user/saved-listings`, { listingId })).data
+    return (await Api().put(`/user/saved-listings/remove`, { listingId })).data
   },
 
   async verify (code) {

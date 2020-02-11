@@ -18,9 +18,9 @@
           <template v-slot:content="{ close }">
             <div class="info">{{ address }}</div>
             <BaseDivider class="context-menu-divider"/>
-            <div class="action" @click="addToSavedListings(close)">
+            <div class="action" @click="savedStatus ? removeFromSavedListings(close) : addToSavedListings(close)">
               <img src="@/assets/img/bookmark-sm.svg">
-              Add to saved
+              {{ savedStatus ? 'Remove from saved' : 'Add to saved' }}
             </div>
           </template>
         </BaseContextMenu>
@@ -35,6 +35,7 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseButtonFlex from '@/components/BaseButtonFlex/BaseButtonFlex'
 import BaseContextMenu from '@/components/BaseContextMenu/BaseContextMenu'
 import UserService from '@/services/Api/services/UserService/UserService'
+import { mapState } from 'vuex'
 export default {
   components: {
     BaseText2,
@@ -76,6 +77,14 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState('user', {
+      savedListings: state => state.user.savedListings
+    }),
+    savedStatus () {
+      return this.savedListings.includes(this.listingId)
+    }
+  },
   methods: {
     async addToSavedListings (close) {
       close()
@@ -83,6 +92,17 @@ export default {
         const user = await UserService.addToSavedListings(this.listingId)
         this.$store.commit('user/setUser', user)
         this.$notify({ text: 'Added to your saved listings', type: 'success' })
+      } catch (error) {
+        console.log(error)
+        this.$notify({ text: 'Error', type: 'error' })
+      }
+    },
+    async removeFromSavedListings (close) {
+      close()
+      try {
+        const user = await UserService.removeFromSavedListings(this.listingId)
+        this.$store.commit('user/setUser', user)
+        this.$notify({ text: 'Removed from your saved listings', type: 'success' })
       } catch (error) {
         console.log(error)
         this.$notify({ text: 'Error', type: 'error' })
