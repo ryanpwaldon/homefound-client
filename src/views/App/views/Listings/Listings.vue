@@ -6,6 +6,14 @@
         <BaseText4 class="filters-title" text="Filters"/>
         <div class="filters-container">
           <BaseFormSelect
+            placeholder="Market status"
+            v-model="filters.marketStatus"
+            :options="[
+              {title: 'Off-market', value: 'OFF'},
+              {title: 'On-market', value: 'ON'}
+            ]"
+          />
+          <BaseFormSelect
             placeholder="Bedrooms"
             v-model="filters.bedrooms"
             :options="[
@@ -51,6 +59,10 @@
           />
         </div>
       </div>
+      <template v-if="total">
+        <BaseText2 :text="`${total} listings`"/>
+        <BaseDivider/>
+      </template>
       <div class="listings-container">
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
@@ -90,7 +102,9 @@
 <script>
 import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
+import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingCardBuyer'
@@ -106,7 +120,9 @@ export default {
   components: {
     LayoutCenter,
     BaseText1,
+    BaseText2,
     BaseText4,
+    BaseDivider,
     BaseFormSelect,
     BaseListingCardBuyer,
     BaseIntersectionTrigger,
@@ -129,6 +145,7 @@ export default {
     lastPage: null,
     loading: false,
     polygon: null,
+    total: null,
     filters: {
       lngLat: {
         $geoWithin: {
@@ -157,7 +174,7 @@ export default {
       const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
       if (this.loading || reachedLastPage) return
       this.loading = true
-      const { docs: listings, pages } = await ListingService.findMany({
+      const { docs: listings, pages, total } = await ListingService.findMany({
         filters: this.filters,
         options: {
           page: this.nextPage,
@@ -167,6 +184,7 @@ export default {
       })
       this.listings.push(...listings)
       this.lastPage = pages
+      this.total = total
       this.nextPage++
       this.loading = false
       this.$refs['intersection-trigger'] && this.$refs['intersection-trigger'].observe()
