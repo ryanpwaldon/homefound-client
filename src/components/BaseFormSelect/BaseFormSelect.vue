@@ -82,7 +82,7 @@ export default {
   background: var(--color-white-1);
   border: solid 1px var(--color-gray-3);
   border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
+  box-shadow: var(--box-shadow-3);
   z-index: 1001;
   max-height: 38rem;
   overflow: auto;

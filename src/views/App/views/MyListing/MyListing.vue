@@ -4,6 +4,7 @@
     <div class="my-listing" v-else>
       <div class="badges">
         <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'yellow'"/>
+        <BaseBadge v-if="listing.marketStatus" :text="listing.marketStatus === 'ON' ? 'On-market' : 'Off-market'" :design="listing.marketStatus === 'ON' ? 'red' : 'green'"/>
         <router-link :to="`/app/listings/${listing._id}`" target="_blank" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }">
           <BaseBadge design="gray" text="Preview" :icon="require('@/assets/img/clickout.svg')"/>
         </router-link>

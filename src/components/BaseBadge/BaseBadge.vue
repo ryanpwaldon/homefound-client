@@ -64,7 +64,7 @@ img {
   background: var(--color-yellow-1);
 }
 .red {
-  color: var(--color-white-1);
-  background: var(--color-red-1);
+  color: var(--color-red-5);
+  background: var(--color-red-4);
 }
 </style>
