@@ -47,6 +47,11 @@ export default {
   color: var(--color-black-2);
   background: var(--color-gray-1);
 }
+.disabled {
+  color: var(--color-gray-4);
+  background: var(--color-gray-1);
+  pointer-events: none;
+}
 .spinner {
   position: absolute;
   left: 50%;

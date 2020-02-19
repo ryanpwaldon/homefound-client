@@ -2,12 +2,12 @@ import Api from '@/services/Api/Api'
 
 export default {
 
-  async register (body) {
-    return (await Api().post('/user', body)).data
+  async createBuyer (body) {
+    return (await Api().post('/user/buyer', body)).data
   },
 
-  async getMe () {
-    return (await Api().get(`/user/me`)).data
+  async createSeller (body) {
+    return (await Api().post('/user/seller', body)).data
   },
 
   async findSavedListings () {

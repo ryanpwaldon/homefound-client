@@ -7,9 +7,9 @@ import {
   ADMIN,
   SELLER,
   BUYER,
-  BUYER_INACTIVE,
-  BUYER_PENDING_ACTIVATION,
-  VERIFICATION_PENDING
+  BUYER_SUBSCRIPTION_ENDED,
+  BUYER_INITIAL_PAYMENT_FAILED,
+  EMAIL_VERIFICATION_PENDING
 } from '@/roles/roles'
 
 Vue.use(VueRouter)
@@ -42,15 +42,31 @@ const routes = [
     }
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/Register/Register'),
+    path: '/signup',
+    name: 'signup',
+    component: () => import('@/views/Signup/Signup'),
     meta: {
       permissions: [
-        { roles: [GUEST], access: true },
+        { roles: [GUEST, BUYER_INITIAL_PAYMENT_FAILED], access: true },
         { roles: [ALL], redirect: '/app' }
       ]
-    }
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'buyer'
+      },
+      {
+        path: 'buyer',
+        name: 'signup-buyer',
+        component: () => import('@/views/Signup/views/Buyer/Buyer')
+      },
+      {
+        path: 'agent',
+        name: 'signup-agent',
+        component: () => import('@/views/Signup/views/Agent/Agent')
+      }
+    ]
   },
   {
     path: '/verify',
@@ -58,18 +74,7 @@ const routes = [
     component: () => import('@/views/Verify/Verify'),
     meta: {
       permissions: [
-        { roles: [VERIFICATION_PENDING], access: true },
-        { roles: [ALL], redirect: '/app' }
-      ]
-    }
-  },
-  {
-    path: '/activate',
-    name: 'activate',
-    component: () => import('@/views/Activate/Activate'),
-    meta: {
-      permissions: [
-        { roles: [BUYER_PENDING_ACTIVATION], access: true },
+        { roles: [EMAIL_VERIFICATION_PENDING], access: true },
         { roles: [ALL], redirect: '/app' }
       ]
     }
@@ -90,9 +95,9 @@ const routes = [
     component: () => import('@/views/App/App'),
     meta: {
       permissions: [
-        { roles: [BUYER, BUYER_INACTIVE, SELLER, ADMIN], access: true },
-        { roles: [VERIFICATION_PENDING], redirect: '/verify' },
-        { roles: [BUYER_PENDING_ACTIVATION], redirect: '/activate' },
+        { roles: [BUYER_INITIAL_PAYMENT_FAILED], redirect: '/signup/buyer' },
+        { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify' },
+        { roles: [BUYER, BUYER_SUBSCRIPTION_ENDED, SELLER, ADMIN], access: true },
         { roles: [ALL], redirect: '/login' }
       ]
     },

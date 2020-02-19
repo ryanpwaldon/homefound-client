@@ -147,6 +147,7 @@ export default {
     polygon: null,
     total: null,
     filters: {
+      marketStatus: 'OFF',
       lngLat: {
         $geoWithin: {
           $geometry: {

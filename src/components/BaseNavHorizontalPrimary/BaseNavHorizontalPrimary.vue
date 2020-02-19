@@ -37,7 +37,7 @@ export default {
         { text: 'Pricing', path: '/pricing' },
         { text: 'FAQs', path: '/faqs' },
         { text: 'Login', path: '/login' },
-        { text: 'Sign up', path: '/register' }
+        { text: 'Sign up', path: '/signup' }
       ]
     }
   }

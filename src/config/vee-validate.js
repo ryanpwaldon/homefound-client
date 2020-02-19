@@ -28,3 +28,5 @@ extend('addressNumber', {
   validate: value => /^[a-zA-Z0-9\- ]*$/.test(value),
   message: 'The {_field_} field may only contain letters, numbers, spaces, and hyphens'
 })
+
+extend('card', ({ valid, error }) => valid || error || 'Your card details are incomplete.')

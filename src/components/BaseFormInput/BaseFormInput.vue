@@ -41,9 +41,9 @@ export default {
 <style lang="scss" scoped>
 .base-form-input {
   color: var(--color-black-2);
-  background: var(--color-white-1);
+  background: var(--color-gray-2);
   padding: var(--spacing-2);
-  border: solid 1px var(--color-gray-3);
+  border: solid 1px var(--color-gray-1);
   border-radius: var(--border-radius-1);
   font-size: 1.4rem;
   width: 100%;

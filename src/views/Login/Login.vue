@@ -1,22 +1,20 @@
 <template>
   <LayoutFocus @keypress.native.enter="submit">
-    <ValidationObserver class="observer" ref="observer" tag="div">
-      <BaseText1 class="title" text="Login to Homefound"/>
-      <BaseDivider/>
-      <BaseText4 class="label" text="Email"/>
+    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
+      <div class="title">Login to Homefound</div>
+      <BaseDivider class="divider"/>
+      <div class="label">Email</div>
       <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
         <BaseFormInput
           v-model="form.email"
-          placeholder="tom@hanks.com"
           autocomplete="username"
         />
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
-      <BaseText4 class="label" text="Password"/>
+      <div class="label">Password</div>
       <ValidationProvider class="provider password" name="password" rules="required" v-slot="{ errors }">
         <BaseFormInput
           v-model="form.password"
-          placeholder="At least 8 characters"
           autocomplete="current-password"
           type="password"
         />
@@ -25,11 +23,12 @@
       <router-link to="/password/instructions">
         <div class="forgot-password">I forgot my password</div>
       </router-link>
-      <BaseDivider/>
+      <BaseDivider class="divider"/>
       <BaseFormSubmitButton
         text="Login"
         :loading="loading"
         @click.native="submit"
+        :design="invalid ? 'disabled' : 'black'"
       />
     </ValidationObserver>
   </LayoutFocus>
@@ -38,8 +37,6 @@
 <script>
 import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
 import AuthService from '@/services/Api/services/AuthService/AuthService'
-import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
@@ -51,8 +48,6 @@ export default {
     LayoutFocus,
     BaseFormInput,
     BaseDivider,
-    BaseText1,
-    BaseText4,
     BaseFormSubmitButton,
     BaseFormError,
     ValidationObserver,
@@ -90,7 +85,13 @@ export default {
   width: 100%;
   position: relative;
 }
+.title {
+  font-size: 1.6rem;
+  color: var(--color-gray-4);
+}
 .label {
+  font-size: 1.4rem;
+  color: var(--color-gray-4);
   margin-bottom: var(--spacing-2);
 }
 .provider {
@@ -99,13 +100,18 @@ export default {
   display: block;
 }
 .provider.password {
-  margin-bottom: var(--spacing-1);
+  margin-bottom: var(--spacing-2);
 }
 .forgot-password {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--color-gray-4);
   text-decoration: underline;
   display: inline-block;
   cursor: pointer;
+}
+.divider {
+  position: relative;
+  width: calc(100% + var(--spacing-5) * 2);
+  left: calc(-1 * var(--spacing-5));
 }
 </style>

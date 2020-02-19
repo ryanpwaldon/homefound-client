@@ -10,6 +10,9 @@
     <script>UPLOADCARE_MANUAL_START = true</script>
   </head>
   <body>
+    <script>
+      window.stripe = window.Stripe('<%= VUE_APP_STRIPE_PUBLISHABLE_KEY %>')
+    </script>
     <noscript>
       <strong>We're sorry but homesight doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

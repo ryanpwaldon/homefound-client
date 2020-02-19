@@ -1,33 +1,22 @@
 <template>
-  <div class="layout-focus">
+  <div class="layout-focus-minimal">
     <router-link class="logo" to="/">
       <img src="@/assets/img/logo-1.svg">
     </router-link>
-    <BaseCard class="content">
-      <slot/>
-    </BaseCard>
+    <slot/>
   </div>
 </template>
 
-<script>
-import BaseCard from '@/components/BaseCard/BaseCard'
-export default {
-  components: {
-    BaseCard
-  }
-}
-</script>
-
 <style lang="scss" scoped>
-.layout-focus {
+.layout-focus-minimal {
   width: 100%;
   min-height: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   background: var(--color-gray-2);
+  padding: var(--spacing-5);
 }
 .logo {
   position: absolute;
@@ -40,8 +29,5 @@ export default {
     display: block;
     height: 100%;
   }
-}
-.content {
-  width: 400px;
 }
 </style>
