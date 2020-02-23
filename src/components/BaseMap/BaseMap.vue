@@ -16,6 +16,10 @@ export default {
     zoom: {
       type: Number,
       default: 3.5
+    },
+    maxZoom: {
+      type: Number,
+      default: 24
     }
   },
   mounted () {
@@ -37,11 +41,14 @@ export default {
     initMap () {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       this.map = new mapboxgl.Map({
+        attributionControl: false,
         style: process.env.VUE_APP_MAPBOX_STYLE_URL,
         container: this.$el,
         center: this.center,
-        zoom: this.zoom
+        zoom: this.zoom,
+        maxZoom: this.maxZoom
       })
+      this.map.on('load', () => this.$emit('load'))
     },
     updateView (lngLat) {
       // add bBox for pologon features

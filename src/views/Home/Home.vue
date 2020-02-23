@@ -8,7 +8,9 @@
           <div class="copy-2">Access off-market and pre-market properties before they’re listed on Realestate.com.au or Domain</div>
           <div class="buttons">
             <BaseButtonLarge text="Get started" design="red"/>
-            <BaseButtonLarge text="View our properties" design="white"/>
+            <router-link to="/explore">
+              <BaseButtonLarge text="View our properties" design="white"/>
+            </router-link>
           </div>
           <div class="copy-3">Agents list free. Find out more <img src="@/assets/img/arrow-right.svg"></div>
         </div>

@@ -32,21 +32,23 @@
             {
               label: 'Impressions',
               data: Object.entries(impressions).map(([date, count]) => ({ x: date, y: count })),
-              backgroundColor: Chart.helpers.color('#d7d7d7').alpha(0.5).rgbString(),
+              backgroundColor: Chart.helpers.color('#d7d7d7').alpha(0).rgbString(),
               borderColor: '#d7d7d7',
-              pointBackgroundColor: '#d7d7d7',
-              pointBorderColor: '#ffffff',
-              borderWidth: 1,
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: '#d7d7d7',
+              pointRadius: 4,
+              borderWidth: 2,
               lineTension: 0.2
             },
             {
               label: 'Clicks',
               data: Object.entries(views).map(([date, count]) => ({ x: date, y: count })),
-              backgroundColor: Chart.helpers.color('#777777').alpha(0.5).rgbString(),
-              borderColor: '#777777',
-              pointBackgroundColor: '#777777',
-              pointBorderColor: '#ffffff',
-              borderWidth: 1,
+              backgroundColor: Chart.helpers.color('#4dadf7').alpha(0).rgbString(),
+              borderColor: '#4dadf7',
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: '#4dadf7',
+              pointRadius: 4,
+              borderWidth: 2,
               lineTension: 0.2
             }
           ]"

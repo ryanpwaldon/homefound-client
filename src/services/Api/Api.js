@@ -17,6 +17,6 @@ export default () => {
     }
     return config
   })
-  client.interceptors.request.use(config => config.url.includes('auth') ? config : new Promise(resolve => setTimeout(() => resolve(config), 500)))
+  client.interceptors.request.use(config => config.url.includes('auth') ? config : new Promise(resolve => setTimeout(() => resolve(config), 250)))
   return client
 }

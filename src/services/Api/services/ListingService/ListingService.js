@@ -30,6 +30,10 @@ export default {
     return (await Api().get(`/listing/${id}/timeseries`, { params: { eventName, range, period } })).data
   },
 
+  async findAllDispersedLngLats () {
+    return (await Api().get(`/listing/lng-lat`)).data
+  },
+
   async delete (id) {
     return (await Api().delete(`/listing/${id}`)).data
   }

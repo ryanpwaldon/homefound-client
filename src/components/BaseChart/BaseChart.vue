@@ -2,7 +2,7 @@
   <div class="base-chart">
     <div class="header">
       <BaseText6 class="label" v-for="(dataset, i) in datasets" :key="i">
-        <div class="color" :style="{ backgroundColor: dataset.pointBackgroundColor }"/>
+        <div class="color" :style="{ backgroundColor: dataset.pointBorderColor }"/>
         <div class="text">{{ dataset.label }}</div>
       </BaseText6>
     </div>
