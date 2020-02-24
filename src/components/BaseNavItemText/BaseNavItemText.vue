@@ -31,6 +31,8 @@ export default {
 .base-nav-item-text {
   display: block;
   position: relative;
+  color: var(--color-gray-4);
+  transition: color 0.2s ease-in-out;
   cursor: pointer;
   &::before {
     content: '';
@@ -46,8 +48,17 @@ export default {
     opacity: 0;
   }
 }
-.base-nav-item-text.transparent:hover::before {
-  opacity: 0.2;
+.nav-item:hover,
+.router-link-active:not(.home) {
+  .wrapper::before { opacity: 0.2 }
+  .icon { opacity: 1 }
+}
+.base-nav-item-text:hover,
+.router-link-exact-active {
+  color: var(--color-black-2);
+  &.transparent::before {
+    opacity: 0.2;
+  }
 }
 .base-nav-item-text:not(.transparent) {
   margin-right: var(--spacing-2);

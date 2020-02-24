@@ -1,15 +1,11 @@
 <template>
   <div class="base-button" :class=[design]>
-    <BaseText2 :text="text"/>
+    {{ text }}
   </div>
 </template>
 
 <script>
-import BaseText2 from '@/components/BaseText2/BaseText2'
 export default {
-  components: {
-    BaseText2
-  },
   props: {
     text: {
       type: String,
@@ -31,12 +27,12 @@ export default {
   font-weight: var(--font-weight-medium);
   display: inline-block;
   position: relative;
+  font-size: 1.8rem;
   cursor: pointer;
 }
 .white {
   color: var(--color-black-2);
   background: var(--color-white-1);
-  box-shadow: var(--box-shadow-1);
   border: solid 1px var(--color-gray-1);
 }
 .gray {

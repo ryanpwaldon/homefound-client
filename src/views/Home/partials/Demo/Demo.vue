@@ -1,0 +1,50 @@
+<template>
+  <div class="demo">
+    <div class="header">
+      <div class="title">Built for homebuyers</div>
+      <div class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+    </div>
+    <div class="video-container">
+      <BaseVideo class="video" :src="require('@/assets/vid/demo.mp4')" :poster="require('@/assets/img/demo-poster.png')"/>
+    </div>
+  </div>
+</template>
+
+<script>
+import BaseVideo from '@/components/BaseVideo/BaseVideo'
+export default {
+  components: {
+    BaseVideo
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.demo {
+  padding: 10rem 0;
+}
+.title {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-4);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+.subtitle {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-7);
+  color: var(--color-gray-4);
+  text-align: center;
+  line-height: 1.5;
+}
+.video-container {
+  width: 100%;
+  position: relative;
+  border-radius: var(--border-radius-1);
+  background: var(--color-white-1);
+  box-shadow: var(--box-shadow-1);
+  overflow: hidden;
+}
+.video {
+  width: 100%;
+}
+</style>
