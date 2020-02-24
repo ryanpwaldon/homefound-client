@@ -1,6 +1,6 @@
 <template>
   <div class="listings">
-    <LayoutCenter>
+    <BaseLayoutCenter>
       <BaseText1 class="title" text="Search" />
       <div class="filters-card">
         <BaseText4 class="filters-title" text="Filters"/>
@@ -80,7 +80,7 @@
       </div>
       <BaseLoader class="loader" v-if="loading"/>
       <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
-    </LayoutCenter>
+    </BaseLayoutCenter>
     <div class="map-container">
       <div class="map-button">
         <transition name="fall">
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -118,7 +118,7 @@ import isEqual from 'lodash/isEqual'
 export default {
   name: 'listings',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseText1,
     BaseText2,
     BaseText4,

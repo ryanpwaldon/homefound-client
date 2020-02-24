@@ -1,21 +1,21 @@
 <template>
-  <LayoutCenter>
+  <BaseLayoutCenter>
     <div class="account">
       <BaseText1 class="title" text="Account"/>
       <BaseNavHorizontalSecondary class="nav" :nav-items="navItems"/>
       <router-view/>
     </div>
-  </LayoutCenter>
+  </BaseLayoutCenter>
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseNavHorizontalSecondary from '@/components/BaseNavHorizontalSecondary/BaseNavHorizontalSecondary'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 export default {
   name: 'account',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseNavHorizontalSecondary,
     BaseText1
   },

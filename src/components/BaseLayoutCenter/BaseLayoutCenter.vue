@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-center">
+  <div class="base-layout-center">
     <div class="container">
       <div class="content">
         <slot/>
@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-.layout-center {
+.base-layout-center {
   width: 100%;
   height: 100%;
   display: flex;

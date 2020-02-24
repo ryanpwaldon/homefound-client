@@ -1,18 +1,18 @@
 <template>
-  <LayoutCenter>
+  <BaseLayoutCenter>
     <div class="admin">
       <BaseText1 text="Admin"/>
     </div>
-  </LayoutCenter>
+  </BaseLayoutCenter>
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 export default {
   name: 'admin',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseText1
   }
 }

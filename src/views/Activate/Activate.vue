@@ -1,20 +1,20 @@
 <template>
-  <LayoutFocus>
+  <BaseLayoutFocus>
     <BaseActivateSubscription
       :customer-id="customerId"
       @payment-success="onPaymentSuccess"
     />
-  </LayoutFocus>
+  </BaseLayoutFocus>
 </template>
 
 <script>
-import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
+import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
 import BaseActivateSubscription from '@/components/BaseActivateSubscription/BaseActivateSubscription'
 import { mapState } from 'vuex'
 export default {
   name: 'activate',
   components: {
-    LayoutFocus,
+    BaseLayoutFocus,
     BaseActivateSubscription
   },
   computed: mapState('user', {

@@ -1,21 +1,21 @@
 <template>
-  <LayoutFocusMinimal @keypress.native.enter="submit">
+  <BaseLayoutFocusMinimal @keypress.native.enter="submit">
     <div class="explore">
       <div class="content"></div>
       <BaseMap class="map" ref="map" @load="addMarkers" :max-zoom="17"/>
     </div>
-  </LayoutFocusMinimal>
+  </BaseLayoutFocusMinimal>
 </template>
 
 <script>
 import ListingService from '@/services/Api/services/ListingService/ListingService'
-import LayoutFocusMinimal from '@/layouts/LayoutFocusMinimal/LayoutFocusMinimal'
+import BaseLayoutFocusMinimal from '@/components/BaseLayoutFocusMinimal/BaseLayoutFocusMinimal'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import { point } from '@turf/helpers'
 export default {
   name: 'explore',
   components: {
-    LayoutFocusMinimal,
+    BaseLayoutFocusMinimal,
     BaseMap
   },
   data: () => ({

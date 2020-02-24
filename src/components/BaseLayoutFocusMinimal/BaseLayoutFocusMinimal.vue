@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-focus-minimal">
+  <div class="base-layout-focus-minimal">
     <router-link class="logo" to="/">
       <img src="@/assets/img/logo-1.svg">
       <div class="label">Homefound</div>
@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-.layout-focus-minimal {
+.base-layout-focus-minimal {
   width: 100%;
   min-height: 100%;
   display: flex;

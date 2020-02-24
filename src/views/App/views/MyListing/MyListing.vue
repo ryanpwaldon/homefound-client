@@ -1,5 +1,5 @@
 <template>
-  <LayoutCenter>
+  <BaseLayoutCenter>
     <BaseLoader class="loader" v-if="loading" text="Loading content"/>
     <div class="my-listing" v-else>
       <div class="badges">
@@ -13,11 +13,11 @@
       <BaseNavHorizontalSecondary class="nav" :nav-items="navItems"/>
       <router-view :listing="listing" @listing-updated="listing = $event"/>
     </div>
-  </LayoutCenter>
+  </BaseLayoutCenter>
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseBadge from '@/components/BaseBadge/BaseBadge'
@@ -26,7 +26,7 @@ import ListingService from '@/services/Api/services/ListingService/ListingServic
 export default {
   name: 'my-listing',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseLoader,
     BaseText1,
     BaseBadge,

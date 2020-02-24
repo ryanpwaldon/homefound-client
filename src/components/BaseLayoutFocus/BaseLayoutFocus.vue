@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-focus">
+  <div class="base-layout-focus">
     <router-link class="logo" to="/">
       <img src="@/assets/img/logo-1.svg">
     </router-link>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout-focus {
+.base-layout-focus {
   width: 100%;
   min-height: 100%;
   height: 100%;

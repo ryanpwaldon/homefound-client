@@ -1,7 +1,7 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit">
+  <BaseLayoutFocus @keypress.native.enter="submit">
     <BaseNavItemText class="logout" text="Logout" @click.native="logout"/>
-    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
+    <ValidationObserver class="observer" ref="observer" tag="div">
       <BaseText1 class="title" text="Verify your account"/>
       <BaseDivider/>
       <BaseText2 class="description">
@@ -24,11 +24,11 @@
         @click.native="submit"
       />
     </ValidationObserver>
-  </LayoutFocus>
+  </BaseLayoutFocus>
 </template>
 
 <script>
-import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
+import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
 import UserService from '@/services/Api/services/UserService/UserService'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
@@ -43,7 +43,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'verify',
   components: {
-    LayoutFocus,
+    BaseLayoutFocus,
     BaseFormInput,
     BaseDivider,
     BaseText1,

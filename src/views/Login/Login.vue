@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit">
+  <BaseLayoutFocus @keypress.native.enter="submit">
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <div class="title">Login to Homefound</div>
       <BaseDivider class="divider"/>
@@ -31,11 +31,11 @@
         :design="invalid ? 'disabled' : 'black'"
       />
     </ValidationObserver>
-  </LayoutFocus>
+  </BaseLayoutFocus>
 </template>
 
 <script>
-import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
+import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
 import AuthService from '@/services/Api/services/AuthService/AuthService'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
@@ -45,7 +45,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'login',
   components: {
-    LayoutFocus,
+    BaseLayoutFocus,
     BaseFormInput,
     BaseDivider,
     BaseFormSubmitButton,

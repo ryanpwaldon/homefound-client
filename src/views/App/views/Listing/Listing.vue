@@ -2,7 +2,7 @@
   <div class="listing">
     <BaseLoader class="loader" text="Loading content" v-if="loading"/>
     <div class="container" v-else>
-      <LayoutCenter>
+      <BaseLayoutCenter>
         <div class="back" @click="$router.go(-1)">
           <img src="@/assets/img/arrow.svg">
           <BaseText4 text="BACK"/>
@@ -34,7 +34,7 @@
           :phone="listing.phone"
           :email="listing.email"
         />
-      </LayoutCenter>
+      </BaseLayoutCenter>
       <div class="map-container">
         <BaseMap :center="listing.lngLat" :zoom="16">
           <Pin :lng-lat="listing.lngLat"/>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText4 from '@/components/BaseText4/BaseText4'
@@ -57,7 +57,7 @@ import Contact from './partials/Contact/Contact'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseLoader,
     BaseText1,
     BaseText4,

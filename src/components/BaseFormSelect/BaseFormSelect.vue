@@ -4,7 +4,7 @@
       {{ selected && selected.title || placeholder }}
     </div>
     <img class="icon" src="@/assets/img/arrow-down.svg">
-    <TransitionContextMenu transform-origin="center top">
+    <BaseTransitionContextMenu transform-origin="center top">
       <div class="dropdown" v-if="focused" v-contain-scroll>
         <div class="placeholder" @click="$emit('input', null)">{{ placeholder }}</div>
         <div
@@ -15,16 +15,16 @@
           {{ option.title }}
         </div>
       </div>
-    </TransitionContextMenu>
+    </BaseTransitionContextMenu>
     <div class="backdrop" v-if="focused"/>
   </div>
 </template>
 
 <script>
-import TransitionContextMenu from '@/transitions/TransitionContextMenu/TransitionContextMenu'
+import BaseTransitionContextMenu from '@/components/BaseTransitionContextMenu/BaseTransitionContextMenu'
 export default {
   components: {
-    TransitionContextMenu
+    BaseTransitionContextMenu
   },
   props: {
     value: {

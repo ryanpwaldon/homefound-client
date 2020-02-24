@@ -1,21 +1,21 @@
 <template>
   <div class="unauthorised">
-    <LayoutCenter>
+    <BaseLayoutCenter>
       <BaseCard>
         <BaseText5 text="Unauthorised"/>
       </BaseCard>
-    </LayoutCenter>
+    </BaseLayoutCenter>
   </div>
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 export default {
   name: 'unauthorised',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseCard,
     BaseText5
   }

@@ -1,5 +1,5 @@
 <template>
-  <LayoutCenter>
+  <BaseLayoutCenter>
     <BaseLoader class="loader" v-if="loading" text="Loading content"/>
     <template v-else>
       <BaseText1 text="Saved listings"/>
@@ -20,11 +20,11 @@
         </router-link>
       </div>
     </template>
-  </LayoutCenter>
+  </BaseLayoutCenter>
 </template>
 
 <script>
-import LayoutCenter from '@/layouts/LayoutCenter/LayoutCenter'
+import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
@@ -33,7 +33,7 @@ import UserService from '@/services/Api/services/UserService/UserService'
 export default {
   name: 'saved',
   components: {
-    LayoutCenter,
+    BaseLayoutCenter,
     BaseLoader,
     BaseText1,
     BaseDivider,

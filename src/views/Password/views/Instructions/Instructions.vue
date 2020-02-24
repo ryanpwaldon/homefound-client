@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocus @keypress.native.enter="submit">
+  <BaseLayoutFocus @keypress.native.enter="submit">
     <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
       <BaseText1 class="title" text="Reset password"/>
       <BaseDivider/>
@@ -21,11 +21,11 @@
         @click.native="submit"
       />
     </ValidationObserver>
-  </LayoutFocus>
+  </BaseLayoutFocus>
 </template>
 
 <script>
-import LayoutFocus from '@/layouts/LayoutFocus/LayoutFocus'
+import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
 import UserService from '@/services/Api/services/UserService/UserService'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
@@ -38,7 +38,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'instructions',
   components: {
-    LayoutFocus,
+    BaseLayoutFocus,
     BaseFormInput,
     BaseDivider,
     BaseText1,

@@ -1,5 +1,5 @@
 <template>
-  <LayoutFocusMinimal @keypress.native.enter="submit">
+  <BaseLayoutFocusMinimal @keypress.native.enter="submit">
     <div class="container">
       <Nav class="nav"/>
       <BaseCard>
@@ -59,11 +59,11 @@
         </ValidationObserver>
       </BaseCard>
     </div>
-  </LayoutFocusMinimal>
+  </BaseLayoutFocusMinimal>
 </template>
 
 <script>
-import LayoutFocusMinimal from '@/layouts/LayoutFocusMinimal/LayoutFocusMinimal'
+import BaseLayoutFocusMinimal from '@/components/BaseLayoutFocusMinimal/BaseLayoutFocusMinimal'
 import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import UserService from '@/services/Api/services/UserService/UserService'
@@ -76,7 +76,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'signup',
   components: {
-    LayoutFocusMinimal,
+    BaseLayoutFocusMinimal,
     Nav,
     BaseCard,
     BaseFormInput,

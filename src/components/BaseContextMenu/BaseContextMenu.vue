@@ -3,11 +3,11 @@
     <slot name="trigger"/>
     <Portal v-if="portalState">
       <div class="context-menu-container" :style="style" @click="close">
-        <TransitionContextMenu @after-leave="portalState = false">
+        <BaseTransitionContextMenu @after-leave="portalState = false">
           <div class="context-menu" ref="context-menu" v-if="contextMenuState" @click.stop v-contain-scroll>
             <slot name="content" :close="close"/>
           </div>
-        </TransitionContextMenu>
+        </BaseTransitionContextMenu>
       </div>
     </Portal>
   </div>
@@ -15,11 +15,11 @@
 
 <script>
 import { Portal } from '@linusborg/vue-simple-portal'
-import TransitionContextMenu from '@/transitions/TransitionContextMenu/TransitionContextMenu'
+import BaseTransitionContextMenu from '@/components/BaseTransitionContextMenu/BaseTransitionContextMenu'
 export default {
   components: {
     Portal,
-    TransitionContextMenu
+    BaseTransitionContextMenu
   },
   data: () => ({
     portalState: false,
