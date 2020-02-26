@@ -14,7 +14,9 @@
     </div>
     <div class="divider"/>
     <div class="bottom">
-      <BaseButtonLarge class="button" text="Get started" design="red"/>
+      <router-link to="/signup/agent">
+        <BaseButtonLarge class="button" text="Get started" design="red"/>
+      </router-link>
     </div>
   </BaseCard>
 </template>

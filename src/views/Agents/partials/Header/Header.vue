@@ -4,7 +4,9 @@
       <div class="title">List properties free forever</div>
       <div class="subtitle">Gain deep insights that improve your listing performance on REA and Domain</div>
       <div class="buttons">
-        <BaseButtonLarge text="Get started" design="red"/>
+        <router-link to="/signup/agent">
+          <BaseButtonLarge text="Get started" design="red"/>
+        </router-link>
       </div>
     </div>
     <div class="illustration">

@@ -1,67 +1,64 @@
 <template>
-  <BaseLayoutFocusMinimal @keypress.native.enter="submit">
-    <div class="content">
-      <Nav class="nav"/>
-      <BaseCard>
-        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-          <div class="title">Sign up as an agent</div>
-          <BaseDivider class="divider"/>
-          <div class="label">Name</div>
-          <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.name"
-              autocomplete="name"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="label">Email</div>
-          <ValidationProvider class="input" name="email" rules="required|email" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.email"
-              autocomplete="email"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="label">Phone</div>
-          <ValidationProvider class="input" name="phone" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.phone"
-              autocomplete="phone"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="label">Agent licence number</div>
-          <ValidationProvider class="input" name="agent licence number" rules="required|numeric" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.licenceNumber"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="label">Password</div>
-          <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.password"
-              autocomplete="new-password"
-              type="password"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <BaseDivider class="divider"/>
-          <BaseFormSubmitButton
-            class="submit"
-            text="Create account"
-            :loading="loading"
-            @click.native="submit"
-            :design="invalid ? 'disabled' : 'black'"
+  <div class="container">
+    <Nav class="nav"/>
+    <BaseCard>
+      <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
+        <div class="title">Sign up as an agent</div>
+        <BaseDivider class="divider"/>
+        <div class="label">Name</div>
+        <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.name"
+            autocomplete="name"
           />
-        </ValidationObserver>
-      </BaseCard>
-    </div>
-  </BaseLayoutFocusMinimal>
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <div class="label">Email</div>
+        <ValidationProvider class="input" name="email" rules="required|email" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.email"
+            autocomplete="email"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <div class="label">Phone</div>
+        <ValidationProvider class="input" name="phone" rules="required|numeric" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.phone"
+            autocomplete="phone"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <div class="label">Agent licence number</div>
+        <ValidationProvider class="input" name="agent licence number" rules="required|numeric" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.licenceNumber"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <div class="label">Password</div>
+        <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.password"
+            autocomplete="new-password"
+            type="password"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <BaseDivider class="divider"/>
+        <BaseFormSubmitButton
+          class="submit"
+          text="Create account"
+          :loading="loading"
+          @click.native="submit"
+          :design="invalid ? 'disabled' : 'black'"
+        />
+      </ValidationObserver>
+    </BaseCard>
+  </div>
 </template>
 
 <script>
-import BaseLayoutFocusMinimal from '@/components/BaseLayoutFocusMinimal/BaseLayoutFocusMinimal'
 import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import UserService from '@/services/Api/services/UserService/UserService'
@@ -73,7 +70,6 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'signup',
   components: {
-    BaseLayoutFocusMinimal,
     Nav,
     BaseCard,
     BaseFormInput,
@@ -115,8 +111,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content {
-  width: 40rem;
+.container {
+  width: 100%;
+  max-width: 40rem;
 }
 .nav {
   margin-bottom: var(--spacing-5);

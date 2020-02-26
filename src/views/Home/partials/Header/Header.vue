@@ -5,9 +5,9 @@
       <div class="subtitle">Australia's most reliable platform for off-market property listings</div>
       <div class="buttons">
         <router-link to="/signup/buyer">
-          <BaseButtonLarge text="Sign up" design="red"/>
+          <BaseButtonLarge text="Get started" design="red"/>
         </router-link>
-        <BaseButtonLarge text="Explore our listings" design="white"/>
+        <BaseButtonLarge text="Explore listings" design="white"/>
       </div>
     </div>
     <div class="illustration">

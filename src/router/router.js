@@ -49,7 +49,23 @@ const routes = [
   {
     path: '/faqs',
     name: 'faqs',
-    component: () => import('@/views/Faqs/Faqs')
+    component: () => import('@/views/Faqs/Faqs'),
+    children: [
+      {
+        path: '',
+        redirect: 'buyer'
+      },
+      {
+        path: 'buyer',
+        name: 'faqs/buyer',
+        component: () => import('@/views/Faqs/views/Buyer/Buyer')
+      },
+      {
+        path: 'agent',
+        name: 'faqs/agent',
+        component: () => import('@/views/Faqs/views/Agent/Agent')
+      }
+    ]
   },
   {
     path: '/explore',

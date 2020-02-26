@@ -1,6 +1,5 @@
 <template>
   <component
-    ref="main"
     class="base-nav-item-text"
     :class="[ design, activeMode === 'none' && 'active-state-disabled' ]"
     :is="path ? 'router-link' : 'div'"
@@ -34,9 +33,6 @@ export default {
       default: 'regular',
       validator: val => ['regular', 'exact', 'none'].includes(val)
     }
-  },
-  mounted () {
-    console.log(this.$refs['main'])
   }
 }
 </script>

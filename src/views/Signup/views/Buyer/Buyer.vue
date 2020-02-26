@@ -1,69 +1,66 @@
 <template>
-  <BaseLayoutFocusMinimal @keypress.native.enter="submit">
-    <div class="container">
-      <Nav class="nav"/>
-      <BaseCard>
-        <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
-          <div class="title">Sign up as a buyer</div>
-          <BaseDivider class="divider"/>
-          <div class="content">
-            <div class="section">
-              <div class="label">Name</div>
-              <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
-                <BaseFormInput
-                  v-model="form.name"
-                  autocomplete="name"
-                />
-                <BaseFormError :message="errors[0]"/>
-              </ValidationProvider>
-              <div class="label">Email</div>
-              <ValidationProvider class="input" name="email" rules="required|email" v-slot="{ errors }">
-                <BaseFormInput
-                  v-model="form.email"
-                  autocomplete="email"
-                />
-                <BaseFormError :message="errors[0]"/>
-              </ValidationProvider>
-              <div class="label">Password</div>
-              <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
-                <BaseFormInput
-                  v-model="form.password"
-                  autocomplete="new-password"
-                  type="password"
-                />
-                <BaseFormError :message="errors[0]"/>
-              </ValidationProvider>
-            </div>
-            <div class="vertical-divider"/>
-            <div class="section">
-              <div class="label">Plan</div>
-              <div class="input plan">
-                <div class="price">74 AUD</div>
-                <div class="subcopy">billed monthly</div>
-              </div>
-              <div class="label">Card details</div>
-              <ValidationProvider class="input" name="card details" rules="required|card" v-slot="{ errors }" :custom-messages="{ required: 'Your card details are required.' }">
-                <BaseFormCard v-model="card"/>
-                <div class="card-error">{{ errors[0] }}</div>
-              </ValidationProvider>
-            </div>
+  <div class="container">
+    <Nav class="nav"/>
+    <BaseCard>
+      <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
+        <div class="title">Sign up as a buyer</div>
+        <BaseDivider class="divider"/>
+        <div class="content">
+          <div class="section">
+            <div class="label">Name</div>
+            <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
+              <BaseFormInput
+                v-model="form.name"
+                autocomplete="name"
+              />
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
+            <div class="label">Email</div>
+            <ValidationProvider class="input" name="email" rules="required|email" v-slot="{ errors }">
+              <BaseFormInput
+                v-model="form.email"
+                autocomplete="email"
+              />
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
+            <div class="label">Password</div>
+            <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
+              <BaseFormInput
+                v-model="form.password"
+                autocomplete="new-password"
+                type="password"
+              />
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
           </div>
-          <BaseDivider class="divider"/>
-          <BaseFormSubmitButton
-            class="submit"
-            text="Create account"
-            :loading="loading"
-            @click.native="submit"
-            :design="invalid ? 'disabled' : 'black'"
-          />
-        </ValidationObserver>
-      </BaseCard>
-    </div>
-  </BaseLayoutFocusMinimal>
+          <div class="vertical-divider"/>
+          <div class="section">
+            <div class="label">Plan</div>
+            <div class="input plan">
+              <div class="price">74 AUD</div>
+              <div class="subcopy">billed monthly</div>
+            </div>
+            <div class="label">Card details</div>
+            <ValidationProvider class="input" name="card details" rules="required|card" v-slot="{ errors }" :custom-messages="{ required: 'Your card details are required.' }">
+              <BaseFormCard v-model="card"/>
+              <div class="card-error">{{ errors[0] }}</div>
+            </ValidationProvider>
+          </div>
+        </div>
+        <BaseDivider class="divider"/>
+        <BaseFormSubmitButton
+          class="submit"
+          text="Create account"
+          :loading="loading"
+          @click.native="submit"
+          :design="invalid ? 'disabled' : 'black'"
+        />
+      </ValidationObserver>
+    </BaseCard>
+  </div>
 </template>
 
 <script>
-import BaseLayoutFocusMinimal from '@/components/BaseLayoutFocusMinimal/BaseLayoutFocusMinimal'
 import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import UserService from '@/services/Api/services/UserService/UserService'
@@ -76,7 +73,6 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'signup',
   components: {
-    BaseLayoutFocusMinimal,
     Nav,
     BaseCard,
     BaseFormInput,
