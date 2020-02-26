@@ -1,5 +1,9 @@
 <template>
-  <div class="base-form-toggle" @click="toggle(!value)" :style="{opacity: loading ? 0.5 : 1}">
+  <div
+    class="base-form-toggle"
+    :class="design"
+    @click="toggle(!value)"
+    :style="{opacity: loading ? 0.5 : 1}">
     <div class="knob-container">
       <div class="knob" ref="knob"/>
     </div>
@@ -17,6 +21,26 @@ export default {
     asyncFunc: {
       type: Function,
       required: false
+    },
+    design: {
+      type: String,
+      default: 'regular'
+    },
+    bgActiveColor: {
+      type: String,
+      default: '--color-green-7'
+    },
+    bgInactiveColor: {
+      type: String,
+      default: '--color-gray-4'
+    },
+    knobActiveColor: {
+      type: String,
+      default: '--color-white-1'
+    },
+    knobInactiveColor: {
+      type: String,
+      default: '--color-white-1'
     }
   },
   mounted () {
@@ -42,11 +66,20 @@ export default {
     },
     animate (state) {
       const documentStyle = getComputedStyle(document.documentElement)
-      const color1 = documentStyle.getPropertyValue('--color-green-7').trim()
-      const color2 = documentStyle.getPropertyValue('--color-gray-4').trim()
+      const bgActiveColor = documentStyle.getPropertyValue(this.bgActiveColor).trim()
+      const bgInactiveColor = documentStyle.getPropertyValue(this.bgInactiveColor).trim()
+      const knobActiveColor = documentStyle.getPropertyValue(this.knobActiveColor).trim()
+      const knobInactiveColor = documentStyle.getPropertyValue(this.knobInactiveColor).trim()
       const tl = anime.timeline({ easing: 'easeInOutQuad', duration: 200 })
-      tl.add({ targets: this.$refs['knob'], translateX: state ? this.$refs['knob'].parentElement.offsetWidth - this.$refs['knob'].offsetWidth : 0 }, 0)
-      tl.add({ targets: this.$el, background: state ? color1 : color2 }, 0)
+      tl.add({
+        targets: this.$refs['knob'],
+        translateX: state ? this.$refs['knob'].parentElement.offsetWidth - this.$refs['knob'].offsetWidth : 0,
+        background: state ? knobActiveColor : knobInactiveColor
+      }, 0)
+      tl.add({
+        targets: this.$el,
+        background: state ? bgActiveColor : bgInactiveColor
+      }, 0)
       return tl
     },
     initTogglePosition (state) {
@@ -77,6 +110,14 @@ export default {
   width: 12px;
   height: 12px;
   border-radius: 100%;
-  background: var(--color-white-1);
+}
+.large {
+  width: 64px;
+  height: 24px;
+  padding: 6px;
+  .knob {
+    width: 12px;
+    height: 12px;
+  }
 }
 </style>

@@ -87,7 +87,6 @@ export default {
 }
 .title {
   font-size: 1.6rem;
-  color: var(--color-gray-4);
 }
 .label {
   font-size: 1.4rem;

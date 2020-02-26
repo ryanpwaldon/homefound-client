@@ -11,32 +11,36 @@
       </div>
       <div class="col col-2">
         <div class="heading">Info</div>
-        <div class="link">Buyers</div>
-        <div class="link">Agents</div>
-        <div class="link">Pricing</div>
-        <div class="link">FAQs</div>
+        <BaseNavItemText text="Buyers" path="/" active-mode="none"/>
+        <BaseNavItemText text="Agents" path="/agents" active-mode="none"/>
+        <BaseNavItemText text="Pricing" path="/pricing" active-mode="none"/>
+        <BaseNavItemText text="FAQs" path="/faqs" active-mode="none"/>
       </div>
       <div class="col col-3">
         <div class="heading">Links</div>
-        <div class="link">Login</div>
-        <div class="link">Sign up</div>
+        <BaseNavItemText text="Login" path="/login" active-mode="none"/>
+        <BaseNavItemText text="Sign up" path="/signup" active-mode="none"/>
       </div>
       <div class="col col-4">
         <div class="heading">Legal</div>
-        <div class="link">Terms</div>
-        <div class="link">Privacy</div>
+        <BaseNavItemText text="Terms" path="/terms" active-mode="none"/>
+        <BaseNavItemText text="Privacy" path="/privacy" active-mode="none"/>
       </div>
       <div class="col col-5">
         <div class="heading">Help</div>
-        <div class="link">Email us</div>
-        <div class="link">Send us a message</div>
+        <BaseNavItemText text="Email us"/>
+        <BaseNavItemText text="Send us a message"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BaseNavItemText from '@/components/BaseNavItemText/BaseNavItemText'
 export default {
+  components: {
+    BaseNavItemText
+  }
 }
 </script>
 
@@ -60,9 +64,6 @@ export default {
 .heading {
   font-size: 1.4rem;
   font-weight: var(--font-weight-medium);
-}
-.link {
-  font-size: 1.4rem;
 }
 .col {
   display: flex;

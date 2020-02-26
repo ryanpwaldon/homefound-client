@@ -27,7 +27,7 @@ export default {
   font-weight: var(--font-weight-medium);
   display: inline-block;
   position: relative;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   cursor: pointer;
 }
 .white {

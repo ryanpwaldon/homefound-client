@@ -26,9 +26,30 @@ const routes = [
     component: () => import('@/views/Agents/Agents')
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/About/About')
+    path: '/pricing',
+    name: 'pricing',
+    component: () => import('@/views/Pricing/Pricing'),
+    children: [
+      {
+        path: '',
+        redirect: 'buyer'
+      },
+      {
+        path: 'buyer',
+        name: 'pricing/buyer',
+        component: () => import('@/views/Pricing/views/Buyer/Buyer')
+      },
+      {
+        path: 'agent',
+        name: 'pricing/agent',
+        component: () => import('@/views/Pricing/views/Agent/Agent')
+      }
+    ]
+  },
+  {
+    path: '/faqs',
+    name: 'faqs',
+    component: () => import('@/views/Faqs/Faqs')
   },
   {
     path: '/explore',
@@ -63,12 +84,12 @@ const routes = [
       },
       {
         path: 'buyer',
-        name: 'signup-buyer',
+        name: 'signup/buyer',
         component: () => import('@/views/Signup/views/Buyer/Buyer')
       },
       {
         path: 'agent',
-        name: 'signup-agent',
+        name: 'signup/agent',
         component: () => import('@/views/Signup/views/Agent/Agent')
       }
     ]
@@ -224,7 +245,8 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: 'history',
-  base: process.env.BASE_URL
+  base: process.env.BASE_URL,
+  scrollBehavior: () => ({ x: 0, y: 0 })
 })
 
 router.beforeEach(async (to, _, next) => {

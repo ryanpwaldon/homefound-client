@@ -12,6 +12,7 @@
           v-for="(navItem, i) in navItems"
           :path="navItem.path"
           :text="navItem.text"
+          :active-mode="navItem.activeMode"
           :design="navItem.design"
           :key="i"
         />
@@ -32,7 +33,7 @@ export default {
     navItems: {
       type: Array,
       default: () => [
-        { text: 'Buyers', path: '/' },
+        { text: 'Buyers', path: '/', activeMode: 'exact' },
         { text: 'Agents', path: '/agents' },
         { text: 'Pricing', path: '/pricing' },
         { text: 'FAQs', path: '/faqs' },

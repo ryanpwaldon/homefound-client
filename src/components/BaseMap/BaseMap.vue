@@ -20,6 +20,10 @@ export default {
     maxZoom: {
       type: Number,
       default: 24
+    },
+    scrollZoom: {
+      type: Boolean,
+      default: true
     }
   },
   mounted () {
@@ -46,7 +50,9 @@ export default {
         container: this.$el,
         center: this.center,
         zoom: this.zoom,
-        maxZoom: this.maxZoom
+        maxZoom: this.maxZoom,
+        scrollZoom: this.scrollZoom,
+        fadeDuration: 0
       })
       this.map.on('load', () => this.$emit('load'))
     },

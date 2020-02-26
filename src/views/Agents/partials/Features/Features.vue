@@ -2,17 +2,24 @@
   <div class="features">
     <BaseCard>
       <div class="icon-container">
-        <img src="@/assets/img/approved.svg" class="icon">
+        <img class="icon" src="@/assets/img/free.svg">
       </div>
-      <div class="title">Off-market guarantee</div>
-      <div class="paragraph">We monitor major listing sites to ensure our properties are genuinley off-market. Once they list on a major site, we flag them.</div>
+      <div class="title">Free forever</div>
+      <div class="paragraph">Off market property listings are in high demand by property seekers – so we will never charge an agent to list on our platform.</div>
     </BaseCard>
     <BaseCard>
       <div class="icon-container">
-        <img src="@/assets/img/motivation.svg" class="icon">
+        <img class="icon" src="@/assets/img/up-trend.svg">
       </div>
-      <div class="title">Built for homebuyers</div>
-      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</div>
+      <div class="title">Real-time analytics</div>
+      <div class="paragraph">Get instant insights into the demand for your property and inform your strategy to listing on major property real estate sites.</div>
+    </BaseCard>
+    <BaseCard>
+      <div class="icon-container">
+        <img class="icon" src="@/assets/img/hidden.svg">
+      </div>
+      <div class="title">Privacy</div>
+      <div class="paragraph">Vendors want to keep their sale private? Your listings will only be visible to our private audience.</div>
     </BaseCard>
   </div>
 </template>

@@ -1,5 +1,11 @@
 <template>
-  <component class="base-nav-item-text" :class="design" :is="path ? 'router-link' : 'div'" :to="path">
+  <component
+    ref="main"
+    class="base-nav-item-text"
+    :class="[ design, activeMode === 'none' && 'active-state-disabled' ]"
+    :is="path ? 'router-link' : 'div'"
+    :exact="activeMode === 'exact'"
+    :to="path">
     <BaseText2 class="text" :text="text"/>
   </component>
 </template>
@@ -22,7 +28,15 @@ export default {
     design: {
       type: String,
       default: 'transparent'
+    },
+    activeMode: {
+      type: String,
+      default: 'regular',
+      validator: val => ['regular', 'exact', 'none'].includes(val)
     }
+  },
+  mounted () {
+    console.log(this.$refs['main'])
   }
 }
 </script>
@@ -48,13 +62,8 @@ export default {
     opacity: 0;
   }
 }
-.nav-item:hover,
-.router-link-active:not(.home) {
-  .wrapper::before { opacity: 0.2 }
-  .icon { opacity: 1 }
-}
 .base-nav-item-text:hover,
-.router-link-exact-active {
+.router-link-active:not(.active-state-disabled) {
   color: var(--color-black-2);
   &.transparent::before {
     opacity: 0.2;

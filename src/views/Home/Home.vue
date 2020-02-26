@@ -1,22 +1,17 @@
 <template>
-  <div class="home">
-    <BaseNavHorizontalPrimary/>
-    <div class="container">
-      <Header class="section"/>
-      <div class="divider"/>
-      <Features class="section"/>
-      <div class="divider"/>
-      <Explore class="section"/>
-      <div class="divider"/>
-      <Demo class="section"/>
-    </div>
-    <BaseFooter/>
-  </div>
+  <BaseLayoutHome>
+    <Header/>
+    <div class="divider"/>
+    <Features/>
+    <div class="divider"/>
+    <Explore/>
+    <div class="divider"/>
+    <Demo/>
+  </BaseLayoutHome>
 </template>
 
 <script>
-import BaseNavHorizontalPrimary from '@/components/BaseNavHorizontalPrimary/BaseNavHorizontalPrimary'
-import BaseFooter from '@/components/BaseFooter/BaseFooter'
+import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import Header from './partials/Header/Header'
 import Features from './partials/Features/Features'
 import Explore from './partials/Explore/Explore'
@@ -24,8 +19,7 @@ import Demo from './partials/Demo/Demo'
 export default {
   name: 'home',
   components: {
-    BaseNavHorizontalPrimary,
-    BaseFooter,
+    BaseLayoutHome,
     Header,
     Features,
     Explore,
@@ -35,22 +29,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 0 var(--spacing-5);
-  align-items: center;
-  background: var(--color-gray-2);
-}
-.section {
-  width: 100%;
-  max-width: 90rem;
-}
 .divider {
   width: 100%;
   height: 1px;
