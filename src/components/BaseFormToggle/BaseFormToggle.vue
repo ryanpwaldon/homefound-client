@@ -113,8 +113,8 @@ export default {
 }
 .large {
   width: 64px;
-  height: 24px;
-  padding: 6px;
+  height: 28px;
+  padding: 8px 10px;
   .knob {
     width: 12px;
     height: 12px;

@@ -126,6 +126,7 @@ export default {
     color: var(--color-black-2);
   }
   .label {
+    font-weight: var(--font-weight-medium);
     transition: color var(--transition-settings-1);
   }
 }
