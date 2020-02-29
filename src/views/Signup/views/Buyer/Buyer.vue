@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <Nav class="nav"/>
     <BaseCard>
-      <ValidationObserver class="form" ref="form" tag="div" v-slot="{ invalid }">
-        <div class="title">Sign up as a buyer</div>
+      <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
+        <Nav/>
         <BaseDivider class="divider"/>
         <div class="content">
           <div class="section">
@@ -53,7 +52,7 @@
           text="Create account"
           :loading="loading"
           @click.native="submit"
-          :design="invalid ? 'disabled' : 'black'"
+          :design="valid ? 'black' : 'disabled'"
         />
       </ValidationObserver>
     </BaseCard>
@@ -119,9 +118,6 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.nav {
-  margin-bottom: var(--spacing-5);
-}
 .form {
   display: flex;
   flex-direction: column;
@@ -130,9 +126,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   grid-gap: var(--spacing-5);
-}
-.title {
-  font-size: 1.6rem;
 }
 .label {
   font-size: 1.4rem;

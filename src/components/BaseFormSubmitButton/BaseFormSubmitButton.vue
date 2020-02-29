@@ -24,7 +24,7 @@ export default {
     },
     design: {
       type: String,
-      default: 'black'
+      default: 'disabled'
     }
   }
 }
@@ -38,6 +38,9 @@ export default {
   border-radius: var(--border-radius-1);
   cursor: pointer;
   position: relative;
+  transition:
+    color var(--transition-settings-1),
+    background-color var(--transition-settings-1);
 }
 .black {
   color: var(--color-white-1);

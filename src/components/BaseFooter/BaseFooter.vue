@@ -56,10 +56,17 @@ export default {
 .content {
   width: 100%;
   max-width: 90rem;
-  padding: 10rem 0;
+  padding: var(--spacing-10) 0;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+    flex-direction: column;
+    > *:not(:last-child) {
+      margin-bottom: var(--spacing-8);
+    }
+  }
 }
 .heading {
   font-size: 1.4rem;

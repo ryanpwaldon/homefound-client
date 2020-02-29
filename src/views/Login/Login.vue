@@ -2,7 +2,7 @@
   <BaseLayoutHome @keypress.native.enter="submit">
     <div class="login">
       <BaseCard class="card">
-        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
+        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
           <div class="title">Login</div>
           <BaseDivider class="divider"/>
           <div class="label">Email</div>
@@ -23,14 +23,14 @@
             <BaseFormError :message="errors[0]"/>
           </ValidationProvider>
           <router-link to="/password/instructions">
-            <div class="forgot-password">I forgot my password</div>
+            <div class="text-button">I forgot my password</div>
           </router-link>
           <BaseDivider class="divider"/>
           <BaseFormSubmitButton
             text="Continue"
             :loading="loading"
             @click.native="submit"
-            :design="invalid ? 'disabled' : 'black'"
+            :design="valid ? 'black' : 'disabled'"
           />
         </ValidationObserver>
       </BaseCard>
@@ -103,7 +103,8 @@ export default {
   position: relative;
 }
 .title {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
 }
 .label {
   font-size: 1.4rem;
@@ -118,7 +119,7 @@ export default {
 .provider.password {
   margin-bottom: var(--spacing-2);
 }
-.forgot-password {
+.text-button {
   font-size: 1.2rem;
   color: var(--color-gray-4);
   text-decoration: underline;

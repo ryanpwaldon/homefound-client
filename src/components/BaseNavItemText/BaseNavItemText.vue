@@ -56,7 +56,12 @@ export default {
     background: var(--color-gray-4);
     transition: opacity 0.2s ease-in-out;
     opacity: 0;
+    z-index: 0;
   }
+}
+.text {
+  z-index: 1;
+  position: relative;
 }
 .base-nav-item-text:hover,
 .router-link-active:not(.active-state-disabled) {

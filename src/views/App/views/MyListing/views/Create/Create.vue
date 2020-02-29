@@ -268,16 +268,16 @@ export default {
       }
     },
     async submit (shouldPublish) {
-      if (this.loading || !(await this.$refs['form'].validate())) return this.$notify({ text: 'Form is incomplete', type: 'error' })
+      if (this.loading || !(await this.$refs['form'].validate())) return this.$notify({ text: 'Incomplete', type: 'error' })
       this.loading = true
       try {
         this.form.published = shouldPublish
         const listing = await ListingService.update(this.listing._id, this.form)
         this.$emit('listing-updated', listing)
-        this.$notify({ text: 'Success', type: 'success' })
+        this.$notify({ type: 'success' })
       } catch (err) {
         console.log(err)
-        this.$notify({ text: 'Error', type: 'error' })
+        this.$notify({ type: 'error' })
       }
       this.loading = false
     }

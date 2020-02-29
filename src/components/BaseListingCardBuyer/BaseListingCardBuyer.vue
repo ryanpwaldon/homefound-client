@@ -94,7 +94,7 @@ export default {
         this.$notify({ text: 'Added to your saved listings', type: 'success' })
       } catch (error) {
         console.log(error)
-        this.$notify({ text: 'Error', type: 'error' })
+        this.$notify({ type: 'error' })
       }
     },
     async removeFromSavedListings (close) {
@@ -105,7 +105,7 @@ export default {
         this.$notify({ text: 'Removed from your saved listings', type: 'success' })
       } catch (error) {
         console.log(error)
-        this.$notify({ text: 'Error', type: 'error' })
+        this.$notify({ type: 'error' })
       }
     }
   }

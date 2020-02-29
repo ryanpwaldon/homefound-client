@@ -1,54 +1,45 @@
 <template>
-  <notifications class="base-notifications" position="top right" :duration="4000">
-    <template slot="body" slot-scope="props">
-      <BaseCard @click.native="props.close">
-        <div class="title-container">
-          <div class="mark" :class="[props.item.type]"/>
-          <BaseText4 class="title" text="Notification"/>
+  <Notify class="base-notifications" position="bottom center" :duration="4000">
+    <template v-slot:body="{ close, item }">
+      <BaseCard class="card" :class="[item.type]" @click.native="close">
+        <div class="text">
+          <span v-if="item.text">{{ item.text }}</span>
+          <span v-else style="text-transform: capitalize">{{ item.type }}</span>
         </div>
-        <BaseText5 class="text" :text="props.item.text"/>
       </BaseCard>
     </template>
-  </notifications>
+  </Notify>
 </template>
 
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
-import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseText5 from '@/components/BaseText5/BaseText5'
 export default {
   components: {
-    BaseCard,
-    BaseText4,
-    BaseText5
+    BaseCard
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .base-notifications {
-  margin: var(--spacing-5);
-  width: 360px !important;
+  width: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 ::v-deep .vue-notification-wrapper {
-  overflow: visible;
-  margin-bottom: var(--spacing-5);
-}
-.title-container {
   display: flex;
-  align-items: center;
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-5);
+  justify-content: center;
 }
-.title {
-  color: var(--color-gray-4);
-}
-.mark {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  margin-right: var(--spacing-2);
-  &.success { background: var(--color-green-2) }
-  &.warning { background: var(--color-yellow-2) }
+.card {
+  padding: var(--spacing-2) var(--spacing-7);
+  &.success { background: var(--color-green-9) }
   &.error { background: var(--color-red-1) }
+}
+.text {
+  color: var(--color-white-1);
+  font-size: 1.6rem;
+  font-weight: var(--font-weight-medium);
+  text-align: center;
 }
 </style>

@@ -1,22 +1,19 @@
 <template>
   <BaseModal @close="$emit('close')">
-    <BaseText1 class="title" text="Update your email"/>
-    <BaseDivider/>
-    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
+    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+      <BaseText1 class="title" text="Update your email"/>
+      <BaseDivider/>
       <BaseText4 class="label" text="New email"/>
       <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
-        <BaseFormInput
-          placeholder="tom@hanks.com"
-          v-model="form.email"
-        />
+        <BaseFormInput placeholder="tom@hanks.com" v-model="form.email"/>
         <BaseFormError :message="errors[0]"/>
       </ValidationProvider>
+      <BaseDivider/>
+      <div class="buttons">
+        <BaseButton text="Cancel" @click.native="$emit('close')"/>
+        <BaseButton text="Save" :design="valid ? 'black' : 'disabled'" @click.native="submit" :loading="loading"/>
+      </div>
     </ValidationObserver>
-    <BaseDivider/>
-    <div class="buttons">
-      <BaseButton text="Cancel" @click.native="$emit('close')"/>
-      <BaseButton text="Save" design="black" @click.native="submit" :loading="loading"/>
-    </div>
   </BaseModal>
 </template>
 
@@ -54,7 +51,7 @@ export default {
       try {
         await new Promise(resolve => setTimeout(resolve, 2000))
         this.$emit('close')
-        this.$notify({ text: 'Successfully updated email', type: 'success' })
+        this.$notify({ text: 'Email updated', type: 'success' })
       } catch (err) {
         console.log(err)
       }
@@ -68,12 +65,10 @@ export default {
 .label {
   margin-bottom: var(--spacing-2);
 }
-.observer {
-  margin-bottom: var(--spacing-5);
-}
 .provider {
-  position: relative;
   display: block;
+  position: relative;
+  margin-bottom: var(--spacing-5);
 }
 .buttons {
   display: flex;

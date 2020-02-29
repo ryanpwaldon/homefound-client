@@ -67,7 +67,7 @@ export default {
       try {
         await new Promise(resolve => setTimeout(resolve, 2000))
         this.$emit('close')
-        this.$notify({ text: 'Successfully updated password', type: 'success' })
+        this.$notify({ text: 'Password updated', type: 'success' })
       } catch (err) {
         console.log(err)
       }

@@ -1,36 +1,29 @@
 <template>
-  <BaseLayoutFocus @keypress.native.enter="submit">
-    <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-      <BaseText1 class="title" text="Reset password"/>
-      <BaseDivider/>
-      <BaseText2 class="description">
-        Type the email address linked to your account and we’ll send you password reset instructions. Be sure to check your spam folder.
-      </BaseText2>
-      <BaseText4 class="label" text="Email"/>
-      <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
-        <BaseFormInput
-          v-model="form.email"
-          placeholder="tom@hanks.com"
-        />
-        <BaseFormError :message="errors[0]"/>
-      </ValidationProvider>
-      <BaseDivider/>
-      <BaseFormSubmitButton
-        text="Send instructions"
-        :loading="loading"
-        @click.native="submit"
-      />
-    </ValidationObserver>
-  </BaseLayoutFocus>
+  <BaseLayoutHome @keypress.native.enter="submit">
+    <div class="instructions">
+      <BaseCard class="card">
+        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+          <div class="title">Reset password</div>
+          <div class="description">Type the email address linked to your account and we’ll send you password reset instructions. Be sure to check your spam folder.</div>
+          <BaseDivider class="divider"/>
+          <div class="label">Email</div>
+          <ValidationProvider class="provider" name="email" rules="required|email" v-slot="{ errors }">
+            <BaseFormInput v-model="form.email"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <BaseDivider class="divider"/>
+          <BaseFormSubmitButton text="Send instructions" :loading="loading" @click.native="submit" :design="valid ? 'black' : 'disabled'"/>
+        </ValidationObserver>
+      </BaseCard>
+    </div>
+  </BaseLayoutHome>
 </template>
 
 <script>
-import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
+import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import UserService from '@/services/Api/services/UserService/UserService'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
-import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText2 from '@/components/BaseText2/BaseText2'
-import BaseText4 from '@/components/BaseText4/BaseText4'
+import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
@@ -38,12 +31,10 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'instructions',
   components: {
-    BaseLayoutFocus,
+    BaseLayoutHome,
     BaseFormInput,
     BaseDivider,
-    BaseText1,
-    BaseText2,
-    BaseText4,
+    BaseCard,
     BaseFormSubmitButton,
     BaseFormError,
     ValidationObserver,
@@ -63,7 +54,7 @@ export default {
       this.loading = true
       try {
         await UserService.sendPasswordResetInstructions(this.form.email)
-        this.$notify({ text: 'If the email matches one of our accounts, we’ll send instructions to reset your password', type: 'success' })
+        this.$notify({ text: 'Email sent', type: 'success' })
       } catch (error) {
         console.log(error)
       }
@@ -74,6 +65,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.instructions {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-10) 0;
+}
+.title {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-2);
+}
+.description {
+  font-size: 1.4rem;
+}
+.card {
+  width: 100%;
+  max-width: 40rem;
+}
 .observer {
   width: 100%;
   position: relative;
@@ -84,11 +93,18 @@ export default {
   line-height: 1.5;
 }
 .label {
+  font-size: 1.4rem;
+  color: var(--color-gray-4);
   margin-bottom: var(--spacing-2);
 }
 .provider {
   display: block;
   position: relative;
   margin-bottom: var(--spacing-5);
+}
+.divider {
+  position: relative;
+  width: calc(100% + var(--spacing-5) * 2);
+  left: calc(-1 * var(--spacing-5));
 }
 </style>

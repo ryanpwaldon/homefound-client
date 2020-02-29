@@ -41,69 +41,108 @@ export default {
   justify-content: space-between;
   padding: var(--spacing-5) 0;
   position: relative;
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 45rem;
-    height: 100%;
-    z-index: 1;
-    > *:not(:last-child) {
-      margin-bottom: var(--spacing-5);
-    }
+  @include media(sm-only) {
+    height: auto;
+    padding: var(--spacing-10) 0;
   }
-  .title {
-    font-size: 4.5rem;
-    font-weight: var(--font-weight-bold);
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 45rem;
+  height: 100%;
+  z-index: 1;
+  margin-right: var(--spacing-5);
+  > *:not(:last-child) {
+    margin-bottom: var(--spacing-5);
   }
-  .subtitle {
-    font-size: 2rem;
-    line-height: 1.5;
-    color: var(--color-gray-4);
-    font-weight: var(--font-weight-medium);
-    width: 80%;
+  @include media(sm-only) {
+    text-align: center;
+    align-items: center;
+    margin-right: 0;
+    max-width: none;
   }
-  .buttons > *:first-child {
+}
+.title {
+  font-size: 4.5rem;
+  font-weight: var(--font-weight-bold);
+  @include media(sm-only) {
+    font-size: 3.5rem;
+  }
+}
+.subtitle {
+  font-size: 2rem;
+  line-height: 1.5;
+  color: var(--color-gray-4);
+  font-weight: var(--font-weight-medium);
+  width: 80%;
+  @include media(sm-only) {
+    width: 100%;
+  }
+}
+.buttons {
+  display: flex;
+  > *:first-child {
     margin-right: var(--spacing-5);
   }
-  .illustration {
-    display: grid;
-    grid-gap: var(--spacing-5);
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    align-self: center;
-    z-index: 2;
-    > *:nth-child(2n + 1) {
-      position: relative;
-      top: 10rem;
+  @include media(sm-only) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    * {
+      width: 100%;
+    }
+    > *:first-child {
+      margin-right: 0;
+      margin-bottom: var(--spacing-3);
     }
   }
-  .background {
-    position: absolute;
-    width: 100vw;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 0;
-    pointer-events: none;
+
+}
+.illustration {
+  display: grid;
+  grid-gap: var(--spacing-5);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-self: center;
+  z-index: 2;
+  > *:nth-child(2n + 1) {
+    position: relative;
+    top: 10rem;
   }
-  .image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right center;
-    pointer-events: none;
+  @include media(sm-only) {
+    display: none;
   }
-  .gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(250, 250, 250, 1) 60%, rgba(250, 250, 250, 0));
-    pointer-events: none;
+}
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  @include media(sm-only) {
+    display: none;
   }
+}
+.image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right center;
+  pointer-events: none;
+}
+.gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(250, 250, 250, 1) 60%, rgba(250, 250, 250, 0));
+  pointer-events: none;
 }
 </style>

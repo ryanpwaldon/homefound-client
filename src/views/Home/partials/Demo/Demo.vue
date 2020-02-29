@@ -21,7 +21,10 @@ export default {
 
 <style lang="scss" scoped>
 .demo {
-  padding: 10rem 0;
+  padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
 .title {
   font-size: 3.5rem;

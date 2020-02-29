@@ -140,7 +140,10 @@ export default {
 
 <style lang="scss" scoped>
 .explore {
-  padding: 10rem 0;
+  padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
 .title {
   font-size: 3.5rem;
@@ -168,6 +171,9 @@ export default {
     left: 0;
     background: var(--color-black-2);
     content: '';
+    @include media(sm-only) {
+      display: none;
+    }
   }
 }
 .map-container {
@@ -192,6 +198,9 @@ export default {
   display: grid;
   grid-gap: var(--spacing-5);
   grid-template-columns: 1fr 1fr;
+  @include media(sm-only) {
+    grid-template-columns: 1fr;
+  }
 }
 .copy-1 {
   font-size: 1.8rem;

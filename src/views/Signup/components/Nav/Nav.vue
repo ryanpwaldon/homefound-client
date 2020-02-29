@@ -1,7 +1,12 @@
 <template>
   <div class="nav">
-    <BaseNavItemText class="nav-item" text="Buyer" path="/signup/buyer"/>
-    <BaseNavItemText class="nav-item" text="Agent" path="/signup/agent"/>
+    <div class="section">
+      <div class="title">Sign up</div>
+    </div>
+    <div class="section">
+      <BaseNavItemText class="nav-item" text="Buyer" path="/signup/buyer"/>
+      <BaseNavItemText class="nav-item" text="Agent" path="/signup/agent"/>
+    </div>
   </div>
 </template>
 
@@ -17,7 +22,16 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+.section {
+  display: flex;
+  align-items: center;
+}
+.title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
 }
 .nav-item {
   position: relative;

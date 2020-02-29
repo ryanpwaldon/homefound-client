@@ -41,7 +41,7 @@ export default {
         const user = await BillingService.cancelSubscription(this.subscriptionId)
         this.$emit('close')
         this.$store.commit('user/setUser', user)
-        this.$notify({ text: 'Success', type: 'success' })
+        this.$notify({ type: 'success' })
       } catch (err) { console.log(err) }
       this.loading = false
     }

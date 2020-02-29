@@ -1,57 +1,49 @@
 <template>
-  <BaseLayoutFocus @keypress.native.enter="submit">
-    <BaseNavItemText class="logout" text="Logout" @click.native="logout"/>
-    <ValidationObserver class="observer" ref="observer" tag="div">
-      <BaseText1 class="title" text="Verify your account"/>
-      <BaseDivider/>
-      <BaseText2 class="description">
-        We sent a code to <span style="color: var(--color-black-2)">{{ $store.state.user.user.email }}</span>. Please verify your account by entering the code below. Be sure to check your junk folder.
-      </BaseText2>
-      <BaseText4 class="label" text="Verification code"/>
-      <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
-        <BaseFormInput
-          v-model="form.code"
-          placeholder="Enter the code sent to your email"
-          type="text"
-        />
-        <BaseFormError :message="errors[0]"/>
-      </ValidationProvider>
-      <BaseText6 class="resend" text="Resend email" @click.native="resend"/>
-      <BaseDivider/>
-      <BaseFormSubmitButton
-        text="Next"
-        :loading="loading"
-        @click.native="submit"
-      />
-    </ValidationObserver>
-  </BaseLayoutFocus>
+  <BaseLayoutHome @keypress.native.enter="submit">
+    <div class="verify">
+      <BaseCard class="card">
+        <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
+          <div class="title">Verify your email</div>
+          <div class="description">
+            We sent a code to <span class="black">{{ $store.state.user.user.email }}</span>. Please verify your email by entering the code below. Be sure to check your junk folder. Not your email? <span class="underline pointer" @click="logout">Login with a different email</span>
+          </div>
+          <BaseDivider class="divider"/>
+          <div class="label">Code</div>
+          <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
+            <BaseFormInput v-model="form.code" type="text"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <div class="resend" @click="resend">Resend email</div>
+          <BaseDivider class="divider"/>
+          <BaseFormSubmitButton
+            text="Next"
+            :loading="loading"
+            @click.native="submit"
+            :design="valid ? 'black' : 'disabled'"
+          />
+        </ValidationObserver>
+      </BaseCard>
+    </div>
+  </BaseLayoutHome>
 </template>
 
 <script>
-import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
+import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import UserService from '@/services/Api/services/UserService/UserService'
+import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
-import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText2 from '@/components/BaseText2/BaseText2'
-import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
-import BaseNavItemText from '@/components/BaseNavItemText/BaseNavItemText'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
   name: 'verify',
   components: {
-    BaseLayoutFocus,
+    BaseLayoutHome,
     BaseFormInput,
+    BaseCard,
     BaseDivider,
-    BaseText1,
-    BaseText2,
-    BaseText4,
-    BaseText6,
     BaseFormSubmitButton,
-    BaseNavItemText,
     BaseFormError,
     ValidationObserver,
     ValidationProvider
@@ -68,14 +60,14 @@ export default {
     async resend () {
       try {
         await UserService.sendVerificationInstructions()
-        this.$notify({ text: 'A new verification email has been sent', type: 'success' })
+        this.$notify({ text: 'Email sent', type: 'success' })
       } catch (error) {
         console.log(error)
-        this.$notify({ text: 'Error sending email', type: 'error' })
+        this.$notify({ type: 'error' })
       }
     },
     async submit () {
-      if (this.loading || !(await this.$refs['observer'].validate())) return
+      if (this.loading || !(await this.$refs['form'].validate())) return
       this.loading = true
       try {
         const { user, accessToken } = await UserService.verify(this.form.code)
@@ -95,22 +87,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logout {
-  position: absolute;
-  margin: var(--spacing-5);
-  right: 0;
-  top: 0;
+.verify {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-10) 0;
 }
-.observer {
+.card {
+  width: 100%;
+  max-width: 40rem;
+}
+.form {
   width: 100%;
   position: relative;
 }
+.title {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-2);
+}
 .description {
-  margin-bottom: var(--spacing-5);
   color: var(--color-gray-4);
   line-height: 1.5;
 }
+.divider {
+  position: relative;
+  width: calc(100% + var(--spacing-5) * 2);
+  left: calc(-1 * var(--spacing-5));
+}
 .label {
+  font-size: 1.4rem;
+  color: var(--color-gray-4);
   margin-bottom: var(--spacing-2);
 }
 .provider {
@@ -119,9 +126,19 @@ export default {
   margin-bottom: var(--spacing-1);
 }
 .resend {
-  text-decoration: underline;
+  font-size: 1.2rem;
   color: var(--color-gray-4);
   display: inline-block;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.black {
+  color: var(--color-black-2);
+}
+.underline {
+  text-decoration: underline;
+}
+.pointer {
   cursor: pointer;
 }
 </style>

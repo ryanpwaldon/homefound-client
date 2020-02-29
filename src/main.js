@@ -13,7 +13,7 @@ import '@/config/config'
   Vue.config.productionTip = false
   Vue.use(vueContainScroll)
   Vue.use(vueNumeral, { locale: 'en-au' })
-  Vue.use(vueNotification)
+  Vue.use(vueNotification, { componentName: 'Notify' })
   Vue.use(vueMoment)
   if (store.state.user.accessToken) await store.dispatch('user/checkAuthStatus')
   new Vue({

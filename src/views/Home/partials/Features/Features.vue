@@ -34,6 +34,10 @@ export default {
   position: relative;
   padding: var(--spacing-10) 0;
   z-index: 1;
+  @include media(sm-only) {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-8) 0;
+  }
 }
 .icon-container {
   height: 3rem;

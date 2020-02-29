@@ -7,7 +7,7 @@
           <BaseText2 text="Homefound"/>
         </router-link>
       </div>
-      <div class="section">
+      <div class="section secondary">
         <BaseNavItemText
           v-for="(navItem, i) in navItems"
           :path="navItem.path"
@@ -54,6 +54,9 @@ export default {
   border-bottom: var(--color-gray-1) solid 1px;
   padding: var(--spacing-4) var(--spacing-5);
   font-weight: var(--font-weight-medium);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 .content {
   display: flex;
@@ -75,5 +78,10 @@ export default {
 .logo {
   height: 25px;
   margin-right: var(--spacing-2);
+}
+.section.secondary {
+  @include media(sm-only) {
+    display: none;
+  }
 }
 </style>

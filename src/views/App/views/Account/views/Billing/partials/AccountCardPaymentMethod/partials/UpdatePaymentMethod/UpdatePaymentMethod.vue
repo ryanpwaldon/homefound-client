@@ -70,7 +70,7 @@ export default {
         const user = await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
         this.$emit('close')
         this.$store.commit('user/setUser', user)
-        this.$notify({ text: 'Successfully updated payment method', type: 'success' })
+        this.$notify({ type: 'success' })
       } catch (err) { console.log(err) }
       this.loading = false
     }

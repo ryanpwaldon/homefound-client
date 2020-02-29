@@ -1,48 +1,34 @@
 <template>
-  <BaseLayoutFocus @keypress.native.enter="submit">
-    <ValidationObserver class="observer" ref="observer" tag="div">
-      <BaseText1 class="title" text="Reset password"/>
-      <BaseDivider/>
-      <BaseText2 class="description">
-        Please enter your new password.
-      </BaseText2>
-      <BaseText4 class="label" text="New password"/>
-      <ValidationProvider class="provider" name="password" rules="required" v-slot="{ errors }">
-        <BaseFormInput
-          v-model="form.password"
-          placeholder="At least 8 characters"
-          autocomplete="new-password"
-          type="password"
-        />
-        <BaseFormError :message="errors[0]"/>
-      </ValidationProvider>
-      <BaseText4 class="label" text="Re-enter password"/>
-      <ValidationProvider class="provider" name="re-enter password" rules="required|match:password" v-slot="{ errors }">
-        <BaseFormInput
-          v-model="form.reEnterPassword"
-          placeholder="Just one more time"
-          autocomplete="new-password"
-          type="password"
-        />
-        <BaseFormError :message="errors[0]"/>
-      </ValidationProvider>
-      <BaseDivider/>
-      <BaseFormSubmitButton
-        text="Reset password"
-        :loading="loading"
-        @click.native="submit"
-      />
-    </ValidationObserver>
-  </BaseLayoutFocus>
+  <BaseLayoutHome @keypress.native.enter="submit">
+    <div class="reset">
+      <BaseCard class="card">
+        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+          <div class="title">Reset password</div>
+          <div class="description">Please enter your new password.</div>
+          <BaseDivider class="divider"/>
+          <div class="label">New password</div>
+          <ValidationProvider class="provider" name="password" rules="required|min:8" v-slot="{ errors }">
+            <BaseFormInput v-model="form.password" placeholder="At least 8 characters" autocomplete="new-password" type="password"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <div class="label">Re-enter password</div>
+          <ValidationProvider class="provider" name="re-enter password" rules="required|match:password" v-slot="{ errors }">
+            <BaseFormInput v-model="form.reEnterPassword" placeholder="Just one more time" autocomplete="new-password" type="password"/>
+            <BaseFormError :message="errors[0]"/>
+          </ValidationProvider>
+          <BaseDivider class="divider"/>
+          <BaseFormSubmitButton text="Reset password" :loading="loading" @click.native="submit" :design="valid ? 'black' : 'disabled'"/>
+        </ValidationObserver>
+      </BaseCard>
+    </div>
+  </BaseLayoutHome>
 </template>
 
 <script>
-import BaseLayoutFocus from '@/components/BaseLayoutFocus/BaseLayoutFocus'
+import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import UserService from '@/services/Api/services/UserService/UserService'
+import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
-import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText2 from '@/components/BaseText2/BaseText2'
-import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
@@ -50,12 +36,10 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'reset',
   components: {
-    BaseLayoutFocus,
+    BaseLayoutHome,
+    BaseCard,
     BaseFormInput,
     BaseDivider,
-    BaseText1,
-    BaseText2,
-    BaseText4,
     BaseFormSubmitButton,
     BaseFormError,
     ValidationObserver,
@@ -82,7 +66,7 @@ export default {
       this.loading = true
       try {
         await UserService.passwordReset(this.token, this.form.password)
-        this.$notify({ text: 'Successfully reset password', type: 'success' })
+        this.$notify({ text: 'Password reset', type: 'success' })
         this.$router.push('/login')
       } catch (error) {
         console.log(error)
@@ -94,21 +78,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.reset {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-10) 0;
+}
+.card {
+  width: 100%;
+  max-width: 40rem;
+}
 .observer {
   width: 100%;
   position: relative;
 }
+.title {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-2);
+}
 .description {
-  margin-bottom: var(--spacing-5);
+  font-size: 1.4rem;
   color: var(--color-gray-4);
-  line-height: 1.5;
 }
 .label {
+  font-size: 1.4rem;
+  color: var(--color-gray-4);
   margin-bottom: var(--spacing-2);
 }
 .provider {
   display: block;
   position: relative;
   margin-bottom: var(--spacing-5);
+}
+.divider {
+  position: relative;
+  width: calc(100% + var(--spacing-5) * 2);
+  left: calc(-1 * var(--spacing-5));
 }
 </style>

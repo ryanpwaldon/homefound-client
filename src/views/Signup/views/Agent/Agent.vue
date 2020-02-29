@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <Nav class="nav"/>
     <BaseCard>
-      <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ invalid }">
-        <div class="title">Sign up as an agent</div>
+      <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+        <Nav/>
         <BaseDivider class="divider"/>
         <div class="label">Name</div>
         <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
@@ -51,7 +50,7 @@
           text="Create account"
           :loading="loading"
           @click.native="submit"
-          :design="invalid ? 'disabled' : 'black'"
+          :design="valid ? 'black' : 'disabled'"
         />
       </ValidationObserver>
     </BaseCard>
@@ -98,7 +97,7 @@ export default {
       this.loading = true
       try {
         const { user, accessToken } = await UserService.register(this.form)
-        this.$notify({ text: 'Account successfully created', type: 'success' })
+        this.$notify({ type: 'success' })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$router.push('/verify')
       } catch (error) {
@@ -114,9 +113,6 @@ export default {
 .container {
   width: 100%;
   max-width: 40rem;
-}
-.nav {
-  margin-bottom: var(--spacing-5);
 }
 .title {
   font-size: 1.6rem;
