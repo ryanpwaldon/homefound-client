@@ -1,7 +1,7 @@
 :root {
 
   // fonts
-  --font-1: SF Pro Text;
+  --font-1: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   // colors
   --color-black-1: #000000;
@@ -43,15 +43,15 @@
   --color-overlay: rgba(15, 15, 15, 0.6);
 
   // spacing
-  --spacing-1: 5px;
-  --spacing-2: 10px;
-  --spacing-3: 15px;
-  --spacing-4: 20px;
-  --spacing-5: 30px;
-  --spacing-6: 40px;
-  --spacing-7: 50px;
-  --spacing-8: 60px;
-  --spacing-10: 100px;
+  --spacing-1: 0.5rem;
+  --spacing-2: 1rem;
+  --spacing-3: 1.5rem;
+  --spacing-4: 2rem;
+  --spacing-5: 3rem;
+  --spacing-6: 4rem;
+  --spacing-7: 5rem;
+  --spacing-8: 6rem;
+  --spacing-10: 10rem;
 
   // box-shadow
   --box-shadow-1: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
