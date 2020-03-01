@@ -1,7 +1,7 @@
 <template>
   <div class="base-layout-focus-minimal">
     <router-link class="logo" to="/">
-      <img src="@/assets/img/logo-1.svg">
+      <img src="@/assets/img/logo-7.svg">
       <div class="label">Homefound</div>
     </router-link>
     <slot/>
