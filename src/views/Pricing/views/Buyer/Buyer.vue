@@ -5,8 +5,8 @@
       <BaseFormToggle
         class="toggle"
         v-model="isYearly"
-        bg-active-color="--color-gray-7"
-        bg-inactive-color="--color-gray-7"
+        bg-active-color="--color-gray-8"
+        bg-inactive-color="--color-gray-8"
         knob-active-color="--color-black-2"
         knob-inactive-color="--color-black-2"
         design="large"

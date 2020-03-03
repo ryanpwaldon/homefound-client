@@ -11,23 +11,27 @@
       </div>
       <div class="col col-2">
         <div class="heading">Info</div>
+        <BaseDivider class="divider"/>
         <BaseNavItemText text="Buyers" path="/" active-mode="none"/>
         <BaseNavItemText text="Agents" path="/agents" active-mode="none"/>
         <BaseNavItemText text="Pricing" path="/pricing" active-mode="none"/>
         <BaseNavItemText text="FAQs" path="/faqs" active-mode="none"/>
       </div>
       <div class="col col-3">
-        <div class="heading">Links</div>
+        <div class="heading">Actions</div>
+        <BaseDivider class="divider"/>
         <BaseNavItemText text="Login" path="/login" active-mode="none"/>
         <BaseNavItemText text="Sign up" path="/signup" active-mode="none"/>
       </div>
       <div class="col col-4">
         <div class="heading">Legal</div>
+        <BaseDivider class="divider"/>
         <BaseNavItemText text="Terms" path="/terms" active-mode="none"/>
         <BaseNavItemText text="Privacy" path="/privacy" active-mode="none"/>
       </div>
       <div class="col col-5">
         <div class="heading">Help</div>
+        <BaseDivider class="divider"/>
         <BaseNavItemText text="Email us"/>
         <BaseNavItemText text="Send us a message"/>
       </div>
@@ -36,9 +40,11 @@
 </template>
 
 <script>
+import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseNavItemText from '@/components/BaseNavItemText/BaseNavItemText'
 export default {
   components: {
+    BaseDivider,
     BaseNavItemText
   }
 }
@@ -48,7 +54,7 @@ export default {
 .base-footer {
   width: 100%;
   padding: 0 var(--spacing-5);
-  background: var(--color-white-1);
+  background: var(--color-gray-2);
   border-top: var(--color-gray-1) solid 1px;
   display: flex;
   justify-content: center;
@@ -57,14 +63,17 @@ export default {
   width: 100%;
   max-width: 90rem;
   padding: var(--spacing-10) 0;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: flex-start;
   justify-content: space-between;
   @include media(sm-only) {
     padding: var(--spacing-8) 0;
-    flex-direction: column;
-    > *:not(:last-child) {
-      margin-bottom: var(--spacing-8);
+    grid-gap: var(--spacing-8);
+    grid-auto-flow: row;
+    justify-content: normal;
+    > * {
+      width: 100%;
     }
   }
 }
@@ -78,6 +87,11 @@ export default {
   align-items: flex-start;
   > *:not(:last-child) {
     margin-bottom: var(--spacing-4);
+  }
+  @include media(sm-only) {
+    > * {
+      width: 100%;
+    }
   }
 }
 .col-1 {
@@ -98,7 +112,17 @@ export default {
   }
   .logo-subcopy {
     font-size: 1.2rem;
-    color: var(--color-gray-6);
+    color: var(--color-gray-4);
+  }
+  @include media(sm-only) {
+    grid-row: 5;
+  }
+}
+.divider {
+  display: none;
+  @include media(sm-only) {
+    display: block;
+    margin: 0 0 var(--spacing-4) 0 !important;
   }
 }
 </style>

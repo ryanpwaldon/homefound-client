@@ -7,7 +7,7 @@
         <router-link to="/signup/buyer">
           <BaseButtonLarge text="Get started" design="red"/>
         </router-link>
-        <BaseButtonLarge text="Explore listings" design="white"/>
+        <BaseButtonLarge text="Explore listings" design="pink"/>
       </div>
     </div>
     <div class="illustration">
@@ -39,11 +39,11 @@ export default {
   height: 60rem;
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing-5) 0;
   position: relative;
   @include media(sm-only) {
     height: auto;
-    padding: var(--spacing-10) 0;
+    justify-content: center;
+    padding: var(--spacing-8) 0;
   }
 }
 .content {
@@ -62,29 +62,33 @@ export default {
     align-items: center;
     margin-right: 0;
     max-width: none;
+    > *:not(:last-child) {
+      margin-bottom: var(--spacing-3);
+    }
   }
 }
 .title {
   font-size: 4.5rem;
   font-weight: var(--font-weight-bold);
   @include media(sm-only) {
-    font-size: 3.5rem;
+    font-size: 3rem;
+    line-height: 1.3;
   }
 }
 .subtitle {
   font-size: 2rem;
   line-height: 1.5;
   color: var(--color-gray-4);
-  font-weight: var(--font-weight-medium);
   width: 80%;
   @include media(sm-only) {
     width: 100%;
+    margin-bottom: var(--spacing-4) !important;
   }
 }
 .buttons {
   display: flex;
   > *:first-child {
-    margin-right: var(--spacing-5);
+    margin-right: var(--spacing-4);
   }
   @include media(sm-only) {
     display: flex;
@@ -95,10 +99,9 @@ export default {
     }
     > *:first-child {
       margin-right: 0;
-      margin-bottom: var(--spacing-3);
+      margin-bottom: var(--spacing-2);
     }
   }
-
 }
 .illustration {
   display: grid;
@@ -142,7 +145,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(250, 250, 250, 1) 60%, rgba(250, 250, 250, 0));
+  background: linear-gradient(to right, var(--color-gray-2) 60%, rgba(250, 250, 250, 0));
   pointer-events: none;
 }
 </style>

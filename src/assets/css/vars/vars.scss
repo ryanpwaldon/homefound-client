@@ -5,14 +5,15 @@
 
   // colors
   --color-black-1: #000000;
-  --color-black-2: #313639;
-  --color-gray-1: #eaeaea;
-  --color-gray-2: #fafafa;
+  --color-black-2: #111111;
+  --color-gray-1: #e5e4e2;
+  --color-gray-2: #fffefc;
   --color-gray-3: #D3D3D3;
-  --color-gray-4: #949A9C;
+  --color-gray-4: #696862;
   --color-gray-5: #ecf0f3;
   --color-gray-6: #878682;
   --color-gray-7: #eaebeb;
+  --color-gray-8: #efeeec;
   --color-white-1: #ffffff;
   --color-yellow-1: #f4e1ae;
   --color-yellow-2: #ffce47;
@@ -36,6 +37,9 @@
   --color-red-3: #be5643;
   --color-red-4: #fdb8b9;
   --color-red-5: #8e2828;
+  --color-red-6: #fff5f2;
+  --color-red-7: #fbc6c4;
+  --color-red-8: #ec5758;
 
   // special colors
   --color-transparent: rgba(0, 0, 0, 0);
@@ -54,7 +58,7 @@
   --spacing-10: 10rem;
 
   // box-shadow
-  --box-shadow-1: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --box-shadow-1: rgba(84, 70, 35, 0.15) 0px 2px 8px, rgba(84, 70, 35, 0.15) 0px 1px 3px;
   --box-shadow-2: 0 2px 4px 0 rgb(51, 154, 244, 0.16);
   --box-shadow-3: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
   --box-shadow-4: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;

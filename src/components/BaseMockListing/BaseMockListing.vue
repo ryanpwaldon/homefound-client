@@ -71,7 +71,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: var(--color-gray-5);
+  background-color: var(--color-gray-8);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -85,8 +85,8 @@ export default {
 }
 .placeholder {
   height: 100%;
-  border-radius: 100px;
-  background: var(--color-gray-5);
+  border-radius: var(--border-radius-1);
+  background: var(--color-gray-8);
   & :first-child { margin-right: auto }
 }
 .placeholder-1 {

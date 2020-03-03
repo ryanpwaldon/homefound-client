@@ -53,7 +53,7 @@ $breakpoints: (
 
 @mixin media($key) {
   @media
-    (min-width: map-deep-get($breakpoints, $key, 'min-width')) and
+    (min-width: calc(#{map-deep-get($breakpoints, $key, 'min-width')} + 1px)) and
     (max-width: map-deep-get($breakpoints, $key, 'max-width')) {
     @content
   }

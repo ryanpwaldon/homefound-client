@@ -59,10 +59,6 @@
           />
         </div>
       </div>
-      <template v-if="total">
-        <BaseText2 :text="`${total} listings`"/>
-        <BaseDivider/>
-      </template>
       <div class="listings-container">
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
@@ -102,9 +98,7 @@
 <script>
 import BaseLayoutCenter from '@/components/BaseLayoutCenter/BaseLayoutCenter'
 import BaseText1 from '@/components/BaseText1/BaseText1'
-import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseText4 from '@/components/BaseText4/BaseText4'
-import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingCardBuyer'
@@ -120,9 +114,7 @@ export default {
   components: {
     BaseLayoutCenter,
     BaseText1,
-    BaseText2,
     BaseText4,
-    BaseDivider,
     BaseFormSelect,
     BaseListingCardBuyer,
     BaseIntersectionTrigger,

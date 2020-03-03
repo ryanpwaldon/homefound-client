@@ -2,7 +2,7 @@
   <div class="header">
     <div class="content">
       <div class="title">List properties free forever</div>
-      <div class="subtitle">Gain deep insights that improve your listing performance on REA and Domain</div>
+      <div class="subtitle">Gain insights that improve your listing performance on REA and Domain</div>
       <div class="buttons">
         <router-link to="/signup/agent">
           <BaseButtonLarge text="Get started" design="red"/>
@@ -60,6 +60,11 @@ export default {
   justify-content: space-between;
   padding: var(--spacing-5) 0;
   position: relative;
+  @include media(sm-only) {
+    height: auto;
+    justify-content: center;
+    padding: var(--spacing-8) 0;
+  }
   .content {
     display: flex;
     flex-direction: column;
@@ -70,21 +75,39 @@ export default {
     > *:not(:last-child) {
       margin-bottom: var(--spacing-5);
     }
+    @include media(sm-only) {
+      text-align: center;
+      align-items: center;
+      margin-right: 0;
+      max-width: none;
+      > *:not(:last-child) {
+        margin-bottom: var(--spacing-3);
+      }
+    }
   }
   .title {
     font-size: 4.5rem;
     font-weight: var(--font-weight-bold);
+    @include media(sm-only) {
+      font-size: 3rem;
+      line-height: 1.3;
+    }
   }
   .subtitle {
     font-size: 2rem;
     line-height: 1.5;
     color: var(--color-gray-4);
-    font-weight: var(--font-weight-medium);
     max-width: 80%;
+    @include media(sm-only) {
+      width: 100%;
+      margin-bottom: var(--spacing-4) !important;
+    }
   }
   .buttons {
-    > :first-child {
-      margin-right: var(--spacing-5);
+    display: flex;
+    flex-direction: column;
+    @include media(sm-only) {
+      &, * { width: 100% }
     }
   }
   .illustration {
@@ -94,6 +117,9 @@ export default {
     align-self: center;
     flex-direction: column;
     align-items: center;
+    @include media(sm-only) {
+      display: none;
+    }
     .listings {
       width: 100%;
       display: grid;

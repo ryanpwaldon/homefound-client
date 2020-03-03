@@ -78,6 +78,7 @@ export default {
         this.$router.push('/app/listings')
       } catch (error) {
         console.log(error)
+        this.$notify({ type: 'error' })
         this.$store.dispatch('user/logout')
       }
       this.loading = false

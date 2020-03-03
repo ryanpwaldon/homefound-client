@@ -21,13 +21,21 @@ export default {
 
 <style lang="scss" scoped>
 .demo {
-  padding: 10rem 0;
+  padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
 .title {
   font-size: 3.5rem;
   margin-bottom: var(--spacing-4);
   font-weight: var(--font-weight-bold);
   text-align: center;
+  @include media(sm-only) {
+    font-size: 3rem;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-2);
+  }
 }
 .subtitle {
   font-size: 1.6rem;
@@ -35,6 +43,9 @@ export default {
   color: var(--color-gray-4);
   text-align: center;
   line-height: 1.5;
+  @include media(sm-only) {
+    margin-bottom: var(--spacing-5);
+  }
 }
 .video-container {
   width: 100%;

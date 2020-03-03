@@ -2,9 +2,9 @@
   <div class="base-badge" :class=[design]>
     <BaseText6>
       <span>{{ text }}</span>
-      <span class="spacer" v-if="text && icon"/>
-      <img v-if="icon" :src="icon">
     </BaseText6>
+    <span class="spacer" v-if="text && icon"/>
+    <img v-if="icon" :src="icon">
   </div>
 </template>
 

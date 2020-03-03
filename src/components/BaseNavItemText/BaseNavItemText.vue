@@ -53,9 +53,8 @@ export default {
     width: calc(100% + var(--spacing-4));
     height: calc(100% + var(--spacing-2));
     border-radius: var(--border-radius-1);
-    background: var(--color-gray-4);
-    transition: opacity 0.2s ease-in-out;
-    opacity: 0;
+    background-color: var(--color-transparent);
+    transition: background-color 0.2s ease-in-out;
     z-index: 0;
   }
 }
@@ -67,7 +66,7 @@ export default {
 .router-link-active:not(.active-state-disabled) {
   color: var(--color-black-2);
   &.transparent::before {
-    opacity: 0.2;
+    background-color: var(--color-gray-8);
   }
 }
 .base-nav-item-text:not(.transparent) {
@@ -80,7 +79,7 @@ export default {
     z-index: 1;
   }
   &::before {
-    background: var(--color-blue-1);
+    background-color: var(--color-blue-1);
     opacity: 1;
   }
 }

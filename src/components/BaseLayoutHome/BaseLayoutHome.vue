@@ -35,6 +35,9 @@ export default {
   padding: 0 var(--spacing-5);
   background: var(--color-gray-2);
   align-items: center;
+  @include media(sm-only) {
+    padding: 0 var(--spacing-4);
+  }
 }
 .layout-content {
   width: 100%;
