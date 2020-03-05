@@ -8,12 +8,12 @@
       },
       {
         icon: require('@/assets/img/up-trend.svg'),
-        title: 'Real-time analytics',
+        title: 'Test the market',
         paragraph: 'Get instant insights into the demand for your property and inform your strategy to listing on major property real estate sites.'
       },
       {
         icon: require('@/assets/img/hidden.svg'),
-        title: 'Privacy',
+        title: 'Off-market properties',
         paragraph: 'Vendors want to keep their sale private? Your listings will only be visible to our private audience.'
       }
     ]"

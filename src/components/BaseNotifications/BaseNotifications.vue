@@ -1,5 +1,5 @@
 <template>
-  <Notify class="base-notifications" position="bottom center" :duration="4000">
+  <Notify class="base-notifications" position="bottom center" :duration="4000" :max="1">
     <template v-slot:body="{ close, item }">
       <BaseCard class="card" :class="[item.type]" @click.native="close">
         <div class="text">

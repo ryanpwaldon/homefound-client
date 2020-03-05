@@ -107,13 +107,31 @@ export default {
   methods: {
     async fetchData () {
       try {
-        const [ impressions, views, contactDetailViews ] = await Promise.all([
-          this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
-          this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
+        const [ contactDetailViews ] = await Promise.all([
+          // this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
+          // this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
           this.fetchTimeseries({ property: 'contactDetailViews', range: 7, period: 'day' })
         ])
-        this.impressions = impressions
-        this.views = views
+        this.impressions = {
+          '2020-02-24T13:00:00.000Z': 64,
+          '2020-02-25T13:00:00.000Z': 58,
+          '2020-02-26T13:00:00.000Z': 58,
+          '2020-02-27T13:00:00.000Z': 54,
+          '2020-02-28T13:00:00.000Z': 52,
+          '2020-02-29T13:00:00.000Z': 48,
+          '2020-03-01T13:00:00.000Z': 48,
+          '2020-03-02T13:00:00.000Z': 45
+        }
+        this.views = {
+          '2020-02-24T13:00:00.000Z': 5,
+          '2020-02-25T13:00:00.000Z': 8,
+          '2020-02-26T13:00:00.000Z': 3,
+          '2020-02-27T13:00:00.000Z': 5,
+          '2020-02-28T13:00:00.000Z': 7,
+          '2020-02-29T13:00:00.000Z': 2,
+          '2020-03-01T13:00:00.000Z': 3,
+          '2020-03-02T13:00:00.000Z': 7
+        }
         this.contactDetailViews = contactDetailViews
         this.success = true
       } catch (err) {
