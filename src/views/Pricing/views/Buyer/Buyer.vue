@@ -67,6 +67,9 @@ export default {
   flex-direction: column;
   text-align: center;
   position: relative;
+  @include media(sm-only) {
+    width: 100%;
+  }
 }
 .top {
   display: flex;
@@ -75,18 +78,16 @@ export default {
 }
 .dollar {
   font-size: 1.6rem;
-  font-family: Rubik;
+  font-family: var(--font-2);
   margin-right: var(--spacing-2);
 }
 .price {
   font-size: 8rem;
-  font-family: Rubik;
-  font-weight: var(--font-weight-regular);
+  font-family: var(--font-2);
   margin-right: var(--spacing-3);
 }
 .period {
   font-size: 1.6rem;
-  font-weight: var(--font-weight-regular);
   text-align: left;
 }
 .divider {
@@ -130,6 +131,9 @@ export default {
   .label {
     font-weight: var(--font-weight-medium);
     transition: color var(--transition-settings-1);
+  }
+  @include media(sm-only) {
+    position: static;
   }
 }
 </style>

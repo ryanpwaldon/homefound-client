@@ -34,6 +34,9 @@ export default {
   width: 100%;
   height: auto;
   padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
 .title {
   font-size: 2rem;
@@ -46,6 +49,9 @@ export default {
   grid-gap: var(--spacing-5);
   grid-template-columns: 1fr 2fr;
   align-items: flex-start;
+  @include media(sm-only) {
+    grid-template-columns: auto;
+  }
 }
 .nav-item {
   font-weight: var(--font-weight-medium);

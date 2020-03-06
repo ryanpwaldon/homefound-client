@@ -39,6 +39,9 @@ export default {
   flex-direction: column;
   text-align: center;
   position: relative;
+  @include media(sm-only) {
+    width: 100%;
+  }
 }
 .top {
   display: flex;
@@ -47,8 +50,7 @@ export default {
 }
 .price {
   font-size: 3.5rem;
-  font-family: Rubik;
-  font-weight: var(--font-weight-regular);
+  font-family: var(--font-2);
 }
 .divider {
   position: relative;
