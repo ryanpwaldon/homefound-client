@@ -16,7 +16,7 @@
     </div>
     <div class="content">
       <BaseCard>
-        <div class="copy-1">Sign up to unlock</div>
+        <div class="copy-1">Sign up to unlock listings</div>
         <div class="copy-2">Start discovering off-market properties today</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
