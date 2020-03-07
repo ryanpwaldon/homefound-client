@@ -58,6 +58,9 @@ export default {
   border-top: var(--color-gray-1) solid 1px;
   display: flex;
   justify-content: center;
+  @include media(sm-only) {
+    padding: 0 var(--spacing-4);
+  }
 }
 .content {
   width: 100%;

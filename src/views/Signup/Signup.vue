@@ -24,5 +24,8 @@ export default {
   justify-content: center;
   align-items: center;
   padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
 </style>

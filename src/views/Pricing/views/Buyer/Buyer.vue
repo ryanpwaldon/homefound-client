@@ -1,7 +1,7 @@
 <template>
   <BaseCard class="buyer">
     <div class="toggle-container">
-      <div :class="{label: true, active: !isYearly}">Monthly</div>
+      <div :class="{label: true, active: !isYearly}" @click="isYearly = false">Monthly</div>
       <BaseFormToggle
         class="toggle"
         v-model="isYearly"
@@ -11,7 +11,7 @@
         knob-inactive-color="--color-black-2"
         design="large"
       />
-      <div :class="{label: true, active: isYearly}">Yearly (save 20%)</div>
+      <div :class="{label: true, active: isYearly}" @click="isYearly = true">Yearly (save 20%)</div>
     </div>
     <div class="top">
       <div class="dollar">$</div>

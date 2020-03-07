@@ -1,11 +1,11 @@
 <template>
   <BaseCard>
     <div class="faq">
-      <div class="question">Lorem ipsum dolor sit amet?</div>
+      <div class="question">What is an off-market property?</div>
       <div class="answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</div>
     </div>
     <div class="faq">
-      <div class="question">Lorem ipsum dolor sit amet?</div>
+      <div class="question">Why would agents list on Homefound?</div>
       <div class="answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</div>
     </div>
     <div class="faq">
@@ -38,9 +38,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.faq {
+  font-size: 1.6rem;
+}
 .faq:not(:last-child) {
   margin-bottom: var(--spacing-5);
-  font-size: 1.6rem;
 }
 .question {
   font-weight: var(--font-weight-medium);

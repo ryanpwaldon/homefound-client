@@ -1,9 +1,8 @@
 <template>
   <div class="container">
+    <Nav/>
     <BaseCard>
       <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
-        <Nav/>
-        <BaseDivider class="divider"/>
         <div class="label">Name</div>
         <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
           <BaseFormInput
@@ -113,6 +112,9 @@ export default {
 .container {
   width: 100%;
   max-width: 40rem;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--spacing-5);
 }
 .title {
   font-size: 1.6rem;

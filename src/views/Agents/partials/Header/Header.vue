@@ -2,7 +2,7 @@
   <div class="header">
     <div class="content">
       <div class="title">Pre-market listing service for agents</div>
-      <div class="subtitle">List for free and gain insights that boost your performance on REA and Domain</div>
+      <div class="subtitle">List properties for free and gain insights that boost your listing performance on REA and Domain</div>
       <div class="buttons">
         <router-link to="/signup/agent">
           <BaseButtonLarge text="Get started" design="red"/>
@@ -105,7 +105,7 @@ export default {
     font-size: 2rem;
     line-height: 1.5;
     color: var(--color-gray-4);
-    max-width: 80%;
+    max-width: 95%;
     @include media(sm-only) {
       width: 100%;
       margin-bottom: var(--spacing-4) !important;

@@ -38,9 +38,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.faq {
+  font-size: 1.6rem;
+}
 .faq:not(:last-child) {
   margin-bottom: var(--spacing-5);
-  font-size: 1.6rem;
 }
 .question {
   font-weight: var(--font-weight-medium);

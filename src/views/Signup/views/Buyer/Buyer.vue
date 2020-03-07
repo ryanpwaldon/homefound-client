@@ -1,9 +1,8 @@
 <template>
   <div class="container">
+    <Nav/>
     <BaseCard>
       <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
-        <Nav/>
-        <BaseDivider class="divider"/>
         <div class="content">
           <div class="section">
             <div class="label">Name</div>
@@ -115,8 +114,9 @@ export default {
 .container {
   width: 100%;
   max-width: 80rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--spacing-5);
 }
 .form {
   display: flex;
