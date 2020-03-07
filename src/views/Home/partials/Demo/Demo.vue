@@ -2,7 +2,7 @@
   <div class="demo">
     <div class="header">
       <div class="title">Built for homebuyers</div>
-      <div class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+      <div class="subtitle">Enjoy a search experience with no ads, the ability to filter by date listed, and where every listing has a price.</div>
     </div>
     <div class="video-container">
       <BaseVideo class="video" :src="require('@/assets/vid/demo.mp4')" :poster="require('@/assets/img/demo-poster.png')"/>

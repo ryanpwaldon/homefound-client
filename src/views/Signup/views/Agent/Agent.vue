@@ -115,6 +115,9 @@ export default {
   display: grid;
   grid-auto-flow: row;
   grid-gap: var(--spacing-5);
+  @include media(sm-only) {
+    max-width: none;
+  }
 }
 .title {
   font-size: 1.6rem;

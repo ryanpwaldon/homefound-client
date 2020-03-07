@@ -9,6 +9,9 @@
         </router-link>
         <BaseButtonLarge text="Explore listings" design="pink"/>
       </div>
+      <router-link class="question" to="/faqs/buyer">
+        What's an off-market property?
+      </router-link>
     </div>
     <div class="illustration">
       <BaseMockListing :image="require('../../assets/4.jpg')"/>
@@ -54,6 +57,7 @@ export default {
   height: 100%;
   z-index: 1;
   margin-right: var(--spacing-5);
+  align-items: flex-start;
   > *:not(:last-child) {
     margin-bottom: var(--spacing-5);
   }
@@ -93,6 +97,7 @@ export default {
   @include media(sm-only) {
     display: flex;
     flex-direction: column;
+    margin-bottom: var(--spacing-4) !important;
     width: 100%;
     * {
       width: 100%;
@@ -102,6 +107,13 @@ export default {
       margin-bottom: var(--spacing-2);
     }
   }
+}
+.question {
+  font-size: 1.5rem;
+  color: var(--color-gray-4);
+  border-bottom: solid 1px var(--color-gray-4);
+  padding-bottom: 5px;
+  opacity: 0.8;
 }
 .illustration {
   display: grid;

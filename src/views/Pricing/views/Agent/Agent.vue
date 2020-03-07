@@ -51,6 +51,7 @@ export default {
 .price {
   font-size: 3.5rem;
   font-family: var(--font-2);
+  font-weight: var(--font-weight-medium);
 }
 .divider {
   position: relative;

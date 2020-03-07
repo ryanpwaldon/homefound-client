@@ -4,17 +4,17 @@
       {
         icon: require('@/assets/img/free.svg'),
         title: 'Free forever',
-        paragraph: 'Off market property listings are in high demand by property seekers – so we will never charge an agent to list on our platform.'
+        paragraph: `Off-market properties are in high demand, so we've flipped the traditional pricing model. Buyers pay for access and agents list for free. If you make a sale, we won't charge.`
       },
       {
         icon: require('@/assets/img/up-trend.svg'),
-        title: 'Test the market',
-        paragraph: 'Get instant insights into the demand for your property and inform your strategy to listing on major property real estate sites.'
+        title: 'Pre-market testing',
+        paragraph: `Use Homefound to quickly identify the level of demand for your property. Use this information to strategise and plan your approach to listing on the major property advertising sites.`
       },
       {
         icon: require('@/assets/img/hidden.svg'),
-        title: 'Off-market properties',
-        paragraph: 'Vendors want to keep their sale private? Your listings will only be visible to our private audience.'
+        title: 'Privacy',
+        paragraph: `Vendors want to keep their sale private? Homefound enables you to gather leads, while keeping your property hidden from the public.`
       }
     ]"
   />

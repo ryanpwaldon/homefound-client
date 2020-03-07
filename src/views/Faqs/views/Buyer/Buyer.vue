@@ -2,11 +2,17 @@
   <BaseCard>
     <div class="faq">
       <div class="question">What is an off-market property?</div>
-      <div class="answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</div>
+      <div class="answer">
+        An off-market property is one that is for sale, however, is not publicly advertised.
+      </div>
     </div>
     <div class="faq">
-      <div class="question">Why would agents list on Homefound?</div>
-      <div class="answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</div>
+      <div class="question">Why would sellers list on Homefound?</div>
+      <div class="answer">
+        - The seller would like a discreet sale
+        <br>
+        - The seller would like to conduct market research prior to listing on mainstream sites
+      </div>
     </div>
     <div class="faq">
       <div class="question">Lorem ipsum dolor sit amet?</div>

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="content">
-      <div class="title">Pre-market listing service for agents</div>
+      <div class="title">Off-market listing service for agents</div>
       <div class="subtitle">List properties for free and gain insights that boost your listing performance on REA and Domain</div>
       <div class="buttons">
         <router-link to="/signup/agent">
@@ -17,7 +17,7 @@
         <BaseMockListing listing-width="auto" spacing="0.8rem" placeholder-height="1rem"/>
       </div>
       <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 51">
-        <path ref="line-path" d="M2.5,2.5v46" fill="none" stroke="var(--color-gray-8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" stroke-dasharray="0.1 10"/>
+        <path ref="line-path" d="M2.5,2.5v46" fill="none" stroke="var(--color-gray-8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" stroke-dasharray="0.1 10"/>
       </svg>
       <svg class="chart" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 445 239">
         <rect width="445" height="239" fill="#fff" rx="3"/>
@@ -155,7 +155,7 @@ export default {
       }
     }
     .line {
-      height: 7rem;
+      height: 5rem;
       margin: -0.5rem 0;
     }
     .chart {

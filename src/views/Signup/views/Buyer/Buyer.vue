@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Nav/>
-    <BaseCard>
+    <BaseCard class="card">
       <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
         <div class="content">
           <div class="section">
@@ -45,14 +45,15 @@
             </ValidationProvider>
           </div>
         </div>
-        <BaseDivider class="divider"/>
-        <BaseFormSubmitButton
-          class="submit"
-          text="Create account"
-          :loading="loading"
-          @click.native="submit"
-          :design="valid ? 'black' : 'disabled'"
-        />
+        <div class="footer">
+          <BaseFormSubmitButton
+            class="submit"
+            text="Create account"
+            :loading="loading"
+            @click.native="submit"
+            :design="valid ? 'black' : 'disabled'"
+          />
+        </div>
       </ValidationObserver>
     </BaseCard>
   </div>
@@ -63,7 +64,6 @@ import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import UserService from '@/services/Api/services/UserService/UserService'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
-import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormCard from '@/components/BaseFormCard/BaseFormCard'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
@@ -74,7 +74,6 @@ export default {
     Nav,
     BaseCard,
     BaseFormInput,
-    BaseDivider,
     BaseFormSubmitButton,
     BaseFormError,
     BaseFormCard,
@@ -118,14 +117,25 @@ export default {
   grid-auto-flow: row;
   grid-gap: var(--spacing-5);
 }
+.card {
+  padding: 0;
+}
 .form {
   display: flex;
   flex-direction: column;
 }
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  grid-gap: var(--spacing-5);
+  display: flex;
+  @include media(sm-only) {
+    flex-direction: column;
+    > *:not(:last-child) {
+      padding-bottom: 0;
+    }
+  }
+}
+.section {
+  padding: var(--spacing-5);
+  width: 100%;
 }
 .label {
   font-size: 1.4rem;
@@ -157,20 +167,23 @@ export default {
     color: var(--color-gray-4);
   }
 }
-.divider {
-  position: relative;
-  width: calc(100% + var(--spacing-5) * 2);
-  left: calc(-1 * var(--spacing-5));
-}
 .vertical-divider {
   position: relative;
-  height: calc(100% + var(--spacing-5) * 2);
-  top: calc(-1 * var(--spacing-5));
+  width: 1px;
+  flex-shrink: 0;
   background: var(--color-gray-1);
 }
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--spacing-5);
+  border-top: 1px solid var(--color-gray-1);
+}
 .submit {
-  align-self: flex-end;
   width: calc(50% - var(--spacing-5) - 0.5px);
+  @include media(sm-only) {
+    width: 100%;
+  }
 }
 .card-error {
   top: 100%;

@@ -1,9 +1,10 @@
 <template>
   <BaseCard class="buyer">
     <div class="toggle-container">
-      <div :class="{label: true, active: !isYearly}" @click="isYearly = false">Monthly</div>
+      <div :class="{label: true, active: !isYearly}" @click="$refs['toggle'].toggle(false)">Monthly</div>
       <BaseFormToggle
         class="toggle"
+        ref="toggle"
         v-model="isYearly"
         bg-active-color="--color-gray-8"
         bg-inactive-color="--color-gray-8"
@@ -11,7 +12,7 @@
         knob-inactive-color="--color-black-2"
         design="large"
       />
-      <div :class="{label: true, active: isYearly}" @click="isYearly = true">Yearly (save 20%)</div>
+      <div :class="{label: true, active: isYearly}" @click="$refs['toggle'].toggle(true)">Yearly (save 20%)</div>
     </div>
     <div class="top">
       <div class="dollar">$</div>
@@ -129,6 +130,7 @@ export default {
     color: var(--color-black-2);
   }
   .label {
+    cursor: pointer;
     font-weight: var(--font-weight-medium);
     transition: color var(--transition-settings-1);
   }

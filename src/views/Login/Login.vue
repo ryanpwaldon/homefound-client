@@ -1,39 +1,40 @@
 <template>
   <BaseLayoutHome @keypress.native.enter="submit">
     <div class="login">
-      <BaseCard class="card">
-        <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
-          <div class="title">Login</div>
-          <BaseDivider class="divider"/>
-          <div class="label">Email</div>
-          <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.email"
-              autocomplete="username"
+      <div class="container">
+        <div class="title">Login</div>
+        <BaseCard class="card">
+          <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+            <div class="label">Email</div>
+            <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
+              <BaseFormInput
+                v-model="form.email"
+                autocomplete="username"
+              />
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
+            <div class="label">Password</div>
+            <ValidationProvider class="provider password" name="password" rules="required" v-slot="{ errors }">
+              <BaseFormInput
+                v-model="form.password"
+                autocomplete="current-password"
+                type="password"
+              />
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
+            <router-link to="/password/instructions">
+              <div class="text-button">I forgot my password</div>
+            </router-link>
+            <BaseDivider class="divider"/>
+            <BaseFormSubmitButton
+              text="Continue"
+              :loading="loading"
+              @click.native="submit"
+              :design="valid ? 'black' : 'disabled'"
             />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="label">Password</div>
-          <ValidationProvider class="provider password" name="password" rules="required" v-slot="{ errors }">
-            <BaseFormInput
-              v-model="form.password"
-              autocomplete="current-password"
-              type="password"
-            />
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <router-link to="/password/instructions">
-            <div class="text-button">I forgot my password</div>
-          </router-link>
-          <BaseDivider class="divider"/>
-          <BaseFormSubmitButton
-            text="Continue"
-            :loading="loading"
-            @click.native="submit"
-            :design="valid ? 'black' : 'disabled'"
-          />
-        </ValidationObserver>
-      </BaseCard>
+          </ValidationObserver>
+        </BaseCard>
+      </div>
     </div>
   </BaseLayoutHome>
 </template>
@@ -90,14 +91,22 @@ export default {
 <style lang="scss" scoped>
 .login {
   width: 100%;
-  height: auto;
   display: flex;
   justify-content: center;
   padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
-.card {
+.container {
   width: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--spacing-5);
   max-width: 40rem;
+  @include media(sm-only) {
+    max-width: none;
+  }
 }
 .observer {
   width: 100%;
