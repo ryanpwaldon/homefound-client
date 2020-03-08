@@ -2,7 +2,7 @@
   <transition @enter="animateEnter" @leave="animateLeave" :css="false" v-if="mounted">
     <div class="base-modal">
       <div class="backdrop"/>
-      <img class="logo" src="@/assets/img/logo-7.svg">
+      <img class="logo" src="@/assets/img/logo-9.svg">
       <BaseCard class="card" ref="card" @click.native.stop>
         <ButtonIcon class="close" :icon="require('@/assets/img/close.svg')" @click.native="$emit('close')"/>
         <slot/>

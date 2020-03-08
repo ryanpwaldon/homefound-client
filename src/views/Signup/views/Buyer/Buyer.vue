@@ -34,10 +34,23 @@
           <div class="vertical-divider"/>
           <div class="section">
             <div class="label">Plan</div>
-            <div class="input plan">
-              <div class="price">74 AUD</div>
-              <div class="subcopy">billed monthly</div>
-            </div>
+            <ValidationProvider class="input" name="plan" rules="required" v-slot="{ errors }">
+              <BaseFormToggleText v-model="form.isMonthly">
+                <template #option-1="{ active }">
+                  <div class="option" :class="{ active }">
+                    <div class="title">Monthly</div>
+                    <div class="subtitle">$74 billed monthly</div>
+                  </div>
+                </template>
+                <template #option-2="{ active }">
+                  <div class="option" :class="{ active }">
+                    <div class="title">Yearly <span class="discount">(save 20%)</span></div>
+                    <div class="subtitle">$710 billed yearly</div>
+                  </div>
+                </template>
+              </BaseFormToggleText>
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
             <div class="label">Card details</div>
             <ValidationProvider class="input" name="card details" rules="required|card" v-slot="{ errors }" :custom-messages="{ required: 'Your card details are required.' }">
               <BaseFormCard v-model="card"/>
@@ -66,6 +79,7 @@ import UserService from '@/services/Api/services/UserService/UserService'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormCard from '@/components/BaseFormCard/BaseFormCard'
+import BaseFormToggleText from '@/components/BaseFormToggleText/BaseFormToggleText'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
@@ -76,6 +90,7 @@ export default {
     BaseFormInput,
     BaseFormSubmitButton,
     BaseFormError,
+    BaseFormToggleText,
     BaseFormCard,
     ValidationObserver,
     ValidationProvider
@@ -85,6 +100,7 @@ export default {
       form: {
         name: '',
         email: '',
+        isMonthly: true,
         password: ''
       },
       card: null,
@@ -149,23 +165,35 @@ export default {
     margin-bottom: var(--spacing-5);
   }
 }
-.plan {
-  width: 100%;
+.option {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-4);
-  border-radius: var(--border-radius-1);
-  border: solid 1px var(--color-gray-1);
-  background: var(--color-gray-2);
-  .price {
-    font-size: 2.4rem;
-    font-weight: var(--font-weight-medium);
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--color-gray-6);
+  padding: var(--spacing-2) 0;
+  transition: color var(--transition-settings-1);
+  font-size: 0.5rem;
+  &.active {
     color: var(--color-black-2);
   }
-  .subcopy {
-    font-size: 1.4rem;
-    color: var(--color-gray-4);
-  }
+}
+.title {
+  font-size: 1.4rem;
+  font-family: var(--font-1);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2em;
+}
+.discount {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+.subtitle {
+  font-size: 1.4rem;
+  font-family: var(--font-1);
+  font-weight: var(--font-weight-regular);
 }
 .vertical-divider {
   position: relative;

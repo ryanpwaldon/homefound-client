@@ -2,7 +2,7 @@
   <div class="container">
     <div class="content">
       <router-link class="logo" to="/">
-        <img src="@/assets/img/logo-7.svg">
+        <img src="@/assets/img/logo-9.svg">
         <BaseText2 text="Homefound"/>
       </router-link>
       <div class="menu">

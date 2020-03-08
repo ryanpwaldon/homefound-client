@@ -2,7 +2,7 @@
   <div class="container" :class="{ open }" @click.prevent.stop>
     <div class="header">
       <router-link class="logo" to="/">
-        <img src="@/assets/img/logo-7.svg">
+        <img src="@/assets/img/logo-9.svg">
         <BaseText2 text="Homefound"/>
       </router-link>
       <img class="menu" :src="require(`@/assets/img/${open ? 'close-thin' : 'menu'}.svg`)" @click="open = !open">

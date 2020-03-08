@@ -3,7 +3,7 @@
     <div class="content">
       <div class="col col-1">
         <router-link class="logo-container" to="/">
-          <img class="logo" src="@/assets/img/logo-7.svg">
+          <img class="logo" src="@/assets/img/logo-9.svg">
           <div class="logo-title">Homefound</div>
         </router-link>
         <div class="logo-subcopy">Discover properties before the crowd.</div>

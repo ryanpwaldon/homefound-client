@@ -52,7 +52,7 @@ export default {
 }
 .disabled {
   color: var(--color-gray-4);
-  background: var(--color-gray-1);
+  background: var(--color-gray-8);
   pointer-events: none;
 }
 .spinner {
