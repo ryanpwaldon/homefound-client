@@ -35,7 +35,7 @@
           <div class="section">
             <div class="label">Plan</div>
             <ValidationProvider class="input" name="plan" rules="required" v-slot="{ errors }">
-              <BaseFormToggleText v-model="form.plan" :options="[PricingPlan.BASIC_MONTHLY, PricingPlan.BASIC_YEARLY]">
+              <BaseFormToggleText v-model="form.pricingPlan" :options="[PricingPlan.BASIC_MONTHLY, PricingPlan.BASIC_YEARLY]">
                 <template #option-1="{ active }">
                   <div class="option" :class="{ active }">
                     <div class="title">Monthly</div>
