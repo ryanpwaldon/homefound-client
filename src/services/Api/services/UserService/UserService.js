@@ -22,8 +22,8 @@ export default {
     return (await Api().put(`/user/listings/saved/remove`, { listingId })).data
   },
 
-  async createSubscription () {
-    return (await Api().put(`/user/subscription`)).data
+  async createSubscription (pricingPlan) {
+    return (await Api().put(`/user/subscription`, { pricingPlan })).data
   },
 
   async cancelSubscription () {

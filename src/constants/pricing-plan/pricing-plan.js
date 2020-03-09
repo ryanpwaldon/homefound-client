@@ -1,0 +1,2 @@
+export const BASIC_MONTHLY = 'BASIC_MONTHLY'
+export const BASIC_YEARLY = 'BASIC_YEARLY'
