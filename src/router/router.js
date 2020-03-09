@@ -10,7 +10,7 @@ import {
   BUYER_SUBSCRIPTION_ENDED,
   BUYER_INITIAL_PAYMENT_FAILED,
   EMAIL_VERIFICATION_PENDING
-} from '@/roles/roles'
+} from '@/constants/roles/roles'
 
 Vue.use(VueRouter)
 

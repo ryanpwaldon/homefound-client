@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BillingService from '@/services/Api/services/BillingService/BillingService'
+import UserService from '@/services/Api/services/UserService/UserService'
 import BaseButton from '@/components/BaseButton/BaseButton'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseText1 from '@/components/BaseText1/BaseText1'
@@ -67,7 +67,7 @@ export default {
       this.loading = true
       try {
         const { paymentMethod } = await this.stripe.createPaymentMethod({ type: 'card', card: this.card })
-        const user = await BillingService.updateCustomerPaymentMethod(this.customerId, paymentMethod.id)
+        const user = await UserService.updateDefaultPaymentMethod(paymentMethod.id)
         this.$emit('close')
         this.$store.commit('user/setUser', user)
         this.$notify({ type: 'success' })

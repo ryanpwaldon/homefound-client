@@ -1,5 +1,5 @@
 import AuthService from '@/services/Api/services/AuthService/AuthService'
-import { GUEST } from '@/roles/roles'
+import { GUEST } from '@/constants/roles/roles'
 
 export default {
   namespaced: true,

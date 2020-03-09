@@ -2,11 +2,11 @@
   <div class="base-form-toggle-text">
     <div class="content">
       <div class="options-container">
-        <div class="option-container" @click="$emit('input', true)">
-          <slot name="option-1" :active="value"/>
+        <div class="option-container" @click="$emit('input', options[0])">
+          <slot name="option-1" :active="value === options[0]"/>
         </div>
-        <div class="option-container" @click="$emit('input', false)">
-          <slot name="option-2" :active="!value"/>
+        <div class="option-container" @click="$emit('input', options[1])">
+          <slot name="option-2" :active="value === options[1]"/>
         </div>
       </div>
       <div class="panel" ref="panel"/>
@@ -19,29 +19,34 @@ import anime from 'animejs'
 export default {
   props: {
     value: {
-      type: Boolean,
+      type: String,
       required: true
+    },
+    options: {
+      type: Array,
+      required: true,
+      validator: options => options.length === 2
     }
   },
   mounted () {
     this.initTogglePosition(this.value)
   },
   watch: {
-    value (val) {
-      this.animate(val)
+    value (value) {
+      this.animate(value)
     }
   },
   methods: {
-    animate (state) {
+    animate (value) {
       return anime.timeline().add({
         targets: this.$refs['panel'],
-        marginLeft: state ? '0%' : '50%',
+        marginLeft: value === this.options[0] ? '0%' : '50%',
         easing: 'easeOutQuad',
         duration: 200
       })
     },
-    initTogglePosition (state) {
-      const animation = this.animate(state)
+    initTogglePosition (value) {
+      const animation = this.animate(value)
       animation.seek(animation.duration)
     }
   }

@@ -14,7 +14,7 @@ import AccountCardReactivateSubscription from './partials/AccountCardReactivateS
 import AccountCardCancelSubscription from './partials/AccountCardCancelSubscription/AccountCardCancelSubscription'
 import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
 import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
-import { BUYER, BUYER_SUBSCRIPTION_CANCELLED, BUYER_SUBSCRIPTION_ENDED } from '@/roles/roles'
+import { BUYER, BUYER_SUBSCRIPTION_CANCELLED, BUYER_SUBSCRIPTION_ENDED } from '@/constants/roles/roles'
 import { mapState } from 'vuex'
 export default {
   name: 'billing',

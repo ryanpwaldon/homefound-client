@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import BillingService from '@/services/Api/services/BillingService/BillingService'
+import UserService from '@/services/Api/services/UserService/UserService'
 import BaseText1 from '@/components/BaseText1/BaseText1'
 import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseModal from '@/components/BaseModal/BaseModal'
@@ -43,7 +43,7 @@ export default {
       if (this.loading) return
       this.loading = true
       try {
-        const user = await BillingService.reactivateSubscription(this.subscriptionId)
+        const user = await UserService.reactivateSubscription()
         this.$emit('close')
         this.$store.commit('user/setUser', user)
         this.$notify({ text: 'Subscription reactivated', type: 'success' })

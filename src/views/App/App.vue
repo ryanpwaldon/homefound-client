@@ -9,7 +9,7 @@
 
 <script>
 import BaseNavVertical from '@/components/BaseNavVertical/BaseNavVertical'
-import { SELLER, ADMIN } from '@/roles/roles'
+import { SELLER, ADMIN } from '@/constants/roles/roles'
 export default {
   name: 'app',
   components: {
