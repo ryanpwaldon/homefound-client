@@ -7,7 +7,7 @@ import {
   ADMIN,
   SELLER,
   BUYER,
-  BUYER_SUBSCRIPTION_ENDED,
+  BUYER_SUBSCRIPTION_DELETED,
   BUYER_INITIAL_PAYMENT_FAILED,
   EMAIL_VERIFICATION_PENDING
 } from '@/constants/roles/roles'
@@ -139,7 +139,7 @@ const routes = [
       permissions: [
         { roles: [BUYER_INITIAL_PAYMENT_FAILED], redirect: '/signup/buyer' },
         { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify' },
-        { roles: [BUYER, BUYER_SUBSCRIPTION_ENDED, SELLER, ADMIN], access: true },
+        { roles: [BUYER, BUYER_SUBSCRIPTION_DELETED, SELLER, ADMIN], access: true },
         { roles: [ALL], redirect: '/login' }
       ]
     },

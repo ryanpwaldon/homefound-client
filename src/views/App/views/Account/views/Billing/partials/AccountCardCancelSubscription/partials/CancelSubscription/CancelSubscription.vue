@@ -6,7 +6,7 @@
     <BaseDivider/>
     <div class="buttons">
       <BaseFormSubmitButton class="button" text="Back" design="gray" @click.native="$emit('close')"/>
-      <BaseFormSubmitButton class="button" text="Cancel subscription" @click.native="submit" :loading="loading"/>
+      <BaseFormSubmitButton class="button" text="Cancel subscription" design="black" @click.native="submit" :loading="loading"/>
     </div>
   </BaseModal>
 </template>
@@ -38,10 +38,10 @@ export default {
       if (this.loading) return
       this.loading = true
       try {
-        const user = await UserService.cancelSubscription()
+        const { user, accessToken } = await UserService.cancelSubscription()
         this.$emit('close')
-        this.$store.commit('user/setUser', user)
-        this.$notify({ type: 'success' })
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
+        this.$notify({ text: 'Subscription cancelled', type: 'success' })
       } catch (err) { console.log(err) }
       this.loading = false
     }

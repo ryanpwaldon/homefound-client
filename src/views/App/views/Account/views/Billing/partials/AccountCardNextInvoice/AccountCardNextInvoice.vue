@@ -4,8 +4,8 @@
       <div class="content">
         <BaseText4 class="label" text="Next invoice"/>
         <BaseText5 class="value">
-          <template v-if="!subscriptionCancelled">Your card will be billed $74 on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}</template>
-          <template v-else>Your subscription has been cancelled. You will still have access until {{ nextInvoiceAt | moment('DD MMMM YYYY') }}</template>
+          <template v-if="!subscriptionCancelled">Your card will be billed $74 on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
+          <template v-else>Your subscription has been cancelled and will end on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
         </BaseText5>
       </div>
     </div>
@@ -16,6 +16,7 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
+import { BUYER_SUBSCRIPTION_CANCELLED } from '@/constants/roles/roles'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -25,7 +26,7 @@ export default {
   },
   computed: mapState('user', {
     nextInvoiceAt: state => state.user.nextInvoiceAt,
-    subscriptionCancelled: state => state.user.subscriptionCancelled
+    subscriptionCancelled: state => state.user.roles.includes(BUYER_SUBSCRIPTION_CANCELLED)
   })
 }
 </script>

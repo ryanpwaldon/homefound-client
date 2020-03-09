@@ -5,7 +5,7 @@
         <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
           <div class="title">Verify your email</div>
           <div class="description">
-            We sent a code to <span class="black">{{ $store.state.user.user.email }}</span>. Please verify your email by entering the code below. Be sure to check your junk folder. Not your email? <span class="underline pointer" @click="logout">Login with a different email</span>
+            We sent a code to <span class="emphasis">{{ $store.state.user.user.email }}</span>. Please verify your email by entering the code below. Be sure to check your junk folder. Not your email? <span class="underline pointer" @click="logout">Login with a different email</span>
           </div>
           <BaseDivider class="divider"/>
           <div class="label">Code</div>
@@ -132,7 +132,7 @@ export default {
   cursor: pointer;
   text-decoration: underline;
 }
-.black {
+.emphasis {
   color: var(--color-black-2);
 }
 .underline {

@@ -8,7 +8,7 @@
     <BaseDivider/>
     <div class="buttons">
       <BaseFormSubmitButton class="button" text="Back" design="gray" @click.native="$emit('close')"/>
-      <BaseFormSubmitButton class="button" text="Reactivate" @click.native="submit" :loading="loading"/>
+      <BaseFormSubmitButton class="button" text="Reactivate" design="black" @click.native="submit" :loading="loading"/>
     </div>
   </BaseModal>
 </template>
@@ -43,9 +43,9 @@ export default {
       if (this.loading) return
       this.loading = true
       try {
-        const user = await UserService.reactivateSubscription()
+        const { user, accessToken } = await UserService.reactivateSubscription()
         this.$emit('close')
-        this.$store.commit('user/setUser', user)
+        this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$notify({ text: 'Subscription reactivated', type: 'success' })
       } catch (err) { console.log(err) }
       this.loading = false
