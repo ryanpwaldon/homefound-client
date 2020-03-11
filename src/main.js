@@ -8,8 +8,15 @@ import vueMoment from 'vue-moment'
 import store from '@/store/store'
 import '@/assets/css/main.scss'
 import '@/config/config'
+import loadJS from 'load-js'
 
-(async () => {
+void (async () => {
+  await loadJS('https://js.stripe.com/v3/')
+  window.stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
+})()
+
+void (async () => {
+  window.UPLOADCARE_MANUAL_START = true
   Vue.config.productionTip = false
   Vue.use(vueContainScroll)
   Vue.use(vueNumeral, { locale: 'en-au' })
