@@ -35,7 +35,7 @@
           <div class="section">
             <div class="label">Plan</div>
             <ValidationProvider class="input" name="plan" rules="required" v-slot="{ errors }">
-              <BaseFormToggleText v-model="form.pricingPlan" :options="[PricingPlan.BASIC_MONTHLY, PricingPlan.BASIC_YEARLY]">
+              <BaseFormToggleText v-model="form.plan" :options="[Plan.BASIC_MONTHLY, Plan.BASIC_YEARLY]">
                 <template #option-1="{ active }">
                   <div class="option" :class="{ active }">
                     <div class="title">Monthly</div>
@@ -82,7 +82,7 @@ import BaseFormCard from '@/components/BaseFormCard/BaseFormCard'
 import BaseFormToggleText from '@/components/BaseFormToggleText/BaseFormToggleText'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
-import * as PricingPlan from '@/constants/pricing-plan/pricing-plan'
+import * as Plan from '@/constants/plan/plan'
 export default {
   name: 'signup',
   components: {
@@ -98,11 +98,11 @@ export default {
   },
   data () {
     return {
-      PricingPlan,
+      Plan,
       form: {
         name: '',
         email: '',
-        pricingPlan: PricingPlan.BASIC_MONTHLY,
+        plan: Plan.BASIC_MONTHLY,
         password: ''
       },
       card: null,
