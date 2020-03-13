@@ -30,7 +30,14 @@
         <div class="label">Agent licence number</div>
         <ValidationProvider class="input" name="agent licence number" rules="required|numeric" v-slot="{ errors }">
           <BaseFormInput
-            v-model="form.licenceNumber"
+            v-model="form.agentLicenceNumber"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
+        <div class="label">Agency address</div>
+        <ValidationProvider class="input" name="agency address" rules="required" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.agencyAddress"
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
@@ -83,9 +90,9 @@ export default {
         name: '',
         email: '',
         phone: '',
-        licenceNumber: '',
-        password: '',
-        userType: 'SELLER'
+        agentLicenceNumber: '',
+        agencyAddress: '',
+        password: ''
       },
       loading: false
     }
@@ -95,10 +102,10 @@ export default {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const { user, accessToken } = await UserService.register(this.form)
+        const { user, accessToken } = await UserService.createSeller(this.form)
         this.$notify({ type: 'success' })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
-        this.$router.push('/verify')
+        this.$router.push('/verify/email')
       } catch (error) {
         console.log(error)
       }

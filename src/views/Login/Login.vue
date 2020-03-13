@@ -3,7 +3,7 @@
     <div class="login">
       <div class="container">
         <div class="title">Login</div>
-        <BaseCard class="card">
+        <BaseCard>
           <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
             <div class="label">Email</div>
             <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">

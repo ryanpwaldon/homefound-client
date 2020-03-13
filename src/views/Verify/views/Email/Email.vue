@@ -1,28 +1,29 @@
 <template>
   <BaseLayoutHome @keypress.native.enter="submit">
-    <div class="verify">
-      <BaseCard class="card">
-        <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
-          <div class="title">Verify your email</div>
-          <div class="description">
-            We sent a code to <span class="emphasis">{{ $store.state.user.user.email }}</span>. Please verify your email by entering the code below. Be sure to check your junk folder. Not your email? <span class="underline pointer" @click="logout">Login with a different email</span>
-          </div>
-          <BaseDivider class="divider"/>
-          <div class="label">Code</div>
-          <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
-            <BaseFormInput v-model="form.code" type="text"/>
-            <BaseFormError :message="errors[0]"/>
-          </ValidationProvider>
-          <div class="resend" @click="resend">Resend email</div>
-          <BaseDivider class="divider"/>
-          <BaseFormSubmitButton
-            text="Next"
-            :loading="loading"
-            @click.native="submit"
-            :design="valid ? 'black' : 'disabled'"
-          />
-        </ValidationObserver>
-      </BaseCard>
+    <div class="email">
+      <div class="container">
+        <div class="title">Verify your email</div>
+        <div class="description">
+          We sent a code to <span class="emphasis">{{ $store.state.user.user.email }}</span>. Please verify your email by entering the code below. Be sure to check your junk folder. <span class="underline pointer" @click="logout">Click here to login with a different email.</span>
+        </div>
+        <BaseCard>
+          <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
+            <div class="label">Code</div>
+            <ValidationProvider class="provider" name="verification code" rules="required" v-slot="{ errors }">
+              <BaseFormInput v-model="form.code" type="text"/>
+              <BaseFormError :message="errors[0]"/>
+            </ValidationProvider>
+            <div class="resend" @click="resend">Resend email</div>
+            <BaseDivider class="divider"/>
+            <BaseFormSubmitButton
+              text="Next"
+              :loading="loading"
+              @click.native="submit"
+              :design="valid ? 'black' : 'disabled'"
+            />
+          </ValidationObserver>
+        </BaseCard>
+      </div>
     </div>
   </BaseLayoutHome>
 </template>
@@ -37,7 +38,7 @@ import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
-  name: 'verify',
+  name: 'verify-email',
   components: {
     BaseLayoutHome,
     BaseFormInput,
@@ -75,6 +76,7 @@ export default {
         this.$router.push('/app')
       } catch (error) {
         console.log(error)
+        this.$notify({ text: 'Incorrect code', type: 'error' })
       }
       this.loading = false
     },
@@ -93,22 +95,31 @@ export default {
   display: flex;
   justify-content: center;
   padding: var(--spacing-10) 0;
+  @include media(sm-only) {
+    padding: var(--spacing-8) 0;
+  }
 }
-.card {
+.container {
   width: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--spacing-5);
   max-width: 40rem;
-}
-.form {
-  width: 100%;
-  position: relative;
+  @include media(sm-only) {
+    max-width: none;
+  }
 }
 .title {
-  font-size: 1.6rem;
-  margin-bottom: var(--spacing-2);
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
 }
 .description {
   color: var(--color-gray-4);
   line-height: 1.5;
+}
+.form {
+  width: 100%;
+  position: relative;
 }
 .divider {
   position: relative;

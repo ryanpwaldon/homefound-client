@@ -10,6 +10,7 @@ export const ADMIN = 'ADMIN'
 // Seller
 export const SELLER = 'SELLER'
 export const SELLER_VERIFICATION_PENDING = 'SELLER_VERIFICATION_PENDING'
+export const SELLER_LOCATION_UNAVAILABLE = 'SELLER_LOCATION_UNAVAILABLE'
 
 // Buyer
 export const BUYER = 'BUYER'

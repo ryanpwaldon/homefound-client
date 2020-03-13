@@ -9,7 +9,9 @@ import {
   BUYER,
   BUYER_SUBSCRIPTION_DELETED,
   BUYER_INITIAL_PAYMENT_FAILED,
-  EMAIL_VERIFICATION_PENDING
+  SELLER_VERIFICATION_PENDING,
+  EMAIL_VERIFICATION_PENDING,
+  SELLER_LOCATION_UNAVAILABLE
 } from '@/constants/roles/roles'
 
 Vue.use(VueRouter)
@@ -27,7 +29,6 @@ const routes = [
   },
   {
     path: '/pricing',
-    name: 'pricing',
     component: () => import('@/views/Pricing/Pricing'),
     children: [
       {
@@ -36,19 +37,18 @@ const routes = [
       },
       {
         path: 'buyer',
-        name: 'pricing/buyer',
+        name: 'pricing-buyer',
         component: () => import('@/views/Pricing/views/Buyer/Buyer')
       },
       {
         path: 'agent',
-        name: 'pricing/agent',
+        name: 'pricing-agent',
         component: () => import('@/views/Pricing/views/Agent/Agent')
       }
     ]
   },
   {
     path: '/faqs',
-    name: 'faqs',
     component: () => import('@/views/Faqs/Faqs'),
     children: [
       {
@@ -57,12 +57,12 @@ const routes = [
       },
       {
         path: 'buyer',
-        name: 'faqs/buyer',
+        name: 'faqs-buyer',
         component: () => import('@/views/Faqs/views/Buyer/Buyer')
       },
       {
         path: 'agent',
-        name: 'faqs/agent',
+        name: 'faqs-agent',
         component: () => import('@/views/Faqs/views/Agent/Agent')
       }
     ]
@@ -85,7 +85,6 @@ const routes = [
   },
   {
     path: '/signup',
-    name: 'signup',
     component: () => import('@/views/Signup/Signup'),
     meta: {
       permissions: [
@@ -100,23 +99,45 @@ const routes = [
       },
       {
         path: 'buyer',
-        name: 'signup/buyer',
+        name: 'signup-buyer',
         component: () => import('@/views/Signup/views/Buyer/Buyer')
       },
       {
         path: 'agent',
-        name: 'signup/agent',
+        name: 'signup-agent',
         component: () => import('@/views/Signup/views/Agent/Agent')
       }
     ]
   },
   {
-    path: '/verify',
-    name: 'verify',
-    component: () => import('@/views/Verify/Verify'),
+    path: '/verify/email',
+    name: 'verify-email',
+    component: () => import('@/views/Verify/views/Email/Email'),
     meta: {
       permissions: [
         { roles: [EMAIL_VERIFICATION_PENDING], access: true },
+        { roles: [ALL], redirect: '/app' }
+      ]
+    }
+  },
+  {
+    path: '/verify/agent',
+    name: 'verify-agent',
+    component: () => import('@/views/Verify/views/Agent/Agent'),
+    meta: {
+      permissions: [
+        { roles: [SELLER_VERIFICATION_PENDING], access: true },
+        { roles: [ALL], redirect: '/app' }
+      ]
+    }
+  },
+  {
+    path: '/unavailable',
+    name: 'unavailable',
+    component: () => import('@/views/Unavailable/Unavailable'),
+    meta: {
+      permissions: [
+        { roles: [SELLER_LOCATION_UNAVAILABLE], access: true },
         { roles: [ALL], redirect: '/app' }
       ]
     }
@@ -137,8 +158,10 @@ const routes = [
     component: () => import('@/views/App/App'),
     meta: {
       permissions: [
+        { roles: [SELLER_LOCATION_UNAVAILABLE], redirect: '/unavailable' },
         { roles: [BUYER_INITIAL_PAYMENT_FAILED], redirect: '/signup/buyer' },
-        { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify' },
+        { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify/email' },
+        { roles: [SELLER_VERIFICATION_PENDING], redirect: '/verify/agent' },
         { roles: [BUYER, BUYER_SUBSCRIPTION_DELETED, SELLER, ADMIN], access: true },
         { roles: [ALL], redirect: '/login' }
       ]

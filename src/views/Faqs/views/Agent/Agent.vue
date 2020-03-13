@@ -30,7 +30,7 @@
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
 export default {
-  name: 'faqs/agent',
+  name: 'faqs-agent',
   components: {
     BaseCard
   }

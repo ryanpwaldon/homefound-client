@@ -117,7 +117,7 @@ export default {
         const paymentMethodId = (await window.stripe.createPaymentMethod({ type: 'card', card: this.card.item })).paymentMethod.id
         const { user, accessToken } = await UserService.createBuyer({ ...this.form, paymentMethodId })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
-        this.$router.push('/app')
+        this.$router.push('/verify/email')
       } catch (error) {
         console.log(error)
       }

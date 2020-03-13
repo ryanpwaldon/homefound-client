@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="faq">
-      <div class="question">Lorem ipsum dolor sit amet?</div>
+      <div class="question">How do you determine whether a property is off-market?</div>
       <div class="answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</div>
     </div>
     <div class="faq">
@@ -36,7 +36,7 @@
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
 export default {
-  name: 'faqs/buyer',
+  name: 'faqs-buyer',
   components: {
     BaseCard
   }
