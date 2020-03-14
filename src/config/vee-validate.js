@@ -30,3 +30,7 @@ extend('addressNumber', {
 })
 
 extend('card', ({ valid, error }) => valid || error || 'Your card details are incomplete.')
+
+extend('location', ({ suburb, state, postcode }) => {
+  return (suburb && state && postcode && true) || 'Please select a suburb from the dropdown.'
+})

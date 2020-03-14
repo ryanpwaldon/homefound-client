@@ -13,7 +13,9 @@
         <BaseText2 class="text">{{ firstPublishedAt | moment('from', 'now') }}</BaseText2>
         <BaseContextMenu>
           <template v-slot:trigger>
-            <BaseButtonFlex class="options-button" :icon="require('@/assets/img/dots.svg')"/>
+            <BaseButtonFlex class="options-button">
+              <img src="@/assets/img/dots.svg">
+            </BaseButtonFlex>
           </template>
           <template v-slot:content="{ close }">
             <div class="info">{{ address }}</div>
@@ -157,6 +159,10 @@ export default {
 .options-button {
   height: 2rem;
   width: 2em;
+  img {
+    width: 100%;
+    display: block;
+  }
 }
 .context-menu-divider {
   margin: 0;

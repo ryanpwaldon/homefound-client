@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.verify {
+.email {
   width: 100%;
   height: auto;
   display: flex;

@@ -1,22 +1,11 @@
 <template>
-  <div class="base-button-inline-icon">
-    <img :src="icon">
+  <div class="base-button-flex">
+    <slot/>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    icon: {
-      type: String,
-      required: true
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
-.base-button-inline-icon {
+.base-button-flex {
   position: relative;
   display: flex;
   align-items: center;
@@ -29,10 +18,6 @@ export default {
   cursor: pointer;
   &:hover {
     background-color: var(--color-gray-1);
-  }
-  img {
-    width: 100%;
-    display: block;
   }
 }
 </style>

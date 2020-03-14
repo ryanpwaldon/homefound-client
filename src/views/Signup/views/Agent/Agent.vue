@@ -34,10 +34,11 @@
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
-        <div class="label">Agency address</div>
-        <ValidationProvider class="input" name="agency address" rules="required" v-slot="{ errors }">
-          <BaseFormInput
-            v-model="form.agencyAddress"
+        <div class="label">Where is your agency located?</div>
+        <ValidationProvider class="input" name="location" rules="required|location" v-slot="{ errors }">
+          <BaseFormAddressAutocomplete
+            placeholder="Type a suburb..."
+            v-model="location"
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
@@ -68,6 +69,7 @@ import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import UserService from '@/services/Api/services/UserService/UserService'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
+import BaseFormAddressAutocomplete from '@/components/BaseFormAddressAutocomplete/BaseFormAddressAutocomplete'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
@@ -80,6 +82,7 @@ export default {
     BaseFormInput,
     BaseDivider,
     BaseFormSubmitButton,
+    BaseFormAddressAutocomplete,
     BaseFormError,
     ValidationObserver,
     ValidationProvider
@@ -91,9 +94,9 @@ export default {
         email: '',
         phone: '',
         agentLicenceNumber: '',
-        agencyAddress: '',
         password: ''
       },
+      location: null,
       loading: false
     }
   },
@@ -102,12 +105,13 @@ export default {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const { user, accessToken } = await UserService.createSeller(this.form)
+        const { user, accessToken } = await UserService.createSeller({ ...this.form, ...this.location })
         this.$notify({ type: 'success' })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$router.push('/verify/email')
       } catch (error) {
         console.log(error)
+        this.$notify({ type: 'error' })
       }
       this.loading = false
     }

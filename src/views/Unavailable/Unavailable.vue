@@ -4,7 +4,7 @@
       <div class="container">
         <div class="title">We haven't launched in your area</div>
         <div class="description">
-          We'll let you know when we're available in your area<span class="underline pointer" @click="logout">Click here to login with a different email.</span>
+          We'll let you know when we're available in your area. <span class="underline pointer" @click="logout">Click here to login with a different email.</span>
         </div>
       </div>
     </div>

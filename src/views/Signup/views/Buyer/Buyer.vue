@@ -120,6 +120,7 @@ export default {
         this.$router.push('/verify/email')
       } catch (error) {
         console.log(error)
+        this.$notify({ type: 'error' })
       }
       this.loading = false
     }

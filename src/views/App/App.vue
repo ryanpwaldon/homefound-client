@@ -56,10 +56,11 @@ export default {
 </style>
 
 <style lang="scss">
-.app-mode {
-  &html,
+html.app-mode {
+  &,
   body,
   #app {
+    height: 100%;
     overflow: hidden;
   }
 }
