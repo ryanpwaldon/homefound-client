@@ -75,7 +75,7 @@
         </router-link>
       </div>
       <BaseLoader class="loader" v-if="loading"/>
-      <BaseIntersectionTrigger ref="intersection-trigger" @intersected="getListings" />
+      <BaseIntersectionTrigger ref="intersection-trigger" @intersected="updateListings" />
     </BaseLayoutCenter>
     <div class="map-container">
       <div class="map-button">
@@ -88,7 +88,7 @@
         </transition>
       </div>
       <BaseMap>
-        <Pin v-for="listing of listings" :key="listing._id" :lng-lat="listing.lngLat"/>
+        <Markers :lng-lats="lngLats"/>
         <GetBounds ref="get-bounds" v-model="polygon"/>
       </BaseMap>
     </div>
@@ -106,7 +106,7 @@ import BaseIntersectionTrigger from '@/components/BaseIntersectionTrigger/BaseIn
 import BaseButtonRounded from '@/components/BaseButtonRounded/BaseButtonRounded'
 import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
-import Pin from '@/components/BaseMap/components/Pin/Pin'
+import Markers from '@/components/BaseMap/components/Markers/Markers'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import isEqual from 'lodash/isEqual'
 export default {
@@ -122,15 +122,17 @@ export default {
     BaseLoader,
     GetBounds,
     BaseMap,
-    Pin
+    Markers
   },
-  async created () {
+  created () {
+    this.updatePoints()
     const destroy = this.$watch('polygon', () => {
       this.updatePolygonFilter()
       destroy()
     })
   },
   data: () => ({
+    lngLats: [],
     listings: [],
     nextPage: 1,
     limit: 9,
@@ -157,13 +159,16 @@ export default {
         this.listings = []
         this.nextPage = 1
         this.lastPage = null
-        this.getListings()
+        this.updateListings()
       }
     }
   },
   methods: {
     isEqual,
-    async getListings () {
+    async updatePoints () {
+      this.lngLats = (await ListingService.findAllLngLats()).map(listing => listing.lngLat)
+    },
+    async updateListings () {
       const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
       if (this.loading || reachedLastPage) return
       this.loading = true

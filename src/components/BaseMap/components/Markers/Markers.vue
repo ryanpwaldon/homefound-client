@@ -1,9 +1,14 @@
 <script>
+import { point } from '@turf/helpers'
 export default {
   props: {
-    points: {
+    lngLats: {
       type: Array,
       required: true
+    },
+    approximate: {
+      type: Boolean,
+      default: false
     }
   },
   async mounted () {
@@ -51,9 +56,10 @@ export default {
       }, { pixelRatio: 2 })
     },
     addSource () {
+      const points = this.lngLats.map(lngLat => point(lngLat))
       this.map.addSource('locations', {
         type: 'geojson',
-        data: { type: 'FeatureCollection', features: this.points },
+        data: { type: 'FeatureCollection', features: points },
         cluster: true,
         clusterRadius: 40,
         clusterMaxZoom: 8
@@ -68,9 +74,11 @@ export default {
           'circle-stroke-width': 1,
           'circle-color': '#fe6464',
           'circle-stroke-color': '#be5643',
-          'circle-stroke-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.5 ],
-          'circle-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.2 ],
-          'circle-radius': [ 'interpolate', ['exponential', 2], ['zoom'], 12, 6, 17, 150 ]
+          ...(this.approximate ? {
+            'circle-stroke-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.5 ],
+            'circle-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.2 ],
+            'circle-radius': [ 'interpolate', ['exponential', 2], ['zoom'], 12, 6, 17, 150 ]
+          } : {})
         }
       })
       this.map.addLayer({

@@ -2,11 +2,11 @@
   <div class="explore">
     <div class="header">
       <div class="title">Explore our listings</div>
-      <div class="subtitle">There are currently <span class="count">{{ points.length }}</span> off-market properties listed on Homefound</div>
+      <div class="subtitle">There are currently <span class="count">{{ lngLats.length }}</span> off-market properties listed on Homefound</div>
     </div>
     <div class="map-container">
       <BaseMap class="map" :max-zoom="17" :zoom="3" :scroll-zoom="true">
-        <Markers :points="points"/>
+        <Markers :lngLats="lngLats" :approximate="true"/>
       </BaseMap>
     </div>
     <div class="content">
@@ -36,7 +36,6 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
-import { point } from '@turf/helpers'
 export default {
   components: {
     BaseMap,
@@ -46,14 +45,14 @@ export default {
     Markers
   },
   async created () {
-    await this.updatePoints()
+    await this.updateLngLats()
   },
   data: () => ({
-    points: []
+    lngLats: []
   }),
   methods: {
-    async updatePoints () {
-      this.points = (await ListingService.findAllDispersedLngLats()).map(listing => point(listing.dispersedLngLat))
+    async updateLngLats () {
+      this.lngLats = (await ListingService.findAllDispersedLngLats()).map(listing => listing.dispersedLngLat)
     }
   }
 }

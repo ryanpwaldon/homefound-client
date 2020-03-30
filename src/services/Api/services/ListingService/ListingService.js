@@ -34,6 +34,10 @@ export default {
     return (await Api().get(`/listing/lng-lat/dispersed`)).data
   },
 
+  async findAllLngLats () {
+    return (await Api().get(`/listing/lng-lat`)).data
+  },
+
   async delete (id) {
     return (await Api().delete(`/listing/${id}`)).data
   }
