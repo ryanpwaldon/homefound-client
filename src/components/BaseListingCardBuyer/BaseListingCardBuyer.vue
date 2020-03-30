@@ -59,7 +59,7 @@ export default {
       default: 'https://ucarecdn.com/48db410d-7b1f-4ec6-8e6c-e8a188c72e15/'
     },
     price: {
-      type: String,
+      type: Number,
       required: true
     },
     bedrooms: {
