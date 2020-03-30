@@ -7,54 +7,20 @@
         <div class="filters-container">
           <BaseFormSelect
             placeholder="Market status"
-            v-model="filters.marketStatus"
+            v-model="query.filters.marketStatus"
             :options="[
               {title: 'Off-market', value: 'OFF'},
               {title: 'On-market', value: 'ON'}
             ]"
           />
           <BaseFormSelect
-            placeholder="Bedrooms"
-            v-model="filters.bedrooms"
+            placeholder="Sort by"
+            v-model="query.sort"
             :options="[
-              {title: '0', value: '0'},
-              {title: '1', value: '1'},
-              {title: '2', value: '2'},
-              {title: '3', value: '3'},
-              {title: '4', value: '4'},
-              {title: '5+', value: '5+'}
-            ]"
-          />
-          <BaseFormSelect
-            placeholder="Bathrooms"
-            v-model="filters.bathrooms"
-            :options="[
-              {title: '0', value: '0'},
-              {title: '1', value: '1'},
-              {title: '2', value: '2'},
-              {title: '3', value: '3'},
-              {title: '4', value: '4'},
-              {title: '5+', value: '5+'}
-            ]"
-          />
-          <BaseFormSelect
-            placeholder="Car spaces"
-            v-model="filters.carSpaces"
-            :options="[
-              {title: '0', value: '0'},
-              {title: '1', value: '1'},
-              {title: '2', value: '2'},
-              {title: '3', value: '3'},
-              {title: '4', value: '4'},
-              {title: '5+', value: '5+'}
-            ]"
-          />
-          <BaseFormSelect
-            placeholder="Property type"
-            v-model="filters.propertyType"
-            :options="[
-              {title: 'House', value: 'house'},
-              {title: 'Unit', value: 'unit'}
+              { title: 'Sort by recently added', value: 'recentlyAdded' },
+              { title: 'Sort by oldest added', value: 'oldestAdded' },
+              { title: 'Sort by lowest price', value: 'lowestPrice' },
+              { title: 'Sort by highest price', value: 'highestPrice' },
             ]"
           />
         </div>
@@ -83,7 +49,7 @@
           <BaseButtonRounded
             text="Update search area"
             @click.native="updatePolygonFilter"
-             v-if="!loading && !isEqual(polygon, filters.lngLat.$geoWithin.$geometry.coordinates)"
+             v-if="!loading && !isEqual(polygon, query.filters.lngLat.$geoWithin.$geometry.coordinates)"
           />
         </transition>
       </div>
@@ -109,6 +75,12 @@ import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import Markers from '@/components/BaseMap/components/Markers/Markers'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import isEqual from 'lodash/isEqual'
+const sortOptions = {
+  recentlyAdded: { firstPublishedAt: -1 },
+  oldestAdded: { firstPublishedAt: 1 },
+  lowestPrice: { price: 1 },
+  highestPrice: { price: -1 }
+}
 export default {
   name: 'listings',
   components: {
@@ -140,20 +112,23 @@ export default {
     loading: false,
     polygon: null,
     total: null,
-    filters: {
-      marketStatus: 'OFF',
-      lngLat: {
-        $geoWithin: {
-          $geometry: {
-            type: 'Polygon',
-            coordinates: null
+    query: {
+      sort: 'recentlyAdded',
+      filters: {
+        marketStatus: 'OFF',
+        lngLat: {
+          $geoWithin: {
+            $geometry: {
+              type: 'Polygon',
+              coordinates: null
+            }
           }
         }
       }
     }
   }),
   watch: {
-    filters: {
+    query: {
       deep: true,
       handler () {
         this.listings = []
@@ -173,11 +148,11 @@ export default {
       if (this.loading || reachedLastPage) return
       this.loading = true
       const { docs: listings, pages, total } = await ListingService.findMany({
-        filters: this.filters,
+        filters: this.query.filters,
         options: {
           page: this.nextPage,
           limit: this.limit,
-          sort: { firstPublishedAt: -1 }
+          sort: sortOptions[this.query.sort]
         }
       })
       this.listings.push(...listings)
@@ -188,7 +163,7 @@ export default {
       this.$refs['intersection-trigger'] && this.$refs['intersection-trigger'].observe()
     },
     updatePolygonFilter () {
-      this.filters.lngLat.$geoWithin.$geometry.coordinates = this.polygon
+      this.query.filters.lngLat.$geoWithin.$geometry.coordinates = this.polygon
     }
   }
 }
