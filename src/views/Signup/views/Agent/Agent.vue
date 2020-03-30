@@ -19,6 +19,15 @@
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
+        <div class="label">Password</div>
+        <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
+          <BaseFormInput
+            v-model="form.password"
+            autocomplete="new-password"
+            type="password"
+          />
+          <BaseFormError :message="errors[0]"/>
+        </ValidationProvider>
         <div class="label">Phone</div>
         <ValidationProvider class="input" name="phone" rules="required|numeric" v-slot="{ errors }">
           <BaseFormInput
@@ -39,15 +48,6 @@
           <BaseFormAddressAutocomplete
             placeholder="Type a suburb..."
             v-model="location"
-          />
-          <BaseFormError :message="errors[0]"/>
-        </ValidationProvider>
-        <div class="label">Password</div>
-        <ValidationProvider class="input" name="password" rules="required|min:8" v-slot="{ errors }">
-          <BaseFormInput
-            v-model="form.password"
-            autocomplete="new-password"
-            type="password"
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>

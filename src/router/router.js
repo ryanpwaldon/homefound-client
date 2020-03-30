@@ -9,7 +9,7 @@ import {
   BUYER,
   BUYER_SUBSCRIPTION_DELETED,
   BUYER_INITIAL_PAYMENT_FAILED,
-  SELLER_VERIFICATION_PENDING,
+  SELLER_REGISTRATION_PENDING,
   EMAIL_VERIFICATION_PENDING,
   SELLER_LOCATION_UNAVAILABLE
 } from '@/constants/roles/roles'
@@ -126,7 +126,7 @@ const routes = [
     component: () => import('@/views/Verify/views/Agent/Agent'),
     meta: {
       permissions: [
-        { roles: [SELLER_VERIFICATION_PENDING], access: true },
+        { roles: [SELLER_REGISTRATION_PENDING], access: true },
         { roles: [ALL], redirect: '/app' }
       ]
     }
@@ -161,7 +161,7 @@ const routes = [
         { roles: [SELLER_LOCATION_UNAVAILABLE], redirect: '/unavailable' },
         { roles: [BUYER_INITIAL_PAYMENT_FAILED], redirect: '/signup/buyer' },
         { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify/email' },
-        { roles: [SELLER_VERIFICATION_PENDING], redirect: '/verify/agent' },
+        { roles: [SELLER_REGISTRATION_PENDING], redirect: '/verify/agent' },
         { roles: [BUYER, BUYER_SUBSCRIPTION_DELETED, SELLER, ADMIN], access: true },
         { roles: [ALL], redirect: '/login' }
       ]

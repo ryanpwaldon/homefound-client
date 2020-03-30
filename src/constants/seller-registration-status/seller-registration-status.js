@@ -1,0 +1,3 @@
+export const APPROVED = 'APPROVED'
+export const LOCATION_UNAVAILABLE = 'LOCATION_UNAVAILABLE'
+export const REFUSED = 'REFUSED'

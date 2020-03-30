@@ -10,6 +10,14 @@ export default {
     return (await Api().post('/user/seller', body)).data
   },
 
+  async findPendingSellerRegistrations () {
+    return (await Api().get('/user/seller/registration/pending')).data
+  },
+
+  async updateSellerRegistrationStatus ({ userId, status }) {
+    return (await Api().put('/user/seller/registration/status', { userId, status })).data
+  },
+
   async findSavedListings () {
     return (await Api().get(`/user/listings/saved`)).data
   },

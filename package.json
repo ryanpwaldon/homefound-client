@@ -22,6 +22,7 @@
     "qs": "^6.9.1",
     "query-string": "^6.9.0",
     "resize-observer-polyfill": "^1.5.1",
+    "shortid": "^2.2.15",
     "swiper": "^5.2.1",
     "uploadcare-widget": "^3.8.0",
     "vee-validate": "^3.0.11",

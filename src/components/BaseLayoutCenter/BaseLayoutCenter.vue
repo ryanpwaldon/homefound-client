@@ -1,18 +1,30 @@
 <template>
   <div class="base-layout-center">
     <div class="container">
-      <div class="content">
+      <div class="content" :style="{ maxWidth }">
         <slot/>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    maxWidth: {
+      type: String,
+      default: '60rem'
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 .base-layout-center {
   width: 100%;
   height: 100%;
   display: flex;
+  min-width: 0;
 }
 .container {
   width: 100%;
@@ -27,7 +39,6 @@
 .content {
   flex: 1;
   width: 100%;
-  max-width: 600px;
   padding: var(--spacing-6) 0;
   display: flex;
   flex-direction: column;
