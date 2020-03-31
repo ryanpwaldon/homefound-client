@@ -21,8 +21,19 @@ export default {
     this.addImage()
     this.addSource()
     this.addLayers()
+    this.$watch('lngLats', {
+      immediate: true,
+      handler: this.updateSource
+    })
   },
+  data: () => ({
+    source: 'markers'
+  }),
   methods: {
+    updateSource () {
+      const points = this.lngLats.map(lngLat => point(lngLat))
+      this.map.getSource(this.source).setData({ features: points })
+    },
     addImage () {
       const map = this.map
       const pulse = this.pulse
@@ -63,10 +74,9 @@ export default {
       }, { pixelRatio: 2 })
     },
     addSource () {
-      const points = this.lngLats.map(lngLat => point(lngLat))
-      this.map.addSource('locations', {
+      this.map.addSource(this.source, {
         type: 'geojson',
-        data: { type: 'FeatureCollection', features: points },
+        data: { type: 'FeatureCollection', features: [] },
         cluster: true,
         clusterRadius: 40,
         clusterMaxZoom: 8
@@ -76,7 +86,7 @@ export default {
       this.map.addLayer({
         id: 'point',
         type: 'circle',
-        source: 'locations',
+        source: this.source,
         paint: {
           'circle-stroke-width': 1,
           'circle-color': '#fe6464',
@@ -91,7 +101,7 @@ export default {
       this.map.addLayer({
         id: 'cluster',
         type: 'symbol',
-        source: 'locations',
+        source: this.source,
         filter: ['has', 'point_count'],
         layout: {
           'icon-image': 'marker',
@@ -101,7 +111,7 @@ export default {
       this.map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'locations',
+        source: this.source,
         filter: ['has', 'point_count'],
         paint: { 'text-color': '#ffffff' },
         layout: {

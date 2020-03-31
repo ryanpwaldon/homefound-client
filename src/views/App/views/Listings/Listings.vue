@@ -5,7 +5,7 @@
       <BaseCard class="filters-card">
         <div class="filters-header">
           <BaseText4 class="filters-title" text="Filters"/>
-          <BaseText4 class="total" :text="`${total} Result${total > 1 ? 's' : ''}`" v-if="total"/>
+          <BaseText4 class="total" :text="`${total} ${total === 1 ? 'Result' : 'Results'}`" v-if="typeof total === 'number'"/>
         </div>
         <div class="filters-container">
           <BaseFormSelect
@@ -26,6 +26,18 @@
               { title: 'Highest price', value: 'highestPrice' },
             ]"
           />
+          <BaseFormSelect
+            placeholder="Bedrooms"
+            v-model="query.filters.bedrooms"
+            :options="[
+              { title: '1', value: '1' },
+              { title: '2', value: '2' },
+              { title: '3', value: '3' },
+              { title: '4', value: '4' },
+              { title: '5', value: '5' },
+              { title: '5+', value: '5+' }
+            ]"
+          />
         </div>
       </BaseCard>
       <div class="listings-container">
@@ -44,7 +56,7 @@
         </router-link>
       </div>
       <BaseLoader class="loader" v-if="loading"/>
-      <BaseIntersectionTrigger ref="intersection-trigger" @intersected="updateListings" />
+      <BaseIntersectionTrigger ref="intersection-trigger" @intersected="updateData" />
     </BaseLayoutCenter>
     <div class="map-container">
       <div class="map-button">
@@ -102,7 +114,6 @@ export default {
     Markers
   },
   created () {
-    this.updatePoints()
     const destroy = this.$watch('polygon', () => {
       this.updatePolygonFilter()
       destroy()
@@ -121,6 +132,7 @@ export default {
       sort: 'recentlyAdded',
       filters: {
         marketStatus: 'OFF',
+        bedrooms: null,
         lngLat: {
           $geoWithin: {
             $geometry: {
@@ -136,22 +148,23 @@ export default {
     query: {
       deep: true,
       handler () {
+        this.lngLats = []
         this.listings = []
         this.nextPage = 1
         this.lastPage = null
-        this.updateListings()
+        this.updateData()
       }
     }
   },
   methods: {
     isEqual,
-    async updatePoints () {
-      this.lngLats = (await ListingService.findAllLngLats()).map(listing => listing.lngLat)
+    async updateLngLats () {
+      const { docs: lngLats } = await ListingService.findAllLngLats({
+        filters: this.query.filters
+      })
+      this.lngLats = lngLats.map(listing => listing.lngLat)
     },
     async updateListings () {
-      const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
-      if (this.loading || reachedLastPage) return
-      this.loading = true
       const { docs: listings, pages, total } = await ListingService.findMany({
         filters: this.query.filters,
         options: {
@@ -163,6 +176,13 @@ export default {
       this.listings.push(...listings)
       this.lastPage = pages
       this.total = total
+    },
+    async updateData () {
+      const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
+      if (this.loading || reachedLastPage) return
+      this.loading = true
+      await this.updateLngLats()
+      await this.updateListings()
       this.nextPage++
       this.loading = false
       this.$refs['intersection-trigger'] && this.$refs['intersection-trigger'].observe()
