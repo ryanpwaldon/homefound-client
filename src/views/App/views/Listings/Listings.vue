@@ -2,8 +2,11 @@
   <div class="listings">
     <BaseLayoutCenter>
       <BaseText1 class="title" text="Search" />
-      <div class="filters-card">
-        <BaseText4 class="filters-title" text="Filters"/>
+      <BaseCard class="filters-card">
+        <div class="filters-header">
+          <BaseText4 class="filters-title" text="Filters"/>
+          <BaseText4 class="count" text="21 Results"/>
+        </div>
         <div class="filters-container">
           <BaseFormSelect
             placeholder="Market status"
@@ -17,14 +20,14 @@
             placeholder="Sort by"
             v-model="query.sort"
             :options="[
-              { title: 'Sort by recently added', value: 'recentlyAdded' },
-              { title: 'Sort by oldest added', value: 'oldestAdded' },
-              { title: 'Sort by lowest price', value: 'lowestPrice' },
-              { title: 'Sort by highest price', value: 'highestPrice' },
+              { title: 'Recently added', value: 'recentlyAdded' },
+              { title: 'Oldest added', value: 'oldestAdded' },
+              { title: 'Lowest price', value: 'lowestPrice' },
+              { title: 'Highest price', value: 'highestPrice' },
             ]"
           />
         </div>
-      </div>
+      </BaseCard>
       <div class="listings-container">
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
@@ -70,6 +73,7 @@ import ListingService from '@/services/Api/services/ListingService/ListingServic
 import BaseListingCardBuyer from '@/components/BaseListingCardBuyer/BaseListingCardBuyer'
 import BaseIntersectionTrigger from '@/components/BaseIntersectionTrigger/BaseIntersectionTrigger'
 import BaseButtonRounded from '@/components/BaseButtonRounded/BaseButtonRounded'
+import BaseCard from '@/components/BaseCard/BaseCard'
 import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import Markers from '@/components/BaseMap/components/Markers/Markers'
@@ -93,6 +97,7 @@ export default {
     BaseButtonRounded,
     BaseLoader,
     GetBounds,
+    BaseCard,
     BaseMap,
     Markers
   },
@@ -182,20 +187,33 @@ export default {
 .title {
   margin-bottom: var(--spacing-5);
 }
-.filters-card {
-  width: 100%;
-  padding: var(--spacing-5);
-  border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
-  background: var(--color-white-1);
-  margin-bottom: var(--spacing-5);
+.filters-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-5);
+  border-bottom: solid 1px var(--color-gray-1);
 }
-.filters-title {
-  margin-bottom: var(--spacing-4);
+.count {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background: var(--color-black-2);
+  }
+}
+.filters-card {
+  padding: 0;
+  margin-bottom: var(--spacing-5);
 }
 .filters-container {
   display: flex;
   flex-wrap: wrap;
+  padding: var(--spacing-5);
   margin-bottom: calc(-1 * var(--spacing-2));
   > * {
     margin-right: var(--spacing-2);

@@ -48,7 +48,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  background: var(--color-gray-2);
+  background: var(--color-white-1);
   border-bottom: var(--color-gray-1) solid 1px;
   padding: var(--spacing-4) var(--spacing-5);
   font-weight: var(--font-weight-medium);

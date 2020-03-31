@@ -65,7 +65,6 @@ export default {
   width: 100%;
   max-width: 100%;
   max-height: 100%;
-  opacity: 0.4;
   z-index: 1;
 }
 .wrapper::before,

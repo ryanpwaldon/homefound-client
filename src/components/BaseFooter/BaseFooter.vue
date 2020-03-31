@@ -54,7 +54,7 @@ export default {
 .base-footer {
   width: 100%;
   padding: 0 var(--spacing-5);
-  background: var(--color-gray-2);
+  background: var(--color-white-1);
   border-top: var(--color-gray-1) solid 1px;
   display: flex;
   justify-content: center;
