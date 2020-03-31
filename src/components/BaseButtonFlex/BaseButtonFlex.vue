@@ -11,13 +11,13 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius-1);
-  transition: var(--transition-settings-1) background-color;
-  background: var(--color-white-1);
+  transition: var(--transition-settings-1) border-color;
+  background: var(--color-gray-2);
   border: 1px var(--color-gray-1) solid;
   padding: 0 var(--spacing-1);
   cursor: pointer;
   &:hover {
-    background-color: var(--color-gray-1);
+    border-color: var(--color-black-2);
   }
 }
 </style>

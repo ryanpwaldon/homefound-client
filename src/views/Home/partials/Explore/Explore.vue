@@ -6,7 +6,7 @@
     </div>
     <div class="map-container">
       <BaseMap class="map" :max-zoom="17" :zoom="3" :scroll-zoom="true">
-        <Markers :lngLats="lngLats" :approximate="true"/>
+        <Markers :lngLats="lngLats" :approximate="true" :pulse="true"/>
       </BaseMap>
     </div>
     <div class="content">

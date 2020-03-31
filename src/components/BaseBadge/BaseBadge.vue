@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 .base-badge {
-  border-radius: 100px;
+  border-radius: var(--border-radius-1);
   display: inline-flex;
   padding: var(--spacing-1) var(--spacing-2);
   font-weight: var(--font-weight-medium);

@@ -5,7 +5,7 @@
       <BaseCard class="filters-card">
         <div class="filters-header">
           <BaseText4 class="filters-title" text="Filters"/>
-          <BaseText4 class="count" text="21 Results"/>
+          <BaseText4 class="total" :text="`${total} Result${total > 1 ? 's' : ''}`" v-if="total"/>
         </div>
         <div class="filters-container">
           <BaseFormSelect
@@ -193,8 +193,10 @@ export default {
   justify-content: space-between;
   padding: var(--spacing-3) var(--spacing-5);
   border-bottom: solid 1px var(--color-gray-1);
+  background: var(--color-gray-9);
+  border-radius: 2px 2px 0 0;
 }
-.count {
+.total {
   position: relative;
   &::after {
     content: '';
@@ -209,6 +211,7 @@ export default {
 .filters-card {
   padding: 0;
   margin-bottom: var(--spacing-5);
+  flex-shrink: 0;
 }
 .filters-container {
   display: flex;

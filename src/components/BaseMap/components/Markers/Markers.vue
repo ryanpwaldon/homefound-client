@@ -25,8 +25,9 @@ export default {
   methods: {
     addImage () {
       const map = this.map
+      const pulse = this.pulse
       const diameter = 200
-      // const duration = 2000
+      const duration = 2000
       map.addImage('marker', {
         width: diameter,
         height: diameter,
@@ -38,14 +39,16 @@ export default {
           this.context = canvas.getContext('2d')
         },
         render () {
-          // const t = (performance.now() % duration) / duration
           const radius = (diameter / 2) * 0.3
-          // const outerRadius = (diameter / 2) * 0.7 * t + radius
           this.context.clearRect(0, 0, this.width, this.height)
-          this.context.beginPath()
-          // this.context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2)
-          // this.context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')'
-          this.context.fill()
+          if (pulse) {
+            this.context.beginPath()
+            const t = (performance.now() % duration) / duration
+            const outerRadius = (diameter / 2) * 0.7 * t + radius
+            this.context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2)
+            this.context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')'
+            this.context.fill()
+          }
           this.context.beginPath()
           this.context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2)
           this.context.fillStyle = 'rgba(255, 100, 100, 1)'
