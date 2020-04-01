@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <ValidationObserver class="form" ref="form" tag="div">
+    <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
       <BaseCard class="card">
         <BaseText4 class="title" text="Address"/>
         <BaseDivider/>
@@ -167,18 +167,18 @@
           </ValidationProvider>
         </div>
       </BaseCard>
+      <BaseCard class="card">
+        <div class="button-container">
+          <BaseFormSubmitButton class="button" text="Save as unpublished" @click.native="submit(false)" :loading="loading" :design="valid ? 'gray' : 'disabled'"/>
+          <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">hidden</span> from property seekers in search results</BaseText6>
+        </div>
+        <BaseDivider/>
+        <div class="button-container">
+          <BaseFormSubmitButton class="button" text="Save and publish" @click.native="submit(true)" :loading="loading" :design="valid ? 'black' : 'disabled'"/>
+          <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">visible</span> to to property seekers in search results</BaseText6>
+        </div>
+      </BaseCard>
     </ValidationObserver>
-    <BaseCard class="card">
-      <div class="button-container">
-        <BaseFormSubmitButton class="button" text="Save as unpublished" design="gray" @click.native="submit(false)" :loading="loading"/>
-        <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">hidden</span> from property seekers in search results</BaseText6>
-      </div>
-      <BaseDivider/>
-      <div class="button-container">
-        <BaseFormSubmitButton class="button" text="Save and publish" @click.native="submit(true)" :loading="loading"/>
-        <BaseText6 class="subcopy">Listing will be <span style="color: var(--color-black-2)">visible</span> to to property seekers in search results</BaseText6>
-      </div>
-    </BaseCard>
   </div>
 </template>
 
