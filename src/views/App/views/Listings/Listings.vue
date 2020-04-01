@@ -148,6 +148,7 @@ export default {
     query: {
       deep: true,
       handler () {
+        this.total = null
         this.lngLats = []
         this.listings = []
         this.nextPage = 1
