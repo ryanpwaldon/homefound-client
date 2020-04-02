@@ -16,7 +16,6 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
-import { BUYER_SUBSCRIPTION_CANCELLED } from '@/constants/roles/roles'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -26,7 +25,7 @@ export default {
   },
   computed: mapState('user', {
     nextInvoiceAt: state => state.user.nextInvoiceAt,
-    subscriptionCancelled: state => state.user.roles.includes(BUYER_SUBSCRIPTION_CANCELLED)
+    subscriptionCancelled: state => state.user.roles.includes(this.$getRole('BUYER_SUBSCRIPTION_CANCELLED'))
   })
 }
 </script>

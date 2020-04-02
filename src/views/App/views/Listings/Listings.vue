@@ -40,6 +40,10 @@
           />
         </div>
       </BaseCard>
+      <BaseAlert class="agent-alert" v-if="roles.includes($getRole('SELLER'))">
+        <img class="info" src="@/assets/img/info.svg">
+        <div>Agents can only see their own listings</div>
+      </BaseAlert>
       <div class="listings-container">
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
@@ -90,7 +94,9 @@ import GetBounds from '@/components/BaseMap/components/GetBounds/GetBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import Markers from '@/components/BaseMap/components/Markers/Markers'
 import BaseMap from '@/components/BaseMap/BaseMap'
+import BaseAlert from '@/components/BaseAlert/BaseAlert'
 import isEqual from 'lodash/isEqual'
+import { mapGetters } from 'vuex'
 const sortOptions = {
   recentlyAdded: { firstPublishedAt: -1 },
   oldestAdded: { firstPublishedAt: 1 },
@@ -111,7 +117,8 @@ export default {
     GetBounds,
     BaseCard,
     BaseMap,
-    Markers
+    Markers,
+    BaseAlert
   },
   created () {
     const destroy = this.$watch('polygon', () => {
@@ -157,6 +164,9 @@ export default {
       }
     }
   },
+  computed: mapGetters('user', [
+    'roles'
+  ]),
   methods: {
     isEqual,
     async updateLngLats () {
@@ -243,6 +253,16 @@ export default {
     margin-right: var(--spacing-2);
     margin-bottom: var(--spacing-2);
   }
+}
+.agent-alert {
+  display: flex;
+  color: var(--color-gray-4);
+  align-items: center;
+  margin-bottom: var(--spacing-5);
+}
+.info {
+  height: 1em;
+  margin-right: var(--spacing-2);
 }
 .listings-container {
   display: grid;

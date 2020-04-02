@@ -1,18 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store/store'
-import {
-  ALL,
-  GUEST,
-  ADMIN,
-  SELLER,
-  BUYER,
-  BUYER_SUBSCRIPTION_DELETED,
-  BUYER_INITIAL_PAYMENT_FAILED,
-  SELLER_REGISTRATION_PENDING,
-  EMAIL_VERIFICATION_PENDING,
-  SELLER_LOCATION_UNAVAILABLE
-} from '@/constants/roles/roles'
+import { getRole } from '@/constants/roles/roles'
 
 Vue.use(VueRouter)
 
@@ -78,8 +67,8 @@ const routes = [
     component: () => import('@/views/Login/Login'),
     meta: {
       permissions: [
-        { roles: [GUEST], access: true },
-        { roles: [ALL], redirect: '/app' }
+        { roles: [getRole('GUEST')], access: true },
+        { roles: [getRole('ALL')], redirect: '/app' }
       ]
     }
   },
@@ -88,8 +77,8 @@ const routes = [
     component: () => import('@/views/Signup/Signup'),
     meta: {
       permissions: [
-        { roles: [GUEST, BUYER_INITIAL_PAYMENT_FAILED], access: true },
-        { roles: [ALL], redirect: '/app' }
+        { roles: [getRole('GUEST'), getRole('BUYER_INITIAL_PAYMENT_FAILED')], access: true },
+        { roles: [getRole('ALL')], redirect: '/app' }
       ]
     },
     children: [
@@ -115,8 +104,8 @@ const routes = [
     component: () => import('@/views/Verify/views/Email/Email'),
     meta: {
       permissions: [
-        { roles: [EMAIL_VERIFICATION_PENDING], access: true },
-        { roles: [ALL], redirect: '/app' }
+        { roles: [getRole('EMAIL_VERIFICATION_PENDING')], access: true },
+        { roles: [getRole('ALL')], redirect: '/app' }
       ]
     }
   },
@@ -126,8 +115,8 @@ const routes = [
     component: () => import('@/views/Verify/views/Agent/Agent'),
     meta: {
       permissions: [
-        { roles: [SELLER_REGISTRATION_PENDING], access: true },
-        { roles: [ALL], redirect: '/app' }
+        { roles: [getRole('SELLER_REGISTRATION_PENDING')], access: true },
+        { roles: [getRole('ALL')], redirect: '/app' }
       ]
     }
   },
@@ -137,8 +126,8 @@ const routes = [
     component: () => import('@/views/Unavailable/Unavailable'),
     meta: {
       permissions: [
-        { roles: [SELLER_LOCATION_UNAVAILABLE], access: true },
-        { roles: [ALL], redirect: '/app' }
+        { roles: [getRole('SELLER_LOCATION_UNAVAILABLE')], access: true },
+        { roles: [getRole('ALL')], redirect: '/app' }
       ]
     }
   },
@@ -158,12 +147,12 @@ const routes = [
     component: () => import('@/views/App/App'),
     meta: {
       permissions: [
-        { roles: [SELLER_LOCATION_UNAVAILABLE], redirect: '/unavailable' },
-        { roles: [BUYER_INITIAL_PAYMENT_FAILED], redirect: '/signup/buyer' },
-        { roles: [EMAIL_VERIFICATION_PENDING], redirect: '/verify/email' },
-        { roles: [SELLER_REGISTRATION_PENDING], redirect: '/verify/agent' },
-        { roles: [BUYER, BUYER_SUBSCRIPTION_DELETED, SELLER, ADMIN], access: true },
-        { roles: [ALL], redirect: '/login' }
+        { roles: [getRole('SELLER_LOCATION_UNAVAILABLE')], redirect: '/unavailable' },
+        { roles: [getRole('BUYER_INITIAL_PAYMENT_FAILED')], redirect: '/signup/buyer' },
+        { roles: [getRole('EMAIL_VERIFICATION_PENDING')], redirect: '/verify/email' },
+        { roles: [getRole('SELLER_REGISTRATION_PENDING')], redirect: '/verify/agent' },
+        { roles: [getRole('BUYER'), getRole('BUYER_SUBSCRIPTION_DELETED'), getRole('SELLER'), getRole('ADMIN')], access: true },
+        { roles: [getRole('ALL')], redirect: '/login' }
       ]
     },
     children: [
@@ -198,8 +187,8 @@ const routes = [
         component: () => import('@/views/App/views/MyListings/MyListings'),
         meta: {
           permissions: [
-            { roles: [SELLER], access: true },
-            { roles: [ALL], redirect: '/app' }
+            { roles: [getRole('SELLER')], access: true },
+            { roles: [getRole('ALL')], redirect: '/app' }
           ]
         }
       },
@@ -208,8 +197,8 @@ const routes = [
         component: () => import('@/views/App/views/MyListing/MyListing'),
         meta: {
           permissions: [
-            { roles: [SELLER], access: true },
-            { roles: [ALL], redirect: '/app' }
+            { roles: [getRole('SELLER')], access: true },
+            { roles: [getRole('ALL')], redirect: '/app' }
           ]
         },
         children: [
@@ -263,8 +252,8 @@ const routes = [
         component: () => import('@/views/App/views/Admin/Admin'),
         meta: {
           permissions: [
-            { roles: [ADMIN], access: true },
-            { roles: [ALL], redirect: '/app' }
+            { roles: [getRole('ADMIN')], access: true },
+            { roles: [getRole('ALL')], redirect: '/app' }
           ]
         }
       }
@@ -293,7 +282,7 @@ router.beforeEach(async (to, _, next) => {
   if (!routePermissions.length) return next()
   const userRoles = store.getters['user/roles']
   for (const permission of routePermissions) {
-    const match = permission.roles.includes(ALL) || userRoles.some(role => permission.roles.includes(role))
+    const match = permission.roles.includes(getRole('ALL')) || userRoles.some(role => permission.roles.includes(role))
     if (match) return permission.access ? next() : next(permission.redirect)
   }
 })

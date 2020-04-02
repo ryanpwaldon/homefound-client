@@ -14,7 +14,6 @@ import AccountCardReactivateSubscription from './partials/AccountCardReactivateS
 import AccountCardCancelSubscription from './partials/AccountCardCancelSubscription/AccountCardCancelSubscription'
 import AccountCardNextInvoice from './partials/AccountCardNextInvoice/AccountCardNextInvoice'
 import AccountCardPaymentMethod from './partials/AccountCardPaymentMethod/AccountCardPaymentMethod'
-import { BUYER, BUYER_SUBSCRIPTION_CANCELLED, BUYER_SUBSCRIPTION_DELETED } from '@/constants/roles/roles'
 import { mapState } from 'vuex'
 export default {
   name: 'billing',
@@ -32,9 +31,9 @@ export default {
       nextInvoiceAt: state => state.user.nextInvoiceAt
     }),
     subscriptionStatus () {
-      if (this.roles.includes(BUYER_SUBSCRIPTION_CANCELLED)) return 'cancelled'
-      if (this.roles.includes(BUYER_SUBSCRIPTION_DELETED)) return 'inactive'
-      if (this.roles.includes(BUYER)) return 'active'
+      if (this.roles.includes(this.$getRole('BUYER_SUBSCRIPTION_CANCELLED'))) return 'cancelled'
+      if (this.roles.includes(this.$getRole('BUYER_SUBSCRIPTION_DELETED'))) return 'inactive'
+      if (this.roles.includes(this.$getRole('BUYER'))) return 'active'
       return null
     }
   }
