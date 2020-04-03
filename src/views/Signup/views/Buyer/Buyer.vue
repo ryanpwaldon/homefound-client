@@ -69,6 +69,9 @@
         </div>
       </ValidationObserver>
     </BaseCard>
+    <div class="disclaimer">
+      By creating an account, you acknowledge that you have read and understood, and agree to Homefound's <router-link to="/terms">Terms & Conditions</router-link> and <router-link to="/privacy">Privacy Policy</router-link>.
+    </div>
   </div>
 </template>
 
@@ -205,13 +208,19 @@ export default {
   background: var(--color-gray-1);
 }
 .footer {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
   padding: var(--spacing-5);
+  align-items: center;
   border-top: 1px solid var(--color-gray-1);
+  grid-gap: var(--spacing-5);
+  @include media(sm-only) {
+    display: flex;
+  }
 }
 .submit {
-  width: calc(50% - var(--spacing-5) - 0.5px);
+  width: 100%;
+  grid-column: 3;
   @include media(sm-only) {
     width: 100%;
   }
@@ -221,5 +230,16 @@ export default {
   position: absolute;
   color: var(--color-red-1);
   margin-top: var(--spacing-2);
+}
+.disclaimer {
+  line-height: 1.5;
+  font-size: 1.2rem;
+  color: var(--color-gray-6);
+  text-align: center;
+  max-width: 50rem;
+  margin: auto;
+  a {
+    text-decoration: underline;
+  }
 }
 </style>

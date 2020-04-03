@@ -61,6 +61,9 @@
         />
       </ValidationObserver>
     </BaseCard>
+    <div class="disclaimer">
+      By creating an account, you acknowledge that you have read and understood, and agree to Homefound's <router-link to="/terms">Terms & Conditions</router-link> and <router-link to="/privacy">Privacy Policy</router-link>.
+    </div>
   </div>
 </template>
 
@@ -148,5 +151,16 @@ export default {
   position: relative;
   width: calc(100% + var(--spacing-5) * 2);
   left: calc(-1 * var(--spacing-5));
+}
+.disclaimer {
+  line-height: 1.5;
+  font-size: 1.2rem;
+  color: var(--color-gray-6);
+  text-align: center;
+  max-width: 50rem;
+  margin: auto;
+  a {
+    text-decoration: underline;
+  }
 }
 </style>

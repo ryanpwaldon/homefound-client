@@ -59,7 +59,7 @@ export default {
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px var(--color-gray-1);
-  background: var(--color-gray-2);
+  background: var(--color-white-1);
   padding: var(--spacing-4);
 }
 .logo {
