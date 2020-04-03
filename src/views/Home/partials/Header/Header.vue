@@ -10,7 +10,7 @@
         <BaseButtonLarge text="Explore listings" design="pink"/>
       </div>
       <router-link class="question" to="/faqs/buyer">
-        What's an off-market property?
+        What is an off-market property?
       </router-link>
     </div>
     <div class="illustration">
