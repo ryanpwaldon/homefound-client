@@ -50,6 +50,14 @@ export default {
   color: var(--color-black-2);
   background: var(--color-gray-1);
 }
+.red {
+  color: var(--color-red-8);
+  background: var(--color-white-1);
+  border: solid 1px var(--color-red-9);
+  &:hover {
+    background: var(--color-red-10);
+  }
+}
 .disabled {
   color: var(--color-gray-4);
   background: var(--color-gray-8);
