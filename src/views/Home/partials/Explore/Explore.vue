@@ -5,7 +5,7 @@
       <div class="subtitle">There are currently <span class="count">{{ lngLats.length }}</span> off-market properties listed on Homefound</div>
     </div>
     <div class="map-container">
-      <BaseMap class="map" :max-zoom="17" :zoom="3" :scroll-zoom="true">
+      <BaseMap class="map" :max-zoom="17" :scroll-zoom="true">
         <Markers :lngLats="lngLats" :approximate="true" :pulse="true"/>
       </BaseMap>
     </div>

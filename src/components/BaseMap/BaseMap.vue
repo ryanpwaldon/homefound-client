@@ -11,11 +11,11 @@ export default {
   props: {
     center: {
       type: Array,
-      default: () => [133.7751, -25.2744]
+      required: false
     },
     zoom: {
       type: Number,
-      default: 3.5
+      required: false
     },
     maxZoom: {
       type: Number,
@@ -24,6 +24,19 @@ export default {
     scrollZoom: {
       type: Boolean,
       default: true
+    },
+    bounds: {
+      type: Array,
+      default: () => ([
+        [113.1730191243102, -39.1957601713381],
+        [153.87999642015694, -10.78370249890736]
+      ])
+    },
+    fitBoundsOptions: {
+      type: Object,
+      default: () => ({
+        padding: 25
+      })
     }
   },
   mounted () {
@@ -42,17 +55,20 @@ export default {
     }
   },
   methods: {
-    initMap () {
+    async initMap () {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       this.map = new mapboxgl.Map({
         attributionControl: false,
         style: process.env.VUE_APP_MAPBOX_STYLE_URL,
         container: this.$el,
-        center: this.center,
-        zoom: this.zoom,
         maxZoom: this.maxZoom,
         scrollZoom: this.scrollZoom,
-        fadeDuration: 0
+        fadeDuration: 0,
+        ...(
+          this.center && this.zoom
+            ? { center: this.center, zoom: this.zoom }
+            : { bounds: this.bounds, fitBoundsOptions: await this.fitBoundsOptions }
+        )
       })
       this.map.on('load', () => this.$emit('load'))
     },
