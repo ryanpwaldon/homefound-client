@@ -265,6 +265,16 @@ const routes = [
     component: () => import('@/views/Unauthorised/Unauthorised')
   },
   {
+    path: '/privacy',
+    name: 'privacy',
+    component: () => import('@/views/Privacy/Privacy')
+  },
+  {
+    path: '/terms',
+    name: 'terms',
+    component: () => import('@/views/Terms/Terms')
+  },
+  {
     path: '*',
     redirect: '/'
   }
