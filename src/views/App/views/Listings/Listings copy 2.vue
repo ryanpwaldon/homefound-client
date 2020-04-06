@@ -75,53 +75,34 @@
           />
         </transition>
       </div>
-      <BaseMap :fit-bounds-options="{ padding: 100 }">
-        <MapBounds v-model="polygon"/>
-        <MapSource source-id="points" :geojson="geojson"/>
-        <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['!', ['has', 'point_count']], !hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{
-            'circle-radius': 15,
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{ 'text-color': '#ffffff' }"
-          :layout="{
-            'icon-allow-overlap': true,
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['SF Pro Text Semibold'],
-            'text-size': 12
-          }"
-        />
-        <MapLayer
-          type="circle"
-          source-id="points"
-          :filter="['==', ['get', 'id'], hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
+      <BaseMap :fit-bounds-options="{ padding: 100 }" v-slot="{ map }">
+        <MapBounds :map="map" v-model="polygon"/>
+        <MapSource :map="map" :geojson="geojson" v-slot="{ sourceId }">
+          <div>
+            <MapLayer
+              :map="map"
+              :source-id="sourceId"
+              type="circle"
+              :paint="{
+                'circle-color': 'blue',
+                'circle-stroke-width': 1,
+                'circle-stroke-color': 'blue'
+              }"
+            />
+            <MapImage :map="map" :image-data="pulse(map)" v-slot="{ imageId }">
+              <MapLayer
+                :map="map"
+                :source-id="sourceId"
+                type="symbol"
+                :filter="['==', ['get', 'id'], hoveredListingId]"
+                :layout="{
+                  'icon-image': imageId,
+                  'icon-allow-overlap': true
+                }"
+              />
+            </MapImage>
+          </div>
+        </MapSource>
       </BaseMap>
     </div>
   </div>
@@ -140,6 +121,7 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import MapBounds from '@/components/BaseMap/components/MapBounds/MapBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
+import MapImage from '@/components/BaseMap/components/MapImage/MapImage'
 import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import BaseAlert from '@/components/BaseAlert/BaseAlert'
@@ -168,6 +150,7 @@ export default {
     BaseCard,
     BaseMap,
     MapSource,
+    MapImage,
     MapLayer,
     BaseAlert
   },

@@ -48,7 +48,7 @@
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
           <BaseListingCardBuyer
             class="listing"
-            :class="{ hovered: hoveredListingId === listing._id }"
+            :class="{ focus: focusedListingId === listing._id }"
             :listing-id="listing._id"
             :address="listing.fullAddress"
             :price="listing.price"
@@ -57,8 +57,8 @@
             :car-spaces="listing.carSpaces"
             :first-published-at="listing.firstPublishedAt"
             :image="listing.images[0]"
-            @mouseenter.native="hoveredListingId = listing._id"
-            @mouseleave.native="hoveredListingId = null"
+            @mouseenter.native="focusedListingId = listing._id"
+            @mouseleave.native="focusedListingId = null"
           />
         </router-link>
       </div>
@@ -77,51 +77,17 @@
       </div>
       <BaseMap :fit-bounds-options="{ padding: 100 }">
         <MapBounds v-model="polygon"/>
-        <MapSource source-id="points" :geojson="geojson"/>
-        <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['!', ['has', 'point_count']], !hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{
-            'circle-radius': 15,
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{ 'text-color': '#ffffff' }"
-          :layout="{
-            'icon-allow-overlap': true,
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['SF Pro Text Semibold'],
-            'text-size': 12
-          }"
-        />
-        <MapLayer
-          type="circle"
-          source-id="points"
-          :filter="['==', ['get', 'id'], hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
+        <MapSource :lng-lats="lngLats" :cluster="true">
+          <MapLayer :options="{
+            type: 'circle',
+            transition: { duration: 200 },
+            paint: {
+              'circle-color': '#fe6466',
+              'circle-stroke-width': 1,
+              'circle-stroke-color': '#be5643'
+            }
+          }"/>
+        </MapSource>
       </BaseMap>
     </div>
   </div>
@@ -140,13 +106,11 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import MapBounds from '@/components/BaseMap/components/MapBounds/MapBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
-import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
+import MapLayer from '@/components/BaseMap/components/MapSource/components/MapLayer/MapLayer'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import BaseAlert from '@/components/BaseAlert/BaseAlert'
 import isEqual from 'lodash/isEqual'
 import { mapGetters } from 'vuex'
-import { featureCollection, point } from '@turf/helpers'
-import pulse from '@/components/BaseMap/components/MapImage/images/pulse'
 const sortOptions = {
   recentlyAdded: { firstPublishedAt: -1 },
   oldestAdded: { firstPublishedAt: 1 },
@@ -172,16 +136,14 @@ export default {
     BaseAlert
   },
   created () {
-    this.pulse = pulse
-    this.isEqual = isEqual
     const destroy = this.$watch('polygon', () => {
       this.updatePolygonFilter()
       destroy()
     })
   },
   data: () => ({
-    hoveredListingId: null,
-    geojson: null,
+    focusedListingId: null,
+    lngLats: [],
     listings: [],
     nextPage: 1,
     limit: 9,
@@ -210,7 +172,7 @@ export default {
       deep: true,
       handler () {
         this.total = null
-        this.geojson = null
+        this.lngLats = []
         this.listings = []
         this.nextPage = 1
         this.lastPage = null
@@ -218,11 +180,21 @@ export default {
       }
     }
   },
-  computed: mapGetters('user', [ 'roles' ]),
+  computed: {
+    focusedListing () {
+      return this.listings.find(listing => listing._id === this.focusedListingId)
+    },
+    ...mapGetters('user', [
+      'roles'
+    ])
+  },
   methods: {
-    async updateGeojson () {
-      const { docs: listings } = await ListingService.findAllLngLats({ filters: this.query.filters })
-      this.geojson = featureCollection(listings.map(listing => point(listing.lngLat, { id: listing._id })))
+    isEqual,
+    async updateLngLats () {
+      const { docs: lngLats } = await ListingService.findAllLngLats({
+        filters: this.query.filters
+      })
+      this.lngLats = lngLats.map(listing => listing.lngLat)
     },
     async updateListings () {
       const { docs: listings, pages, total } = await ListingService.findMany({
@@ -241,7 +213,7 @@ export default {
       const reachedLastPage = this.lastPage && this.nextPage > this.lastPage
       if (this.loading || reachedLastPage) return
       this.loading = true
-      await this.updateGeojson()
+      await this.updateLngLats()
       await this.updateListings()
       this.nextPage++
       this.loading = false
@@ -323,7 +295,7 @@ export default {
   min-width: 0;
   transition: box-shadow var(--transition-settings-1);
 }
-.listing.hovered {
+.listing.focus {
   box-shadow: var(--box-shadow-5);
 }
 .map-container {

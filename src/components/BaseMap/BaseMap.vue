@@ -1,6 +1,6 @@
 <template>
   <div class="base-map">
-    <slot v-if="map"/>
+    <slot v-if="loaded" :map="map"/>
   </div>
 </template>
 
@@ -45,13 +45,12 @@ export default {
   },
   beforeDestroy () {
     this.removeParentResizeListener()
-    this.destroyed = true
     this.map.remove()
   },
   data () {
     return {
       map: null,
-      destroyed: false
+      loaded: false
     }
   },
   methods: {
@@ -70,10 +69,9 @@ export default {
             : { bounds: this.bounds, fitBoundsOptions: await this.fitBoundsOptions }
         )
       })
-      this.map.on('load', () => this.$emit('load'))
+      this.map.on('load', () => (this.loaded = true))
     },
-    updateView (lngLat) {
-      // add bBox for pologon features
+    flyTo (lngLat) {
       this.map.flyTo({
         center: lngLat,
         zoom: 16

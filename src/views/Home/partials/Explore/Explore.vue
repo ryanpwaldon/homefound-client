@@ -2,11 +2,46 @@
   <div class="explore">
     <div class="header">
       <div class="title">Explore our listings</div>
-      <div class="subtitle">There are currently <span class="count">{{ lngLats.length }}</span> off-market properties listed on Homefound</div>
+      <div class="subtitle">There are currently <span class="count">{{ geojson && geojson.features.length }}</span> off-market properties listed on Homefound</div>
     </div>
     <div class="map-container">
       <BaseMap class="map" :max-zoom="17" :scroll-zoom="true">
-        <Markers :lngLats="lngLats" :approximate="true" :pulse="true"/>
+        <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
+        <MapImage image-id="pulse" :image-data="pulse(200, '#ff6464', '#be5643', '#ffc8c8')"/>
+        <MapLayer
+          type="circle"
+          source-id="clusters"
+          :filter="['!', ['has', 'point_count']]"
+          :paint="{
+            'circle-color': '#fe6464',
+            'circle-stroke-color': '#be5643',
+            'circle-stroke-width': 1,
+            'circle-stroke-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.5 ],
+            'circle-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.2 ],
+            'circle-radius': [ 'interpolate', ['exponential', 2], ['zoom'], 12, 6, 17, 150 ]
+          }"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['has', 'point_count']"
+          :layout="{
+            'icon-image': 'pulse',
+            'icon-allow-overlap': true
+          }"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['has', 'point_count']"
+          :paint="{ 'text-color': '#ffffff' }"
+          :layout="{
+            'icon-allow-overlap': true,
+            'text-field': '{point_count_abbreviated}',
+            'text-font': ['SF Pro Text Semibold'],
+            'text-size': 12
+          }"
+        />
       </BaseMap>
     </div>
     <div class="content">
@@ -31,28 +66,36 @@
 
 <script>
 import BaseMap from '@/components/BaseMap/BaseMap'
-import Markers from '@/components/BaseMap/components/Markers/Markers'
+import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
+import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
+import MapImage from '@/components/BaseMap/components/MapImage/MapImage'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
+import pulse from '@/components/BaseMap/components/MapImage/images/pulse'
+import { featureCollection, point } from '@turf/helpers'
 export default {
   components: {
     BaseMap,
     BaseCard,
     BaseButtonLarge,
     BaseFormInput,
-    Markers
+    MapSource,
+    MapLayer,
+    MapImage
   },
   async created () {
-    await this.updateLngLats()
+    this.pulse = pulse
+    await this.updateGeojson()
   },
   data: () => ({
-    lngLats: []
+    geojson: null
   }),
   methods: {
-    async updateLngLats () {
-      this.lngLats = (await ListingService.findAllDispersedLngLats()).map(listing => listing.dispersedLngLat)
+    async updateGeojson () {
+      const listings = await ListingService.findAllDispersedLngLats()
+      this.geojson = featureCollection(listings.map(listing => point(listing.dispersedLngLat)))
     }
   }
 }

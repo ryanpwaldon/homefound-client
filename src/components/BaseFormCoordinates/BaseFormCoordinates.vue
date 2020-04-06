@@ -2,8 +2,8 @@
   <div class="base-form-coordinates" :class="[mode.toLowerCase()]">
     <div class="map-container">
       <BaseMap class="map" ref="map">
-        <GeocodeForward :query="query" @updated="onGeocodeForward" v-if="mode === 'AUTOMATIC'"/>
-        <GetCenter @updated="onGetCenter" v-else/>
+        <MapGeocode :query="query" @updated="onGeocodeForward" v-if="mode === 'AUTOMATIC'"/>
+        <MapCenter @updated="onGetCenter" v-else/>
       </BaseMap>
       <img class="pin" src="@/assets/img/pin.svg" v-if="value.length">
     </div>
@@ -12,14 +12,14 @@
 
 <script>
 import BaseMap from '@/components/BaseMap/BaseMap'
-import GeocodeForward from '@/components/BaseMap/components/GeocodeForward/GeocodeForward'
-import GetCenter from '@/components/BaseMap/components/GetCenter/GetCenter'
+import MapGeocode from '@/components/BaseMap/components/MapGeocode/MapGeocode'
+import MapCenter from '@/components/BaseMap/components/MapCenter/MapCenter'
 import debounce from 'lodash/debounce'
 export default {
   components: {
     BaseMap,
-    GetCenter,
-    GeocodeForward
+    MapCenter,
+    MapGeocode
   },
   props: {
     value: {
@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted () {
-    this.value.length && this.$refs['map'].updateView(this.value)
+    this.value.length && this.$refs['map'].flyTo(this.value)
   },
   data: () => ({
     query: null
@@ -55,7 +55,7 @@ export default {
       this.$emit('input', lngLat)
     },
     onGeocodeForward (lngLat) {
-      this.$refs['map'].updateView(lngLat)
+      this.$refs['map'].flyTo(lngLat)
       this.$emit('input', lngLat)
     }
   }

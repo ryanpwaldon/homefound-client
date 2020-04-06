@@ -57,11 +57,6 @@ const routes = [
     ]
   },
   {
-    path: '/explore',
-    name: 'explore',
-    component: () => import('@/views/Explore/Explore')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login/Login'),

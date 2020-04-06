@@ -37,7 +37,7 @@
       </BaseLayoutCenter>
       <div class="map-container">
         <BaseMap :center="listing.lngLat" :zoom="16">
-          <Markers :lng-lats="[listing.lngLat]"/>
+          <MapMarkers :lng-lats="[listing.lngLat]"/>
         </BaseMap>
       </div>
     </div>
@@ -52,7 +52,7 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseGallery from '@/components/BaseGallery/BaseGallery'
 import BaseMap from '@/components/BaseMap/BaseMap'
-import Markers from '@/components/BaseMap/components/Markers/Markers'
+import MapMarkers from '@/components/BaseMap/components/MapMarkers/MapMarkers'
 import Contact from './partials/Contact/Contact'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 export default {
@@ -64,7 +64,7 @@ export default {
     BaseText5,
     BaseGallery,
     BaseMap,
-    Markers,
+    MapMarkers,
     Contact
   },
   props: {

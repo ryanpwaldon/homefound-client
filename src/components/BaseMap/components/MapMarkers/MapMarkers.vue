@@ -1,4 +1,5 @@
 <script>
+import shortId from 'shortid'
 import { point } from '@turf/helpers'
 export default {
   props: {
@@ -13,11 +14,23 @@ export default {
     pulse: {
       type: Boolean,
       default: false
+    },
+    hide: {
+      type: Boolean,
+      default: false
     }
   },
-  async mounted () {
+  created () {
     this.map = this.$parent.map
-    await new Promise(resolve => this.map.on('load', resolve))
+    const id = shortId.generate()
+    this.imageId = `image-${id}`
+    this.sourceId = `source-${id}`
+    this.layerPointId = `point-${id}`
+    this.layerClusterId = `cluster-${id}`
+    this.layerCountId = `count-${id}`
+  },
+  async mounted () {
+    this.map.loaded() || await new Promise(resolve => this.map.on('load', resolve))
     this.addImage()
     this.addSource()
     this.addLayers()
@@ -25,21 +38,33 @@ export default {
       immediate: true,
       handler: this.updateSource
     })
+    this.$watch('hide', {
+      immediate: true,
+      handler: this.updateHidden
+    })
   },
-  data: () => ({
-    source: 'markers'
-  }),
+  beforeDestroy () {
+    this.map.removeLayer(this.layerPointId)
+    this.map.removeLayer(this.layerClusterId)
+    this.map.removeLayer(this.layerCountId)
+    this.map.removeImage(this.imageId)
+    this.map.removeSource(this.sourceId)
+  },
   methods: {
     updateSource () {
       const points = this.lngLats.map(lngLat => point(lngLat))
-      this.map.getSource(this.source).setData({ features: points })
+      this.map.getSource(this.sourceId).setData({ features: points })
+    },
+    updateHidden (hide) {
+      this.map.setPaintProperty(this.layerPointId, 'circle-stroke-opacity', hide ? 0 : 1)
+      this.map.setPaintProperty(this.layerPointId, 'circle-opacity', hide ? 0 : 1)
+      this.map.setPaintProperty(this.layerClusterId, 'icon-opacity', hide ? 0 : 1)
+      this.map.setPaintProperty(this.layerCountId, 'text-opacity', hide ? 0 : 1)
     },
     addImage () {
       const map = this.map
-      const pulse = this.pulse
       const diameter = 200
-      const duration = 2000
-      map.addImage('marker', {
+      const imageData = {
         width: diameter,
         height: diameter,
         data: new Uint8Array(diameter * diameter * 4),
@@ -50,16 +75,15 @@ export default {
           this.context = canvas.getContext('2d')
         },
         render () {
+          const duration = 2000
           const radius = (diameter / 2) * 0.3
           this.context.clearRect(0, 0, this.width, this.height)
-          if (pulse) {
-            this.context.beginPath()
-            const t = (performance.now() % duration) / duration
-            const outerRadius = (diameter / 2) * 0.7 * t + radius
-            this.context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2)
-            this.context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')'
-            this.context.fill()
-          }
+          this.context.beginPath()
+          const t = (performance.now() % duration) / duration
+          const outerRadius = (diameter / 2) * 0.7 * t + radius
+          this.context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2)
+          this.context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')'
+          this.context.fill()
           this.context.beginPath()
           this.context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2)
           this.context.fillStyle = 'rgba(255, 100, 100, 1)'
@@ -71,10 +95,11 @@ export default {
           map.triggerRepaint()
           return true
         }
-      }, { pixelRatio: 2 })
+      }
+      map.addImage(this.imageId, imageData, { pixelRatio: 2 })
     },
     addSource () {
-      this.map.addSource(this.source, {
+      this.map.addSource(this.sourceId, {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: [] },
         cluster: true,
@@ -84,12 +109,13 @@ export default {
     },
     addLayers () {
       this.map.addLayer({
-        id: 'point',
+        id: this.layerPointId,
+        source: this.sourceId,
         type: 'circle',
-        source: this.source,
+        transition: { duration: 200 },
         paint: {
-          'circle-stroke-width': 1,
           'circle-color': '#fe6464',
+          'circle-stroke-width': 1,
           'circle-stroke-color': '#be5643',
           ...(this.approximate ? {
             'circle-stroke-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.5 ],
@@ -99,20 +125,22 @@ export default {
         }
       })
       this.map.addLayer({
-        id: 'cluster',
+        id: this.layerClusterId,
+        source: this.sourceId,
         type: 'symbol',
-        source: this.source,
         filter: ['has', 'point_count'],
+        transition: { duration: 200 },
         layout: {
-          'icon-image': 'marker',
+          'icon-image': this.imageId,
           'icon-allow-overlap': true
         }
       })
       this.map.addLayer({
-        id: 'cluster-count',
+        id: this.layerCountId,
         type: 'symbol',
-        source: this.source,
+        source: this.sourceId,
         filter: ['has', 'point_count'],
+        transition: { duration: 200 },
         paint: { 'text-color': '#ffffff' },
         layout: {
           'icon-allow-overlap': true,
