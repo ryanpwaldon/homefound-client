@@ -37,7 +37,16 @@
       </BaseLayoutCenter>
       <div class="map-container">
         <BaseMap :center="listing.lngLat" :zoom="16">
-          <MapMarkers :lng-lats="[listing.lngLat]"/>
+          <MapSource source-id="point" :geojson="geojson"/>
+          <MapLayer
+            type="circle"
+            source-id="point"
+            :paint="{
+              'circle-color': '#fe6464',
+              'circle-stroke-color': '#be5643',
+              'circle-stroke-width': 1
+            }"
+          />
         </BaseMap>
       </div>
     </div>
@@ -52,9 +61,11 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseGallery from '@/components/BaseGallery/BaseGallery'
 import BaseMap from '@/components/BaseMap/BaseMap'
-import MapMarkers from '@/components/BaseMap/components/MapMarkers/MapMarkers'
+import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
+import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
 import Contact from './partials/Contact/Contact'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
+import { point } from '@turf/helpers'
 export default {
   components: {
     BaseLayoutCenter,
@@ -64,7 +75,8 @@ export default {
     BaseText5,
     BaseGallery,
     BaseMap,
-    MapMarkers,
+    MapSource,
+    MapLayer,
     Contact
   },
   props: {
@@ -80,6 +92,11 @@ export default {
     listing: null,
     loading: true
   }),
+  computed: {
+    geojson () {
+      return point(this.listing.lngLat)
+    }
+  },
   methods: {
     async getListing () {
       this.listing = await ListingService.findOne(this.id)
