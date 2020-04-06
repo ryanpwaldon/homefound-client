@@ -23,7 +23,7 @@
           </div>
           <div class="card">
             <BaseText4 class="label" text="Posted"/>
-            <BaseText5 :text="listing.createdAt | moment('from', 'now')"/>
+            <BaseText5 :text="listing.firstPublishedAt | moment('from', 'now')"/>
           </div>
         </div>
         <BaseGallery class="gallery" :images="listing.images"/>

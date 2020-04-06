@@ -35,24 +35,14 @@
             </div>
           </ValidationProvider>
           <div class="break"/>
-          <ValidationProvider class="field lg" name="suburb" rules="required|name" v-slot="{ errors }">
+          <ValidationProvider class="field lg" name="location" rules="required|location" v-slot="{ errors }">
             <BaseText2 class="field-label" text="Suburb"/>
             <div class="field-content">
-              <BaseFormInput v-model="form.suburb" :disabled="!!listing.firstPublishedAt"/>
-              <BaseFormError :message="errors[0]"/>
-            </div>
-          </ValidationProvider>
-          <ValidationProvider class="field md" name="state" rules="required" v-slot="{ errors }">
-            <BaseText2 class="field-label" text="State"/>
-            <div class="field-content">
-              <BaseFormSelect placeholder="Select" v-model="form.state" :options="options.states" :disabled="!!listing.firstPublishedAt"/>
-              <BaseFormError :message="errors[0]"/>
-            </div>
-          </ValidationProvider>
-          <ValidationProvider class="field sm" name="postcode" rules="required|numeric" v-slot="{ errors }">
-            <BaseText2 class="field-label" text="Postcode"/>
-            <div class="field-content">
-              <BaseFormInput v-model="form.postcode" :disabled="!!listing.firstPublishedAt"/>
+              <BaseFormAddressAutocomplete
+                :value="location"
+                @input="Object.assign(form, $event)"
+                :disabled="!!listing.firstPublishedAt"
+              />
               <BaseFormError :message="errors[0]"/>
             </div>
           </ValidationProvider>
@@ -191,10 +181,11 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormSelect from '@/components/BaseFormSelect/BaseFormSelect'
+import BaseFormTextSwitch from '@/components/BaseFormTextSwitch/BaseFormTextSwitch'
 import BaseFormCoordinates from '@/components/BaseFormCoordinates/BaseFormCoordinates'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import BaseFormImageUploader from '@/components/BaseFormImageUploader/BaseFormImageUploader'
-import BaseFormTextSwitch from '@/components/BaseFormTextSwitch/BaseFormTextSwitch'
+import BaseFormAddressAutocomplete from '@/components/BaseFormAddressAutocomplete/BaseFormAddressAutocomplete'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 import * as options from './form-datatypes'
@@ -210,9 +201,10 @@ export default {
     BaseFormInput,
     BaseFormSelect,
     BaseFormTextSwitch,
+    BaseFormCoordinates,
     BaseFormSubmitButton,
     BaseFormImageUploader,
-    BaseFormCoordinates,
+    BaseFormAddressAutocomplete,
     ValidationProvider,
     ValidationObserver
   },
@@ -236,6 +228,13 @@ export default {
     }
   },
   computed: {
+    location () {
+      return {
+        suburb: this.form.suburb,
+        state: this.form.state,
+        postcode: this.form.postcode
+      }
+    },
     buildingAddress () {
       if (!this.form.streetNumber || !this.form.streetName || !this.form.streetType || !this.form.suburb || !this.form.state || !this.form.postcode) return null
       return (`${this.form.streetNumber} ${this.form.streetName} ${this.form.streetType}, ${this.form.suburb} ${this.form.state} ${this.form.postcode}`).trim()

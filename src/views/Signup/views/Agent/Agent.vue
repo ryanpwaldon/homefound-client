@@ -47,7 +47,8 @@
         <ValidationProvider class="input" name="location" rules="required|location" v-slot="{ errors }">
           <BaseFormAddressAutocomplete
             placeholder="Type a suburb..."
-            v-model="location"
+            :value="location"
+            @input="Object.assign(form, $event)"
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
@@ -96,11 +97,22 @@ export default {
         name: '',
         email: '',
         phone: '',
+        suburb: '',
+        state: '',
+        postcode: '',
         agentLicenceNumber: '',
         password: ''
       },
-      location: null,
       loading: false
+    }
+  },
+  computed: {
+    location () {
+      return {
+        suburb: this.form.suburb,
+        state: this.form.state,
+        postcode: this.form.postcode
+      }
     }
   },
   methods: {
@@ -108,7 +120,7 @@ export default {
       if (this.loading || !(await this.$refs['observer'].validate())) return
       this.loading = true
       try {
-        const { user, accessToken } = await UserService.createSeller({ ...this.form, ...this.location })
+        const { user, accessToken } = await UserService.createSeller(this.form)
         this.$notify({ type: 'success' })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
         this.$router.push('/verify/email')

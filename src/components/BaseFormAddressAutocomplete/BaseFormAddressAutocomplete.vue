@@ -7,8 +7,9 @@
       @keydown.down.native="focusIndex !== addresses.length - 1 && focusIndex++"
       @keydown.up.native="focusIndex !== 0 && focusIndex--"
       @keydown.enter.native="onSelect"
-      @focus.native="onInputFocus"
-      :disabled="!!value"
+      @focus.native="canDisplayDropdown = true"
+      @blur.native="canDisplayDropdown = false"
+      :disabled="valid || disabled"
     />
     <BaseTransitionContextMenu transform-origin="center top">
       <div class="addresses-container" v-if="canDisplayDropdown && addresses.length">
@@ -19,14 +20,14 @@
           @mouseenter="focusIndex = i"
           @click="onSelect"
           :key="i">
-          {{ address.suburb }}, {{ address.postcode }} {{ address.state }}
+          {{ formatAddress(address) }}
         </div>
       </div>
     </BaseTransitionContextMenu>
     <BaseButtonFlex
       class="edit"
       @click.native="onEdit"
-      v-if="!!value">
+      v-if="valid && !disabled">
       Edit
     </BaseButtonFlex>
   </div>
@@ -52,10 +53,14 @@ export default {
     placeholder: {
       type: String,
       required: false
+    },
+    disabled: {
+      type: Boolean,
+      required: false
     }
   },
-  beforeDestroy () {
-    window.removeEventListener('click', this.handleClick)
+  created () {
+    if (this.valid) this.query = this.formatAddress(this.value)
   },
   data: () => ({
     query: '',
@@ -63,6 +68,16 @@ export default {
     focusIndex: 0,
     canDisplayDropdown: false
   }),
+  computed: {
+    valid () {
+      return !!(
+        this.value.suburb &&
+        this.value.state &&
+        this.value.postcode &&
+        true
+      )
+    }
+  },
   watch: {
     query: debounce(async function (query) {
       if (!query) return
@@ -71,26 +86,20 @@ export default {
     }, 100)
   },
   methods: {
-    handleClick () {
-      this.canDisplayDropdown = false
-      window.removeEventListener('click', this.handleClick)
-    },
-    onInputFocus () {
-      this.canDisplayDropdown = true
-      window.addEventListener('click', this.handleClick)
-    },
     onSelect () {
       const address = this.addresses[this.focusIndex]
-      this.query = `${address.suburb}, ${address.postcode} ${address.state}`
+      this.query = this.formatAddress(address)
       this.$emit('input', address)
-      this.canDisplayDropdown = false
     },
     async onEdit () {
       this.query = ''
       this.addresses = []
-      this.$emit('input', null)
+      this.$emit('input', { suburb: '', state: '', postcode: '' })
       await this.$nextTick()
       this.$refs['input'].$el.focus()
+    },
+    formatAddress ({ suburb, state, postcode }) {
+      return `${suburb}, ${postcode} ${state}`
     }
   }
 }
