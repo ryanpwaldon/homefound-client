@@ -750,6 +750,13 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@honeybadger-io/vue@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/vue/-/vue-0.0.10.tgz#a0f1973220dcd21c1a6094a8fd090ca3f0f6bd54"
+  integrity sha512-AiV73WW7bzno9WlGySSrvzSl/BHxDdifGhj2yLM+Nf+eBIgHF8+V2zdaFsZMnWd4uDMdKB1/k5hGduACbEaEUQ==
+  dependencies:
+    honeybadger-js "^2.0.2"
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -4238,6 +4245,11 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+honeybadger-js@^2.0.2:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/honeybadger-js/-/honeybadger-js-2.2.0.tgz#9af54d471c8f404889933a24cc7a05f1410ec40b"
+  integrity sha512-JCJ1C4CQmbR62XGnUuDXmqiF+8nPpBPA53WZnOSZj3yohTRs+5tQb1FLl07Jh3wC+aFFIbPyT9kFHOq1/0pwYg==
 
 hoopy@^0.1.4:
   version "0.1.4"

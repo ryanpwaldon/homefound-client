@@ -3,13 +3,14 @@ import App from '@/App.vue'
 import router from '@/router/router'
 import vueNumeral from 'vue-numeral-filter'
 import vueNotification from 'vue-notification'
+import HoneybadgerVue from '@honeybadger-io/vue'
 import vueContainScroll from '@/directives/vue-contain-scroll'
 import vueMoment from 'vue-moment'
 import store from '@/store/store'
-import '@/assets/css/main.scss'
-import '@/config/config'
 import loadJS from 'load-js'
 import { getRole } from '@/constants/roles/roles'
+import '@/assets/css/main.scss'
+import '@/config/config'
 
 void (async () => {
   await loadJS('https://js.stripe.com/v3/')
@@ -24,6 +25,7 @@ void (async () => {
   Vue.use(vueNumeral, { locale: 'en-au' })
   Vue.use(vueNotification, { componentName: 'Notify' })
   Vue.use(vueMoment)
+  Vue.use(HoneybadgerVue, { apiKey: process.env.VUE_APP_HONEYBADGER_API_KEY, environment: process.env.VUE_APP_ENV })
   if (store.state.user.accessToken) await store.dispatch('user/checkAuthStatus')
   new Vue({
     router,
