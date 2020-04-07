@@ -5121,6 +5121,11 @@ load-json-file@^2.0.0:
     pify "^2.0.0"
     strip-bom "^3.0.0"
 
+load-script@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+  integrity sha1-BJGTngvuVkPuSUp+PaPSuscMbKQ=
+
 loader-fs-cache@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/loader-fs-cache/-/loader-fs-cache-1.0.2.tgz#54cedf6b727e1779fd8f01205f05f6e88706f086"
@@ -8663,6 +8668,13 @@ vue-router@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.3.tgz#e6b14fabc0c0ee9fda0e2cbbda74b350e28e412b"
   integrity sha512-8iSa4mGNXBjyuSZFCCO4fiKfvzqk+mhL0lnKuGcQtO1eoj8nq3CmbEG8FwK5QqoqwDgsjsf1GDuisDX4cdb/aQ==
+
+vue-segment-analytics@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vue-segment-analytics/-/vue-segment-analytics-0.4.1.tgz#6c1167fb2bcd7c1c8ad2be907e8643f755c7a374"
+  integrity sha512-sdgdNaDWR1j7PzBGN+jyujvozAthZ9k0mUpdsG6EgOa6L1RFGsg1SDgk1l8fBsHQjCXV1NmWE1LY0/unzAEd0Q==
+  dependencies:
+    load-script "~1.0.0"
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
