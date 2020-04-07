@@ -42,7 +42,7 @@
       </BaseCard>
       <BaseAlert class="agent-alert" v-if="roles.includes($getRole('SELLER'))">
         <img class="info" src="@/assets/img/info.svg">
-        <div>Agents can only see their own listings</div>
+        <div>Agents can only view their own listings</div>
       </BaseAlert>
       <div class="listings-container">
         <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
