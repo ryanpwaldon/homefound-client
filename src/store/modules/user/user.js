@@ -1,5 +1,4 @@
 import AuthService from '@/services/Api/services/AuthService/AuthService'
-import { getRole } from '@/constants/roles/roles'
 
 export default {
   namespaced: true,
@@ -9,7 +8,7 @@ export default {
   },
   getters: {
     roles: state => {
-      return (state.user && state.user.roles) || [getRole('GUEST')]
+      return (state.user && state.user.roles) || [this._vm.$getRole('GUEST')]
     }
   },
   mutations: {
@@ -34,6 +33,7 @@ export default {
       commit('setUser', user)
       commit('setAccessToken', accessToken)
       localStorage.setItem('accessToken', accessToken)
+      this._vm.$segment.identify(user._id)
     },
     logout ({ commit }) {
       commit('setUser', null)
