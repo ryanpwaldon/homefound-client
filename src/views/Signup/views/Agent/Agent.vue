@@ -78,7 +78,6 @@ import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
-import { ACCOUNT_CREATED } from '@/constants/events/events'
 export default {
   name: 'signup',
   components: {
@@ -124,7 +123,6 @@ export default {
         const { user, accessToken } = await UserService.createSeller(this.form)
         this.$notify({ type: 'success' })
         this.$store.dispatch('user/loginSuccess', { user, accessToken })
-        this.$segment.track(ACCOUNT_CREATED)
         this.$router.push('/verify/email')
       } catch (error) {
         console.log(error)

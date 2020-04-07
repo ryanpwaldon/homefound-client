@@ -29,7 +29,7 @@ void (async () => {
   Vue.use(vueNotification, { componentName: 'Notify' })
   Vue.use(vueIntercom, { appId: process.env.VUE_APP_INTERCOM_APP_ID })
   Vue.use(vueHoneybadger, { apiKey: process.env.VUE_APP_HONEYBADGER_API_KEY, environment: process.env.VUE_APP_ENV, developmentEnvironments: ['development'] })
-  Vue.use(vueSegmentAnalytics, { id: process.env.VUE_APP_SEGMENT_WRITE_KEY, router })
+  Vue.use(vueSegmentAnalytics, { id: process.env.VUE_APP_SEGMENT_WRITE_KEY })
   if (store.state.user.accessToken) await store.dispatch('user/checkAuthStatus')
   new Vue({
     router,

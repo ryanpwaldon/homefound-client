@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import AuthService from '@/services/Api/services/AuthService/AuthService'
 
 export default {
@@ -7,8 +8,8 @@ export default {
     accessToken: localStorage.getItem('accessToken') || null
   },
   getters: {
-    roles: state => {
-      return (state.user && state.user.roles) || [this._vm.$getRole('GUEST')]
+    roles (state) {
+      return (state.user && state.user.roles) || [Vue.prototype.$getRole('GUEST')]
     }
   },
   mutations: {
@@ -33,7 +34,7 @@ export default {
       commit('setUser', user)
       commit('setAccessToken', accessToken)
       localStorage.setItem('accessToken', accessToken)
-      this._vm.$segment.identify(user._id)
+      Vue.prototype.$segment.identify(user._id)
     },
     logout ({ commit }) {
       commit('setUser', null)

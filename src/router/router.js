@@ -292,4 +292,8 @@ router.beforeEach(async (to, _, next) => {
   }
 })
 
+router.afterEach(() => {
+  setTimeout(Vue.prototype.$segment.page, 5)
+})
+
 export default router

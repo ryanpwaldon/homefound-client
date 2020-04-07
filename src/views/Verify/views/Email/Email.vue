@@ -37,6 +37,7 @@ import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
+import { ACCOUNT_CREATED } from '@/constants/events/events'
 export default {
   name: 'verify-email',
   components: {
@@ -48,6 +49,9 @@ export default {
     BaseFormError,
     ValidationObserver,
     ValidationProvider
+  },
+  mounted () {
+    this.$segment.track(ACCOUNT_CREATED)
   },
   data () {
     return {
