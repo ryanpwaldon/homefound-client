@@ -15,8 +15,8 @@ export default {
     this.initCard()
   },
   methods: {
-    initCard () {
-      const elements = window.stripe.elements()
+    async initCard () {
+      const elements = (await window.stripe).elements()
       const card = elements.create('card', { style: this.getCardStyle(), classes: { focus: 'focus' } })
       card.mount(this.$el)
       card.on('change', ({ complete, error, empty }) => {

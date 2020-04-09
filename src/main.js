@@ -6,7 +6,6 @@ import vueNotification from 'vue-notification'
 import vueHoneybadger from '@honeybadger-io/vue'
 import vueContainScroll from '@/directives/vue-contain-scroll'
 import vueSegmentAnalytics from 'vue-segment-analytics'
-import vueIntercom from 'vue-intercom'
 import vueMoment from 'vue-moment'
 import store from '@/store/store'
 import loadJS from 'load-js'
@@ -17,9 +16,6 @@ import '@/config/config'
 void (async () => {
   await loadJS('https://js.stripe.com/v3/')
   window.stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
-})()
-
-void (async () => {
   window.UPLOADCARE_MANUAL_START = true
   Vue.prototype.$getRole = getRole
   Vue.config.productionTip = false
@@ -27,7 +23,6 @@ void (async () => {
   Vue.use(vueContainScroll)
   Vue.use(vueNumeral, { locale: 'en-au' })
   Vue.use(vueNotification, { componentName: 'Notify' })
-  Vue.use(vueIntercom, { appId: process.env.VUE_APP_INTERCOM_APP_ID })
   Vue.use(vueHoneybadger, { apiKey: process.env.VUE_APP_HONEYBADGER_API_KEY, environment: process.env.VUE_APP_ENV, developmentEnvironments: ['development'] })
   Vue.use(vueSegmentAnalytics, { id: process.env.VUE_APP_SEGMENT_WRITE_KEY })
   if (store.state.user.accessToken) await store.dispatch('user/checkAuthStatus')

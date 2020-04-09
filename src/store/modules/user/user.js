@@ -40,6 +40,7 @@ export default {
       commit('setUser', null)
       commit('setAccessToken', null)
       localStorage.removeItem('accessToken')
+      Vue.prototype.$segment.reset()
     }
   }
 }

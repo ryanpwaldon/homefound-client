@@ -48,7 +48,7 @@
           <BaseFormAddressAutocomplete
             placeholder="Type a suburb..."
             :value="location"
-            @input="Object.assign(form, $event)"
+            @input="Object.assign(form, { sellerSuburb: $event.suburb, sellerState: $event.state, sellerPostcode: $event.postcode })"
           />
           <BaseFormError :message="errors[0]"/>
         </ValidationProvider>
@@ -97,9 +97,9 @@ export default {
         name: '',
         email: '',
         phone: '',
-        suburb: '',
-        state: '',
-        postcode: '',
+        sellerSuburb: '',
+        sellerState: '',
+        sellerPostcode: '',
         agentLicenceNumber: '',
         password: ''
       },
@@ -109,9 +109,9 @@ export default {
   computed: {
     location () {
       return {
-        suburb: this.form.suburb,
-        state: this.form.state,
-        postcode: this.form.postcode
+        suburb: this.form.sellerSuburb,
+        state: this.form.sellerState,
+        postcode: this.form.sellerPostcode
       }
     }
   },
