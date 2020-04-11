@@ -1,11 +1,16 @@
 <template>
   <div class="base-button" :class=[design]>
-    {{ text }}
+    <span :style="{visibility: loading ? 'hidden' : 'visible'}">{{ text }}</span>
+    <div class="spinner" v-if="loading"><BaseSpinner/></div>
   </div>
 </template>
 
 <script>
+import BaseSpinner from '@/components/BaseSpinner/BaseSpinner'
 export default {
+  components: {
+    BaseSpinner
+  },
   props: {
     text: {
       type: String,
@@ -14,6 +19,10 @@ export default {
     design: {
       type: String,
       default: 'gray'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -57,6 +66,16 @@ export default {
 .blue {
   color: var(--color-white-1);
   background: var(--color-blue-3);
+}
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+::v-deep .spinner > * {
+  width: var(--spacing-3);
+  height: var(--spacing-3);
 }
 .spinner {
   position: absolute;
