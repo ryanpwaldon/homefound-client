@@ -53,12 +53,16 @@
         </router-link>
       </BaseCard>
       <BaseCard>
-        <div class="copy-1">No properties in your area?</div>
-        <div class="copy-2">Be the first to know when we list in new areas</div>
-        <div class="form">
-          <BaseFormInput placeholder="Enter your email..."/>
-          <BaseButtonLarge class="button" text="Get updates" design="pink"/>
-        </div>
+        <div class="copy-1">Get updates</div>
+        <div class="copy-2">Be the first to know when we launch in new areas</div>
+        <ValidationObserver v-slot="{ valid }">
+          <form class="form" @submit.prevent="valid && submit">
+            <ValidationProvider name="email" rules="required|email">
+              <BaseFormInput v-model="form.email" placeholder="Enter your email..."/>
+            </ValidationProvider>
+            <BaseButtonLarge class="button" text="Submit" design="pink" :loading="loading"/>
+          </form>
+        </ValidationObserver>
       </BaseCard>
     </div>
   </div>
@@ -74,6 +78,7 @@ import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
 import pulse from '@/components/BaseMap/components/MapImage/images/pulse'
+import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 import { featureCollection, point } from '@turf/helpers'
 export default {
   components: {
@@ -83,19 +88,37 @@ export default {
     BaseFormInput,
     MapSource,
     MapLayer,
-    MapImage
+    MapImage,
+    ValidationObserver,
+    ValidationProvider
   },
   async created () {
     this.pulse = pulse
     await this.updateGeojson()
   },
   data: () => ({
-    geojson: null
+    geojson: null,
+    loading: false,
+    form: {
+      email: ''
+    }
   }),
   methods: {
     async updateGeojson () {
       const listings = await ListingService.findAllDispersedLngLats()
       this.geojson = featureCollection(listings.map(listing => point(listing.dispersedLngLat)))
+    },
+    async submit () {
+      if (this.loading) return
+      this.loading = true
+      try {
+        await new Promise(resolve => this.$segment.identify({ email: this.form.email }, resolve))
+        this.$notify({ type: 'success', message: 'Subscribed' })
+      } catch (err) {
+        console.log(err)
+        this.$notify({ type: 'error' })
+      }
+      this.loading = false
     }
   }
 }
