@@ -4247,9 +4247,9 @@ hmac-drbg@^1.0.0:
     minimalistic-crypto-utils "^1.0.1"
 
 honeybadger-js@^2.0.2:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/honeybadger-js/-/honeybadger-js-2.2.0.tgz#9af54d471c8f404889933a24cc7a05f1410ec40b"
-  integrity sha512-JCJ1C4CQmbR62XGnUuDXmqiF+8nPpBPA53WZnOSZj3yohTRs+5tQb1FLl07Jh3wC+aFFIbPyT9kFHOq1/0pwYg==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/honeybadger-js/-/honeybadger-js-2.2.1.tgz#96c775cb5d016efd9597c0293cfc6ef4cb956579"
+  integrity sha512-KF1azMMFLm9km019DEORB5PaWGw5SylE8WTxXoG96655QFHXA4ToM5t+8/Po9TKZ5YhrULTVow6ly1h2aQ8qpg==
 
 hoopy@^0.1.4:
   version "0.1.4"
