@@ -56,11 +56,11 @@
         <div class="copy-1">Get updates</div>
         <div class="copy-2">Be the first to know when we launch in new areas</div>
         <ValidationObserver v-slot="{ valid }">
-          <form class="form" @submit.prevent="valid && submit">
+          <form class="form" @submit.prevent="valid && submit()">
             <ValidationProvider name="email" rules="required|email">
               <BaseFormInput v-model="form.email" placeholder="Enter your email..."/>
             </ValidationProvider>
-            <BaseButtonLarge class="button" text="Submit" design="pink" :loading="loading"/>
+            <BaseButtonLarge class="button" text="Submit" type="submit" design="pink" :loading="loading"/>
           </form>
         </ValidationObserver>
       </BaseCard>

@@ -1,8 +1,8 @@
 <template>
-  <div class="base-button" :class=[design]>
+  <button class="base-button" :class=[design] :type="type">
     <span :style="{visibility: loading ? 'hidden' : 'visible'}">{{ text }}</span>
     <div class="spinner" v-if="loading"><BaseSpinner/></div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -15,6 +15,10 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      default: 'button'
     },
     design: {
       type: String,
