@@ -107,22 +107,23 @@ export default {
   methods: {
     async fetchData () {
       try {
-        const [ impressions, views, contactDetailViews ] = await Promise.all([
-          this.fetchTimeseries({ property: 'impressions', range: 7, period: 'day' }),
-          this.fetchTimeseries({ property: 'views', range: 7, period: 'day' }),
-          this.fetchTimeseries({ property: 'contactDetailViews', range: 7, period: 'day' })
-        ])
+        const { impressions, views, contactDetailViews } = await this.fetchTimeseries({
+          properties: ['impressions', 'views', 'contactDetailViews'],
+          range: 7,
+          period: 'day'
+        })
         this.impressions = impressions
         this.views = views
         this.contactDetailViews = contactDetailViews
         this.success = true
       } catch (err) {
+        console.log(err)
         this.success = false
       }
       this.loading = false
     },
-    fetchTimeseries ({ property, range, period }) {
-      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing._id, property, range, period })
+    fetchTimeseries ({ properties, range, period }) {
+      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing._id, properties, range, period })
     },
     sum (timeseries) {
       return Object.values(timeseries).reduce((sum, value) => sum + value, 0)
