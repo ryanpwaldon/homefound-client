@@ -5,10 +5,10 @@
       <BaseText1 text="Saved listings"/>
       <BaseDivider/>
       <div class="items">
-        <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
+        <router-link v-for="listing in listings" :key="listing.id" :to="`/app/listings/${listing.id}`">
           <BaseListingCardBuyer
             class="listing"
-            :listing-id="listing._id"
+            :listing-id="listing.id"
             :address="listing.fullAddress"
             :price="listing.price"
             :bedrooms="listing.bedrooms"

@@ -271,7 +271,7 @@ export default {
       this.loading = true
       try {
         this.form.published = shouldPublish
-        const listing = await ListingService.update(this.listing._id, this.form)
+        const listing = await ListingService.update(this.listing.id, this.form)
         this.$emit('listing-updated', listing)
         this.$notify({ type: 'success' })
       } catch (err) {

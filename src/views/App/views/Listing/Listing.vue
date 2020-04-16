@@ -28,7 +28,7 @@
         </div>
         <BaseGallery class="gallery" :images="listing.images"/>
         <Contact
-          :listing-id="listing._id"
+          :listing-id="listing.id"
           :created-by="listing.createdBy"
           :name="listing.name"
           :phone="listing.phone"

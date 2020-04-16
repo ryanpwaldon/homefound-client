@@ -123,7 +123,7 @@ export default {
       this.loading = false
     },
     fetchTimeseries ({ properties, range, period }) {
-      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing._id, properties, range, period })
+      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing.id, properties, range, period })
     },
     sum (timeseries) {
       return Object.values(timeseries).reduce((sum, value) => sum + value, 0)

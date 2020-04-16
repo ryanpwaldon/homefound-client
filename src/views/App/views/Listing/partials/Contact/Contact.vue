@@ -58,7 +58,7 @@ export default {
     show: false
   }),
   computed: mapState('user', {
-    userId: state => state.user._id
+    userId: state => state.user.id
   }),
   methods: {
     onClick () {

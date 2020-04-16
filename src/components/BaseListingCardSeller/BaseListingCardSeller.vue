@@ -13,7 +13,7 @@
       <BaseDivider class="divider"/>
       <div class="badges">
         <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'yellow'"/>
-        <router-link :to="`/app/listings/${listing._id}`" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }" @click.native.stop>
+        <router-link :to="`/app/listings/${listing.id}`" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }" @click.native.stop>
           <BaseBadge :icon="require('@/assets/img/clickout.svg')" design="gray"/>
         </router-link>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="settings">
     <CardTogglePublished
-      :listing-id="listing._id"
+      :listing-id="listing.id"
       @listing-updated="$emit('listing-updated', $event)"
       :published="listing.published"
     />

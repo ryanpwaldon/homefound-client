@@ -8,7 +8,7 @@
       <div class="spacer"/>
       <BaseButton class="button" text="Delete" @click.native="showModal = true" :design="listing.firstPublishedAt ? 'disabled' : 'gray'"/>
     </div>
-    <DeleteListing :listing-id="listing._id" v-if="showModal" @close="showModal = false"/>
+    <DeleteListing :listing-id="listing.id" v-if="showModal" @close="showModal = false"/>
   </BaseCard>
 </template>
 

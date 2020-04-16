@@ -89,7 +89,7 @@ export default {
       this.formSubmissionLoading = true
       try {
         await Promise.all(this.selectedAgents.map(user => {
-          const userId = user._id
+          const userId = user.id
           const status = this.registrationStatus
           return UserService.updateSellerRegistrationStatus({ userId, status })
         }))

@@ -11,7 +11,7 @@
         <BaseLoader class="loader" v-if="loading"/>
         <router-link
           v-for="(listing, i) in listings"
-          :to="`/app/my-listings/${listing._id}`"
+          :to="`/app/my-listings/${listing.id}`"
           :key="i">
           <BaseListingCardSeller class="listing" :listing="listing" />
         </router-link>
@@ -49,7 +49,7 @@ export default {
   methods: {
     async createListing () {
       const listing = await ListingService.create({})
-      this.$router.push(`/app/my-listings/${listing._id}`)
+      this.$router.push(`/app/my-listings/${listing.id}`)
     }
   }
 }

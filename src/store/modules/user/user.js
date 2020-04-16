@@ -34,7 +34,7 @@ export default {
       commit('setUser', user)
       commit('setAccessToken', accessToken)
       localStorage.setItem('accessToken', accessToken)
-      Vue.prototype.$segment.identify(user._id)
+      Vue.prototype.$segment.identify(user.id)
     },
     logout ({ commit }) {
       commit('setUser', null)

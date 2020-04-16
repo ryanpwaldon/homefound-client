@@ -5,7 +5,7 @@
       <div class="badges">
         <BaseBadge :text="listing.published ? 'Published' : 'Unpublished'" :design="listing.published ? 'green' : 'yellow'"/>
         <BaseBadge v-if="listing.marketStatus" :text="listing.marketStatus === 'ON' ? 'On-market' : 'Off-market'" :design="listing.marketStatus === 'ON' ? 'red' : 'green'"/>
-        <router-link :to="`/app/listings/${listing._id}`" target="_blank" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }">
+        <router-link :to="`/app/listings/${listing.id}`" target="_blank" :style="listing.publishable ? { } : { pointerEvents: 'none', opacity: 0.5 }">
           <BaseBadge design="gray" text="Preview" :icon="require('@/assets/img/clickout.svg')"/>
         </router-link>
       </div>
@@ -43,9 +43,9 @@ export default {
   computed: {
     navItems () {
       return [
-        { text: 'Create', path: `/app/my-listings/${this.listing._id}/create` },
-        { text: 'Performance', path: `/app/my-listings/${this.listing._id}/performance` },
-        { text: 'Settings', path: `/app/my-listings/${this.listing._id}/settings` }
+        { text: 'Create', path: `/app/my-listings/${this.listing.id}/create` },
+        { text: 'Performance', path: `/app/my-listings/${this.listing.id}/performance` },
+        { text: 'Settings', path: `/app/my-listings/${this.listing.id}/settings` }
       ]
     }
   }

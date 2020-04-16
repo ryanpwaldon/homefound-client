@@ -45,11 +45,11 @@
         <div>Agents can only view their own listings</div>
       </BaseAlert>
       <div class="listings-container">
-        <router-link v-for="listing in listings" :key="listing._id" :to="`/app/listings/${listing._id}`">
+        <router-link v-for="listing in listings" :key="listing.id" :to="`/app/listings/${listing.id}`">
           <BaseListingCardBuyer
             class="listing"
-            :class="{ hovered: hoveredListingId === listing._id }"
-            :listing-id="listing._id"
+            :class="{ hovered: hoveredListingId === listing.id }"
+            :listing-id="listing.id"
             :address="listing.fullAddress"
             :price="listing.price"
             :bedrooms="listing.bedrooms"
@@ -57,7 +57,7 @@
             :car-spaces="listing.carSpaces"
             :first-published-at="listing.firstPublishedAt"
             :image="listing.images[0]"
-            @mouseenter.native="hoveredListingId = listing._id"
+            @mouseenter.native="hoveredListingId = listing.id"
             @mouseleave.native="hoveredListingId = null"
           />
         </router-link>
@@ -222,7 +222,7 @@ export default {
   methods: {
     async updateGeojson () {
       const { docs: listings } = await ListingService.findAllLngLats({ filters: this.query.filters })
-      this.geojson = featureCollection(listings.map(listing => point(listing.lngLat, { id: listing._id })))
+      this.geojson = featureCollection(listings.map(listing => point(listing.lngLat, { id: listing.id })))
     },
     async updateListings () {
       const { docs: listings, pages, total } = await ListingService.findMany({
