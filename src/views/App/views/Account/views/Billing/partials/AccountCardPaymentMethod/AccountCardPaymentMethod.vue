@@ -4,7 +4,7 @@
       <div class="content">
         <BaseText4 class="label" text="Payment method"/>
         <BaseText5 class="value">
-          <span class="card-brand">{{ cardBrand }}</span> ending in {{ cardLast4 }}.
+          <span class="card-brand">{{ cardBrand }}</span> ending in {{ cardLast4 }}
         </BaseText5>
       </div>
       <BaseButton text="Update" @click.native="showModal = true"/>
