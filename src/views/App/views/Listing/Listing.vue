@@ -36,7 +36,7 @@
         />
       </BaseLayoutCenter>
       <div class="map-container">
-        <BaseMap :center="listing.lngLat" :zoom="16">
+        <BaseMap :center="listing.lngLat" :zoom="10">
           <MapSource source-id="point" :geojson="geojson"/>
           <MapLayer
             type="circle"
