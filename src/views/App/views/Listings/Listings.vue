@@ -40,7 +40,7 @@
           />
         </div>
       </BaseCard>
-      <BaseAlert class="agent-alert" v-if="roles.includes($getRole('SELLER'))">
+      <BaseAlert class="agent-alert" v-if="!roles.includes($getRole('BUYER'))">
         <img class="info" src="@/assets/img/info.svg">
         <div>Agents can only view their own listings</div>
       </BaseAlert>
