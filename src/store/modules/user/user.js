@@ -38,12 +38,14 @@ export default {
       commit('setAccessToken', accessToken)
       localStorage.setItem('accessToken', accessToken)
       Vue.prototype.$segment.identify(user.id)
+      Vue.prototype.$honeybadger.setContext({ userId: user.id, email: user.email })
     },
     logout ({ commit }) {
       commit('setUser', {})
       commit('setAccessToken', null)
       localStorage.removeItem('accessToken')
       Vue.prototype.$segment.reset()
+      Vue.prototype.$honeybadger.resetContext()
     }
   }
 }
