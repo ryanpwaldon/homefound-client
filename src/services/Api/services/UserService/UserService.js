@@ -30,6 +30,10 @@ export default {
     return (await Api().put(`/user/listings/saved/remove`, { listingId })).data
   },
 
+  async updateOneNotification (notificationId, state) {
+    return (await Api().put(`/user/notifications`, { notificationId, state })).data
+  },
+
   async createSubscription (pricingPlan) {
     return (await Api().put(`/user/subscription`, { pricingPlan })).data
   },

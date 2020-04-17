@@ -10,6 +10,9 @@ export default {
   getters: {
     roles (state) {
       return (state.user && state.user.roles) || [Vue.prototype.$getRole('GUEST')]
+    },
+    notifications (state) {
+      return (state.user && state.user.notifications) || []
     }
   },
   mutations: {

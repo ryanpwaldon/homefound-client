@@ -238,6 +238,11 @@ const routes = [
             path: 'billing',
             name: 'billing',
             component: () => import('@/views/App/views/Account/views/Billing/Billing')
+          },
+          {
+            path: 'notifications',
+            name: 'notifications',
+            component: () => import('@/views/App/views/Account/views/Notifications/Notifications')
           }
         ]
       },

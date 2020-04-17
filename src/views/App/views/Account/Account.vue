@@ -22,7 +22,8 @@ export default {
   data: () => ({
     navItems: [
       { text: 'Overview', path: `/app/account/overview` },
-      { text: 'Billing', path: `/app/account/billing` }
+      { text: 'Billing', path: `/app/account/billing` },
+      { text: 'Notifications', path: `/app/account/notifications` }
     ]
   })
 }
