@@ -1,10 +1,11 @@
 <template>
   <div class="notifications">
-    <BaseContentCard class="card" title="Email notifications">
+    <BaseContentCard class="card" title="Email">
       <div class="option" v-for="(notification, i) in allNotifications" :key="i">
         <div class="title">{{ notification.title }}</div>
         <div class="description">{{ notification.description }}</div>
         <BaseFormToggle
+          class="toggle"
           :value="notifications.includes(notification.id)"
           :async-func="state => updateOneNotification(notification.id, state)"
         />
@@ -28,13 +29,13 @@ export default {
   created () {
     this.allNotifications = [
       {
-        title: 'Daily summary',
-        description: 'Receive a summary of newly listed properties at the end of each day.',
+        title: 'Daily market summary',
+        description: 'Receive a summary of new property listings at the end of each day.',
         role: this.$getRole('BUYER'),
         id: MARKET_REPORT_DAILY
       },
       {
-        title: 'Daily summary',
+        title: 'Daily performance summary',
         description: `Receive a summary of how your listings performed (the day prior) at the beginning of each day.`,
         role: this.$getRole('SELLER'),
         id: PERFORMANCE_REPORT_DAILY
@@ -68,6 +69,9 @@ export default {
   justify-content: space-between;
   grid-row-gap: var(--spacing-2);
   grid-column-gap: var(--spacing-5);
+  &:not(:last-child) {
+    margin-bottom: var(--spacing-5);
+  }
 }
 .name {
   grid-row: 1;
@@ -82,7 +86,7 @@ export default {
   grid-column: 1;
 }
 .toggle {
-  grid-row: 1;
+  grid-row: 1 / 3;
   grid-column: 2;
 }
 </style>
