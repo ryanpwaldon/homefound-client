@@ -4,7 +4,7 @@ import AuthService from '@/services/Api/services/AuthService/AuthService'
 export default {
   namespaced: true,
   state: {
-    user: null,
+    user: {},
     accessToken: localStorage.getItem('accessToken') || null
   },
   getters: {
@@ -40,7 +40,7 @@ export default {
       Vue.prototype.$segment.identify(user.id)
     },
     logout ({ commit }) {
-      commit('setUser', null)
+      commit('setUser', {})
       commit('setAccessToken', null)
       localStorage.removeItem('accessToken')
       Vue.prototype.$segment.reset()

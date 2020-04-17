@@ -1,8 +1,8 @@
 <template>
-  <div class="base-form-submit-button" :class="[design]">
+  <button class="base-form-submit-button" :class="[design]" :type="type">
     <BaseText2 :text="text" :style="{visibility: loading ? 'hidden' : 'visible'}"/>
     <div class="spinner" v-if="loading"><BaseSpinner/></div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -17,6 +17,10 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      default: 'button'
     },
     loading: {
       type: Boolean,

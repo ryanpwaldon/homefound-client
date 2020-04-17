@@ -2,7 +2,7 @@
   <div class="container">
     <Nav/>
     <BaseCard>
-      <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+      <ValidationObserver class="form" ref="form" tag="form" v-slot="{ valid }" @submit.prevent="submit">
         <div class="label">Name</div>
         <ValidationProvider class="input" name="name" rules="required|alpha_spaces" v-slot="{ errors }">
           <BaseFormInput
@@ -55,9 +55,9 @@
         <BaseDivider class="divider"/>
         <BaseFormSubmitButton
           class="submit"
+          type="submit"
           text="Create account"
           :loading="loading"
-          @click.native="submit"
           :design="valid ? 'black' : 'disabled'"
         />
       </ValidationObserver>
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     async submit () {
-      if (this.loading || !(await this.$refs['observer'].validate())) return
+      if (this.loading || !(await this.$refs['form'].validate())) return
       this.loading = true
       try {
         const { user, accessToken } = await UserService.createSeller(this.form)

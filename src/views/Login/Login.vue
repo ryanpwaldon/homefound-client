@@ -4,7 +4,7 @@
       <div class="container">
         <div class="title">Login</div>
         <BaseCard>
-          <ValidationObserver class="observer" ref="observer" tag="div" v-slot="{ valid }">
+          <ValidationObserver class="form" ref="form" tag="form" v-slot="{ valid }" @submit.prevent="submit">
             <div class="label">Email</div>
             <ValidationProvider class="provider email" name="email" rules="required|email" v-slot="{ errors }">
               <BaseFormInput
@@ -28,8 +28,8 @@
             <BaseDivider class="divider"/>
             <BaseFormSubmitButton
               text="Continue"
+              type="submit"
               :loading="loading"
-              @click.native="submit"
               :design="valid ? 'black' : 'disabled'"
             />
           </ValidationObserver>
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     async submit () {
-      if (this.loading || !(await this.$refs['observer'].validate())) return
+      if (this.loading || !(await this.$refs['form'].validate())) return
       this.loading = true
       try {
         const { user, accessToken } = await AuthService.login(this.form)
@@ -108,7 +108,7 @@ export default {
     max-width: none;
   }
 }
-.observer {
+.form {
   width: 100%;
   position: relative;
 }

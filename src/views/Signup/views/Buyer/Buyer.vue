@@ -2,7 +2,7 @@
   <div class="container">
     <Nav/>
     <BaseCard class="card">
-      <ValidationObserver class="form" ref="form" tag="div" v-slot="{ valid }">
+      <ValidationObserver class="form" ref="form" tag="form" v-slot="{ valid }" @submit.prevent="submit">
         <div class="content">
           <div class="section">
             <div class="label">Name</div>
@@ -61,9 +61,9 @@
         <div class="footer">
           <BaseFormSubmitButton
             class="submit"
+            type="submit"
             text="Create account"
             :loading="loading"
-            @click.native="submit"
             :design="valid ? 'black' : 'disabled'"
           />
         </div>
