@@ -24,8 +24,12 @@ export default {
     BaseText4
   },
   computed: mapState('user', {
-    nextInvoiceAt: state => state.user.nextInvoiceAt,
-    subscriptionCancelled: state => state.user.roles.includes(this.$getRole('BUYER_SUBSCRIPTION_CANCELLED'))
+    nextInvoiceAt (state) {
+      return state.user.nextInvoiceAt
+    },
+    subscriptionCancelled (state) {
+      return state.user.roles.includes(this.$getRole('BUYER_SUBSCRIPTION_CANCELLED'))
+    }
   })
 }
 </script>

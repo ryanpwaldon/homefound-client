@@ -9,6 +9,7 @@
 
 <script>
 import BaseNavVertical from '@/components/BaseNavVertical/BaseNavVertical'
+import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: {
@@ -31,8 +32,11 @@ export default {
     this.removeAppStyles()
   },
   computed: {
+    ...mapGetters('user', [
+      'roles'
+    ]),
     filteredNavItems () {
-      return this.navItems.filter(item => !item.roles || this.$store.state.user.user.roles.some(role => item.roles.includes(role)))
+      return this.navItems.filter(item => !item.roles || this.roles.some(role => item.roles.includes(role)))
     }
   },
   methods: {
