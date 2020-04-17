@@ -47,7 +47,7 @@ export default {
   @include media(md-up) {
     background: var(--color-white-1);
     border-radius: var(--border-radius-1);
-    box-shadow: var(--box-shadow-1);
+    border: solid 1px var(--color-gray-1);
     padding: var(--spacing-5);
   }
   @include media(sm-only) {

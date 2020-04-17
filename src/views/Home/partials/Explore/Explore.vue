@@ -177,7 +177,7 @@ export default {
   padding-top: calc(100% / 16 * 10);
   margin-bottom: var(--spacing-5);
   border-radius: var(--border-radius-1);
-  box-shadow: var(--box-shadow-1);
+  border: solid 1px var(--color-gray-1);
   overflow: hidden;
 }
 .map {

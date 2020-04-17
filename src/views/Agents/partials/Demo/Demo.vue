@@ -52,7 +52,7 @@ export default {
   position: relative;
   border-radius: var(--border-radius-1);
   background: var(--color-white-1);
-  box-shadow: var(--box-shadow-1);
+  border: solid 1px var(--color-gray-1);
   overflow: hidden;
 }
 .video {

@@ -160,7 +160,7 @@ export default {
     }
     .chart {
       width: 100%;
-      box-shadow: var(--box-shadow-1);
+      border: solid 1px var(--color-gray-1);
       border-radius: var(--border-radius-1);
     }
   }

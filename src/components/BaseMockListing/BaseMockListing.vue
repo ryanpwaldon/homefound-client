@@ -52,7 +52,7 @@ export default {
   flex-direction: column;
   position: relative;
   padding: var(--spacing);
-  box-shadow: var(--box-shadow-1);
+  border: solid 1px var(--color-gray-1);
   border-radius: var(--border-radius-1);
   background: var(--color-white-1);
   > *:not(:last-child) {
