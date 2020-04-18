@@ -1,3 +1,5 @@
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+
 module.exports = {
   devServer: {
     disableHostCheck: true,
@@ -13,11 +15,15 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    config.module
+    config
+      .module
       .rule('markdown')
       .test(/\.md$/)
       .use('raw-loader')
-        .loader('raw-loader')
-        .end()
+      .loader('raw-loader')
+      .end()
+    config
+      .plugin('favicons')
+      .use(FaviconsWebpackPlugin, [{ logo: './src/assets/img/logo-9.svg' }])
   }
 }
