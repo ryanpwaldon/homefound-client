@@ -24,6 +24,6 @@ module.exports = {
       .end()
     config
       .plugin('favicons')
-      .use(FaviconsWebpackPlugin, [{ logo: './src/assets/img/logo-9.svg' }])
+      .use(FaviconsWebpackPlugin, [{ logo: './src/assets/img/favicon.svg' }])
   }
 }
