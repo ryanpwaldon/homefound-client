@@ -260,7 +260,7 @@ export default {
   height: 100%;
   display: flex;
   > * {
-    width: 50%;
+    width: 50% !important;
     flex-shrink: 0;
   }
 }
