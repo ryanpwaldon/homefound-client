@@ -107,11 +107,15 @@ export default {
   methods: {
     async fetchData () {
       try {
-        const { impressions, views, contactDetailViews } = await this.fetchTimeseries({
+        const period = 'day'
+        const { impressions, views, contactDetailViews } = await ListingPerformanceService.findTimeseriesByListingId({
+          listingId: this.listing.id,
           properties: ['impressions', 'views', 'contactDetailViews'],
+          period,
           range: 7,
-          period: 'day'
+          endDate: this.$moment().startOf(period).add(1, period).toDate()
         })
+        console.log(this.$moment().startOf(period).add(1, period).toDate())
         this.impressions = impressions
         this.views = views
         this.contactDetailViews = contactDetailViews
@@ -121,9 +125,6 @@ export default {
         this.success = false
       }
       this.loading = false
-    },
-    fetchTimeseries ({ properties, range, period }) {
-      return ListingPerformanceService.findTimeseriesByListingId({ listingId: this.listing.id, properties, range, period })
     },
     sum (timeseries) {
       return Object.values(timeseries).reduce((sum, value) => sum + value, 0)
