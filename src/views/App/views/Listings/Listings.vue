@@ -48,7 +48,7 @@
         <router-link v-for="listing in listings" :key="listing.id" :to="`/app/listings/${listing.id}`">
           <BaseListingCardBuyer
             class="listing"
-            :class="{ hovered: hoveredListingId === listing.id }"
+            :class="{ hovered: activePointId === listing.id }"
             :listing-id="listing.id"
             :address="listing.fullAddress"
             :price="listing.price"
@@ -57,8 +57,8 @@
             :car-spaces="listing.carSpaces"
             :first-published-at="listing.firstPublishedAt"
             :image="listing.images[0]"
-            @mouseenter.native="hoveredListingId = listing.id"
-            @mouseleave.native="hoveredListingId = null"
+            @mouseenter.native="activePointId = listing.id"
+            @mouseleave.native="activePointId = null"
           />
         </router-link>
       </div>
@@ -75,51 +75,72 @@
           />
         </transition>
       </div>
-      <BaseMap :fit-bounds-options="{ padding: 100 }">
+      <BaseMap ref="map" :fit-bounds-options="{ padding: 100 }">
         <MapBounds v-model="polygon"/>
         <MapSource source-id="points" :geojson="geojson"/>
         <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['!', ['has', 'point_count']], !hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
-        />
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{
-            'circle-radius': 15,
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
-          }"
+        <MapImagePulse
+          image-id="pulse-point"
+          :circle-radius="5"
+          :circle-stroke-width="1"
+          :pulse-radius="20"
+          fill-color="#ff6464"
+          stroke-color="#be5643"
+          pulse-color="#ffc8c8"
         />
         <MapLayer
           type="symbol"
           source-id="clusters"
-          :filter="['all', ['has', 'point_count'], !hoveredListingId]"
-          :paint="{ 'text-color': '#ffffff' }"
-          :layout="{
-            'icon-allow-overlap': true,
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['SF Pro Text Semibold'],
-            'text-size': 12
-          }"
+          :filter="['all', ['!', ['has', 'point_count']], ['==', ['get', 'id'], activePointId]]"
+          :layout="{ 'icon-image': 'pulse-point', 'icon-allow-overlap': true }"
+        />
+        <MapImagePulse
+          image-id="pulse-cluster"
+          :circle-radius="15"
+          :circle-stroke-width="1"
+          :pulse-radius="20"
+          fill-color="#ff6464"
+          stroke-color="#be5643"
+          pulse-color="#ff7979"
         />
         <MapLayer
-          type="circle"
-          source-id="points"
-          :filter="['==', ['get', 'id'], hoveredListingId]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1
+          type="symbol"
+          source-id="clusters"
+          :filter="['all', ['has', 'point_count'], ['==', ['get', 'cluster_id'], activeClusterId]]"
+          :layout="{ 'icon-image': 'pulse-cluster', 'icon-allow-overlap': true }"
+        />
+        <MapImageCircle
+          image-id="circle-point"
+          :circle-radius="5"
+          :circle-stroke-width="1"
+          fill-color="#ff6464"
+          stroke-color="#be5643"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['!', ['has', 'point_count']]"
+          :layout="{ 'icon-image': 'circle-point', 'icon-allow-overlap': true }"
+        />
+        <MapImageCircle
+          image-id="circle-cluster"
+          :circle-radius="15"
+          :circle-stroke-width="1"
+          fill-color="#ff6464"
+          stroke-color="#be5643"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['has', 'point_count']"
+          :paint="{ 'text-color': '#ffffff' }"
+          :layout="{
+            'icon-image': 'circle-cluster',
+            'icon-allow-overlap': true,
+            'text-size': 12,
+            'text-field': '{point_count_abbreviated}',
+            'text-font': ['SF Pro Text Semibold'],
+            'icon-allow-overlap': true
           }"
         />
       </BaseMap>
@@ -141,12 +162,13 @@ import MapBounds from '@/components/BaseMap/components/MapBounds/MapBounds'
 import BaseLoader from '@/components/BaseLoader/BaseLoader'
 import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
 import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
+import MapImagePulse from '@/components/BaseMap/components/MapImagePulse/MapImagePulse'
+import MapImageCircle from '@/components/BaseMap/components/MapImageCircle/MapImageCircle'
 import BaseMap from '@/components/BaseMap/BaseMap'
 import BaseAlert from '@/components/BaseAlert/BaseAlert'
 import isEqual from 'lodash/isEqual'
 import { mapGetters } from 'vuex'
 import { featureCollection, point } from '@turf/helpers'
-import pulse from '@/components/BaseMap/components/MapImage/images/pulse'
 const sortOptions = {
   recentlyAdded: { firstPublishedAt: -1 },
   oldestAdded: { firstPublishedAt: 1 },
@@ -169,10 +191,11 @@ export default {
     BaseMap,
     MapSource,
     MapLayer,
+    MapImagePulse,
+    MapImageCircle,
     BaseAlert
   },
   created () {
-    this.pulse = pulse
     this.isEqual = isEqual
     const destroy = this.$watch('polygon', () => {
       this.updatePolygonFilter()
@@ -180,7 +203,7 @@ export default {
     })
   },
   data: () => ({
-    hoveredListingId: null,
+    activePointId: null,
     geojson: null,
     listings: [],
     nextPage: 1,
@@ -219,6 +242,26 @@ export default {
     }
   },
   computed: mapGetters('user', [ 'roles' ]),
+  asyncComputed: {
+    async activeClusterId () {
+      let activeClusterId = null
+      const activePointId = this.activePointId
+      if (!(this.$refs['map'] && this.$refs['map'].map)) return null
+      const source = this.$refs['map'].map.getSource('clusters')
+      const clusters = this.$refs['map'].map.querySourceFeatures('clusters').filter(feature => !!feature.properties.cluster_id)
+      await Promise.all(clusters.map(cluster => {
+        return new Promise(resolve => {
+          source.getClusterLeaves(cluster.properties.cluster_id, cluster.properties.point_count, 0, (error, points) => {
+            if (error) console.log(error)
+            const match = points && points.find(point => point.properties.id === activePointId)
+            if (match) activeClusterId = cluster.properties.cluster_id
+            resolve()
+          })
+        })
+      }))
+      return activeClusterId
+    }
+  },
   methods: {
     async updateGeojson () {
       const { docs: listings } = await ListingService.findAllLngLats({ filters: this.query.filters })

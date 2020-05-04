@@ -4,10 +4,19 @@
       <div class="title">Explore our listings</div>
       <div class="subtitle">There are currently <span class="count">{{ geojson && geojson.features.length }}</span> off-market properties listed on Homefound</div>
     </div>
-    <div class="map-container">
+    <div class="map-container" @mouseenter="pulse = true" @mouseleave="pulse = false">
       <BaseMap class="map" :max-zoom="17" :scroll-zoom="true">
         <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
-        <MapImage image-id="pulse" :image-data="pulse(200, '#ff6464', '#be5643', '#ffc8c8')"/>
+        <MapImagePulse
+          image-id="pulse"
+          :circle-radius="15"
+          :circle-stroke-width="1"
+          :pulse-radius="20"
+          fill-color="#ff6464"
+          stroke-color="#be5643"
+          pulse-color="#ffc8c8"
+          :duration="2000"
+        />
         <MapLayer
           type="circle"
           source-id="clusters"
@@ -25,21 +34,13 @@
           type="symbol"
           source-id="clusters"
           :filter="['has', 'point_count']"
-          :layout="{
-            'icon-image': 'pulse',
-            'icon-allow-overlap': true
-          }"
-        />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['has', 'point_count']"
           :paint="{ 'text-color': '#ffffff' }"
           :layout="{
-            'icon-allow-overlap': true,
+            'text-size': 12,
+            'icon-image': 'pulse',
             'text-field': '{point_count_abbreviated}',
             'text-font': ['SF Pro Text Semibold'],
-            'text-size': 12
+            'icon-allow-overlap': true
           }"
         />
       </BaseMap>
@@ -72,12 +73,11 @@
 import BaseMap from '@/components/BaseMap/BaseMap'
 import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
 import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
-import MapImage from '@/components/BaseMap/components/MapImage/MapImage'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import ListingService from '@/services/Api/services/ListingService/ListingService'
-import pulse from '@/components/BaseMap/components/MapImage/images/pulse'
+import MapImagePulse from '@/components/BaseMap/components/MapImagePulse/MapImagePulse'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 import { featureCollection, point } from '@turf/helpers'
 export default {
@@ -88,12 +88,11 @@ export default {
     BaseFormInput,
     MapSource,
     MapLayer,
-    MapImage,
+    MapImagePulse,
     ValidationObserver,
     ValidationProvider
   },
   async created () {
-    this.pulse = pulse
     await this.updateGeojson()
   },
   data: () => ({

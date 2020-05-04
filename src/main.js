@@ -3,6 +3,7 @@ import App from '@/App.vue'
 import router from '@/router/router'
 import vueNumeral from 'vue-numeral-filter'
 import vueNotification from 'vue-notification'
+import vueAsyncComputed from 'vue-async-computed'
 import vueHoneybadger from '@honeybadger-io/vue'
 import vueContainScroll from '@/directives/vue-contain-scroll'
 import vueSegmentAnalytics from 'vue-segment-analytics'
@@ -21,6 +22,7 @@ void (async () => {
   Vue.config.productionTip = false
   Vue.use(vueMoment)
   Vue.use(vueContainScroll)
+  Vue.use(vueAsyncComputed)
   Vue.use(vueNumeral, { locale: 'en-au' })
   Vue.use(vueNotification, { componentName: 'Notify' })
   Vue.use(vueHoneybadger, { apiKey: process.env.VUE_APP_HONEYBADGER_API_KEY, environment: process.env.VUE_APP_ENV, developmentEnvironments: ['development'] })
