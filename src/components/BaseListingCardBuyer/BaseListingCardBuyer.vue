@@ -24,6 +24,10 @@
               <img src="@/assets/img/bookmark-sm.svg">
               {{ savedStatus ? 'Remove from saved' : 'Add to saved' }}
             </div>
+            <div class="action" @click="flyTo(close)">
+              <img src="@/assets/img/geolocate.svg">
+              Fly to
+            </div>
           </template>
         </BaseContextMenu>
       </div>
@@ -109,6 +113,10 @@ export default {
         console.log(error)
         this.$notify({ type: 'error' })
       }
+    },
+    flyTo (close) {
+      this.$emit('fly-to')
+      close()
     }
   }
 }
@@ -181,7 +189,6 @@ export default {
   cursor: pointer;
   img {
     height: 1em;
-    width: 11px;
     margin-right: var(--spacing-2);
   }
   &:hover {

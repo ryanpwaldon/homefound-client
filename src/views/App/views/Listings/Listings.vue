@@ -57,6 +57,7 @@
             :car-spaces="listing.carSpaces"
             :first-published-at="listing.firstPublishedAt"
             :image="listing.images[0]"
+            @fly-to="flyTo(listing.lngLat)"
             @mouseenter.native="activePointId = listing.id"
             @mouseleave.native="activePointId = null"
           />
@@ -92,7 +93,7 @@
           type="symbol"
           source-id="clusters"
           :filter="['all', ['!', ['has', 'point_count']], ['==', ['get', 'id'], activePointId]]"
-          :layout="{ 'icon-image': 'pulse-point', 'icon-allow-overlap': true }"
+          :layout="{ 'icon-image': 'pulse-point', 'icon-allow-overlap': true, 'icon-ignore-placement': true }"
         />
         <MapImagePulse
           image-id="pulse-cluster"
@@ -107,7 +108,7 @@
           type="symbol"
           source-id="clusters"
           :filter="['all', ['has', 'point_count'], ['==', ['get', 'cluster_id'], activeClusterId]]"
-          :layout="{ 'icon-image': 'pulse-cluster', 'icon-allow-overlap': true }"
+          :layout="{ 'icon-image': 'pulse-cluster', 'icon-allow-overlap': true, 'icon-ignore-placement': true }"
         />
         <MapImageCircle
           image-id="circle-point"
@@ -263,6 +264,9 @@ export default {
     }
   },
   methods: {
+    flyTo (lngLat) {
+      this.$refs['map'].flyTo(lngLat)
+    },
     async updateGeojson () {
       const { docs: listings } = await ListingService.findAllLngLats({ filters: this.query.filters })
       this.geojson = featureCollection(listings.map(listing => point(listing.lngLat, { id: listing.id })))
