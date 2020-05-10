@@ -38,7 +38,7 @@ export default {
 }
 .nav-item:hover,
 .router-link-active:not(.home) {
-  .wrapper::before { opacity: 0.2 }
+  .wrapper::before { opacity: 1 }
   .icon { opacity: 1 }
 }
 .wrapper {
@@ -57,7 +57,7 @@ export default {
     width: calc(100% + var(--spacing));
     height: calc(100% + var(--spacing));
     border-radius: var(--border-radius-1);
-    background: var(--color-gray-4);
+    background: var(--color-gray-8);
     opacity: 0;
   }
 }
