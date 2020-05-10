@@ -20,7 +20,7 @@ export default {
     },
     clusterMaxZoom: {
       type: Number,
-      default: 8
+      default: 12
     }
   },
   created () {

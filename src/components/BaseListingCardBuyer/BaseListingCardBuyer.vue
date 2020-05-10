@@ -26,7 +26,7 @@
             </div>
             <div class="action" @click="flyTo(close)">
               <img src="@/assets/img/geolocate.svg">
-              Fly to
+              View on map
             </div>
           </template>
         </BaseContextMenu>

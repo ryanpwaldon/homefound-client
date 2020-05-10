@@ -89,12 +89,6 @@
           stroke-color="#be5643"
           pulse-color="#ffc8c8"
         />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['all', ['!', ['has', 'point_count']], ['==', ['get', 'id'], activePointId]]"
-          :layout="{ 'icon-image': 'pulse-point', 'icon-allow-overlap': true, 'icon-ignore-placement': true }"
-        />
         <MapImagePulse
           image-id="pulse-cluster"
           :circle-radius="15"
@@ -104,24 +98,12 @@
           stroke-color="#be5643"
           pulse-color="#ff7979"
         />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['all', ['has', 'point_count'], ['==', ['get', 'cluster_id'], activeClusterId]]"
-          :layout="{ 'icon-image': 'pulse-cluster', 'icon-allow-overlap': true, 'icon-ignore-placement': true }"
-        />
         <MapImageCircle
           image-id="circle-point"
           :circle-radius="5"
           :circle-stroke-width="1"
           fill-color="#ff6464"
           stroke-color="#be5643"
-        />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['!', ['has', 'point_count']]"
-          :layout="{ 'icon-image': 'circle-point', 'icon-allow-overlap': true }"
         />
         <MapImageCircle
           image-id="circle-cluster"
@@ -133,15 +115,44 @@
         <MapLayer
           type="symbol"
           source-id="clusters"
+          :filter="['all', ['!', ['has', 'point_count']], ['==', ['get', 'id'], activePointId]]"
+          :layout="{
+            'icon-image': 'pulse-point',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          }"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['all', ['has', 'point_count'], ['==', ['get', 'cluster_id'], activeClusterId]]"
+          :layout="{
+            'icon-image': 'pulse-cluster',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          }"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
+          :filter="['!', ['has', 'point_count']]"
+          :layout="{
+            'icon-image': 'circle-point',
+            'icon-allow-overlap': true
+          }"
+        />
+        <MapLayer
+          type="symbol"
+          source-id="clusters"
           :filter="['has', 'point_count']"
           :paint="{ 'text-color': '#ffffff' }"
           :layout="{
-            'icon-image': 'circle-cluster',
-            'icon-allow-overlap': true,
             'text-size': 12,
             'text-field': '{point_count_abbreviated}',
             'text-font': ['SF Pro Text Semibold'],
-            'icon-allow-overlap': true
+            'icon-image': 'circle-cluster',
+            'icon-allow-overlap': true,
+            'text-allow-overlap': true
           }"
         />
       </BaseMap>
@@ -368,10 +379,6 @@ export default {
 }
 .listing {
   min-width: 0;
-  transition: box-shadow var(--transition-settings-1);
-}
-.listing.hovered {
-  box-shadow: var(--box-shadow-5);
 }
 .map-container {
   position: relative;
