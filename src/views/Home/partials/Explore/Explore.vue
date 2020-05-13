@@ -47,15 +47,15 @@
     </div>
     <div class="content">
       <BaseCard>
-        <div class="copy-1">Sign up to unlock listings</div>
-        <div class="copy-2">Start discovering off-market properties today</div>
+        <div class="copy-1">Ready to get started?</div>
+        <div class="copy-2">Go off-market and improve your chances of finding great deals on property</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>
       </BaseCard>
       <BaseCard>
-        <div class="copy-1">Get updates</div>
-        <div class="copy-2">Be the first to know when we launch in new areas</div>
+        <div class="copy-1">Not in your area?</div>
+        <div class="copy-2">Subscribe to our newsletter and we’ll let you know when we expand to new locations</div>
         <ValidationObserver v-slot="{ valid }">
           <form class="form" @submit.prevent="valid && submit()">
             <ValidationProvider name="email" rules="required|email">
@@ -124,15 +124,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.explore {
-  padding: var(--spacing-10) 0;
-  @include media(sm-only) {
-    padding: var(--spacing-8) 0;
-  }
-}
 .title {
   font-size: 3.5rem;
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-2);
   font-weight: var(--font-weight-bold);
   text-align: center;
   @include media(sm-only) {
@@ -143,7 +137,7 @@ export default {
 }
 .subtitle {
   font-size: 1.6rem;
-  margin-bottom: var(--spacing-7);
+  margin-bottom: var(--spacing-5);
   color: var(--color-gray-4);
   text-align: center;
   line-height: 1.5;

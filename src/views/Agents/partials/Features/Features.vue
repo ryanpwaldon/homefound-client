@@ -1,5 +1,5 @@
 <template>
-  <BaseFeaturesGrid
+  <BaseIconCopyGrid
     :features="[
       {
         icon: require('@/assets/img/free.svg'),
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import BaseFeaturesGrid from '@/components/BaseFeaturesGrid/BaseFeaturesGrid'
+import BaseIconCopyGrid from '@/components/BaseIconCopyGrid/BaseIconCopyGrid'
 export default {
   components: {
-    BaseFeaturesGrid
+    BaseIconCopyGrid
   }
 }
 </script>

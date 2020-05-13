@@ -1,13 +1,18 @@
 <template>
   <div class="header">
     <div class="content">
-      <div class="title">Off-market listing service for agents</div>
-      <div class="subtitle">List properties for free and gain insights that boost your listing performance on REA and Domain</div>
+      <div class="title">
+        List smarter.<br>
+        List pre-market.
+      </div>
+      <div class="subtitle">
+        List pre-market for free and gain insights to boost the performance of your property advertising campaigns.
+      </div>
       <div class="buttons">
         <router-link to="/signup/agent">
-          <BaseButtonLarge text="Get started" design="red"/>
+          <BaseButtonLarge text="List a property" design="red"/>
         </router-link>
-        <BaseButtonLarge text="View demo" design="pink"/>
+        <BaseButtonLarge text="Ask a question" design="pink"/>
       </div>
     </div>
     <div class="illustration">
@@ -96,6 +101,7 @@ export default {
   .title {
     font-size: 4.5rem;
     font-weight: var(--font-weight-bold);
+    line-height: 1.2;
     @include media(sm-only) {
       font-size: 3rem;
       line-height: 1.3;

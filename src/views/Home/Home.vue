@@ -1,12 +1,16 @@
 <template>
   <BaseLayoutHome>
+    <div class="spacer"/>
     <Header/>
-    <div class="divider"/>
+    <div class="spacer"/>
     <Features/>
-    <div class="divider"/>
+    <div class="spacer"/>
     <Explore/>
-    <div class="divider"/>
-    <Demo/>
+    <div class="spacer"/>
+    <Platform/>
+    <div class="spacer"/>
+    <CTA/>
+    <div class="spacer"/>
   </BaseLayoutHome>
 </template>
 
@@ -15,7 +19,8 @@ import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import Header from './partials/Header/Header'
 import Features from './partials/Features/Features'
 import Explore from './partials/Explore/Explore'
-import Demo from './partials/Demo/Demo'
+import Platform from './partials/Platform/Platform'
+import CTA from './partials/CTA/CTA'
 export default {
   name: 'home',
   components: {
@@ -23,15 +28,15 @@ export default {
     Header,
     Features,
     Explore,
-    Demo
+    Platform,
+    CTA
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.divider {
+.spacer {
   width: 100%;
-  height: 1px;
-  background: var(--color-gray-1);
+  height: 15rem;
 }
 </style>

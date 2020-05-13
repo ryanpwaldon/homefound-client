@@ -1,5 +1,12 @@
 <template>
-  <video class="base-video"/>
+  <div class="base-video">
+    <video
+      ref="video"
+      :playsinline="playsInline"
+      :autoplay="autoplay"
+      :muted="muted"
+    />
+  </div>
 </template>
 
 <script>
@@ -14,6 +21,18 @@ export default {
     poster: {
       type: String,
       required: false
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    muted: {
+      type: Boolean,
+      default: false
+    },
+    playsInline: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -22,7 +41,7 @@ export default {
   },
   methods: {
     initPlyr () {
-      this.plyr = new Plyr(this.$el, {
+      this.plyr = new Plyr(this.$refs['video'], {
         ratio: '16:9',
         hideControls: false,
         poster: this.poster
@@ -40,3 +59,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+video {
+  display: block;
+}
+</style>
