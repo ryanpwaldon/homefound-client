@@ -73,4 +73,16 @@ export default {
     grid-column: 1 / span 2;
   }
 }
+::v-deep .base-markdown {
+  * {
+    font-size: 1.6rem;
+    color: var(--color-gray-4);
+  }
+  strong {
+    font-weight: var(--font-weight-medium);
+  }
+  p strong {
+    color: var(--color-black-2);
+  }
+}
 </style>

@@ -46,12 +46,12 @@ export default {
   background-position: center center;
   border: solid 1px var(--color-gray-1);
   border-radius: var(--border-radius-1);
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-5);
 }
 .title {
-  font-size: 1.8rem;
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-2);
+  font-size: 2.2rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-4);
 }
 .paragraph {
   font-size: 1.6rem;

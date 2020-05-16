@@ -47,8 +47,9 @@
     </div>
     <div class="content">
       <BaseCard>
-        <div class="copy-1">Ready to get started?</div>
-        <div class="copy-2">Go off-market and improve your chances of finding great deals on property</div>
+        <div class="copy-1">Sign up for access</div>
+        <div class="copy-2">
+          Get access to our off-market listings to improve your chances of finding great deals on property</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>

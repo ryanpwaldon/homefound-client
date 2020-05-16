@@ -21,6 +21,12 @@ export default {
 
 <style lang="scss" scoped>
 .base-markdown ::v-deep {
+  *:first-child {
+    margin-top: 0;
+  }
+  *:last-child {
+    margin-bottom: 0;
+  }
   * {
     line-height: 1.5;
   }

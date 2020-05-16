@@ -1,15 +1,15 @@
 <template>
   <div class="base-icon-copy-grid">
-    <div class="card-container" v-for="(feature, i) in features" :key="i">
-      <BaseCard class="card">
-        <div class="icon-container">
-          <img class="icon" :src="feature.icon">
-        </div>
-        <div class="title">{{ feature.title }}</div>
-        <div class="paragraph">{{ feature.paragraph }}</div>
-      </BaseCard>
-    </div>
-    <div class="card-container" v-if="features.length % 2"/>
+    <BaseCard class="card" v-for="(feature, i) in features" :key="i">
+      <div
+        class="icon-container"
+        v-if="feature.icon"
+        :style="{height: feature.iconHeight || '3rem', width: feature.iconWidth || '5.5rem'}">
+        <img class="icon" :src="feature.icon">
+      </div>
+      <div class="title">{{ feature.title }}</div>
+      <div class="paragraph">{{ feature.paragraph }}</div>
+    </BaseCard>
   </div>
 </template>
 
@@ -32,17 +32,8 @@ export default {
 .base-icon-copy-grid {
   position: relative;
   display: grid;
-  grid-gap: 1px;
-  background: var(--color-gray-1);
+  grid-gap: var(--spacing-5);
   grid-template-columns: 1fr 1fr;
-}
-.card-container {
-  display: flex;
-  background: var(--color-gray-2);
-  &:not(:nth-child(1)):not(:nth-child(2)) { padding-top: var(--spacing-5) }
-  &:not(:nth-last-child(1)):not(:nth-last-child(2)) { padding-bottom: var(--spacing-5) }
-  &:nth-child(2n + 1) { padding-right: var(--spacing-5) }
-  &:nth-child(2n) { padding-left: var(--spacing-5) }
 }
 .icon-container {
   height: 3rem;

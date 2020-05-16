@@ -2,7 +2,7 @@
   <div class="header">
     <div class="content">
       <div class="title">Discover properties before the crowd</div>
-      <div class="subtitle">Australia’s home for off-market listings. Discover properties for sale <span style="font-weight: var(--font-weight-bold)">before</span> they’re listed on Realestate.com.au or Domain.</div>
+      <div class="subtitle">Australia’s home for off-market listings. Discover properties for sale before they list on Realestate.com.au or Domain.</div>
       <div class="buttons">
         <router-link to="/signup/buyer">
           <BaseButtonLarge text="Get started" design="red"/>

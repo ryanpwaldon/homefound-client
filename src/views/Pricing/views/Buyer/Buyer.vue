@@ -21,12 +21,11 @@
     </div>
     <div class="divider"/>
     <div class="middle">
-      <div class="feature">Full access to our listings</div>
-      <div class="feature">Real-time analytics</div>
-      <div class="feature">Tempor incididunt ut labore et</div>
-      <div class="feature">Ut enim ad minim veniam</div>
-      <div class="feature">Adipisicing elit sed do eiusmod</div>
-      <div class="feature">Mollit anim id est laborum</div>
+      <div class="feature bold">What's included?</div>
+      <div class="feature">Full off-market access</div>
+      <div class="feature">Off-market monitor</div>
+      <div class="feature">Efficient search platform</div>
+      <div class="feature">Daily off-market reports</div>
     </div>
     <div class="divider"/>
     <div class="bottom">
@@ -104,7 +103,7 @@ export default {
   flex-direction: column;
   align-items: center;
   > *:not(:last-child) {
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-5);
   }
 }
 .feature {
@@ -137,5 +136,8 @@ export default {
   @include media(sm-only) {
     position: static;
   }
+}
+.bold {
+  font-weight: var(--font-weight-medium);
 }
 </style>

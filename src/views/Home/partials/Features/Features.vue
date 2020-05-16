@@ -13,7 +13,7 @@ export default {
       {
         icon: require('@/assets/img/question-circle.svg'),
         title: 'How does it work?',
-        paragraph: 'We provide agents with incentives to list on our platform before they list on other sites so you can be the first to discover new property. Learn more.'
+        paragraph: 'We provide agents with incentives to list on our platform before they list on other sites so you can discover property before everyone else. Learn more.'
       },
       {
         icon: require('@/assets/img/price-tag.svg'),
@@ -23,7 +23,7 @@ export default {
       {
         icon: require('@/assets/img/approved.svg'),
         title: 'Off-market reliability',
-        paragraph: 'We monitor major listing sites so you can be confident our properties are off-market. If a property lists on a major site, we update its status.'
+        paragraph: 'We monitor major listing sites so you can be confident our properties are off-market. If a property lists on a major site, we tell you.'
       },
       {
         icon: require('@/assets/img/motivation.svg'),

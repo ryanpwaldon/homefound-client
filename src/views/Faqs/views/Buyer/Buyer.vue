@@ -1,32 +1,21 @@
 <template>
   <BaseCard>
+    <BaseMarkdown :markdown="markdown"/>
   </BaseCard>
 </template>
 
 <script>
+import BaseMarkdown from '@/components/BaseMarkdown/BaseMarkdown'
 import BaseCard from '@/components/BaseCard/BaseCard'
+import markdown from './assets/FAQs.md'
 export default {
   name: 'faqs-buyer',
   components: {
+    BaseMarkdown,
     BaseCard
+  },
+  created () {
+    this.markdown = markdown
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.faq {
-  font-size: 1.6rem;
-}
-.faq:not(:last-child) {
-  margin-bottom: var(--spacing-5);
-}
-.question {
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-2);
-  line-height: 1.5;
-}
-.answer {
-  color: var(--color-gray-4);
-  line-height: 1.5;
-}
-</style>

@@ -1,16 +1,16 @@
 <template>
   <BaseCard class="agent">
     <div class="top">
-      <div class="price">Free forever</div>
+      <div class="dollar">$</div>
+      <div class="price">0</div>
+      <div class="period">free<br>forever</div>
     </div>
     <div class="divider"/>
     <div class="middle">
-      <div class="feature">Full access to our listings</div>
-      <div class="feature">Real-time analytics</div>
-      <div class="feature">Tempor incididunt ut labore et</div>
-      <div class="feature">Ut enim ad minim veniam</div>
-      <div class="feature">Adipisicing elit sed do eiusmod</div>
-      <div class="feature">Mollit anim id est laborum</div>
+      <div class="feature bold">What's included?</div>
+      <div class="feature">List unlimited properties</div>
+      <div class="feature">Real-time engagement tracking</div>
+      <div class="feature">Daily performance emails</div>
     </div>
     <div class="divider"/>
     <div class="bottom">
@@ -48,10 +48,19 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.price {
-  font-size: 3.5rem;
+.dollar {
+  font-size: 1.6rem;
   font-family: var(--font-2);
-  font-weight: var(--font-weight-medium);
+  margin-right: var(--spacing-2);
+}
+.price {
+  font-size: 8rem;
+  font-family: var(--font-2);
+  margin-right: var(--spacing-3);
+}
+.period {
+  font-size: 1.6rem;
+  text-align: left;
 }
 .divider {
   position: relative;
@@ -66,7 +75,7 @@ export default {
   flex-direction: column;
   align-items: center;
   > *:not(:last-child) {
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-5);
   }
 }
 .feature {
@@ -74,5 +83,8 @@ export default {
 }
 .button {
   width: 100%;
+}
+.bold {
+  font-weight: var(--font-weight-medium);
 }
 </style>
