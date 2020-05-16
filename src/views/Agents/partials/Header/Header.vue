@@ -6,7 +6,7 @@
         List pre-market.
       </div>
       <div class="subtitle">
-        List pre-market for free and gain insights to boost the performance of your property advertising campaigns.
+        List pre-market for free and gain insights to boost the performance of your property advertising campaigns
       </div>
       <div class="buttons">
         <router-link to="/signup/agent">

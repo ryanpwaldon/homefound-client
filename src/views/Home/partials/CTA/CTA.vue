@@ -1,7 +1,7 @@
 <template>
   <div class="cta">
-    <div class="title">Ready to get started?</div>
-    <div class="subtitle">Go off-market and improve your chances of finding great deals on property</div>
+    <div class="title">Start searching smarter</div>
+    <div class="subtitle">Join and access an exclusive feed of off-market properties</div>
     <div class="buttons">
       <router-link to="/signup/buyer">
         <BaseButtonLarge text="Get started" design="red"/>

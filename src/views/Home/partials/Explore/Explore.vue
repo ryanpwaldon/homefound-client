@@ -2,7 +2,7 @@
   <div class="explore">
     <div class="header">
       <div class="title">Explore our listings</div>
-      <div class="subtitle">There are currently <span class="count">{{ geojson && geojson.features.length }}</span> off-market properties listed on Homefound</div>
+      <div class="subtitle" :style="{ opacity: !!geojson ? 1 : 0 }">There are {{ geojson && geojson.features.length }} off-market properties listed on Homefound</div>
     </div>
     <div class="map-container" @mouseenter="pulse = true" @mouseleave="pulse = false">
       <BaseMap class="map" :max-zoom="17" :scroll-zoom="true">
@@ -47,16 +47,16 @@
     </div>
     <div class="content">
       <BaseCard>
-        <div class="copy-1">Sign up for access</div>
+        <div class="copy-1">Sign up to gain access</div>
         <div class="copy-2">
-          Get access to our off-market listings to improve your chances of finding great deals on property</div>
+          Access exclusive properties before they list on Realestate.com.au or Domain.</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>
       </BaseCard>
       <BaseCard>
         <div class="copy-1">Not in your area?</div>
-        <div class="copy-2">Subscribe to our newsletter and we’ll let you know when we expand to new locations</div>
+        <div class="copy-2">Subscribe to our newsletter and we’ll let you know when we expand to new locations.</div>
         <ValidationObserver v-slot="{ valid }">
           <form class="form" @submit.prevent="valid && submit()">
             <ValidationProvider name="email" rules="required|email">
@@ -141,6 +141,7 @@ export default {
   margin-bottom: var(--spacing-5);
   color: var(--color-gray-4);
   text-align: center;
+  transition: var(--transition-settings-1) opacity;
   line-height: 1.5;
   @include media(sm-only) {
     margin-bottom: var(--spacing-5);

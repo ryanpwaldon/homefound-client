@@ -20,7 +20,6 @@ export default {
         { text: 'Buyers', path: '/', activeMode: 'exact' },
         { text: 'Agents', path: '/agents' },
         { text: 'Pricing', path: '/pricing' },
-        { text: 'FAQs', path: '/faqs' },
         { text: 'Login', path: '/login' },
         { text: 'Sign up', path: '/signup' }
       ]

@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <div class="content">
-      <div class="title">Discover properties before the crowd</div>
-      <div class="subtitle">Australia’s home for off-market listings. Discover properties for sale before they list on Realestate.com.au or Domain.</div>
+      <div class="title">Off market property for serious buyers</div>
+      <div class="subtitle">Subscribe and gain access to an exclusive feed of pre-market and off-market properties</div>
       <div class="buttons">
         <router-link to="/signup/buyer">
           <BaseButtonLarge text="Get started" design="red"/>
@@ -64,35 +64,32 @@ export default {
   height: 100%;
   z-index: 1;
   align-items: flex-start;
-  > *:not(:last-child) {
-    margin-bottom: var(--spacing-5);
-  }
   @include media(sm-only) {
     text-align: center;
     align-items: center;
     margin-right: 0;
     max-width: none;
-    > *:not(:last-child) {
-      margin-bottom: var(--spacing-3);
-    }
   }
 }
 .title {
   font-size: 4.5rem;
   font-weight: var(--font-weight-bold);
+  margin-bottom: 2.5rem;
   @include media(sm-only) {
     font-size: 3rem;
     line-height: 1.3;
+    margin-bottom: var(--spacing-3);
   }
 }
 .subtitle {
+  width: 100%;
   font-size: 2rem;
   line-height: 1.5;
   color: var(--color-gray-4);
-  width: 100%;
+  margin-bottom: var(--spacing-5);
   @include media(sm-only) {
     width: 100%;
-    margin-bottom: var(--spacing-4) !important;
+    margin-bottom: var(--spacing-4);
   }
 }
 .buttons {

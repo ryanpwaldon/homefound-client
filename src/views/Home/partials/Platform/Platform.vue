@@ -1,8 +1,8 @@
 <template>
   <div class="platform">
     <div class="header">
-      <div class="title">Built for homebuyers</div>
-      <div class="subtitle">We redesigned search for a buyer-first experience.</div>
+      <div class="title">Built for buyers</div>
+      <div class="subtitle">Search for properties using our buyer-first platform</div>
     </div>
     <img class="example" src="@/assets/img/platform.png">
     <img class="arrow" src="@/assets/img/arrow-down-loop.svg">

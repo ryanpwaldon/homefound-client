@@ -15,7 +15,6 @@
         <BaseNavItemText text="Buyers" path="/" active-mode="none"/>
         <BaseNavItemText text="Agents" path="/agents" active-mode="none"/>
         <BaseNavItemText text="Pricing" path="/pricing" active-mode="none"/>
-        <BaseNavItemText text="FAQs" path="/faqs" active-mode="none"/>
       </div>
       <div class="col col-3">
         <div class="heading">Actions</div>
