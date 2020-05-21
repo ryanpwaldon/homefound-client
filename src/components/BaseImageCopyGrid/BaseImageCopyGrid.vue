@@ -27,6 +27,10 @@ export default {
   grid-gap: 1px;
   background: var(--color-gray-1);
   grid-template-columns: 1fr 1fr;
+  @include media(sm-only) {
+    background: none;
+    grid-template-columns: 1fr;
+  }
 }
 .container {
   display: flex;
@@ -36,6 +40,12 @@ export default {
   &:not(:nth-last-child(1)):not(:nth-last-child(2)) { padding-bottom: var(--spacing-5) }
   &:nth-child(2n + 1) { padding-right: var(--spacing-5) }
   &:nth-child(2n) { padding-left: var(--spacing-5) }
+  @include media(sm-only) {
+    padding: 0 !important;
+    &:not(:last-child) {
+      padding-bottom: var(--spacing-5) !important;
+    }
+  }
 }
 .image {
   height: 0;

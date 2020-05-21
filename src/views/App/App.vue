@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <BaseLayoutFullWindow/>
     <BaseNavVertical :nav-items="filteredNavItems"/>
     <keep-alive include="listings">
       <router-view/>
@@ -8,11 +9,13 @@
 </template>
 
 <script>
+import BaseLayoutFullWindow from '@/components/BaseLayoutFullWindow/BaseLayoutFullWindow'
 import BaseNavVertical from '@/components/BaseNavVertical/BaseNavVertical'
 import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: {
+    BaseLayoutFullWindow,
     BaseNavVertical
   },
   created () {
@@ -25,26 +28,12 @@ export default {
       { text: 'Account', path: '/app/account', icon: require('@/assets/img/gear.svg'), position: 2 }
     ]
   },
-  mounted () {
-    this.addAppStyles()
-  },
-  beforeDestroy () {
-    this.removeAppStyles()
-  },
   computed: {
     ...mapGetters('user', [
       'roles'
     ]),
     filteredNavItems () {
       return this.navItems.filter(item => !item.roles || this.roles.some(role => item.roles.includes(role)))
-    }
-  },
-  methods: {
-    addAppStyles () {
-      document.documentElement.classList.add('app-mode')
-    },
-    removeAppStyles () {
-      document.documentElement.classList.remove('app-mode')
     }
   }
 }
@@ -55,16 +44,5 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-}
-</style>
-
-<style lang="scss">
-html.app-mode {
-  &,
-  body,
-  #app {
-    height: 100%;
-    overflow: hidden;
-  }
 }
 </style>

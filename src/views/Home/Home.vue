@@ -38,5 +38,8 @@ export default {
 .spacer {
   width: 100%;
   height: 15rem;
+  @include media(sm-only) {
+    height: 6rem;
+  }
 }
 </style>

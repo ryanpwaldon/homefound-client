@@ -17,6 +17,11 @@ const routes = [
     component: () => import('@/views/Agents/Agents')
   },
   {
+    path: '/explore',
+    name: 'explore',
+    component: () => import('@/views/Explore/Explore')
+  },
+  {
     path: '/pricing',
     component: () => import('@/views/Pricing/Pricing'),
     children: [

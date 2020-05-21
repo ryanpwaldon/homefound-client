@@ -2,48 +2,11 @@
   <div class="explore">
     <div class="header">
       <div class="title">Explore our listings</div>
-      <div class="subtitle" :style="{ opacity: !!geojson ? 1 : 0 }">There are {{ geojson && geojson.features.length }} off-market properties listed on Homefound</div>
+      <div class="subtitle" :style="{ opacity: totalListingsCount ? 1 : 0 }">There are {{ totalListingsCount }} off-market properties listed on Homefound</div>
+      <BaseButtonLarge class="button" text="View interactive map" design="pink"/>
     </div>
     <div class="map-container" @mouseenter="pulse = true" @mouseleave="pulse = false">
-      <BaseMap class="map" :max-zoom="17" :scroll-zoom="true">
-        <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
-        <MapImagePulse
-          image-id="pulse"
-          :circle-radius="15"
-          :circle-stroke-width="1"
-          :pulse-radius="20"
-          fill-color="#ff6464"
-          stroke-color="#be5643"
-          pulse-color="#ffc8c8"
-          :duration="2000"
-        />
-        <MapLayer
-          type="circle"
-          source-id="clusters"
-          :filter="['!', ['has', 'point_count']]"
-          :paint="{
-            'circle-color': '#fe6464',
-            'circle-stroke-color': '#be5643',
-            'circle-stroke-width': 1,
-            'circle-stroke-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.5 ],
-            'circle-opacity': [ 'interpolate', ['exponential', 0.5], ['zoom'], 12, 1, 17, 0.2 ],
-            'circle-radius': [ 'interpolate', ['exponential', 2], ['zoom'], 12, 6, 17, 150 ]
-          }"
-        />
-        <MapLayer
-          type="symbol"
-          source-id="clusters"
-          :filter="['has', 'point_count']"
-          :paint="{ 'text-color': '#ffffff' }"
-          :layout="{
-            'text-size': 12,
-            'icon-image': 'pulse',
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['SF Pro Text Semibold'],
-            'icon-allow-overlap': true
-          }"
-        />
-      </BaseMap>
+      <BasePreviewMap class="map" @loaded="totalListingsCount = $event.totalListingsCount"/>
     </div>
     <div class="content">
       <BaseCard>
@@ -71,43 +34,28 @@
 </template>
 
 <script>
-import BaseMap from '@/components/BaseMap/BaseMap'
-import MapSource from '@/components/BaseMap/components/MapSource/MapSource'
-import MapLayer from '@/components/BaseMap/components/MapLayer/MapLayer'
+import BasePreviewMap from '@/components/BasePreviewMap/BasePreviewMap'
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
-import ListingService from '@/services/Api/services/ListingService/ListingService'
-import MapImagePulse from '@/components/BaseMap/components/MapImagePulse/MapImagePulse'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
-import { featureCollection, point } from '@turf/helpers'
 export default {
   components: {
-    BaseMap,
+    BasePreviewMap,
     BaseCard,
     BaseButtonLarge,
     BaseFormInput,
-    MapSource,
-    MapLayer,
-    MapImagePulse,
     ValidationObserver,
     ValidationProvider
   },
-  async created () {
-    await this.updateGeojson()
-  },
   data: () => ({
-    geojson: null,
     loading: false,
+    totalListingsCount: null,
     form: {
       email: ''
     }
   }),
   methods: {
-    async updateGeojson () {
-      const listings = await ListingService.findAllDispersedLngLats()
-      this.geojson = featureCollection(listings.map(listing => point(listing.dispersedLngLat)))
-    },
     async submit () {
       if (this.loading) return
       this.loading = true
@@ -144,7 +92,7 @@ export default {
   transition: var(--transition-settings-1) opacity;
   line-height: 1.5;
   @include media(sm-only) {
-    margin-bottom: var(--spacing-5);
+    margin-bottom: var(--spacing-2);
   }
 }
 .count {
@@ -213,5 +161,17 @@ export default {
   display: grid;
   grid-template-columns: 1fr min-content;
   grid-gap: var(--spacing-2);
+}
+.map-container,
+.content {
+  @include media(sm-only) {
+    display: none;
+  }
+}
+.header .button {
+  display: none;
+  @include media(sm-only) {
+    display: block;
+  }
 }
 </style>

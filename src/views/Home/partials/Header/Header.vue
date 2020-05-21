@@ -53,7 +53,6 @@ export default {
   @include media(sm-only) {
     height: auto;
     justify-content: center;
-    padding: var(--spacing-8) 0;
   }
 }
 .content {
@@ -100,7 +99,6 @@ export default {
   @include media(sm-only) {
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--spacing-4) !important;
     width: 100%;
     * {
       width: 100%;

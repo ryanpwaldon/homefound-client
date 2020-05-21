@@ -34,6 +34,9 @@ export default {
   display: grid;
   grid-gap: var(--spacing-5);
   grid-template-columns: 1fr 1fr;
+  @include media(sm-only) {
+    grid-template-columns: 1fr;
+  }
 }
 .icon-container {
   height: 3rem;
