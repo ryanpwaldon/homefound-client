@@ -89,7 +89,7 @@ import * as Plan from '@/constants/plan/plan'
 export default {
   name: 'signup',
   metaInfo: {
-    title: 'Signup: Buyer'
+    title: 'Sign up: Buyer'
   },
   components: {
     Nav,

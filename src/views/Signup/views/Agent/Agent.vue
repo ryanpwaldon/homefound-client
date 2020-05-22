@@ -81,7 +81,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 export default {
   name: 'signup',
   metaInfo: {
-    title: 'Signup: Agent'
+    title: 'Sign up: Agent'
   },
   components: {
     Nav,

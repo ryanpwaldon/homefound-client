@@ -27,7 +27,7 @@ module.exports = {
     config
       .plugin('favicons')
       .use(FaviconsWebpackPlugin, [{ logo: './src/assets/img/favicon.svg' }])
-    process.NODE_ENV === 'production' && config
+    process.env.NODE_ENV === 'production' && config
       .plugin('prerender-spa-plugin')
       .use(PrerenderSpaPlugin, [{
         staticDir: path.join(__dirname, 'dist'),
