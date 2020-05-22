@@ -11,6 +11,9 @@ import BaseLayoutHome from '@/components/BaseLayoutHome/BaseLayoutHome'
 import BaseMarkdown from '@/components/BaseMarkdown/BaseMarkdown'
 import markdown from './assets/terms-and-conditions.md'
 export default {
+  metaInfo: {
+    title: 'Terms of Service'
+  },
   components: {
     BaseLayoutHome,
     BaseMarkdown

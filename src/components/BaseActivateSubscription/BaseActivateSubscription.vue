@@ -5,7 +5,7 @@
     <div class="field">
       <BaseText4 class="label" text="Plan"/>
       <div class="plan">
-        <BaseText1 class="price" text="74 AUD"/>
+        <BaseText1 class="price" :text="`${BASIC_MONTHLY_PRICE} AUD`"/>
         <BaseText2 class="subcopy" text="/ month"/>
       </div>
     </div>
@@ -16,7 +16,7 @@
     </div>
     <BaseDivider/>
     <BaseFormSubmitButton class="button" text="Subscribe" @click.native="submit" :loading="loading"/>
-    <BaseText2 class="subcopy" text="Your card will be immediately charged $74 and then billed $74 each month thereafter until cancelled."/>
+    <BaseText2 class="subcopy" :text="`Your card will be immediately charged ${BASIC_MONTHLY_PRICE} and then billed ${BASIC_MONTHLY_PRICE} each month thereafter until cancelled.`"/>
   </div>
 </template>
 
@@ -28,6 +28,7 @@ import BaseText4 from '@/components/BaseText4/BaseText4'
 import BaseText6 from '@/components/BaseText6/BaseText6'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
+import { BASIC_MONTHLY_PRICE } from '@/constants/plan/plan'
 export default {
   components: {
     BaseText1,
@@ -42,6 +43,9 @@ export default {
       type: String,
       required: true
     }
+  },
+  created () {
+    this.BASIC_MONTHLY_PRICE = BASIC_MONTHLY_PRICE
   },
   async mounted () {
     await this.$refs['card']

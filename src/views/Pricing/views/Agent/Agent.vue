@@ -25,6 +25,9 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 export default {
+  metaInfo: {
+    title: 'Pricing: Agent'
+  },
   components: {
     BaseCard,
     BaseButtonLarge
@@ -54,9 +57,9 @@ export default {
   margin-right: var(--spacing-2);
 }
 .price {
-  font-size: 8rem;
+  font-size: 6rem;
   font-family: var(--font-2);
-  margin-right: var(--spacing-3);
+  margin-right: var(--spacing-2);
 }
 .period {
   font-size: 1.6rem;

@@ -3,7 +3,7 @@
     <BaseText1 class="title" text="Reactivate your subscription"/>
     <BaseDivider/>
     <BaseText2 class="subcopy">
-      Your card (<span class="card-brand">{{ cardBrand }}</span> ending in {{ cardLast4 }}) will be billed $74 per month starting {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.
+      Your card (<span class="card-brand">{{ cardBrand }}</span> ending in {{ cardLast4 }}) will be billed ${{ BASIC_MONTHLY_PRICE }} per month starting {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.
     </BaseText2>
     <BaseDivider/>
     <div class="buttons">
@@ -20,6 +20,7 @@ import BaseText2 from '@/components/BaseText2/BaseText2'
 import BaseModal from '@/components/BaseModal/BaseModal'
 import BaseDivider from '@/components/BaseDivider/BaseDivider'
 import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubmitButton'
+import { BASIC_MONTHLY_PRICE } from '@/constants/plan/plan'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -28,6 +29,9 @@ export default {
     BaseModal,
     BaseDivider,
     BaseFormSubmitButton
+  },
+  created () {
+    this.BASIC_MONTHLY_PRICE = BASIC_MONTHLY_PRICE
   },
   data: () => ({
     loading: false

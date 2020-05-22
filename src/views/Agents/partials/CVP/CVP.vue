@@ -17,17 +17,17 @@ export default {
       {
         icon: require('@/assets/img/price-tag.svg'),
         title: 'Perfect your listing price',
-        paragraph: `Use Homefound to test your pricing strategy. Determine the perfect price to list before spending thousands on an underperforming advertising campaign.`
+        paragraph: `Use Homefound to test your pricing strategy. Determine the perfect price before spending thousands on an underperforming advertising campaign.`
       },
       {
         icon: require('@/assets/img/cash.svg'),
-        title: 'Free advertising',
-        paragraph: `Vendors don’t want to spend money on marketing? Homefound is completely free for agents. Sell property without paying a cent on advertising.`
+        title: 'Save money',
+        paragraph: `Vendors don’t want to spend money on marketing? Homefound is free for agents. Sell property without an advertising expense.`
       },
       {
         icon: require('@/assets/img/eye.svg'),
         title: 'Privacy',
-        paragraph: `Some vendors prefer the idea of selling off-market. Use Homefound to get your property in front of a quality audience without compromising on privacy.`
+        paragraph: `Some vendors prefer the idea of selling off-market. Use Homefound to get your property in front of a targeted audience without compromising on vendor privacy.`
       }
     ]
   }

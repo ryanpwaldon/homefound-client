@@ -4,7 +4,7 @@
       <div class="content">
         <BaseText4 class="label" text="Next invoice"/>
         <BaseText5 class="value">
-          <template v-if="!subscriptionCancelled">Your card will be billed $74 on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
+          <template v-if="!subscriptionCancelled">Your card will be billed ${{ BASIC_MONTHLY_PRICE }} on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
           <template v-else>Your subscription has been cancelled and will end on {{ nextInvoiceAt | moment('DD MMMM YYYY') }}.</template>
         </BaseText5>
       </div>
@@ -17,11 +17,15 @@ import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseText5 from '@/components/BaseText5/BaseText5'
 import BaseText4 from '@/components/BaseText4/BaseText4'
 import { mapState } from 'vuex'
+import { BASIC_MONTHLY_PRICE } from '@/constants/plan/plan'
 export default {
   components: {
     BaseCard,
     BaseText5,
     BaseText4
+  },
+  created () {
+    this.BASIC_MONTHLY_PRICE = BASIC_MONTHLY_PRICE
   },
   computed: mapState('user', {
     nextInvoiceAt (state) {

@@ -8,6 +8,7 @@ import vueHoneybadger from '@honeybadger-io/vue'
 import vueContainScroll from '@/directives/vue-contain-scroll'
 import vueSegmentAnalytics from 'vue-segment-analytics'
 import vueMoment from 'vue-moment'
+import vueMeta from 'vue-meta'
 import store from '@/store/store'
 import loadJS from 'load-js'
 import { getRole } from '@/constants/roles/roles'
@@ -20,6 +21,7 @@ void (async () => {
   window.UPLOADCARE_MANUAL_START = true
   Vue.prototype.$getRole = getRole
   Vue.config.productionTip = false
+  Vue.use(vueMeta)
   Vue.use(vueMoment)
   Vue.use(vueContainScroll)
   Vue.use(vueAsyncComputed)

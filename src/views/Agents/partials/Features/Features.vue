@@ -17,14 +17,14 @@ export default {
         iconHeight: '8.8rem',
         iconWidth: '8.8rem',
         title: 'Homefound for agents',
-        paragraph: `We're an advertising platform for pre-market and off-market property listings. Use Homefound to seek pre-market interest, or simply advertise for free.`
+        paragraph: `We're an advertising platform for pre-market and off-market property listings. Use Homefound to seek pre-market interest, or simply advertise privately for free.`
       },
       {
         icon: require('@/assets/img/audience-persona.svg'),
         iconHeight: '8.8rem',
         iconWidth: '8.8rem',
         title: 'Our audience',
-        paragraph: `Your listings will be shown to our audience of registered buyers - they pay a monthly subscription to access your listings.`
+        paragraph: `Your listings will be shown to our audience of motivated buyers. This primarily comprises of buyers agents and investors.`
       }
     ]
   }

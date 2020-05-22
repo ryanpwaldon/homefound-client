@@ -16,7 +16,7 @@
     </div>
     <div class="top">
       <div class="dollar">$</div>
-      <div class="price">{{ price }}</div>
+      <div class="price">{{ price | numeral('0,0') }}</div>
       <div class="period">billed<br>{{ period }}</div>
     </div>
     <div class="divider"/>
@@ -40,18 +40,26 @@
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
 import BaseFormToggle from '@/components/BaseFormToggle/BaseFormToggle'
+import { BASIC_MONTHLY_PRICE, BASIC_YEARLY_PRICE } from '@/constants/plan/plan'
 export default {
+  metaInfo: {
+    title: 'Pricing: Buyer'
+  },
   components: {
     BaseCard,
     BaseButtonLarge,
     BaseFormToggle
+  },
+  created () {
+    this.BASIC_MONTHLY_PRICE = BASIC_MONTHLY_PRICE
+    this.BASIC_YEARLY_PRICE = BASIC_YEARLY_PRICE
   },
   data: () => ({
     isYearly: false
   }),
   computed: {
     price () {
-      return this.isYearly ? '710' : '74'
+      return this.isYearly ? this.BASIC_YEARLY_PRICE : this.BASIC_MONTHLY_PRICE
     },
     period () {
       return this.isYearly ? 'yearly' : 'monthly'
@@ -82,9 +90,9 @@ export default {
   margin-right: var(--spacing-2);
 }
 .price {
-  font-size: 8rem;
+  font-size: 6rem;
   font-family: var(--font-2);
-  margin-right: var(--spacing-3);
+  margin-right: var(--spacing-2);
 }
 .period {
   font-size: 1.6rem;

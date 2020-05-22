@@ -100,6 +100,7 @@ export default {
   position: relative;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
+  border: solid 1px var(--color-gray-1);
 }
 .knob-container {
   width: 100%;

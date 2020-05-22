@@ -1,4 +1,6 @@
+const path = require('path')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
 
 module.exports = {
   devServer: {
@@ -25,5 +27,21 @@ module.exports = {
     config
       .plugin('favicons')
       .use(FaviconsWebpackPlugin, [{ logo: './src/assets/img/favicon.svg' }])
+    process.NODE_ENV === 'production' && config
+      .plugin('prerender-spa-plugin')
+      .use(PrerenderSpaPlugin, [{
+        staticDir: path.join(__dirname, 'dist'),
+        routes: [
+          '/',
+          '/agents',
+          '/pricing/buyer',
+          '/pricing/agent',
+          '/login',
+          '/signup/buyer',
+          '/signup/agent',
+          '/terms',
+          '/privacy'
+        ]
+      }])
   }
 }

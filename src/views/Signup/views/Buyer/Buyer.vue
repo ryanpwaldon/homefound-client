@@ -39,13 +39,13 @@
                 <template #option-1="{ active }">
                   <div class="option" :class="{ active }">
                     <div class="title">Monthly</div>
-                    <div class="subtitle">$74 billed monthly</div>
+                    <div class="subtitle">${{ Plan.BASIC_MONTHLY_PRICE }} billed monthly</div>
                   </div>
                 </template>
                 <template #option-2="{ active }">
                   <div class="option" :class="{ active }">
                     <div class="title">Yearly <span class="discount">(save 20%)</span></div>
-                    <div class="subtitle">$710 billed yearly</div>
+                    <div class="subtitle">${{ Plan.BASIC_YEARLY_PRICE | numeral('0,0') }} billed yearly</div>
                   </div>
                 </template>
               </BaseFormToggleText>
@@ -88,6 +88,9 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-va
 import * as Plan from '@/constants/plan/plan'
 export default {
   name: 'signup',
+  metaInfo: {
+    title: 'Signup: Buyer'
+  },
   components: {
     Nav,
     BaseCard,

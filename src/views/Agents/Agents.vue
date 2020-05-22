@@ -23,6 +23,12 @@ import Platform from './partials/Platform/Platform'
 import CTA from './partials/CTA/CTA'
 export default {
   name: 'agents',
+  metaInfo: {
+    title: 'Find motivated buyers for your listings',
+    meta: [
+      { vmid: 'description', name: 'description', content: 'List pre-market free and gain insights to boost the performance of your property advertising campaigns.' }
+    ]
+  },
   components: {
     BaseLayoutHome,
     Header,

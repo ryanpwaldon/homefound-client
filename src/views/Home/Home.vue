@@ -24,6 +24,12 @@ import CTA from './partials/CTA/CTA'
 import SweetScroll from 'sweet-scroll'
 export default {
   name: 'home',
+  metaInfo: {
+    title: 'Exclusive off-market property subscription',
+    meta: [
+      { vmid: 'description', name: 'description', content: 'Subscribe and gain access to an exclusive feed of pre-market and off-market properties.' }
+    ]
+  },
   components: {
     BaseLayoutHome,
     Header,

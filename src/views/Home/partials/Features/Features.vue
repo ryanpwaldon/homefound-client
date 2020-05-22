@@ -18,7 +18,7 @@ export default {
       {
         icon: require('@/assets/img/approved.svg'),
         title: 'Off-market assurance',
-        paragraph: `We continuously update our off-market properties to accurately reflect what's listed in the public market.`
+        paragraph: `We continuously update our off-market properties to reflect what's listed in the public market.`
       }
     ]
   }

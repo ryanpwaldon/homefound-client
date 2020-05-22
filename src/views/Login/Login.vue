@@ -50,6 +50,9 @@ import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubm
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
   name: 'login',
+  metaInfo: {
+    title: 'Login'
+  },
   components: {
     BaseLayoutHome,
     BaseCard,

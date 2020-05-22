@@ -80,6 +80,9 @@ import BaseFormSubmitButton from '@/components/BaseFormSubmitButton/BaseFormSubm
 import { ValidationObserver, ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 export default {
   name: 'signup',
+  metaInfo: {
+    title: 'Signup: Agent'
+  },
   components: {
     Nav,
     BaseCard,
