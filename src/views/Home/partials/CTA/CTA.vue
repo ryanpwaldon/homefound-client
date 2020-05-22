@@ -1,12 +1,12 @@
 <template>
   <div class="cta">
-    <div class="title">Start searching smarter</div>
-    <div class="subtitle">Join and access an exclusive feed of off-market properties</div>
+    <div class="title">Enhance your search</div>
+    <div class="subtitle">Give yourself a headstart. Discover properties before they list on REA and Domain.</div>
     <div class="buttons">
       <router-link to="/signup/buyer">
         <BaseButtonLarge text="Get started" design="red"/>
       </router-link>
-      <BaseButtonLarge text="Have a question?" design="pink"/>
+      <BaseButtonLarge text="Ask a question" design="pink"/>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
 }
 .subtitle {
   font-size: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   line-height: 1.5;
   color: var(--color-gray-4);
   width: 100%;
@@ -55,7 +55,6 @@ export default {
   @include media(sm-only) {
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--spacing-4) !important;
     width: 100%;
     * {
       width: 100%;

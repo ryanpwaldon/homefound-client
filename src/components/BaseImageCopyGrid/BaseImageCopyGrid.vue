@@ -2,10 +2,11 @@
   <div class="base-image-copy-grid">
     <div class="container" v-for="(feature, i) in features" :key="i">
       <div class="image" :style="{backgroundImage: `url(${feature.image})`}"/>
-      <div class="title">{{ feature.title }}</div>
-      <div class="paragraph">{{ feature.paragraph }}</div>
+      <div class="content">
+        <div class="title">{{ feature.title }}</div>
+        <div class="paragraph">{{ feature.paragraph }}</div>
+      </div>
     </div>
-    <div class="container" v-if="features.length % 2"/>
   </div>
 </template>
 
@@ -24,27 +25,19 @@ export default {
 .base-image-copy-grid {
   position: relative;
   display: grid;
-  grid-gap: 1px;
-  background: var(--color-gray-1);
+  grid-gap: var(--spacing-8);
   grid-template-columns: 1fr 1fr;
   @include media(sm-only) {
-    background: none;
+    text-align: center;
     grid-template-columns: 1fr;
+    grid-gap: var(--spacing-8);
   }
 }
 .container {
   display: flex;
   flex-direction: column;
-  background: var(--color-gray-2);
-  &:not(:nth-child(1)):not(:nth-child(2)) { padding-top: var(--spacing-5) }
-  &:not(:nth-last-child(1)):not(:nth-last-child(2)) { padding-bottom: var(--spacing-5) }
-  &:nth-child(2n + 1) { padding-right: var(--spacing-5) }
-  &:nth-child(2n) { padding-left: var(--spacing-5) }
   @include media(sm-only) {
-    padding: 0 !important;
-    &:not(:last-child) {
-      padding-bottom: var(--spacing-5) !important;
-    }
+    flex-direction: column-reverse;
   }
 }
 .image {
@@ -56,12 +49,27 @@ export default {
   background-position: center center;
   border: solid 1px var(--color-gray-1);
   border-radius: var(--border-radius-1);
-  margin-bottom: var(--spacing-5);
+  margin-bottom: 2.5rem;
+  @include media(sm-only) {
+    margin-bottom: 0;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  @include media(sm-only) {
+    margin-bottom: var(--spacing-3);
+  }
 }
 .title {
   font-size: 2.2rem;
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-3);
+  @include media(sm-only) {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-2);
+  }
 }
 .paragraph {
   font-size: 1.6rem;

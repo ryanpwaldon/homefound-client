@@ -1,6 +1,7 @@
 <template>
   <div class="cvp">
-    <div class="title">Why list on Homefound?</div>
+    <img class="icon" src="@/assets/img/agent-persona-2.svg">
+    <div class="title">Why Homefound?</div>
     <BaseIconCopyGrid :features="features"/>
   </div>
 </template>
@@ -15,7 +16,7 @@ export default {
     this.features = [
       {
         icon: require('@/assets/img/price-tag.svg'),
-        title: 'Perfect your price',
+        title: 'Perfect your listing price',
         paragraph: `Use Homefound to test your pricing strategy. Determine the perfect price to list before spending thousands on an underperforming advertising campaign.`
       },
       {
@@ -34,15 +35,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cvp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.icon {
+  width: 12rem;
+  margin-bottom: var(--spacing-4);
+}
 .title {
   font-size: 3.5rem;
-  margin-bottom: var(--spacing-7);
-  font-weight: var(--font-weight-bold);
   text-align: center;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-8);
   @include media(sm-only) {
     font-size: 3rem;
     line-height: 1.3;
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-8);
   }
 }
 </style>

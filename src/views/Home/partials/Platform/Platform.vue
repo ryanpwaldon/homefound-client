@@ -1,11 +1,11 @@
 <template>
   <div class="platform">
     <div class="header">
-      <div class="title">Built for buyers</div>
-      <div class="subtitle">Search for properties using our buyer-first platform</div>
+      <div class="title">Dashboard</div>
+      <div class="subtitle">A convenient place to view our properties</div>
     </div>
     <img class="example" src="@/assets/img/platform.png">
-    <img class="arrow" src="@/assets/img/arrow-down-loop.svg">
+    <div class="spacer"/>
     <BaseImageCopyGrid :features="features"/>
   </div>
 </template>
@@ -19,11 +19,6 @@ export default {
   created () {
     this.features = [
       {
-        image: require('@/assets/img/simple-search.gif'),
-        title: 'Search with clarity',
-        paragraph: 'Stay focused with a distraction-free and functional interface.'
-      },
-      {
         image: require('@/assets/img/filter-by-status.gif'),
         title: 'Filter by status',
         paragraph: 'Distinguish between off-market and on-market listings. Properties don’t say off-market forever, so we make it clear what is and what isn’t.'
@@ -36,7 +31,7 @@ export default {
       {
         image: require('@/assets/img/market-report.png'),
         title: 'Daily reports',
-        paragraph: 'Keep updated with a daily summary of newly listed off-market properties sent to your inbox.'
+        paragraph: 'Keep updated with a daily summary of new off-market properties sent to your inbox.'
       }
     ]
   }
@@ -79,8 +74,11 @@ export default {
   overflow: hidden;
   display: block;
 }
-.arrow {
-  height: 6rem;
-  margin: var(--spacing-5) 0;
+.spacer {
+  width: 100%;
+  height: 15rem;
+  @include media(sm-only) {
+    height: 6rem;
+  }
 }
 </style>

@@ -12,7 +12,7 @@ export default {
     this.features = [
       {
         icon: require('@/assets/img/question-circle.svg'),
-        title: 'How does it work?',
+        title: 'How it works',
         paragraph: 'Agents use Homefound to get off-market properties in front of motivated buyers. Buyers subscribe to gain access.'
       },
       {

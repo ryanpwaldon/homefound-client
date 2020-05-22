@@ -1,12 +1,12 @@
 <template>
   <div class="cta">
-    <div class="title">Start listing smarter</div>
-    <div class="subtitle">Improve your listing performance by listing pre-market</div>
+    <div class="title">Get started</div>
+    <div class="subtitle">Still unsure? Ask a question – we’re happy to help.</div>
     <div class="buttons">
-      <router-link to="/signup/buyer">
+      <router-link to="/signup/agent">
         <BaseButtonLarge text="List a property" design="red"/>
       </router-link>
-      <BaseButtonLarge text="Have a question?" design="pink"/>
+      <BaseButtonLarge text="Ask a question" design="pink"/>
     </div>
   </div>
 </template>
@@ -38,9 +38,9 @@ export default {
 }
 .subtitle {
   font-size: 1.5rem;
-  margin-bottom: 3rem;
   line-height: 1.5;
   color: var(--color-gray-4);
+  margin-bottom: 2rem;
   width: 100%;
   @include media(sm-only) {
     width: 100%;

@@ -2,30 +2,30 @@
   <div class="explore">
     <div class="header">
       <div class="title">Explore our listings</div>
-      <div class="subtitle" :style="{ opacity: totalListingsCount ? 1 : 0 }">There are {{ totalListingsCount }} off-market properties listed on Homefound</div>
-      <BaseButtonLarge class="button" text="View interactive map" design="pink"/>
+      <div class="paragraph" :style="{ opacity: totalListingsCount ? 1 : 0 }">There are {{ totalListingsCount }} off-market properties listed on Homefound</div>
     </div>
-    <div class="map-container" @mouseenter="pulse = true" @mouseleave="pulse = false">
+    <div class="map-container">
       <BasePreviewMap class="map" @loaded="totalListingsCount = $event.totalListingsCount"/>
     </div>
     <div class="content">
-      <BaseCard>
-        <div class="copy-1">Sign up to gain access</div>
-        <div class="copy-2">
-          Access exclusive properties before they list on Realestate.com.au or Domain.</div>
+      <div class="paragraph mobile">Sign up for full access or subscribe to our newsletter – we’ll update you as we grow.</div>
+      <BaseCard class="card action">
+        <div class="title">Sign up for full access</div>
+        <div class="paragraph">Access exclusive properties before they list on Realestate.com.au or Domain.</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>
       </BaseCard>
-      <BaseCard>
-        <div class="copy-1">Not in your area?</div>
-        <div class="copy-2">Subscribe to our newsletter and we’ll let you know when we expand to new locations.</div>
-        <ValidationObserver v-slot="{ valid }">
+      <BaseCard class="card newsletter">
+        <div class="title">Not in your area?</div>
+        <div class="paragraph">Subscribe to our newsletter – we’ll update you as we grow.</div>
+        <BaseButtonLarge class="button" text="Subscribe for updates" design="pink" @click.native="showForm = true" v-if="!showForm"/>
+        <ValidationObserver v-slot="{ valid }" v-else>
           <form class="form" @submit.prevent="valid && submit()">
             <ValidationProvider name="email" rules="required|email">
               <BaseFormInput v-model="form.email" placeholder="Enter your email..."/>
             </ValidationProvider>
-            <BaseButtonLarge class="button" text="Submit" type="submit" design="pink" :loading="loading"/>
+            <BaseButtonLarge class="button" text="Get updates" type="submit" design="pink" :loading="loading"/>
           </form>
         </ValidationObserver>
       </BaseCard>
@@ -50,6 +50,7 @@ export default {
   },
   data: () => ({
     loading: false,
+    showForm: false,
     totalListingsCount: null,
     form: {
       email: ''
@@ -73,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
+.header .title {
   font-size: 3.5rem;
   margin-bottom: var(--spacing-2);
   font-weight: var(--font-weight-bold);
@@ -84,34 +85,13 @@ export default {
     margin-bottom: var(--spacing-2);
   }
 }
-.subtitle {
+.header .paragraph {
   font-size: 1.6rem;
   margin-bottom: var(--spacing-5);
   color: var(--color-gray-4);
   text-align: center;
   transition: var(--transition-settings-1) opacity;
   line-height: 1.5;
-  @include media(sm-only) {
-    margin-bottom: var(--spacing-2);
-  }
-}
-.count {
-  position: relative;
-  display: inline-block;
-  color: var(--color-black-2);
-  font-weight: var(--font-weight-medium);
-  &::after {
-    width: 100%;
-    position: absolute;
-    height: 2px;
-    top: 100%;
-    left: 0;
-    background: var(--color-black-2);
-    content: '';
-    @include media(sm-only) {
-      display: none;
-    }
-  }
 }
 .map-container {
   height: 0;
@@ -136,42 +116,57 @@ export default {
   grid-gap: var(--spacing-5);
   grid-template-columns: 1fr 1fr;
   @include media(sm-only) {
+    text-align: center;
     grid-template-columns: 1fr;
+    grid-gap: var(--spacing-4);
   }
 }
-.copy-1 {
+.content .title {
   font-size: 1.8rem;
   font-weight: var(--font-weight-medium);
   margin-bottom: var(--spacing-2);
   line-height: 1.5;
 }
-.copy-2 {
+.content .paragraph {
   font-size: 1.6rem;
   color: var(--color-gray-4);
   margin-bottom: var(--spacing-4);
   line-height: 1.5;
 }
-.button {
+.content .button {
   font-size: 1.4rem;
   @include media(sm-only) {
     width: 100%;
   }
 }
-.form {
+.newsletter .form {
   display: grid;
   grid-template-columns: 1fr min-content;
   grid-gap: var(--spacing-2);
 }
-.map-container,
-.content {
-  @include media(sm-only) {
-    display: none;
-  }
-}
-.header .button {
+.paragraph.mobile {
   display: none;
   @include media(sm-only) {
     display: block;
+    margin: 0;
+  }
+}
+@include media(sm-only) {
+  .map-container {
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0;
+  }
+  .card {
+    border: none;
+    border-radius: 0;
+    background: var(--color-transparent);
+    padding: 0;
+  }
+  .card .title,
+  .card .paragraph {
+    display: none;
   }
 }
 </style>

@@ -13,11 +13,11 @@ export default {
   created () {
     this.features = [
       {
-        icon: require('@/assets/img/agent-persona.svg'),
+        icon: require('@/assets/img/agent-persona-1.svg'),
         iconHeight: '8.8rem',
         iconWidth: '8.8rem',
         title: 'Homefound for agents',
-        paragraph: `We are a free advertising platform for pre-market and off-market property listings. Use Homefound to seek pre-market interest, or simply advertise for free.`
+        paragraph: `We're an advertising platform for pre-market and off-market property listings. Use Homefound to seek pre-market interest, or simply advertise for free.`
       },
       {
         icon: require('@/assets/img/audience-persona.svg'),

@@ -10,7 +10,7 @@
         <div class="logo-subcopy">© {{ (new Date()).getFullYear() }} Homefound.</div>
       </div>
       <div class="col col-2">
-        <div class="heading">Info</div>
+        <div class="heading">Links</div>
         <BaseDivider class="divider"/>
         <BaseNavItemText text="Buyers" path="/" active-mode="none"/>
         <BaseNavItemText text="Agents" path="/agents" active-mode="none"/>
@@ -71,7 +71,7 @@ export default {
   justify-content: space-between;
   @include media(sm-only) {
     padding: var(--spacing-8) 0;
-    grid-gap: var(--spacing-8);
+    grid-gap: var(--spacing-5);
     grid-auto-flow: row;
     justify-content: normal;
     > * {
@@ -89,6 +89,9 @@ export default {
   align-items: flex-start;
   > *:not(:last-child) {
     margin-bottom: var(--spacing-4);
+    @include media(sm-only) {
+      margin-bottom: var(--spacing-2);
+    }
   }
   @include media(sm-only) {
     > * {
@@ -118,13 +121,14 @@ export default {
   }
   @include media(sm-only) {
     grid-row: 5;
+    margin-top: var(--spacing-5);
   }
 }
 .divider {
   display: none;
   @include media(sm-only) {
     display: block;
-    margin: 0 0 var(--spacing-4) 0 !important;
+    margin: 0 0 var(--spacing-2) 0 !important;
   }
 }
 </style>

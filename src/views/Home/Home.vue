@@ -1,14 +1,14 @@
 <template>
   <BaseLayoutHome>
     <div class="spacer"/>
-    <Header/>
-    <div class="spacer"/>
+    <Header @secondary-button-clicked="scrollToExplore"/>
+    <div class="spacer divider"/>
     <Features/>
-    <div class="spacer"/>
-    <Explore/>
-    <div class="spacer"/>
+    <div class="spacer divider"/>
+    <Explore ref="explore"/>
+    <div class="spacer divider"/>
     <Platform/>
-    <div class="spacer"/>
+    <div class="spacer divider"/>
     <CTA/>
     <div class="spacer"/>
   </BaseLayoutHome>
@@ -21,6 +21,7 @@ import Features from './partials/Features/Features'
 import Explore from './partials/Explore/Explore'
 import Platform from './partials/Platform/Platform'
 import CTA from './partials/CTA/CTA'
+import SweetScroll from 'sweet-scroll'
 export default {
   name: 'home',
   components: {
@@ -30,6 +31,12 @@ export default {
     Explore,
     Platform,
     CTA
+  },
+  methods: {
+    scrollToExplore () {
+      const scroller = new SweetScroll()
+      scroller.toElement(this.$refs['explore'].$el, { easing: 'easeInOutQuad', duration: 500, offset: -96 })
+    }
   }
 }
 </script>
@@ -38,8 +45,28 @@ export default {
 .spacer {
   width: 100%;
   height: 15rem;
+  position: relative;
   @include media(sm-only) {
     height: 6rem;
+  }
+}
+.divider {
+  @include media(sm-only) {
+    height: 12rem;
+  }
+}
+.divider::after {
+  content: '';
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-gray-1);
+  @include media(sm-only) {
+    display: block;
   }
 }
 </style>
