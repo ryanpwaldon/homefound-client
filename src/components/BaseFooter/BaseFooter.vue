@@ -31,8 +31,7 @@
       <div class="col col-5">
         <div class="heading">Help</div>
         <BaseDivider class="divider"/>
-        <BaseNavItemText text="Email us"/>
-        <BaseNavItemText text="Send us a message"/>
+        <BaseNavItemText class="intercom-open-widget" text="Contact us"/>
       </div>
     </div>
   </div>

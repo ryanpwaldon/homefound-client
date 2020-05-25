@@ -6,7 +6,7 @@
       <router-link to="/signup/agent">
         <BaseButtonLarge text="List a property" design="red"/>
       </router-link>
-      <BaseButtonLarge text="Ask a question" design="pink"/>
+      <BaseButtonLarge class="intercom-open-widget" text="Ask a question" design="pink"/>
     </div>
   </div>
 </template>

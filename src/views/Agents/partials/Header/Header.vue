@@ -12,7 +12,7 @@
         <router-link to="/signup/agent">
           <BaseButtonLarge text="List a property" design="red"/>
         </router-link>
-        <BaseButtonLarge text="Ask a question" design="pink"/>
+        <BaseButtonLarge class="intercom-open-widget" text="Ask a question" design="pink"/>
       </div>
     </div>
     <svg class="illustration large" ref="illustration-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407 313.444">
