@@ -22,7 +22,7 @@ export default {
       {
         image: require('@/assets/img/buyer-engagement.png'),
         title: 'Buyers are notified',
-        paragraph: `Subscribed buyers view your listings as just as they would on REA. Your listings won’t be visible to anyone else.`
+        paragraph: `Subscribed buyers are notified. They can view your listings on our private platform.`
       },
       {
         image: require('@/assets/img/realtime-tracking.png'),

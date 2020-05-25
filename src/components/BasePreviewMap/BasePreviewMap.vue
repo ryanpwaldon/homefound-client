@@ -1,5 +1,10 @@
 <template>
-  <BaseMap :max-zoom="17" :scroll-zoom="true">
+  <BaseMap
+    :max-zoom="17"
+    :scroll-zoom="true"
+    :center="[151.2093, -33.8688]"
+    :zoom="10"
+  >
     <MapSource source-id="clusters" :geojson="geojson" :cluster="true"/>
     <MapImagePulse
       image-id="pulse"

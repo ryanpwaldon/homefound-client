@@ -108,8 +108,8 @@ export default {
   border-radius: 100px;
 }
 .knob {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 100%;
 }
 .large {
