@@ -22,9 +22,9 @@
     <div class="divider"/>
     <div class="middle">
       <div class="feature bold">What's included?</div>
-      <div class="feature">Full access to all properties</div>
+      <div class="feature">Full access</div>
       <div class="feature">Unlimited users</div>
-      <div class="feature">Daily email reports</div>
+      <div class="feature">Daily market reports</div>
     </div>
     <div class="divider"/>
     <div class="bottom">

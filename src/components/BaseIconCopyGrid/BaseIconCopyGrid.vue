@@ -5,7 +5,7 @@
         <img class="icon" :src="feature.icon">
       </div>
       <div class="title">{{ feature.title }}</div>
-      <div class="paragraph">{{ feature.paragraph }}</div>
+      <div class="paragraph" v-html="feature.paragraph"/>
     </BaseCard>
   </div>
 </template>

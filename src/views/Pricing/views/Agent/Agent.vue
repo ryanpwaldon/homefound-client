@@ -10,7 +10,7 @@
       <div class="feature bold">What's included?</div>
       <div class="feature">List unlimited properties</div>
       <div class="feature">Real-time engagement tracking</div>
-      <div class="feature">Daily performance emails</div>
+      <div class="feature">Daily performance reports</div>
     </div>
     <div class="divider"/>
     <div class="bottom">
