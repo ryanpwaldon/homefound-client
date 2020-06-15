@@ -25,7 +25,7 @@ import SweetScroll from 'sweet-scroll'
 export default {
   name: 'home',
   metaInfo: {
-    title: 'The off-market property subscription for serious buyers'
+    title: 'Off-market property for buyers agents'
   },
   components: {
     BaseLayoutHome,

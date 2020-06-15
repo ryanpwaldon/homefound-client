@@ -3,7 +3,7 @@
     <div class="top">
       <div class="dollar">$</div>
       <div class="price">0</div>
-      <div class="period">free<br>forever</div>
+      <div class="period">zero<br>cost</div>
     </div>
     <div class="divider"/>
     <div class="middle">

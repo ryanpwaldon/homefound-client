@@ -22,10 +22,9 @@
     <div class="divider"/>
     <div class="middle">
       <div class="feature bold">What's included?</div>
-      <div class="feature">Full off-market access</div>
-      <div class="feature">Off-market monitor</div>
-      <div class="feature">Efficient search platform</div>
-      <div class="feature">Daily off-market reports</div>
+      <div class="feature">Full access to all properties</div>
+      <div class="feature">Unlimited users</div>
+      <div class="feature">Daily email reports</div>
     </div>
     <div class="divider"/>
     <div class="bottom">

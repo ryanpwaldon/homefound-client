@@ -1,7 +1,7 @@
 <template>
   <div class="cta">
-    <div class="title">Enhance your search</div>
-    <div class="subtitle">Give yourself a headstart. Discover properties before they list on REA and Domain.</div>
+    <div class="title">Subscribe today</div>
+    <div class="subtitle">Automate and improve your off-market property discovery</div>
     <div class="buttons">
       <router-link to="/signup/buyer">
         <BaseButtonLarge text="Get started" design="red"/>

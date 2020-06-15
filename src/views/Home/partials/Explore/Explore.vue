@@ -10,14 +10,14 @@
     <div class="content">
       <div class="paragraph mobile">Sign up for full access or subscribe to our newsletter – we’ll update you as we grow.</div>
       <BaseCard class="card action">
-        <div class="title">Sign up for full access</div>
-        <div class="paragraph">Access exclusive properties before they list on Realestate.com.au or Domain.</div>
+        <div class="title">Subscribe for full access</div>
+        <div class="paragraph">Gain access by subscribing to a no lock-in monthly or yearly subscription. Cancel anytime.</div>
         <router-link to="/signup/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>
       </BaseCard>
       <BaseCard class="card newsletter">
-        <div class="title">Not in your area?</div>
+        <div class="title">Nothing in your area?</div>
         <div class="paragraph">Subscribe to our newsletter – we’ll update you as we grow.</div>
         <BaseButtonLarge class="button" text="Subscribe for updates" design="pink" @click.native="showForm = true" v-if="!showForm"/>
         <ValidationObserver v-slot="{ valid }" v-else>

@@ -117,8 +117,8 @@ export default {
   height: 28px;
   padding: 8px 10px;
   .knob {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
   }
 }
 </style>

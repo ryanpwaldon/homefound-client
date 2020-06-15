@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="content">
-      <div class="title">Off market property for serious buyers</div>
+      <div class="title">Off market property for buyers agents</div>
       <div class="subtitle">Subscribe and gain access to an exclusive feed of pre-market and off-market properties</div>
       <div class="buttons">
         <router-link to="/signup/buyer">
