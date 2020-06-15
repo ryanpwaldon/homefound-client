@@ -2,11 +2,11 @@
   <div class="header">
     <div class="content">
       <div class="title">
-        List smarter.<br>
-        List pre-market.
+        Advertise direct to<br>
+        buyers agents
       </div>
       <div class="subtitle">
-        List pre-market <span style="font-family: var(--font-3); line-height: 0; color: var(--color-black-1); font-size: 1.2em;">free</span> and gain insights to boost the performance of your property advertising campaigns
+        List pre-market <span style="font-family: var(--font-3); line-height: 0; color: var(--color-black-1); font-size: 1.2em;">free</span> and get in front of a highly targeted audience of motivated buyers
       </div>
       <div class="buttons">
         <router-link to="/signup/agent">
