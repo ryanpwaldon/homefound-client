@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Nav/>
-    <BaseCard class="card">
+    <BaseCard class="card" :locked="true">
       <ValidationObserver class="form" ref="form" tag="form" v-slot="{ valid }" @submit.prevent="submit">
         <div class="content">
           <div class="section">
@@ -78,7 +78,7 @@
 <script>
 import Nav from '../../components/Nav/Nav'
 import BaseCard from '@/components/BaseCard/BaseCard'
-import UserService from '@/services/Api/services/UserService/UserService'
+// import UserService from '@/services/Api/services/UserService/UserService'
 import BaseFormInput from '@/components/BaseFormInput/BaseFormInput'
 import BaseFormError from '@/components/BaseFormError/BaseFormError'
 import BaseFormCard from '@/components/BaseFormCard/BaseFormCard'
@@ -117,18 +117,18 @@ export default {
   },
   methods: {
     async submit () {
-      if (this.loading || !(await this.$refs['form'].validate())) return
-      this.loading = true
-      try {
-        const paymentMethodId = (await window.stripe.createPaymentMethod({ type: 'card', card: this.card.item })).paymentMethod.id
-        const { user, accessToken } = await UserService.createBuyer({ ...this.form, paymentMethodId })
-        this.$store.dispatch('user/loginSuccess', { user, accessToken })
-        this.$router.push('/verify/email')
-      } catch (error) {
-        console.log(error)
-        this.$notify({ type: 'error' })
-      }
-      this.loading = false
+      // if (this.loading || !(await this.$refs['form'].validate())) return
+      // this.loading = true
+      // try {
+      //   const paymentMethodId = (await window.stripe.createPaymentMethod({ type: 'card', card: this.card.item })).paymentMethod.id
+      //   const { user, accessToken } = await UserService.createBuyer({ ...this.form, paymentMethodId })
+      //   this.$store.dispatch('user/loginSuccess', { user, accessToken })
+      //   this.$router.push('/verify/email')
+      // } catch (error) {
+      //   console.log(error)
+      //   this.$notify({ type: 'error' })
+      // }
+      // this.loading = false
     }
   }
 }
