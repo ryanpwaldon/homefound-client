@@ -24,7 +24,7 @@ export default {
         iconHeight: '8.8rem',
         iconWidth: '8.8rem',
         title: 'Our audience',
-        paragraph: `We exclusively deliver your properties to our audience of registered buyers agents – ideal for driving a strong pre-market campaign, or for a quick way to test the market.`
+        paragraph: `We deliver your properties exclusively to our audience of registered <span style="font-weight: var(--font-weight-medium); color: var(--color-black-2);">buyers agents</span> – ideal for driving a strong pre-market campaign, or for a quick way to test the market.`
       }
     ]
   }
