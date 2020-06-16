@@ -24,9 +24,9 @@ import CTA from './partials/CTA/CTA'
 export default {
   name: 'agents',
   metaInfo: {
-    title: 'Find motivated buyers for your listings',
+    title: 'Advertise direct to buyers agents',
     meta: [
-      { vmid: 'description', name: 'description', content: 'List pre-market free and gain insights to boost the performance of your property advertising campaigns.' }
+      { vmid: 'description', name: 'description', content: 'List pre-market free and get in front of a highly targeted audience of motivated buyers.' }
     ]
   },
   components: {
