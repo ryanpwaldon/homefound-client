@@ -12,7 +12,7 @@
       <BaseCard class="card action">
         <div class="title">Subscribe for full access</div>
         <div class="paragraph">Gain access by subscribing to a no lock-in monthly or yearly subscription. Cancel anytime.</div>
-        <router-link to="/signup/buyer">
+        <router-link to="/pricing/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>
       </BaseCard>

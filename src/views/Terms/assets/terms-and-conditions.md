@@ -1,6 +1,6 @@
 # Terms & Conditions
 
-Please read these Terms and Conditions ("Terms" or "Terms and Conditions") carefully before using the [homefound.com.au](https://homefound.com.au/) website, mobile applications ("**Apps"**), and our related online and offline offerings (collectively, the "**Services**") operated by Homefound ("Homefound", "us", "we", or "our"). For purposes of these Terms, "you" and "your" means you as the user of the Service.
+Please read these Terms and Conditions ("Terms" or "Terms and Conditions") carefully before using the [homefound.net.au](https://homefound.net.au/) website, mobile applications ("**Apps"**), and our related online and offline offerings (collectively, the "**Services**") operated by Homefound ("Homefound", "us", "we", or "our"). For purposes of these Terms, "you" and "your" means you as the user of the Service.
 
 Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service.
 
@@ -26,7 +26,7 @@ By accessing or using the Service you agree to be bound by these Terms. If you d
 
 ## 2. Subscriptions
 
-Some parts of the Service are made available on a paid subscription basis ("Subscription(s)"). Pricing for the Subscriptions is set forth here: [https://homefound.com.au/pricing](https://homefound.com.au/pricing).
+Some parts of the Service are made available on a paid subscription basis ("Subscription(s)"). Pricing for the Subscriptions is set forth here: [https://homefound.net.au/pricing](https://homefound.net.au/pricing).
 
 You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing Cycles are set on a monthly or yearly basis. Whether you are using monthly or yearly billing, your account may be charged on a monthly basis.
 
@@ -36,7 +36,7 @@ A valid payment method, including credit card, is required to process the paymen
 
 Should automatic billing fail to occur for any reason, Homefound may attempt to charge the credit card on file one or more times. Should payment continue to fail, the Subscription will be cancelled.
 
-You may cancel your Subscription either through your online account management page or by contacting Homefound customer support team at [team@homefound.com.au](mailto:team@homefound.com.au).
+You may cancel your Subscription either through your online account management page or by contacting Homefound customer support team at [team@homefound.net.au](mailto:team@homefound.net.au).
 
 ## 3. Referrals and Credit
 
@@ -106,7 +106,7 @@ If you are a copyright owner, or authorised on behalf of one, and you believe th
 - a statement by you that you have a good faith belief that the disputed use is not authorised by the copyright owner, its agent, or the law;
 - a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorised to act on the copyright owner's behalf.
 
-Such notices of copyright infringement should be sent to our copyright agent via email to [team@homefound.com.au](mailto:team@homefound.com.au).
+Such notices of copyright infringement should be sent to our copyright agent via email to [team@homefound.net.au](mailto:team@homefound.net.au).
 
 ## 10. Restrictions on Your Use of the Service
 
@@ -181,7 +181,7 @@ Any dispute, controversy, or claim (collectively, "Claim") relating in any way t
 
 **Any arbitration under these Terms will take place on an individual basis – class arbitrations and class actions are not permitted. You understand that by agreeing to these Terms, you and Homefound are each waiving the right to trial by jury or to participate in a class action or class arbitration.** Notwithstanding the foregoing, you and Homefound will have the right to bring an action in a court of proper jurisdiction for injunctive or other equitable or conservatory relief, pending a final decision by the arbitrator.
 
-You have the right to opt-out and not be bound by the arbitration provisions set forth in these Terms by sending written notice of your decision to opt-out to [team@homefound.com.au](mailto:team@homefound.com.au) listed in the Contact Us section of these Terms. The notice must be sent to Homefound within thirty (30) days of your registering to use the Service or agreeing to these Terms, otherwise you shall be bound to arbitrate disputes in accordance with these Terms. If you opt-out of these arbitration provisions, Homefound also will not be bound by them.
+You have the right to opt-out and not be bound by the arbitration provisions set forth in these Terms by sending written notice of your decision to opt-out to [team@homefound.net.au](mailto:team@homefound.net.au) listed in the Contact Us section of these Terms. The notice must be sent to Homefound within thirty (30) days of your registering to use the Service or agreeing to these Terms, otherwise you shall be bound to arbitrate disputes in accordance with these Terms. If you opt-out of these arbitration provisions, Homefound also will not be bound by them.
 
 ## 22. Changes
 
@@ -197,4 +197,4 @@ These Terms constitute the entire agreement between us regarding our Service and
 
 ## Contact Us
 
-You may contact us regarding the Service or these Terms via email to [team@homefound.com.au](mailto:team@homefound.com.au).
+You may contact us regarding the Service or these Terms via email to [team@homefound.net.au](mailto:team@homefound.net.au).

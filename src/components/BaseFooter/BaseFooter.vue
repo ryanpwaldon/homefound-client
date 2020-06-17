@@ -32,6 +32,9 @@
         <div class="heading">Help</div>
         <BaseDivider class="divider"/>
         <BaseNavItemText class="intercom-open-widget" text="Contact us"/>
+        <a :href="`mailto:${contactEmail}`" target="_blank">
+          <BaseNavItemText text="Send an email"/>
+        </a>
       </div>
     </div>
   </div>
@@ -44,6 +47,9 @@ export default {
   components: {
     BaseDivider,
     BaseNavItemText
+  },
+  created () {
+    this.contactEmail = process.env.VUE_APP_CONTACT_EMAIL
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="title">Subscribe today</div>
     <div class="subtitle">Automate and improve your off-market property discovery</div>
     <div class="buttons">
-      <router-link to="/signup/buyer">
+      <router-link to="/pricing/buyer">
         <BaseButtonLarge text="Get started" design="red"/>
       </router-link>
       <BaseButtonLarge class="intercom-open-widget" text="Ask a question" design="pink"/>

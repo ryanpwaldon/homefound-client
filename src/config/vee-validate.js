@@ -1,5 +1,10 @@
 import { extend } from 'vee-validate/dist/vee-validate.full'
 
+extend('forceInvalid', {
+  message: 'Please enter a valid {_field_}',
+  validate: () => false
+})
+
 extend('requiredArray', {
   computesRequired: true,
   message: 'The {_field_} field requires at least 1 item',

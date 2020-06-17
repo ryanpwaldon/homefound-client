@@ -3,14 +3,15 @@
     <div class="top">
       <div class="dollar">$</div>
       <div class="price">0</div>
-      <div class="period">zero<br>cost</div>
+      <div class="period">zero<br>fees</div>
     </div>
     <div class="divider"/>
     <div class="middle">
       <div class="feature bold">What's included?</div>
       <div class="feature">List unlimited properties</div>
       <div class="feature">Real-time engagement tracking</div>
-      <div class="feature">Daily performance reports</div>
+      <div class="feature">Daily engagement reports</div>
+      <div class="feature">Unlimited users</div>
     </div>
     <div class="divider"/>
     <div class="bottom">

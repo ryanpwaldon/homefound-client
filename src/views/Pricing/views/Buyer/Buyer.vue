@@ -1,36 +1,21 @@
 <template>
   <BaseCard class="buyer">
-    <div class="toggle-container">
-      <div :class="{label: true, active: !isYearly}" @click="$refs['toggle'].toggle(false)">Monthly</div>
-      <BaseFormToggle
-        class="toggle"
-        ref="toggle"
-        v-model="isYearly"
-        bg-active-color="--color-gray-8"
-        bg-inactive-color="--color-gray-8"
-        knob-active-color="--color-black-2"
-        knob-inactive-color="--color-black-2"
-        design="large"
-      />
-      <div :class="{label: true, active: isYearly}" @click="$refs['toggle'].toggle(true)">Yearly (save 20%)</div>
-    </div>
     <div class="top">
-      <div class="dollar">$</div>
-      <div class="price">{{ price | numeral('0,0') }}</div>
-      <div class="period">billed<br>{{ period }}</div>
+      <div class="plan">Business Plan</div>
+      <div class="period">billed monthly / yearly</div>
     </div>
     <div class="divider"/>
     <div class="middle">
       <div class="feature bold">What's included?</div>
-      <div class="feature">Full access</div>
+      <div class="feature">Full off-market access</div>
+      <div class="feature">Daily off-market reports</div>
       <div class="feature">Unlimited users</div>
-      <div class="feature">Daily market reports</div>
     </div>
     <div class="divider"/>
     <div class="bottom">
-      <router-link to="/signup/buyer">
-        <BaseButtonLarge class="button" text="Get started" design="red"/>
-      </router-link>
+    <a :href="`mailto:${contactEmail}`" target="_blank">
+      <BaseButtonLarge class="button" text="Contact us" design="red"/>
+    </a>
     </div>
   </BaseCard>
 </template>
@@ -38,31 +23,16 @@
 <script>
 import BaseCard from '@/components/BaseCard/BaseCard'
 import BaseButtonLarge from '@/components/BaseButtonLarge/BaseButtonLarge'
-import BaseFormToggle from '@/components/BaseFormToggle/BaseFormToggle'
-import { BASIC_MONTHLY_PRICE, BASIC_YEARLY_PRICE } from '@/constants/plan/plan'
 export default {
   metaInfo: {
     title: 'Pricing: Buyer'
   },
   components: {
     BaseCard,
-    BaseButtonLarge,
-    BaseFormToggle
+    BaseButtonLarge
   },
   created () {
-    this.BASIC_MONTHLY_PRICE = BASIC_MONTHLY_PRICE
-    this.BASIC_YEARLY_PRICE = BASIC_YEARLY_PRICE
-  },
-  data: () => ({
-    isYearly: false
-  }),
-  computed: {
-    price () {
-      return this.isYearly ? this.BASIC_YEARLY_PRICE : this.BASIC_MONTHLY_PRICE
-    },
-    period () {
-      return this.isYearly ? 'yearly' : 'monthly'
-    }
+    this.contactEmail = process.env.VUE_APP_CONTACT_EMAIL
   }
 }
 </script>
@@ -82,20 +52,17 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
-.dollar {
-  font-size: 1.6rem;
-  font-family: var(--font-2);
-  margin-right: var(--spacing-2);
-}
-.price {
-  font-size: 6rem;
-  font-family: var(--font-2);
-  margin-right: var(--spacing-2);
+.plan {
+  font-size: 3.6rem;
+  letter-spacing: 0.02em;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 1rem;
 }
 .period {
   font-size: 1.6rem;
-  text-align: left;
+  color: var(--color-gray-4);
 }
 .divider {
   position: relative;

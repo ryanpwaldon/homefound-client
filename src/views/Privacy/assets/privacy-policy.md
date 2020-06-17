@@ -4,7 +4,7 @@ Homefound ("Homefound," "we," "us," and "our") provides a platform that enables 
 
 ## Scope
 
-This Privacy Policy covers the personal information we collect about you when you use our products or services, or otherwise interact with us, including on our website at [homefound.com.](https://homefound.com.au.au/)[au](https://homefound.com.au/), mobile applications ("**Apps**"), and our related online and offline offerings (collectively, the "**Services**"). This policy also explains your choices surrounding how we use your personal information, which include how you can object to certain uses of the information and how you can access and update certain information.
+This Privacy Policy covers the personal information we collect about you when you use our products or services, or otherwise interact with us, including on our website at [homefound.com.](https://homefound.net.au.au/)[au](https://homefound.net.au/), mobile applications ("**Apps**"), and our related online and offline offerings (collectively, the "**Services**"). This policy also explains your choices surrounding how we use your personal information, which include how you can object to certain uses of the information and how you can access and update certain information.
 
 ## 1. Personal Information we collect
 
@@ -179,4 +179,4 @@ We may revise this Privacy Policy from time to time in our sole discretion. If t
 
 ## Contact Us
 
-If you have any questions about our privacy practices or this Privacy Policy, please contact via email to [team@homefound.com.au](mailto:team@homefound.com.au).
+If you have any questions about our privacy practices or this Privacy Policy, please contact via email to [team@homefound.net.au](mailto:team@homefound.net.au).

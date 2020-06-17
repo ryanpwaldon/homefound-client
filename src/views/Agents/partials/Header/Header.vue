@@ -6,7 +6,7 @@
         buyers agents
       </div>
       <div class="subtitle">
-        List pre-market <span style="font-family: var(--font-3); line-height: 0; color: var(--color-black-1); font-size: 1.2em;">free</span> and get in front of a highly targeted audience of motivated buyers
+        List pre-market or off-market <span style="font-family: var(--font-3); line-height: 0; color: var(--color-black-1); font-size: 1.2em;">free</span> and get your properties in front of motivated buyers
       </div>
       <div class="buttons">
         <router-link to="/signup/agent">
