@@ -11,7 +11,7 @@
       <div class="paragraph mobile">Sign up for full access or subscribe to our newsletter – we’ll update you as we grow.</div>
       <BaseCard class="card action">
         <div class="title">Subscribe for full access</div>
-        <div class="paragraph">Gain access by subscribing to a no lock-in monthly or yearly subscription. Cancel anytime.</div>
+        <div class="paragraph">Gain full access by subscribing to a monthly or yearly subscription.</div>
         <router-link to="/pricing/buyer">
           <BaseButtonLarge class="button" text="Get started" design="red"/>
         </router-link>

@@ -13,7 +13,7 @@ export default {
       {
         icon: require('@/assets/img/question-circle.svg'),
         title: 'How it works',
-        paragraph: 'Real estate agents use Homefound to get <span style="white-space: nowrap">off-market</span> properties in front of buyers agents. Buyers subscribe to gain access.'
+        paragraph: 'Real estate agents use Homefound to get <span style="white-space: nowrap">off-market</span> properties in front of motivated buyers. Buyers subscribe to gain access.'
       },
       // {
       //   icon: require('@/assets/img/search-circle.svg'),
