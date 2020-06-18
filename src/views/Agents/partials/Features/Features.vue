@@ -17,7 +17,7 @@ export default {
         iconHeight: '8.8rem',
         iconWidth: '8.8rem',
         title: 'For real estate agents',
-        paragraph: `We're an advertising platform for pre-market and off-market listings. Use Homefound to seek <span style="white-space: nowrap">pre-market</span> interest, or simply advertise privately for free.`
+        paragraph: `We're a <span style="font-weight: var(--font-weight-medium); color: var(--color-black-2);">private</span> advertising platform for pre-market and off-market listings. Use Homefound to seek <span style="white-space: nowrap">pre-market</span> interest, or simply advertise privately for free.`
       },
       {
         icon: require('@/assets/img/audience-persona.svg'),
