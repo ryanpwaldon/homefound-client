@@ -1,7 +1,7 @@
 <template>
   <BaseCard class="buyer">
     <div class="top">
-      <div class="plan">Business Plan</div>
+      <div class="plan">Buyer</div>
       <div class="period">billed monthly / yearly</div>
     </div>
     <div class="divider"/>
